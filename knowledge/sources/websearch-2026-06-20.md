@@ -1,5 +1,5 @@
 ---
-source: kopis
+source: websearch
 date: 2026-06-20
 fetched: 2026-06-21T04:20:07+09:00
 collected: 3
@@ -10,7 +10,7 @@ archived: 0
 error: 
 ---
 
-# kopis 수집 로그 2026-06-20
+# websearch 수집 로그 2026-06-20
 
 - 수집(OKF): 3
 - 신규: 0
