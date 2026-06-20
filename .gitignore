@@ -16,3 +16,6 @@ web/public/data/*.db
 
 # 에이전트 세션 내부 파일
 .jeo/
+
+# 에이전트 survey 스크래치
+.survey/

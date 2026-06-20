@@ -1,9 +1,12 @@
-# 놓치마 (Notchima)
+<h1>
+  <img src="assets/brand/notchima-mascot-256.png" alt="놓치마 마스코트" width="96" align="left" hspace="12" />
+  놓치마 <small>(Notchima)</small><br/>
+  <sub>기회, 다 챙겨드릴게요.</sub>
+</h1>
 
 [![ingest](https://github.com/jellyggumi/happy-our-planning/actions/workflows/ingest.yml/badge.svg)](https://github.com/jellyggumi/happy-our-planning/actions/workflows/ingest.yml)
-[![Python 3.14](https://img.shields.io/badge/python-3.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Node 22](https://img.shields.io/badge/node-22-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Tests 22 passing](https://img.shields.io/badge/tests-22%20passing-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
+[![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![Tests 40 passing](https://img.shields.io/badge/tests-40%20passing-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
 [![Knowledge Format](https://img.shields.io/badge/data-schema.org%2FEvent-orange?logo=json&logoColor=white)](docs/02-data-model-okf.md)
 [![Hosting](https://img.shields.io/badge/SaaS-Cloudflare%20%2B%20GitHub%20Actions-F38020?logo=cloudflare&logoColor=white)](docs/09-saas-free-stack.md)
 [![Cost ₩0/month](https://img.shields.io/badge/cost-%E2%82%A90%2Fmonth-2ea44f)](docs/00-overview.md)
@@ -73,7 +76,7 @@ flowchart LR
 ```mermaid
 flowchart TD
   A["⏰ cron 일 1회 / workflow_dispatch"] --> B[checkout]
-  B --> C[setup python 3.14 + pip install]
+  B --> C[setup python 3.12 + pip install]
   C --> D["run_pipeline<br/>수집→정규화→OKF적재→검증→인덱스→SQLite→wiki"]
   D --> E["unittest · 40종"]
   E --> F{변경 diff?}
@@ -139,6 +142,8 @@ flowchart TB
 | [docs/09-saas-free-stack](docs/09-saas-free-stack.md) | 무료 SaaS 스택 |
 | [docs/10-roadmap-milestones](docs/10-roadmap-milestones.md) | 로드맵·마일스톤·리스크 |
 | [docs/11-discovery-sqlite-ai](docs/11-discovery-sqlite-ai.md) | 웹검색 발견·SQLite·Gemini (2026 개선) |
+| [docs/12-naming-brainstorm](docs/12-naming-brainstorm.md) | 네이밍 브레인스토밍·후보 평가 |
+| [docs/13-brand](docs/13-brand.md) | 브랜드 가이드(이름·슬로건·마스코트·컬러) |
 
 ## 레이아웃
 ```
@@ -148,6 +153,7 @@ config/       sources/regions/themes/age-bands 통제 어휘
 scripts/      ingest(공공+웹검색) · normalize · build(+sqlite) · recommend(+gemini) · macro · notify
 web/          정적 프런트엔드 (Leaflet + Fuse.js)
 .github/      ingest 워크플로우 (일 1회 cron)
+assets/       브랜드 자산 (마스코트·아이콘 원본)
 ```
 
 ## 빠른 시작 (오프라인, 키 불필요)
