@@ -13,21 +13,21 @@ updated: 2026-06-21
 > **파일 경로 + 함수 시그니처 + DoD(기계검증 명령)**. 이미 코드가 있는 항목은 `DONE`로
 > 회귀 게이트만 유지하고, 신규는 `TODO`. seed의 `success_criteria.status: pending`과 1:1.
 
-## 상태 요약 (실측: 1975 LOC Python · 40 tests green)
+## 상태 요약 (실측: ~2281 LOC Python · 56 tests green · T1–T6 전부 DONE)
 | 영역 | 모듈 | 상태 |
 |------|------|------|
 | 수집 | `scripts/ingest/{base,kopis,tourapi,websearch}.py` | DONE |
 | 정규화/적재 | `scripts/normalize/{to_okf,upsert}.py` | DONE |
 | 빌드/검증 | `scripts/build/{validate,build_index,build_sqlite,wiki_index}.py` | DONE |
 | 검색 인덱스 | `events.db`(FTS5) + `data/*.json` | DONE |
-| 매크로 계획 | `scripts/macro/apply.py` (`plan_job` 등) | DONE (러너 제외) |
-| 알람 계산 | `scripts/notify/dispatch.py` (`compute_notifications`) | DONE (실채널 부분) |
+| 매크로 계획+실행 | `scripts/macro/{apply,runner}.py` (`plan_job`·`run_job`) | DONE |
+| 알람 계산+전송 | `scripts/notify/dispatch.py` (`compute_notifications`·telegram/webpush) | DONE |
 | AI 플래닝 | `scripts/recommend/{rank,ai_planner}.py` | DONE |
 | 지식 wiki | `knowledge/` + `wiki_index.build()` | DONE |
 
 ## 진행 중 / 신규 큐 (우선순위 순)
 
-### T1 — Playwright 신청 러너 (F3.4 · AC-F3-runner) `TODO`
+### T1 — Playwright 신청 러너 (F3.4 · AC-F3-runner) `DONE`
 - 신규: `scripts/macro/runner.py`
   - `def run_job(job: dict, *, headless: bool = True, dry_run: bool = False) -> dict`
     — `apply.plan_job()` 산출 `job`(steps[])을 소비, `is_auto_submit(job)`가 False면 최종 submit 직전 pause.
@@ -40,20 +40,20 @@ updated: 2026-06-21
 - 의존성 게이트: Playwright 미설치 시 테스트 `skipUnless`(무료·선택 의존), CI는 `playwright install chromium`.
 - **DoD**: `python -m unittest tests.test_runner` green; C5(약관게이트) 불변.
 
-### T2 — 알람 실채널 마감 (F4.3 · AC-F4-channel) `TODO`
+### T2 — 알람 실채널 마감 (F4.3 · AC-F4-channel) `DONE`
 - 기존: `scripts/notify/dispatch.py::_send_telegram` 확장 + Web Push 어댑터 추가.
   - `def _send_telegram(notif: dict) -> bool` — `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` 없으면 dry-run True 반환(무오류).
   - 신규 `def _send_webpush(notif, subscription) -> bool` (선택, VAPID 무료).
 - 신규 테스트: `test_dispatch_dryrun_without_token`(stdout 캡처) / `test_send_payload_shape`(전송 페이로드 구조).
 - **DoD**: 무토큰 dry-run 무오류 + 토큰 주입 시 200 응답(수동/CI secret). `TestNotify` 회귀 green.
 
-### T3 — Cloudflare 엣지 어댑터 (C7 · 배포) `TODO`
+### T3 — Cloudflare 엣지 어댑터 (C7 · 배포) `DONE`
 - 신규: `web/worker/ai-proxy.js` — Gemini 키를 서버측 보관하는 프록시(브라우저 키 노출 금지).
 - 신규: `web/worker/wrangler.toml` (free tier), `web/worker/jobqueue.js`(매크로 잡 큐 stub).
 - **DoD**: `wrangler deploy --dry-run` 통과 + 키가 클라이언트 번들에 없음(`git grep` 0).
 - 주의: 벤더 종속 최소화 — flat-file SSOT 유지, Worker는 선택적 가속 계층(C2).
 
-### T4 — UI 5필터·반응형 검증 (F2.3) `TODO`
+### T4 — UI 5필터·반응형 검증 (F2.3) `DONE`
 - 기존: `web/public/{index.html,app.js,styles.css}`.
 - 검증 산출: `specs/verify/ui-checklist.md` — 5필터 조합/URL 복원/360px 스냅샷 증거.
 - **DoD**: agent-browser 스냅샷으로 5축 필터 + URL 상태 복원 확인(증거 첨부).
@@ -66,7 +66,7 @@ updated: 2026-06-21
   커버(결측 제거 보장). 샘플 데이터는 6개 시/도 분포(실소스 적재 시 17개로 확대).
   검증: `geocode.coverage(events)` + tests(TestGeocode 7건).
 
-### T6 — 클린업: 죽은 코드 (drift_guards) `TODO`
+### T6 — 클린업: 죽은 코드 (drift_guards) `DONE`
 - `scripts/run_pipeline.py` `main()` 말미 **중복 `return 0`**(도달불가) 제거.
 - **DoD**: `python -m scripts.run_pipeline` rc==0 유지 + 라인 제거.
 

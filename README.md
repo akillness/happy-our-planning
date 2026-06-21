@@ -6,7 +6,7 @@
 
 [![ingest](https://github.com/jellyggumi/happy-our-planning/actions/workflows/ingest.yml/badge.svg)](https://github.com/jellyggumi/happy-our-planning/actions/workflows/ingest.yml)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Tests 40 passing](https://img.shields.io/badge/tests-40%20passing-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
+[![Tests 56 passing](https://img.shields.io/badge/tests-56%20passing-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
 [![Knowledge Format](https://img.shields.io/badge/data-schema.org%2FEvent-orange?logo=json&logoColor=white)](docs/02-data-model-okf.md)
 [![Hosting](https://img.shields.io/badge/SaaS-Cloudflare%20%2B%20GitHub%20Actions-F38020?logo=cloudflare&logoColor=white)](docs/09-saas-free-stack.md)
 [![Cost ₩0/month](https://img.shields.io/badge/cost-%E2%82%A90%2Fmonth-2ea44f)](docs/00-overview.md)
@@ -78,7 +78,7 @@ flowchart TD
   A["⏰ cron 일 1회 / workflow_dispatch"] --> B[checkout]
   B --> C[setup python 3.12 + pip install]
   C --> D["run_pipeline<br/>수집→정규화→OKF적재→검증→인덱스→SQLite→wiki"]
-  D --> E["unittest · 40종"]
+  D --> E["unittest · 56종"]
   E --> F{변경 diff?}
   F -- 있음 --> G["commit & push<br/>knowledge/** + web/public/data/**"]
   F -- 없음 --> H[no-op 종료]
@@ -161,7 +161,7 @@ assets/       브랜드 자산 (마스코트·아이콘 원본)
 ```bash
 pip install -r requirements.txt
 python -m scripts.run_pipeline          # 수집(웹검색 포함)→정규화→검증→인덱스→SQLite→wiki
-python -m unittest discover -s tests    # 단위 테스트 40종
+python -m unittest discover -s tests    # 단위 테스트 56종
 python -m scripts.ingest.websearch      # 웹검색 발견 후보(Exa/Brave/Tavily, 오프라인 픽스처)
 python -m scripts.build.build_sqlite --query 축제   # SQLite FTS5 전문검색 데모
 python -m scripts.recommend.rank        # 규칙기반 추천 + 주간 플랜(JSON)
