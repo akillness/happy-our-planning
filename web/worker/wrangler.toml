@@ -1,0 +1,23 @@
+# Cloudflare Workers 설정 (무료 tier). C7 선택적 엣지 계층.
+# 배포 검증: `wrangler deploy --dry-run` (실배포 아님).
+# 키는 secret 으로만 주입: `wrangler secret put GEMINI_KEY` (번들/저장소에 키 금지 — C4).
+
+name = "notchima-ai-proxy"
+main = "ai-proxy.js"
+compatibility_date = "2024-11-01"
+
+# 무료 tier 기본값(요청 한도 내). 별도 유료 설정 없음.
+workers_dev = true
+
+# 모델은 변수로(키 아님). 키는 secret 으로 분리한다.
+[vars]
+GEMINI_MODEL = "gemini-1.5-flash"
+
+# 매크로 잡 큐 Worker는 별도 환경으로 분리(선택). KV 바인딩이 있으면 영속화.
+[env.jobqueue]
+name = "notchima-jobqueue"
+main = "jobqueue.js"
+
+# [[env.jobqueue.kv_namespaces]]
+# binding = "JOBS"
+# id = "<wrangler kv namespace create JOBS 로 생성한 id>"
