@@ -64,6 +64,7 @@ def _mk(sub: dict, e: dict, kind: str, headline: str) -> dict:
         "subscription_id": sub["id"],
         "channel": sub.get("channel", "stdout"),
         "target": sub.get("target"),
+        "subscription": sub.get("subscription"),  # web push 구독 객체(선택)
         "event_id": e["id"],
         "kind": kind,
         "title": f"[{headline}] {e['name']}",
@@ -82,7 +83,22 @@ def _save_sent(keys: set[str]) -> None:
     SENT_PATH.write_text(json.dumps(sorted(keys), ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def _telegram_payload(notif: dict) -> dict:
+    """Telegram sendMessage 페이로드(전송 분리 → 구조 테스트 가능)."""
+    return {"chat_id": notif.get("target"), "text": f"{notif['title']}\n{notif['body']}"}
+
+
+def _webpush_payload(notif: dict) -> dict:
+    """Web Push 페이로드(서비스워커가 표시할 알림 본문)."""
+    return {
+        "title": notif["title"],
+        "body": notif["body"],
+        "data": {"event_id": notif.get("event_id"), "kind": notif.get("kind")},
+    }
+
+
 def _send_telegram(notif: dict) -> bool:
+    """토큰/타깃 없으면 dry-run(False) — 무오류. 있으면 실제 전송."""
     token = os.environ.get("TELEGRAM_TOKEN")
     if not token or not notif.get("target"):
         return False
@@ -90,12 +106,35 @@ def _send_telegram(notif: dict) -> bool:
         import httpx
         httpx.post(
             f"https://api.telegram.org/bot{token}/sendMessage",
-            json={"chat_id": notif["target"], "text": f"{notif['title']}\n{notif['body']}"},
+            json=_telegram_payload(notif),
             timeout=10,
         )
         return True
     except Exception as exc:
         print(f"telegram 실패: {exc}", file=sys.stderr)
+        return False
+
+
+def _send_webpush(notif: dict, subscription: dict | None = None) -> bool:
+    """VAPID 키/구독 없으면 dry-run(False) — 무오류. 있으면 실제 전송(무료 VAPID).
+
+    pywebpush는 선택 의존: 미설치 시에도 dry-run으로 무오류 처리한다(C1).
+    """
+    vapid = os.environ.get("VAPID_PRIVATE_KEY")
+    subscription = subscription or notif.get("subscription")
+    if not vapid or not subscription:
+        return False
+    try:  # pragma: no cover - 네트워크/의존성 경로
+        from pywebpush import webpush
+        webpush(
+            subscription_info=subscription,
+            data=json.dumps(_webpush_payload(notif), ensure_ascii=False),
+            vapid_private_key=vapid,
+            vapid_claims={"sub": os.environ.get("VAPID_SUBJECT", "mailto:admin@example.com")},
+        )
+        return True
+    except Exception as exc:
+        print(f"webpush 실패: {exc}", file=sys.stderr)
         return False
 
 
@@ -108,7 +147,12 @@ def dispatch(events: list[dict], subscriptions: list[dict], now: dt.datetime | N
         if n["dedupe_key"] in sent:
             suppressed += 1
             continue
-        ok = _send_telegram(n) if n["channel"] == "telegram" else False
+        if n["channel"] == "telegram":
+            ok = _send_telegram(n)
+        elif n["channel"] == "webpush":
+            ok = _send_webpush(n)
+        else:
+            ok = False
         prefix = "SENT" if ok else "DRY "
         print(f"{prefix} → {n['channel']}: {n['title']}")
         sent.add(n["dedupe_key"])

@@ -193,6 +193,48 @@ class TestNotify(unittest.TestCase):
         self.assertEqual(r1["delivered"], 1)
         self.assertEqual(r2["suppressed"], 1)
 
+    def test_dispatch_dryrun_without_token(self):
+        # 토큰 없는 telegram 채널 → 무오류 dry-run, DRY 접두로 출력.
+        import io
+        from contextlib import redirect_stdout
+        env = {k: v for k, v in os.environ.items() if k != "TELEGRAM_TOKEN"}
+        old = dict(os.environ)
+        os.environ.clear(); os.environ.update(env)
+        try:
+            subs = [{"id": "s1", "filters": {"sido": "서울특별시"}, "channel": "telegram",
+                     "target": "12345"}]
+            now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=dt.timezone(dt.timedelta(hours=9)))
+            buf = io.StringIO()
+            with redirect_stdout(buf):
+                summary = notify.dispatch(self._events(), subs, now)
+        finally:
+            os.environ.clear(); os.environ.update(old)
+        self.assertEqual(summary["delivered"], 1)
+        self.assertIn("DRY", buf.getvalue())
+        self.assertNotIn("SENT", buf.getvalue())
+
+    def test_telegram_payload_shape(self):
+        notif = {"target": "999", "title": "[제목] 행사", "body": "본문"}
+        payload = notify._telegram_payload(notif)
+        self.assertEqual(payload["chat_id"], "999")
+        self.assertEqual(payload["text"], "[제목] 행사\n본문")
+
+    def test_webpush_payload_shape(self):
+        notif = {"title": "[제목] 행사", "body": "본문", "event_id": "x", "kind": "deadline-D1"}
+        payload = notify._webpush_payload(notif)
+        self.assertEqual(payload["title"], "[제목] 행사")
+        self.assertEqual(payload["data"], {"event_id": "x", "kind": "deadline-D1"})
+
+    def test_webpush_dryrun_without_vapid(self):
+        env = {k: v for k, v in os.environ.items() if k != "VAPID_PRIVATE_KEY"}
+        old = dict(os.environ)
+        os.environ.clear(); os.environ.update(env)
+        try:
+            self.assertFalse(notify._send_webpush(
+                {"title": "t", "body": "b"}, {"endpoint": "https://push"}))
+        finally:
+            os.environ.clear(); os.environ.update(old)
+
 
 class TestMacro(unittest.TestCase):
     def test_auto_site_has_submit(self):
