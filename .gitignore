@@ -19,3 +19,6 @@ web/public/data/*.db
 
 # 에이전트 survey 스크래치
 .survey/
+
+# UI 검증 스냅샷(재생성 가능, 바이너리) — JSON 증거만 커밋
+specs/verify/evidence/*.png

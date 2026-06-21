@@ -1,0 +1,46 @@
+{
+  "total_checks": 8,
+  "passed": 8,
+  "checks": [
+    {
+      "check": "초기 로드 + 카운트",
+      "ok": true,
+      "detail": "활성 10건"
+    },
+    {
+      "check": "5축 필터 → URL 동기화",
+      "ok": true,
+      "detail": "q=%EC%B6%95%EC%A0%9C&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&theme=%EC%B6%95%EC%A0%9C&age=%EC%96%B4%EB%A6%B0%EC%9D%B4&from=2026-01-01&to=2026-12-31&applyable=1"
+    },
+    {
+      "check": "필터 적용 결과 카운트",
+      "ok": true,
+      "detail": "0/10"
+    },
+    {
+      "check": "URL 복원(새 세션 입력값)",
+      "ok": true,
+      "detail": "{\"q\": \"축제\", \"sido\": \"서울특별시\", \"theme\": \"축제\", \"age\": \"어린이\", \"from\": \"2026-01-01\", \"to\": \"2026-12-31\", \"applyable\": true}"
+    },
+    {
+      "check": "URL 복원(카운트 일치)",
+      "ok": true,
+      "detail": "0==0"
+    },
+    {
+      "check": "360px 모바일 스냅샷",
+      "ok": true,
+      "detail": "specs/verify/evidence/ui-360px.png"
+    },
+    {
+      "check": "reset → 전체 복귀",
+      "ok": true,
+      "detail": "10==10"
+    },
+    {
+      "check": "데스크톱 필터 스냅샷",
+      "ok": true,
+      "detail": "specs/verify/evidence/ui-desktop-filtered.png"
+    }
+  ]
+}

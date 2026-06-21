@@ -52,6 +52,24 @@
     };
   }
 
+  // 필터 상태 ↔ URL 동기화(공유·새로고침 시 복원). 빈 값은 생략한다.
+  const URL_KEYS = ["q", "sido", "theme", "age", "from", "to"];
+
+  function writeURL(f) {
+    const p = new URLSearchParams();
+    for (const k of URL_KEYS) if (f[k]) p.set(k, f[k]);
+    if (f.applyable) p.set("applyable", "1");
+    const qs = p.toString();
+    const url = qs ? "?" + qs : location.pathname;
+    history.replaceState(null, "", url);
+  }
+
+  function restoreFromURL() {
+    const p = new URLSearchParams(location.search);
+    for (const k of URL_KEYS) if (p.has(k)) $(k).value = p.get(k);
+    $("applyable").checked = p.get("applyable") === "1";
+  }
+
   function isApplyable(e) {
     if (e.status !== "Open") return false;
     const today = new Date().toISOString().slice(0, 10);
@@ -75,6 +93,7 @@
       return true;
     });
     render(rows);
+    writeURL(f);
   }
 
   function badge(e) {
@@ -183,6 +202,7 @@
       $("applyable").checked = false; applyFilters();
     });
     $("aiBtn").addEventListener("click", showAI);
+    window.addEventListener("popstate", () => { restoreFromURL(); applyFilters(); });
   }
 
   async function main() {
@@ -195,7 +215,7 @@
       state.events = events; state.facets = facets; state.regions = regions;
       state.fuse = new Fuse(events, { keys: ["name", "description", "themes"], threshold: 0.4 });
       $("freshness").textContent = `갱신 ${updated.generated_at} · 활성 ${updated.total_active}건`;
-      buildFilters(); wire(); applyFilters();
+      buildFilters(); wire(); restoreFromURL(); applyFilters();
     } catch (err) {
       $("freshness").textContent = "데이터 로드 실패: " + err.message;
     }
