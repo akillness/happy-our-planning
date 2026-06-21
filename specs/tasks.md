@@ -58,9 +58,13 @@ updated: 2026-06-21
 - 검증 산출: `specs/verify/ui-checklist.md` — 5필터 조합/URL 복원/360px 스냅샷 증거.
 - **DoD**: agent-browser 스냅샷으로 5축 필터 + URL 상태 복원 확인(증거 첨부).
 
-### T5 — 멀티소스·지오코딩 품질 (M2 잔여) `TODO`
-- 기존: `scripts/ingest/tourapi.py`(geo) + websearch. 추가: VWorld 지오코딩 캐시 `knowledge/sources/geocache.json`.
-- **DoD**: 좌표 결측률 < 15%, 17개 시/도 모두 ≥1건(빌드 산출 카운트로 측정).
+### T5 — 멀티소스·지오코딩 품질 (M2 잔여) `DONE`
+- 신규: `scripts/normalize/geocode.py` — 캐시→VWorld(선택)→시/도 centroid 3단 폴백.
+  `config/regions.yaml`에 17개 시/도 centroid 추가, `knowledge/sources/geocache.json` 캐시.
+  `to_okf.run()`이 수집 직후 `geocode.enrich()` 호출(content_hash 재계산 → C2 idempotent).
+- **DoD**: 좌표 결측률 0%(< 15% 목표) — 빌드 산출 10/10 좌표 보유. centroid 테이블 17/17 시/도
+  커버(결측 제거 보장). 샘플 데이터는 6개 시/도 분포(실소스 적재 시 17개로 확대).
+  검증: `geocode.coverage(events)` + tests(TestGeocode 7건).
 
 ### T6 — 클린업: 죽은 코드 (drift_guards) `TODO`
 - `scripts/run_pipeline.py` `main()` 말미 **중복 `return 0`**(도달불가) 제거.

@@ -4,15 +4,18 @@
     "slug": "seoul",
     "count": 4,
     "centroid": [
-      37.550399999999996,
-      126.95425
+      37.55845,
+      126.966125
     ]
   },
   {
     "sido": "부산광역시",
     "slug": "busan",
     "count": 2,
-    "centroid": null
+    "centroid": [
+      35.1796,
+      129.0756
+    ]
   },
   {
     "sido": "강원특별자치도",
@@ -36,12 +39,18 @@
     "sido": "제주특별자치도",
     "slug": "jeju",
     "count": 1,
-    "centroid": null
+    "centroid": [
+      33.489,
+      126.4983
+    ]
   },
   {
     "sido": "경기도",
     "slug": "gyeonggi",
     "count": 1,
-    "centroid": null
+    "centroid": [
+      37.4138,
+      127.5183
+    ]
   }
 ]

@@ -21,6 +21,7 @@ from scripts.macro import apply as macro
 from scripts.ingest import websearch
 from scripts.build import build_sqlite
 from scripts.recommend import ai_planner
+from scripts.normalize import geocode
 
 
 class TestConfig(unittest.TestCase):
@@ -423,6 +424,56 @@ class TestAiPlanner(unittest.TestCase):
             os.environ.clear(); os.environ.update(old)
         self.assertEqual(result["engine"], "rule-based-fallback")
         self.assertEqual(result["days"][0]["items"][0]["event_id"], "a")
+
+
+class TestGeocode(unittest.TestCase):
+    def test_centroid_table_covers_17_sidos(self):
+        # 폴백 centroid 테이블이 17개 시/도 전부를 커버해야 한다(좌표 결측 제거 보장).
+        cov = geocode.coverage([])
+        self.assertEqual(cov["centroid_table_size"], 17)
+
+    def test_sido_centroid_lookup_and_alias(self):
+        lat, lng = geocode.sido_centroid("서울특별시")
+        self.assertAlmostEqual(lat, 37.5665, places=3)
+        # 별칭도 정규화되어 좌표를 찾는다.
+        self.assertEqual(geocode.sido_centroid("서울"), geocode.sido_centroid("서울특별시"))
+        self.assertEqual(geocode.sido_centroid("없는도"), (None, None))
+
+    def test_enrich_fills_missing_with_centroid(self):
+        ev = {"id": "g1", "location": {"sido": "제주특별자치도"}}
+        out = geocode.geocode_event(dict(ev), cache={})
+        self.assertAlmostEqual(out["location"]["lat"], 33.4890, places=3)
+        self.assertEqual(out["location"]["geo_precision"], "sido-centroid")
+
+    def test_existing_coords_preserved(self):
+        ev = {"id": "g2", "location": {"sido": "서울특별시", "lat": 37.1, "lng": 127.1}}
+        out = geocode.geocode_event(dict(ev), cache={})
+        self.assertEqual(out["location"]["lat"], 37.1)
+        self.assertNotIn("geo_precision", out["location"])  # 변경 안 함
+
+    def test_cache_hit_uses_precise_coords(self):
+        ev = {"id": "g3", "name": "세종문화회관", "location": {"sido": "서울특별시"}}
+        cache = {"세종문화회관": {"lat": 37.5725, "lng": 126.9760}}
+        out = geocode.geocode_event(dict(ev), cache=cache)
+        self.assertEqual(out["location"]["lat"], 37.5725)
+        self.assertEqual(out["location"]["geo_precision"], "address-cache")
+
+    def test_coverage_missing_rate_zero_after_enrich(self):
+        events = [{"id": str(i), "location": {"sido": s}}
+                  for i, s in enumerate(["서울특별시", "부산광역시", "경기도"])]
+        enriched = geocode.enrich(events)
+        cov = geocode.coverage(enriched)
+        self.assertEqual(cov["missing_rate"], 0.0)
+        self.assertLess(cov["missing_rate"], 0.15)
+
+    def test_vworld_no_key_returns_none(self):
+        env = {k: v for k, v in os.environ.items() if k != "VWORLD_KEY"}
+        old = dict(os.environ)
+        os.environ.clear(); os.environ.update(env)
+        try:
+            self.assertIsNone(geocode.vworld_geocode("서울특별시 세종대로 110"))
+        finally:
+            os.environ.clear(); os.environ.update(old)
 
 
 if __name__ == "__main__":

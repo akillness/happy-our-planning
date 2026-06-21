@@ -1,22 +1,23 @@
 # 17 시/도 통제 어휘 (표시명 ↔ slug ↔ 행정코드). 시군구는 별도 보강 파일/소스 매핑.
+# 각 시/도 centroid(lat/lng)는 좌표 결측 시 폴백 지오코딩에 사용(scripts/normalize/geocode.py).
 regions:
-  - { name: "서울특별시", slug: "seoul", code: "11" }
-  - { name: "부산광역시", slug: "busan", code: "26" }
-  - { name: "대구광역시", slug: "daegu", code: "27" }
-  - { name: "인천광역시", slug: "incheon", code: "28" }
-  - { name: "광주광역시", slug: "gwangju", code: "29" }
-  - { name: "대전광역시", slug: "daejeon", code: "30" }
-  - { name: "울산광역시", slug: "ulsan", code: "31" }
-  - { name: "세종특별자치시", slug: "sejong", code: "36" }
-  - { name: "경기도", slug: "gyeonggi", code: "41" }
-  - { name: "강원특별자치도", slug: "gangwon", code: "51" }
-  - { name: "충청북도", slug: "chungbuk", code: "43" }
-  - { name: "충청남도", slug: "chungnam", code: "44" }
-  - { name: "전북특별자치도", slug: "jeonbuk", code: "52" }
-  - { name: "전라남도", slug: "jeonnam", code: "46" }
-  - { name: "경상북도", slug: "gyeongbuk", code: "47" }
-  - { name: "경상남도", slug: "gyeongnam", code: "48" }
-  - { name: "제주특별자치도", slug: "jeju", code: "50" }
+  - { name: "서울특별시", slug: "seoul", code: "11", lat: 37.5665, lng: 126.9780 }
+  - { name: "부산광역시", slug: "busan", code: "26", lat: 35.1796, lng: 129.0756 }
+  - { name: "대구광역시", slug: "daegu", code: "27", lat: 35.8714, lng: 128.6014 }
+  - { name: "인천광역시", slug: "incheon", code: "28", lat: 37.4563, lng: 126.7052 }
+  - { name: "광주광역시", slug: "gwangju", code: "29", lat: 35.1595, lng: 126.8526 }
+  - { name: "대전광역시", slug: "daejeon", code: "30", lat: 36.3504, lng: 127.3845 }
+  - { name: "울산광역시", slug: "ulsan", code: "31", lat: 35.5384, lng: 129.3114 }
+  - { name: "세종특별자치시", slug: "sejong", code: "36", lat: 36.4801, lng: 127.2890 }
+  - { name: "경기도", slug: "gyeonggi", code: "41", lat: 37.4138, lng: 127.5183 }
+  - { name: "강원특별자치도", slug: "gangwon", code: "51", lat: 37.8228, lng: 128.1555 }
+  - { name: "충청북도", slug: "chungbuk", code: "43", lat: 36.6357, lng: 127.4917 }
+  - { name: "충청남도", slug: "chungnam", code: "44", lat: 36.5184, lng: 126.8000 }
+  - { name: "전북특별자치도", slug: "jeonbuk", code: "52", lat: 35.7175, lng: 127.1530 }
+  - { name: "전라남도", slug: "jeonnam", code: "46", lat: 34.8679, lng: 126.9910 }
+  - { name: "경상북도", slug: "gyeongbuk", code: "47", lat: 36.4919, lng: 128.8889 }
+  - { name: "경상남도", slug: "gyeongnam", code: "48", lat: 35.4606, lng: 128.2132 }
+  - { name: "제주특별자치도", slug: "jeju", code: "50", lat: 33.4890, lng: 126.4983 }
 
 # 소스별 지역 표기 → 표준 name 별칭 (정규화기가 사용)
 aliases:

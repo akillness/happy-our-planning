@@ -16,6 +16,7 @@ from scripts.ingest.kopis import KopisAdapter
 from scripts.ingest.tourapi import TourApiAdapter
 from scripts.ingest.websearch import WebSearchAdapter
 from scripts.normalize.upsert import upsert
+from scripts.normalize import geocode
 
 ADAPTERS = {
     "kopis": KopisAdapter,
@@ -43,7 +44,7 @@ def _write_log(key: str, count: int, stats: dict, error: str | None = None) -> N
     path.write_text(body, encoding="utf-8")
 
 
-def run(only: list[str] | None = None) -> dict:
+def run(only: list[str] | None = None, *, use_network: bool = False) -> dict:
     enabled = [s["key"] for s in sources() if s.get("enabled")]
     targets = [k for k in enabled if (not only or k in only)]
     summary = {}
@@ -54,6 +55,8 @@ def run(only: list[str] | None = None) -> dict:
             continue
         try:
             events = adapter_cls().collect()
+            events = geocode.enrich(events, use_network=use_network)
+            stats = upsert(events, processed_sources={key})
             stats = upsert(events, processed_sources={key})
             _write_log(key, len(events), stats)
             summary[key] = {"collected": len(events), **stats}
