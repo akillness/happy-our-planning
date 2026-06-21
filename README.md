@@ -6,7 +6,7 @@
 
 [![ingest](https://github.com/jellyggumi/happy-our-planning/actions/workflows/ingest.yml/badge.svg)](https://github.com/jellyggumi/happy-our-planning/actions/workflows/ingest.yml)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Tests 56 passing](https://img.shields.io/badge/tests-56%20passing-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
+[![Tests 58 passing](https://img.shields.io/badge/tests-58%20passing-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
 [![Knowledge Format](https://img.shields.io/badge/data-schema.org%2FEvent-orange?logo=json&logoColor=white)](docs/02-data-model-okf.md)
 [![Hosting](https://img.shields.io/badge/SaaS-Cloudflare%20%2B%20GitHub%20Actions-F38020?logo=cloudflare&logoColor=white)](docs/09-saas-free-stack.md)
 [![Cost ₩0/month](https://img.shields.io/badge/cost-%E2%82%A90%2Fmonth-2ea44f)](docs/00-overview.md)
@@ -180,10 +180,12 @@ cd web/public && python -m http.server 8000   # → http://localhost:8000
 - ✅ 정적 UI: Leaflet 지도 + 5축 필터(지역/기간/나이/테마/키워드) + Fuse 검색 + AI 추천 다이얼로그
 - ✅ 규칙기반 추천/주간 플래너(무료, LLM 폴백), 마감임박 알람 + 중복억제
 - ✅ 신청 매크로 잡 계획 + 약관 자동제출 게이팅(반자동 강등 보장)
+- ✅ Playwright 기반 E2E 매크로 러너 (mock 폼 자동 제출 및 결과 캡처)
+- ✅ Telegram 알림 채널 (토큰 주입 시 실제 전송, 무토큰 시 dry-run 무오류)
 - ✅ 지식 wiki 자동 인덱싱(REGIONS/THEMES/SOURCES)
 - ✅ 웹검색 발견 레이어(Exa·Brave·Tavily) — 신뢰도/날짜/지역 가드로 OKF 후보 적재, `🔎 발견` 배지
 - ✅ SQLite(libSQL) 파생 인덱스 `events.db` — FTS5 한국어 전문검색 + sido/theme/status 교차필터
 - ✅ Google AI Studio(Gemini) 주간 플래너 — responseSchema JSON 강제 + 환각 가드 + 규칙 폴백
 
 ## 상태
-M0–M2 코어 + M3–M6 검증 슬라이스 동작(샘플 데이터). 다음: 실 API 키 연결(원격 수집), Cloudflare Pages/Workers 배포, Playwright 매크로 러너 실행부, 시/도 경계 GeoJSON.
+- M0–M6 코어 및 검증 슬라이스 동작(샘플 데이터). Playwright 매크로 러너 및 Telegram 알림 채널 구현 완료. 다음: 실 API 키 연결(원격 수집), Cloudflare Pages/Workers 배포, 시/도 경계 GeoJSON.

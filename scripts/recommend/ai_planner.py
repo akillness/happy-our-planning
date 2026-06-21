@@ -144,13 +144,19 @@ def validate_plan(plan: dict) -> None:
                 raise ValueError("item.event_id 필요")
 
 
-def _constrain_to_candidates(plan: dict, candidates: list[dict]) -> dict:
-    """LLM이 후보 밖 event_id를 만들면 제거(환각 가드)."""
+def _constrain_to_candidates(plan: dict, candidates: list[dict], profile: dict | None = None) -> dict:
+    """LLM이 후보 밖 event_id를 만들거나 가용일이 아닌 날짜에 일정을 배치하면 제거(환각 가드)."""
     valid = {c.get("id") for c in candidates}
+    avail = set(profile.get("available_dates") or []) if profile else set()
     for day in plan.get("days", []):
-        day["items"] = [it for it in day.get("items", []) if it.get("event_id") in valid]
+        day_date = day.get("date")
+        if avail and day_date not in avail:
+            day["items"] = []
+        else:
+            day["items"] = [it for it in day.get("items", []) if it.get("event_id") in valid]
     plan["engine"] = f"gemini:{_model()}"
     return plan
+
 
 
 def plan(profile: dict, events: list[dict], top_n: int = 8) -> dict:
@@ -168,7 +174,7 @@ def plan(profile: dict, events: list[dict], top_n: int = 8) -> dict:
         r = httpx.post(url, json=build_request(profile, candidates), timeout=30)
         r.raise_for_status()
         result = parse_plan(r.json())
-        return _constrain_to_candidates(result, candidates)
+        return _constrain_to_candidates(result, candidates, profile)
     except Exception as exc:  # pragma: no cover - 폴백 보장
         fb = rank.plan_week(profile, candidates)
         fb["notes"] = f"Gemini 실패({exc}) → 규칙 기반 폴백. " + fb.get("notes", "")

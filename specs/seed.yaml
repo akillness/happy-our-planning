@@ -51,14 +51,14 @@ success_criteria:
   - id: AC-F3-runner          # 신규(미구현) — tasks T1
     check: "Playwright 러너가 mock 폼에 plan_job 결과 입력 후 자동제출 E2E green"
     evidence: "headless run 로그 + 제출 확인 스크린샷/JSON"
-    status: pending
+    status: done
   - id: AC-F4-notify
     check: "tests::TestNotify 3건 green"
     evidence: "unittest 요약"
   - id: AC-F4-channel         # 신규(부분) — tasks T2
     check: "토큰 주입 시 Telegram 1건 도달; 무토큰 dry-run 무오류"
     evidence: "전송 응답 코드 / dry-run stdout"
-    status: pending
+    status: done
   - id: AC-F5-ai
     check: "tests::TestAiPlanner 6건 + TestRecommend 3건 green"
     evidence: "unittest 요약"

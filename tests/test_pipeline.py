@@ -172,7 +172,19 @@ class TestNotify(unittest.TestCase):
         return [{"id": "x", "name": "마감임박행사", "sido": "서울특별시", "themes": ["공연"],
                  "age_bands": ["어린이"], "status": "Open",
                  "application_start": "2026-06-25T09:00:00+09:00",
-                 "application_end": "2026-07-10T18:00:00+09:00", "url": "https://e"}]
+                 "application_end": "2026-07-10T18:00:00+09:00", "url": "https://e",
+                 "fetched_at": "2026-06-20T00:00:00+09:00"}]
+
+    def test_new_event_notification(self):
+        events = [dict(self._events()[0], fetched_at="2026-07-09T09:00:00+09:00")]
+        subs = [{"id": "s1", "filters": {"sido": "서울특별시"}, "channel": "stdout"}]
+        now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=dt.timezone(dt.timedelta(hours=9)))
+        out = notify.compute_notifications(events, subs, now)
+        # 마감 D-1 알림과 신규 행사 알림 두 개가 생성되어야 함
+        self.assertEqual(len(out), 2)
+        kinds = {o["kind"] for o in out}
+        self.assertIn("deadline-D1", kinds)
+        self.assertIn("new-event", kinds)
 
     def test_deadline_d1_and_filter_match(self):
         subs = [{"id": "s1", "filters": {"sido": "서울특별시"}, "channel": "stdout"}]
@@ -412,6 +424,16 @@ class TestAiPlanner(unittest.TestCase):
             {"event_id": "a"}, {"event_id": "ghost"}]}]}
         out = ai_planner._constrain_to_candidates(plan, [{"id": "a"}])
         self.assertEqual([i["event_id"] for i in out["days"][0]["items"]], ["a"])
+
+    def test_constrain_filters_unavailable_dates(self):
+        plan = {"week_of": "w", "days": [
+            {"date": "2026-07-18", "items": [{"event_id": "a"}]},
+            {"date": "2026-07-19", "items": [{"event_id": "a"}]}
+        ]}
+        profile = {"available_dates": ["2026-07-18"]}
+        out = ai_planner._constrain_to_candidates(plan, [{"id": "a"}], profile)
+        self.assertEqual(len(out["days"][0]["items"]), 1)
+        self.assertEqual(len(out["days"][1]["items"]), 0)
 
     def test_plan_falls_back_without_key(self):
         env = {k: v for k, v in os.environ.items()

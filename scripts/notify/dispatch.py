@@ -54,6 +54,15 @@ def compute_notifications(events: list[dict], subscriptions: list[dict],
                 d_remain = (end - today).days
                 if d_remain in deadline_days:
                     out.append(_mk(sub, e, f"deadline-D{d_remain}", f"신청 마감 D-{d_remain}"))
+            # 신규 등록 행사 (new-event)
+            if e.get("fetched_at"):
+                try:
+                    fetched = dt.datetime.fromisoformat(e["fetched_at"])
+                    # 24시간 이내 수집된 행사인지 확인
+                    if 0 <= (now - fetched).total_seconds() <= 86400:
+                        out.append(_mk(sub, e, "new-event", "신규 행사 발견"))
+                except Exception:
+                    pass
     return out
 
 
