@@ -1,0 +1,58 @@
+---
+title: 놓치마 · 구조 (모듈 그래프)
+---
+flowchart TB
+  RP["scripts/run_pipeline.py<br/>오케스트레이터"]
+
+  subgraph COMMON["scripts/common"]
+    CFG["config.py<br/>통제어휘 로더"]
+    OKF["okf.py<br/>content_hash · to_markdown"]
+  end
+  subgraph ING["scripts/ingest"]
+    BASE[base.py]
+    KO[kopis.py]
+    TO[tourapi.py]
+    WSA["websearch.py<br/>Exa·Brave·Tavily"]
+  end
+  subgraph NORM["scripts/normalize"]
+    T2O[to_okf.py]
+    UPS[upsert.py]
+  end
+  subgraph BUILD["scripts/build"]
+    VAL[validate.py]
+    BI[build_index.py]
+    SQ["build_sqlite.py<br/>FTS5"]
+    WI[wiki_index.py]
+  end
+  subgraph REC2["scripts/recommend"]
+    REC["rank.py<br/>규칙기반"]
+    AIP["ai_planner.py<br/>Gemini + 폴백"]
+  end
+  NOT["scripts/notify/dispatch.py"]
+  MAC["scripts/macro/apply.py"]
+
+  RP --> ING --> NORM --> BUILD
+  BASE --> KO & TO & WSA
+  KO & TO & WSA --> T2O --> UPS
+  CFG -.-> T2O & BI & WI & WSA
+  OKF -.-> UPS & BI & WI & SQ
+  REC --> AIP
+  RP --> REC & NOT & MAC
+  BUILD --> WEB["web/public/data/*.json + events.db → index.html"]
+
+  classDef orch fill:#FFF1ED,stroke:#FF7A5C,stroke-width:2px,color:#7A2E1E;
+  classDef common fill:#FFF9E6,stroke:#E0B23A,stroke-width:1.5px,color:#5C4710;
+  classDef ingest fill:#EAF6FF,stroke:#3FA0D3,stroke-width:1.5px,color:#0B3550;
+  classDef norm fill:#E9FBF5,stroke:#3FD3B0,stroke-width:1.5px,color:#0B3B33;
+  classDef build fill:#F3ECFF,stroke:#9B6BE0,stroke-width:1.5px,color:#3A2660;
+  classDef rec fill:#FCE9F3,stroke:#D85B9E,stroke-width:1.5px,color:#5C1840;
+  classDef sink fill:#E6F6EC,stroke:#2ea44f,stroke-width:1.5px,color:#14532d;
+
+  class RP orch;
+  class CFG,OKF common;
+  class BASE,KO,TO,WSA ingest;
+  class T2O,UPS norm;
+  class VAL,BI,SQ,WI build;
+  class REC,AIP rec;
+  class NOT,MAC orch;
+  class WEB sink;

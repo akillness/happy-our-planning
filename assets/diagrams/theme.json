@@ -1,0 +1,25 @@
+{
+  "theme": "base",
+  "htmlLabels": false,
+  "themeVariables": {
+    "fontFamily": "Pretendard, 'Apple SD Gothic Neo', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    "fontSize": "15px",
+    "primaryColor": "#E9FBF5",
+    "primaryBorderColor": "#3FD3B0",
+    "primaryTextColor": "#0B3B33",
+    "lineColor": "#7A8B96",
+    "tertiaryColor": "#FFF1ED",
+    "clusterBkg": "#F6FAFB",
+    "clusterBorder": "#CBD8DF",
+    "edgeLabelBackground": "#FFFFFF",
+    "titleColor": "#0B3B33"
+  },
+  "flowchart": {
+    "curve": "basis",
+    "htmlLabels": false,
+    "padding": 18,
+    "nodeSpacing": 48,
+    "rankSpacing": 64,
+    "useMaxWidth": true
+  }
+}

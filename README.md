@@ -26,106 +26,19 @@
 사전 빌드 JSON → 정적 UI(검색/지도). 상태/AI/알람만 엣지 함수. 스크립트가 모든 적재·매크로·알람을 구동.
 
 ## 시스템 로직 (데이터 흐름)
-```mermaid
-flowchart LR
-  subgraph SRC["무료 데이터 소스"]
-    K[KOPIS]
-    T[TourAPI 4.0]
-    G[data.go.kr / VWorld<br/>지오코딩]
-    WS["웹검색 발견<br/>Exa · Brave · Tavily"]
-  end
-
-  subgraph WRITE["쓰기 경로 · 스크립트 (GitHub Actions)"]
-    I["ingest<br/>raw/**/sample-*"]
-    N["normalize → OKF<br/>schema.org/Event"]
-    U["upsert<br/>content_hash 증분 · archived"]
-    V["validate<br/>JSON Schema 게이트"]
-    B["build_index<br/>events/facets/regions/updated.json"]
-    SQL["build_sqlite<br/>events.db · FTS5 인덱스"]
-    W["wiki_index<br/>REGIONS/THEMES/SOURCES"]
-  end
-
-  subgraph DB["지식 DB (git flat-file)"]
-    MD["knowledge/events/**.md<br/>YAML frontmatter = SSOT"]
-    IDX["knowledge/index.md"]
-  end
-
-  subgraph READ["읽기 경로 · 100% 정적"]
-    JSON["web/public/data/*.json + events.db"]
-    UI["Leaflet 지도 + Fuse 검색<br/>5축 필터 + AI 다이얼로그"]
-  end
-
-  subgraph EDGE["엣지 함수 (Cloudflare)"]
-    R["recommend<br/>규칙기반 랭킹"]
-    AI["ai_planner<br/>Google AI Studio(Gemini) + 폴백"]
-    NT["notify<br/>마감 D-1 · dedupe"]
-    MC["macro<br/>약관 게이팅"]
-  end
-
-  K & T & WS --> I --> N
-  G --> N --> U --> MD
-  MD --> V --> B --> JSON --> UI
-  MD --> SQL --> JSON
-  MD --> W --> IDX
-  MD --> R --> AI --> UI
-  MD --> NT
-  MD --> MC
-```
+<p align="center">
+  <img src="assets/diagrams/system-logic.svg" alt="놓치마 시스템 로직 — 무료 데이터 소스 → 쓰기 경로(GitHub Actions) → 지식 DB → 읽기 경로(정적) · 엣지 함수(Cloudflare)" width="100%" />
+</p>
 
 ## CI 워크플로우 (.github/workflows/ingest.yml)
-```mermaid
-flowchart TD
-  A["⏰ cron 일 1회 / workflow_dispatch"] --> B[checkout]
-  B --> C[setup python 3.12 + pip install]
-  C --> D["run_pipeline<br/>수집→정규화→OKF적재→검증→인덱스→SQLite→wiki"]
-  D --> E["unittest · 56종"]
-  E --> F{변경 diff?}
-  F -- 있음 --> G["commit & push<br/>knowledge/** + web/public/data/**"]
-  F -- 없음 --> H[no-op 종료]
-  G --> I[정적 사이트 데이터 최신화]
-```
+<p align="center">
+  <img src="assets/diagrams/ci-workflow.svg" alt="놓치마 CI 워크플로우 — cron→checkout→setup→run_pipeline→unittest→diff 게이트→commit/no-op" width="100%" />
+</p>
 
 ## 구조 (모듈 그래프)
-```mermaid
-flowchart TB
-  RP["scripts/run_pipeline.py<br/>오케스트레이터"]
-
-  subgraph COMMON["scripts/common"]
-    CFG["config.py<br/>통제어휘 로더"]
-    OKF["okf.py<br/>content_hash · to_markdown"]
-  end
-  subgraph ING["scripts/ingest"]
-    BASE[base.py]
-    KO[kopis.py]
-    TO[tourapi.py]
-    WSA["websearch.py<br/>Exa·Brave·Tavily"]
-  end
-  subgraph NORM["scripts/normalize"]
-    T2O[to_okf.py]
-    UPS[upsert.py]
-  end
-  subgraph BUILD["scripts/build"]
-    VAL[validate.py]
-    BI[build_index.py]
-    SQ["build_sqlite.py<br/>FTS5"]
-    WI[wiki_index.py]
-  end
-  subgraph REC2["scripts/recommend"]
-    REC["rank.py<br/>규칙기반"]
-    AIP["ai_planner.py<br/>Gemini + 폴백"]
-  end
-  NOT["scripts/notify/dispatch.py"]
-  MAC["scripts/macro/apply.py"]
-
-  RP --> ING --> NORM --> BUILD
-  BASE --> KO & TO & WSA
-  KO & TO & WSA --> T2O --> UPS
-  CFG -.-> T2O & BI & WI & WSA
-  OKF -.-> UPS & BI & WI & SQ
-  REC --> AIP
-  RP --> REC & NOT & MAC
-  BUILD --> WEB["web/public/data/*.json + events.db → index.html"]
-```
+<p align="center">
+  <img src="assets/diagrams/module-graph.svg" alt="놓치마 모듈 그래프 — run_pipeline 오케스트레이터에서 ingest·normalize·build·recommend·notify·macro로 분기" width="100%" />
+</p>
 
 ## 문서 (구체 설계)
 | 문서 | 내용 |

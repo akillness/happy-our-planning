@@ -1,0 +1,23 @@
+---
+title: 놓치마 · CI 워크플로우 (ingest.yml)
+---
+flowchart TD
+  A["⏰ cron 일 1회 / workflow_dispatch"] --> B[checkout]
+  B --> C[setup python 3.12 + pip install]
+  C --> D["run_pipeline<br/>수집→정규화→OKF적재→검증→인덱스→SQLite→wiki"]
+  D --> E["unittest · 56종"]
+  E --> F{변경 diff?}
+  F -- 있음 --> G["commit & push<br/>knowledge/** + web/public/data/**"]
+  F -- 없음 --> H[no-op 종료]
+  G --> I[정적 사이트 데이터 최신화]
+
+  classDef trigger fill:#FFF1ED,stroke:#FF7A5C,stroke-width:1.5px,color:#7A2E1E;
+  classDef step fill:#E9FBF5,stroke:#3FD3B0,stroke-width:1.5px,color:#0B3B33;
+  classDef gate fill:#FFF9E6,stroke:#E0B23A,stroke-width:1.5px,color:#5C4710;
+  classDef ok fill:#E6F6EC,stroke:#2ea44f,stroke-width:1.5px,color:#14532d;
+
+  class A trigger;
+  class B,C,D,E step;
+  class F gate;
+  class G,I ok;
+  class H step;

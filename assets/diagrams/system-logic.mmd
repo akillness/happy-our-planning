@@ -1,0 +1,58 @@
+---
+title: 놓치마 · 시스템 로직 (데이터 흐름)
+---
+flowchart LR
+  subgraph SRC["🌐 무료 데이터 소스"]
+    K[KOPIS]
+    T[TourAPI 4.0]
+    G["data.go.kr / VWorld<br/>지오코딩"]
+    WS["웹검색 발견<br/>Exa · Brave · Tavily"]
+  end
+
+  subgraph WRITE["⚙️ 쓰기 경로 · 스크립트 (GitHub Actions)"]
+    I["ingest<br/>raw/**/sample-*"]
+    N["normalize → OKF<br/>schema.org/Event"]
+    U["upsert<br/>content_hash 증분 · archived"]
+    V["validate<br/>JSON Schema 게이트"]
+    B["build_index<br/>events/facets/regions/updated.json"]
+    SQL["build_sqlite<br/>events.db · FTS5 인덱스"]
+    W["wiki_index<br/>REGIONS/THEMES/SOURCES"]
+  end
+
+  subgraph DB["📚 지식 DB (git flat-file)"]
+    MD["knowledge/events/**.md<br/>YAML frontmatter = SSOT"]
+    IDX["knowledge/index.md"]
+  end
+
+  subgraph READ["🖥️ 읽기 경로 · 100% 정적"]
+    JSON["web/public/data/*.json + events.db"]
+    UI["Leaflet 지도 + Fuse 검색<br/>5축 필터 + AI 다이얼로그"]
+  end
+
+  subgraph EDGE["☁️ 엣지 함수 (Cloudflare)"]
+    R["recommend<br/>규칙기반 랭킹"]
+    AI["ai_planner<br/>Google AI Studio(Gemini) + 폴백"]
+    NT["notify<br/>마감 D-1 · dedupe"]
+    MC["macro<br/>약관 게이팅"]
+  end
+
+  K & T & WS --> I --> N
+  G --> N --> U --> MD
+  MD --> V --> B --> JSON --> UI
+  MD --> SQL --> JSON
+  MD --> W --> IDX
+  MD --> R --> AI --> UI
+  MD --> NT
+  MD --> MC
+
+  classDef src fill:#FFF1ED,stroke:#FF7A5C,stroke-width:1.5px,color:#7A2E1E;
+  classDef write fill:#EAF6FF,stroke:#3FA0D3,stroke-width:1.5px,color:#0B3550;
+  classDef db fill:#FFF9E6,stroke:#E0B23A,stroke-width:1.5px,color:#5C4710;
+  classDef read fill:#E9FBF5,stroke:#3FD3B0,stroke-width:1.5px,color:#0B3B33;
+  classDef edge fill:#F3ECFF,stroke:#9B6BE0,stroke-width:1.5px,color:#3A2660;
+
+  class K,T,G,WS src;
+  class I,N,U,V,B,SQL,W write;
+  class MD,IDX db;
+  class JSON,UI read;
+  class R,AI,NT,MC edge;
