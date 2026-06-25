@@ -187,6 +187,61 @@ class TestNotify(unittest.TestCase):
         self.assertIn("deadline-D1", kinds)
         self.assertIn("new-event", kinds)
 
+    def test_application_open_today(self):
+        # 신청 시작일이 오늘 + status=Open 이면 application-open 트리거 발생.
+        events = [dict(self._events()[0],
+                       application_start="2026-07-09T09:00:00+09:00",
+                       application_end="2026-08-01T18:00:00+09:00",
+                       fetched_at="2026-06-20T00:00:00+09:00", status="Open")]
+        subs = [{"id": "s1", "filters": {"sido": "서울특별시"}, "channel": "stdout"}]
+        now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=dt.timezone(dt.timedelta(hours=9)))
+        kinds = {o["kind"] for o in notify.compute_notifications(events, subs, now)}
+        self.assertIn("application-open", kinds)
+
+    def test_application_open_requires_open_status(self):
+        # status가 Open이 아니면 신청 시작일 당일이어도 application-open 미발생.
+        events = [dict(self._events()[0],
+                       application_start="2026-07-09T09:00:00+09:00",
+                       application_end="2026-08-01T18:00:00+09:00",
+                       fetched_at="2026-06-20T00:00:00+09:00", status="Closed")]
+        subs = [{"id": "s1", "filters": {"sido": "서울특별시"}, "channel": "stdout"}]
+        now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=dt.timezone(dt.timedelta(hours=9)))
+        kinds = {o["kind"] for o in notify.compute_notifications(events, subs, now)}
+        self.assertNotIn("application-open", kinds)
+
+    def test_dedupe_across_trigger_types(self):
+        # 한 행사가 application-open + new-event + deadline-D1 세 트리거를 동시 충족 →
+        # 서로 다른 dedupe_key 3건, 2회차 실행은 전부 억제.
+        events = [dict(self._events()[0],
+                       application_start="2026-07-09T09:00:00+09:00",
+                       application_end="2026-07-10T18:00:00+09:00",
+                       fetched_at="2026-07-09T09:00:00+09:00", status="Open")]
+        subs = [{"id": "s1", "filters": {"sido": "서울특별시"}, "channel": "stdout"}]
+        now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=dt.timezone(dt.timedelta(hours=9)))
+        out = notify.compute_notifications(events, subs, now)
+        self.assertEqual({o["kind"] for o in out},
+                         {"application-open", "new-event", "deadline-D1"})
+        self.assertEqual(len({o["dedupe_key"] for o in out}), 3)
+        r1 = notify.dispatch(events, subs, now)
+        r2 = notify.dispatch(events, subs, now)
+        self.assertEqual(r1["delivered"], 3)
+        self.assertEqual(r2["suppressed"], 3)
+
+    def test_new_event_24h_boundary(self):
+        # new-event는 fetched_at이 정확히 24h(86400s) 전이면 발화, 그 직전(86401s)이면 미발화.
+        subs = [{"id": "s1", "filters": {"sido": "서울특별시"}, "channel": "stdout"}]
+        now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=dt.timezone(dt.timedelta(hours=9)))
+        far_future_end = "2026-09-01T18:00:00+09:00"  # 마감/오픈 트리거 격리
+        at_boundary = (now - dt.timedelta(seconds=86400)).isoformat()
+        events = [dict(self._events()[0], application_start="2026-01-01T00:00:00+09:00",
+                       application_end=far_future_end, fetched_at=at_boundary, status="Open")]
+        kinds = {o["kind"] for o in notify.compute_notifications(events, subs, now)}
+        self.assertIn("new-event", kinds)
+        over_boundary = (now - dt.timedelta(seconds=86401)).isoformat()
+        events2 = [dict(events[0], fetched_at=over_boundary)]
+        kinds2 = {o["kind"] for o in notify.compute_notifications(events2, subs, now)}
+        self.assertNotIn("new-event", kinds2)
+
     def test_deadline_d1_and_filter_match(self):
         subs = [{"id": "s1", "filters": {"sido": "서울특별시"}, "channel": "stdout"}]
         now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=dt.timezone(dt.timedelta(hours=9)))

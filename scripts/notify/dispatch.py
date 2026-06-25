@@ -44,10 +44,10 @@ def compute_notifications(events: list[dict], subscriptions: list[dict],
         for e in events:
             if not _matches(e, sub.get("filters", {})):
                 continue
-            # 신청 오픈
+            # 신청 오픈 (application-open) — 신청 시작일 당일 + 오픈 상태
             if e.get("application_start"):
                 if _date(e["application_start"]) == today.isoformat() and e.get("status") == "Open":
-                    out.append(_mk(sub, e, "open", "신청이 오픈되었습니다"))
+                    out.append(_mk(sub, e, "application-open", "신청이 오픈되었습니다"))
             # 마감 임박
             if e.get("application_end"):
                 end = dt.date.fromisoformat(_date(e["application_end"]))
