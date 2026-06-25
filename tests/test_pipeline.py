@@ -22,6 +22,7 @@ from scripts.ingest import websearch
 from scripts.build import build_sqlite
 from scripts.recommend import ai_planner
 from scripts.normalize import geocode
+from scripts.common import http as common_http
 
 
 class TestConfig(unittest.TestCase):
@@ -496,6 +497,86 @@ class TestGeocode(unittest.TestCase):
             self.assertIsNone(geocode.vworld_geocode("서울특별시 세종대로 110"))
         finally:
             os.environ.clear(); os.environ.update(old)
+
+class TestCommonHttp(unittest.TestCase):
+    class _Resp:
+        def __init__(self, status_code, text=""):
+            self.status_code = status_code
+            self.text = text
+
+    class _Boom(Exception):
+        pass
+
+    def test_should_retry_status(self):
+        for s in (429, 500, 502, 503, 504, 599):
+            self.assertTrue(common_http.should_retry_status(s), s)
+        for s in (200, 301, 400, 401, 404, 422):
+            self.assertFalse(common_http.should_retry_status(s), s)
+
+    def test_returns_first_success_without_sleeping(self):
+        slept = []
+        calls = []
+
+        def send():
+            calls.append(1)
+            return self._Resp(200)
+
+        resp = common_http.request_with_retry(send, sleep=slept.append)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(len(calls), 1)  # 재시도 없음
+        self.assertEqual(slept, [])
+
+    def test_retries_then_succeeds_on_5xx(self):
+        slept = []
+        seq = [self._Resp(503), self._Resp(503), self._Resp(200)]
+
+        resp = common_http.request_with_retry(
+            lambda: seq.pop(0), retries=2, backoff=0.5, sleep=slept.append)
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(slept, [0.5, 1.0])  # 지수 백오프
+
+    def test_gives_up_after_retries_raises_http_error(self):
+        slept = []
+        with self.assertRaises(common_http.HttpError) as cm:
+            common_http.request_with_retry(
+                lambda: self._Resp(503, "down"), retries=1, sleep=slept.append)
+        self.assertEqual(cm.exception.status, 503)
+        self.assertEqual(len(slept), 1)  # retries=1 → 1번만 대기
+
+    def test_4xx_fails_immediately_no_retry(self):
+        slept = []
+        with self.assertRaises(common_http.HttpError) as cm:
+            common_http.request_with_retry(
+                lambda: self._Resp(404, "nope"), retries=3, sleep=slept.append)
+        self.assertEqual(cm.exception.status, 404)
+        self.assertEqual(slept, [])  # 4xx는 재시도 안 함
+
+    def test_retries_on_injected_exception_then_reraises(self):
+        slept = []
+        calls = []
+
+        def send():
+            calls.append(1)
+            raise self._Boom("transient")
+
+        with self.assertRaises(self._Boom):
+            common_http.request_with_retry(
+                send, retries=2, retry_exceptions=(self._Boom,), sleep=slept.append)
+        self.assertEqual(len(calls), 3)  # 최초 + 2 재시도
+        self.assertEqual(slept, [0.5, 1.0])
+
+    def test_non_listed_exception_propagates_immediately(self):
+        calls = []
+
+        def send():
+            calls.append(1)
+            raise ValueError("not retryable")
+
+        with self.assertRaises(ValueError):
+            common_http.request_with_retry(
+                send, retries=3, retry_exceptions=(self._Boom,))
+        self.assertEqual(len(calls), 1)
+
 
 
 if __name__ == "__main__":

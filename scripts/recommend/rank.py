@@ -16,6 +16,17 @@ from scripts.common.config import ROOT
 
 EVENTS_JSON = ROOT / "web" / "public" / "data" / "events.json"
 
+# 추천 점수 가중치(튜닝 단일 지점). score_event가 이 상수만 조합한다.
+W_REGION = 3       # 프로필 지역(시/도) 일치
+W_THEME = 2        # 테마 일치 1건당
+W_AGE = 2          # 나이대 일치
+W_FREE = 1         # 무료
+W_OPEN = 2         # 신청가능(status=Open)
+W_NEAR = 2         # 도보·근거리(<=5km)
+W_NEARISH = 1      # 근거리(<=30km)
+W_AVAIL = 2        # 가용일 내 개최
+PAID_EXCLUDE = -1.0  # free_only인데 유료 → 후보 제외 신호
+
 DEMO_PROFILE = {
     "regions": ["서울특별시"],
     "age_band": "어린이",
@@ -36,7 +47,7 @@ def _haversine(a: dict, lat: float, lng: float) -> float | None:
     return 2 * r * math.asin(math.sqrt(h))
 
 
-def _is_free(price) -> bool:
+def _is_free(price: object) -> bool:
     return price == "free" or price == 0 or price == 0.0
 
 
@@ -49,37 +60,45 @@ def score_event(e: dict, profile: dict) -> tuple[float, list[str]]:
     prefs = profile.get("prefs", {})
 
     if e.get("sido") in (profile.get("regions") or []):
-        score += 3; reasons.append(f"지역일치({e['sido']})")
+        score += W_REGION
+        reasons.append(f"지역일치({e['sido']})")
 
     matched = set(e.get("themes") or []) & set(profile.get("themes") or [])
     if matched:
-        score += 2 * len(matched); reasons.append("테마일치(" + ",".join(sorted(matched)) + ")")
+        score += W_THEME * len(matched)
+        reasons.append("테마일치(" + ",".join(sorted(matched)) + ")")
 
     if profile.get("age_band") and profile["age_band"] in (e.get("age_bands") or []):
-        score += 2; reasons.append(f"나이대일치({profile['age_band']})")
+        score += W_AGE
+        reasons.append(f"나이대일치({profile['age_band']})")
 
     if _is_free(e.get("price")):
-        score += 1; reasons.append("무료")
+        score += W_FREE
+        reasons.append("무료")
     elif prefs.get("free_only"):
-        return -1, ["유료 제외"]
+        return PAID_EXCLUDE, ["유료 제외"]
 
     if e.get("status") == "Open":
-        score += 2; reasons.append("신청가능")
+        score += W_OPEN
+        reasons.append("신청가능")
 
     near = prefs.get("near")
     if near and e.get("lat") and e.get("lng"):
         d = _haversine(e, near["lat"], near["lng"])
         if d is not None:
             if d <= 5:
-                score += 2; reasons.append(f"도보·근거리({d:.1f}km)")
+                score += W_NEAR
+                reasons.append(f"도보·근거리({d:.1f}km)")
             elif d <= 30:
-                score += 1; reasons.append(f"근거리({d:.0f}km)")
+                score += W_NEARISH
+                reasons.append(f"근거리({d:.0f}km)")
 
     avail = {_date(x) for x in profile.get("available_dates") or []}
     if avail:
         s, en = _date(e.get("start_date")), _date(e.get("end_date")) or _date(e.get("start_date"))
         if any(s <= d <= en for d in avail):
-            score += 2; reasons.append("가용일 내 개최")
+            score += W_AVAIL
+            reasons.append("가용일 내 개최")
 
     return score, reasons
 

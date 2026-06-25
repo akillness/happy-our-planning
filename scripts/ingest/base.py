@@ -8,11 +8,14 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import logging
 import os
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 from scripts.common.config import ROOT, source as source_cfg
+
+log = logging.getLogger("notchima.ingest")
 
 RAW_DIR = ROOT / "raw"
 
@@ -77,7 +80,7 @@ class SourceAdapter:
             try:
                 okf = self.map_to_okf(n)
             except Exception as exc:  # 한 레코드 실패가 전체를 막지 않음
-                print(f"[{self.key}] map error: {exc}")
+                log.warning("[%s] map error: %s", self.key, exc)
                 continue
             if okf:
                 out.append(okf)

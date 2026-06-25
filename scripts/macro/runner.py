@@ -23,26 +23,77 @@ from scripts.macro import apply as _apply
 _SUPPORTED = {"goto", "fill", "check", "click", "submit", "pause", "assert_text"}
 
 
+def _filtered_steps(job: dict) -> list[dict]:
+    """잡의 스텝을 안전 불변(C5)에 맞게 정제한다.
+
+    `is_auto_submit(job)`가 False면(반자동/약관 게이트) submit 액션을 제거한다.
+    잡이 잘못 전달돼도 러너가 한 번 더 submit을 막는 이중 방어.
+    """
+    steps = list(job.get("steps", []))
+    if not _apply.is_auto_submit(job):
+        steps = [s for s in steps if s.get("action") != "submit"]
+    return steps
+
+
+def _new_result(job: dict) -> dict:
+    return {
+        "site": job.get("site_key"),
+        "mode": job.get("mode", "manual"),
+        "submitted": False,
+        "result_text": "",
+        "screenshot": None,
+    }
+
+
+def _drive(page, steps: list[dict], *, success: dict, result: dict) -> dict:
+    """page-like 객체에 스텝을 디스패치한다(브라우저 추상화 경계).
+
+    page는 Playwright sync page와 동일한 표면(goto/fill/check/click/locator)을
+    가지면 되며, 테스트는 가짜 page로 submit/pause 불변을 chromium 없이 검증한다.
+    """
+    for step in steps:
+        action = step.get("action")
+        if action not in _SUPPORTED:
+            continue
+        if action == "goto":
+            page.goto(step["url"])
+        elif action == "fill":
+            page.fill(step["selector"], step.get("value", ""))
+        elif action == "check":
+            page.check(step["selector"])
+        elif action == "click":
+            page.click(step["selector"])
+        elif action == "assert_text":
+            loc = page.locator(step["selector"])
+            loc.wait_for(timeout=5000)
+            result["result_text"] = loc.inner_text()
+        elif action == "pause":
+            # 반자동: 최종 제출은 사용자가 수행. 자동 실행은 여기서 멈춘다.
+            result["paused_reason"] = step.get("reason", "사용자 최종제출 대기")
+            break
+        elif action == "submit":
+            page.click(step["selector"])
+            result["submitted"] = True
+
+    # 성공 신호 캡처(제출했고 success_signal selector가 있으면).
+    if result["submitted"] and success.get("selector"):
+        loc = page.locator(success["selector"])
+        try:
+            loc.wait_for(timeout=5000)
+            result["result_text"] = loc.inner_text()
+        except Exception:  # pragma: no cover - 신호 미출현
+            result["result_text"] = ""
+    return result
+
+
 def run_job(job: dict, *, headless: bool = True, dry_run: bool = False,
             screenshot_dir: str | Path | None = None) -> dict:
     """잡을 실행하고 증거(JSON)를 반환한다.
 
     반환: {site, mode, submitted, result_text, screenshot, paused_reason?}
     """
-    mode = job.get("mode", "manual")
-    steps = list(job.get("steps", []))
-
-    # 이중 방어: 자동 제출 잡이 아니면 submit 액션을 제거한다(약관 게이트 불변).
-    if not _apply.is_auto_submit(job):
-        steps = [s for s in steps if s.get("action") != "submit"]
-
-    result: dict = {
-        "site": job.get("site_key"),
-        "mode": mode,
-        "submitted": False,
-        "result_text": "",
-        "screenshot": None,
-    }
+    steps = _filtered_steps(job)
+    result = _new_result(job)
 
     if dry_run:
         # 브라우저를 띄우지 않고 계획만 검증(무키·오프라인 통과 경로).
@@ -60,39 +111,7 @@ def run_job(job: dict, *, headless: bool = True, dry_run: bool = False,
         browser = p.chromium.launch(headless=headless)
         page = browser.new_page()
         try:
-            for step in steps:
-                action = step.get("action")
-                if action not in _SUPPORTED:
-                    continue
-                if action == "goto":
-                    page.goto(step["url"])
-                elif action == "fill":
-                    page.fill(step["selector"], step.get("value", ""))
-                elif action == "check":
-                    page.check(step["selector"])
-                elif action == "click":
-                    page.click(step["selector"])
-                elif action == "assert_text":
-                    loc = page.locator(step["selector"])
-                    loc.wait_for(timeout=5000)
-                    result["result_text"] = loc.inner_text()
-                elif action == "pause":
-                    # 반자동: 최종 제출은 사용자가 수행. 자동 실행은 여기서 멈춘다.
-                    result["paused_reason"] = step.get("reason", "사용자 최종제출 대기")
-                    break
-                elif action == "submit":
-                    page.click(step["selector"])
-                    result["submitted"] = True
-
-            # 성공 신호 캡처(제출했고 success_signal selector가 있으면).
-            if result["submitted"] and success.get("selector"):
-                loc = page.locator(success["selector"])
-                try:
-                    loc.wait_for(timeout=5000)
-                    result["result_text"] = loc.inner_text()
-                except Exception:  # pragma: no cover - 신호 미출현
-                    result["result_text"] = ""
-
+            _drive(page, steps, success=success, result=result)
             if screenshot_dir is not None:
                 out = Path(screenshot_dir)
                 out.mkdir(parents=True, exist_ok=True)

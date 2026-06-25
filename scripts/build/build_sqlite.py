@@ -148,11 +148,14 @@ def search(
             where.append("events_fts MATCH ?")
             params.append(text)
         if sido:
-            where.append("e.sido = ?"); params.append(sido)
+            where.append("e.sido = ?")
+            params.append(sido)
         if status:
-            where.append("e.status = ?"); params.append(status)
+            where.append("e.status = ?")
+            params.append(status)
         if theme:
-            where.append("e.themes LIKE ?"); params.append(f'%"{theme}"%')
+            where.append("e.themes LIKE ?")
+            params.append(f'%"{theme}"%')
         sql = f"SELECT e.* FROM events e {joins}"
         if where:
             sql += " WHERE " + " AND ".join(where)

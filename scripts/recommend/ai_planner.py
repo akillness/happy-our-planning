@@ -169,10 +169,13 @@ def plan(profile: dict, events: list[dict], top_n: int = 8) -> dict:
         import httpx
     except ImportError:
         return rank.plan_week(profile, candidates)
+    from scripts.common import http as _http
     url = f"{API_HOST}/v1beta/models/{_model()}:generateContent?key={key}"
     try:  # pragma: no cover - 네트워크 경로
-        r = httpx.post(url, json=build_request(profile, candidates), timeout=30)
-        r.raise_for_status()
+        r = _http.request_with_retry(
+            lambda: httpx.post(url, json=build_request(profile, candidates), timeout=30),
+            retry_exceptions=(httpx.TransportError,),
+        )
         result = parse_plan(r.json())
         return _constrain_to_candidates(result, candidates, profile)
     except Exception as exc:  # pragma: no cover - 폴백 보장
