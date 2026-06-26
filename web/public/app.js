@@ -9,6 +9,8 @@
   const $ = (id) => document.getElementById(id);
   const dpart = (s) => (s || "").slice(0, 10);
   const isFree = (p) => p === "free" || p === 0;
+  // scripts/common/okf.py::_safe_id 와 동일 규칙 — 정적 상세 페이지 파일명 매칭.
+  const safeId = (id) => String(id).replace(/[^0-9A-Za-z._-]/g, "_");
 
   async function getJSON(name) {
     const r = await fetch(DATA + name);
@@ -152,6 +154,7 @@
       ${e.application_end ? `<p>신청마감: <b>${dpart(e.application_end)}</b> <span class="badge status ${STATUS_CLASS[e.display_status] || ""}">${e.display_status || ""}</span></p>` : ""}
       <p>출처: ${e.source} · ${isFree(e.price) ? "무료" : (e.price ?? "정보없음")}</p>
       <a href="${e.url}" target="_blank" rel="noopener">신청/상세 페이지</a>
+      <a href="events/${safeId(e.id)}.html" rel="noopener">공유용 상세(JSON-LD)</a>
       <button class="act" data-act="macro"${e.display_status === "마감" ? " disabled" : ""}>신청 매크로 등록</button>
       <button class="act" data-act="alarm">🔔 알람 켜기</button>`;
 
