@@ -10,7 +10,6 @@ from scripts.common.okf import (
     content_hash,
     event_path,
     iter_events,
-    parse_markdown,
     to_markdown,
 )
 from scripts.ingest.base import now_kst

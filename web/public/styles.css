@@ -21,6 +21,12 @@ body { margin:0; font-family: system-ui, "Apple SD Gothic Neo", sans-serif; back
 .badge.free { background:#1f3d2e; color:#7be0a8; }
 .badge.open { background:#3d3320; color:#ffd479; }
 .badge.discovered { background:#3a2440; color:#e3a9ff; }
+.badge.status.before { background:#26323d; color:#9fc3e0; }
+.badge.status.open { background:#1f3d2e; color:#7be0a8; }
+.badge.status.imminent { background:#4a2722; color:#ff9e8a; }
+.badge.status.closed { background:#2a2a2a; color:#9a9a9a; }
+.act[disabled] { opacity:.45; cursor:not-allowed; }
+
 dialog { background:var(--card); color:var(--fg); border:1px solid #2a3450; border-radius:14px; max-width:560px; width:92%; padding:18px; }
 dialog h2 { margin-top:0; }
 dialog button.close { float:right; background:none; border:none; color:var(--mut); font-size:20px; cursor:pointer; }

@@ -70,6 +70,27 @@ updated: 2026-06-21
 - `scripts/run_pipeline.py` `main()` 말미 **중복 `return 0`**(도달불가) 제거.
 - **DoD**: `python -m scripts.run_pipeline` rc==0 유지 + 라인 제거.
 
+## 스프린트 S1–S4 (wiki/sprint-plan-2026 미러 · 2026-06-26)
+
+> 코드 진실원천은 `../scripts/`/`../tests/`. 아래는 sprint-plan 태스크의 실측 상태.
+
+| 태스크 | 내용 | 상태 | 검증 |
+|---|---|---|---|
+| S1-T1 | `print()`→`logging` | `DONE` | 커밋 62c6209 |
+| S1-T2 | `scripts/common/http.py` retry/backoff | `DONE` | `TestHttpRetry` |
+| S1-T3 | 신규/오픈/마감 알림 트리거 | `DONE` | 커밋 8082bce |
+| S2-T1 | 행사별 정적 상세 HTML(JSON-LD) | `DONE` | `scripts/build/build_pages.py` · `TestBuildPages`(4) |
+| S2-T2 | 상태 배지·CTA 분기 + `derive_status` | `DONE` | `TestDisplayStatus`(7) |
+| S2-T3 | 시/도 경계 GeoJSON 코로플레스 | `BLOCKED` | 외부 경계 데이터 필요(오프라인 불가) |
+| S3-T1 | AI 플래너 가용일 가드레일+개인화 | `DONE` | `test_constrain_filters_unavailable_dates` |
+| S3-T2 | 한국어 FTS N-gram 부분일치 | `DONE` | `test_fts_korean_partial_match` |
+| S3-T3 | 타입안정성(`OkfEvent`/`ScoredEvent`)+mypy CI | `DONE` | `mypy.ini` rc==0 · `.github/workflows/ci.yml` · `TestRecommend` |
+| S4-T1 | 매크로 러너 fake-page 스파이 CI | `DONE` | `TestRunnerUnit`(chromium 불요) |
+| S4-T2 | 실 API ≥500건 적재 | `BLOCKED` | 실 키·네트워크 필요(코드 경로 준비완료) |
+| S4-T3 | usage 모니터 + 배포 | `PARTIAL` | `scripts/ops/usage_report.py` · `TestUsageReport`(8); 배포는 계정 필요 |
+
+- 게이트(2026-06-26): `python -m unittest discover -s tests` → 96 tests(93 pass/3 skip), `python -m mypy` rc==0, `OFFLINE=1 python -m scripts.run_pipeline` rc==0, `validate.py` rc==0.
+
 ## 실행 규약 (team)
 1. 작업당 1 커밋, 메시지에 `Txx` + 충족 AC id.
 2. 커밋 전 게이트: `python -m unittest discover -s tests` green + `validate.py` rc==0.

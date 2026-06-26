@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 import math
 import sys
+from dataclasses import dataclass, field
 from pathlib import Path
 
 from scripts.common.config import ROOT
@@ -36,6 +37,23 @@ DEMO_PROFILE = {
 }
 
 
+@dataclass
+class ScoredEvent:
+    """점수화된 행사 후보 — 점수와 설명가능 근거를 행사에 결속한다.
+
+    `to_record()`는 UI/플래너/ai_planner가 소비하는 평면 dict(`_score`/`_reasons`
+    부가)을 산출 — 기존 출력 계약을 보존한다.
+    """
+
+    event: dict
+    score: float
+    reasons: list[str] = field(default_factory=list)
+
+    def to_record(self) -> dict:
+        return {**self.event, "_score": round(self.score, 2), "_reasons": self.reasons}
+
+
+
 def _haversine(a: dict, lat: float, lng: float) -> float | None:
     if a.get("lat") is None or a.get("lng") is None:
         return None
@@ -53,6 +71,12 @@ def _is_free(price: object) -> bool:
 
 def _date(s: str | None) -> str:
     return (s or "")[:10]
+
+
+def _window(e: dict) -> tuple[str, str]:
+    """행사 개최 구간 (시작, 종료). 종료 결측 시 시작일로 대체."""
+    s = _date(e.get("start_date"))
+    return s, _date(e.get("end_date")) or s
 
 
 def score_event(e: dict, profile: dict) -> tuple[float, list[str]]:
@@ -95,7 +119,7 @@ def score_event(e: dict, profile: dict) -> tuple[float, list[str]]:
 
     avail = {_date(x) for x in profile.get("available_dates") or []}
     if avail:
-        s, en = _date(e.get("start_date")), _date(e.get("end_date")) or _date(e.get("start_date"))
+        s, en = _window(e)
         if any(s <= d <= en for d in avail):
             score += W_AVAIL
             reasons.append("가용일 내 개최")
@@ -104,14 +128,14 @@ def score_event(e: dict, profile: dict) -> tuple[float, list[str]]:
 
 
 def recommend(profile: dict, events: list[dict], top_n: int = 10) -> list[dict]:
-    scored = []
+    scored: list[ScoredEvent] = []
     for e in events:
         s, reasons = score_event(e, profile)
         if s <= 0:
             continue
-        scored.append({**e, "_score": round(s, 2), "_reasons": reasons})
-    scored.sort(key=lambda x: -x["_score"])
-    return scored[:top_n]
+        scored.append(ScoredEvent(event=e, score=s, reasons=reasons))
+    scored.sort(key=lambda x: -x.score)
+    return [se.to_record() for se in scored[:top_n]]
 
 
 def plan_week(profile: dict, candidates: list[dict]) -> dict:
@@ -125,7 +149,7 @@ def plan_week(profile: dict, candidates: list[dict]) -> dict:
         for c in candidates:
             if c["id"] in used:
                 continue
-            s, en = _date(c.get("start_date")), _date(c.get("end_date")) or _date(c.get("start_date"))
+            s, en = _window(c)
             if s <= d <= en:
                 items.append({
                     "event_id": c["id"],

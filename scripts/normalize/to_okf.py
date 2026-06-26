@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import datetime as dt
 import sys
-from pathlib import Path
 
 from scripts.common.config import ROOT, sources
 from scripts.ingest.base import now_kst

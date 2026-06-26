@@ -1,0 +1,31 @@
+name: ci
+# 푸시·PR마다 타입검사(mypy) + 단위 테스트 게이트. 수집 cron(ingest.yml)과 분리.
+on:
+  push:
+    branches: [main, master]
+  pull_request: {}
+  workflow_dispatch: {}
+
+jobs:
+  typecheck-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: |
+          pip install -r requirements.txt
+          pip install mypy
+
+      - name: Type check (mypy gate, S3-T3/G6)
+        run: python -m mypy scripts/ --ignore-missing-imports
+
+      - name: Unit tests
+        run: python -m unittest discover -s tests
+
+      - name: OKF schema validate (rc==0 gate, C3)
+        run: python scripts/build/validate.py

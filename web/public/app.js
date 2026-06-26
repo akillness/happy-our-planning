@@ -96,10 +96,20 @@
     writeURL(f);
   }
 
+  // 빌드타임 파생 display_status(신청전/오픈/마감임박/마감) → 색상 배지.
+  const STATUS_CLASS = { "신청전": "before", "오픈": "open", "마감임박": "imminent", "마감": "closed" };
+
+  function statusBadge(e) {
+    const label = e.display_status || (e.status === "Open" ? "오픈" : "");
+    if (!label) return "";
+    return `<span class="badge status ${STATUS_CLASS[label] || ""}">${label}</span>`;
+  }
+
   function badge(e) {
     const b = [];
     if (isFree(e.price)) b.push('<span class="badge free">무료</span>');
-    if (e.status === "Open") b.push('<span class="badge open">신청가능</span>');
+    const sb = statusBadge(e);
+    if (sb) b.push(sb);
     if (e.event_type) b.push(`<span class="badge">${e.event_type}</span>`);
     if (e.verification === "web-discovered") {
       const c = e.confidence != null ? ` ${Math.round(e.confidence * 100)}%` : "";
@@ -107,6 +117,7 @@
     }
     return b.join(" ");
   }
+
 
   function render(rows) {
     $("count").textContent = rows.length;
@@ -138,11 +149,12 @@
       <h2>${e.name}</h2>
       <p>${e.description || ""}</p>
       <div class="meta">📍 ${e.sido || ""} ${e.sigungu || ""} · 🗓 ${dpart(e.start_date)}${e.end_date ? " ~ " + dpart(e.end_date) : ""}</div>
-      ${e.application_end ? `<p>신청마감: <b>${dpart(e.application_end)}</b></p>` : ""}
+      ${e.application_end ? `<p>신청마감: <b>${dpart(e.application_end)}</b> <span class="badge status ${STATUS_CLASS[e.display_status] || ""}">${e.display_status || ""}</span></p>` : ""}
       <p>출처: ${e.source} · ${isFree(e.price) ? "무료" : (e.price ?? "정보없음")}</p>
       <a href="${e.url}" target="_blank" rel="noopener">신청/상세 페이지</a>
-      <button class="act" data-act="macro">신청 매크로 등록</button>
+      <button class="act" data-act="macro"${e.display_status === "마감" ? " disabled" : ""}>신청 매크로 등록</button>
       <button class="act" data-act="alarm">🔔 알람 켜기</button>`;
+
     d.querySelector(".close").onclick = () => d.close();
     d.querySelectorAll("[data-act]").forEach((btn) => {
       btn.onclick = () => alert(

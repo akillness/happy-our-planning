@@ -5,6 +5,7 @@ import datetime as dt
 import json
 
 from scripts.common.config import canonical_sido
+from scripts.common.dates import combine_kst
 from scripts.common.okf import content_hash
 from scripts.ingest.base import SourceAdapter, now_kst
 
@@ -16,8 +17,7 @@ def _kst_date(value: str, end: bool = False) -> str | None:
         d = dt.datetime.strptime(value, "%Y%m%d")
     except ValueError:
         return None
-    t = dt.time(23, 59, 59) if end else dt.time(0, 0, 0)
-    return dt.datetime.combine(d, t, dt.timezone(dt.timedelta(hours=9))).isoformat()
+    return combine_kst(d, end)
 
 
 def _num(value) -> float | None:

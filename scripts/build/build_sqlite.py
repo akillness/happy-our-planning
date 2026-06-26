@@ -58,7 +58,33 @@ CREATE VIRTUAL TABLE events_fts USING fts5(
     name, description, themes,
     content='events', content_rowid='rowid', tokenize='unicode61'
 );
+-- 한국어 부분일치 보강: 이름/설명/테마의 문자 N-gram(기본 bigram) 색인.
+-- unicode61은 CJK를 공백 단위로만 토큰화해 "음악"으로 "음악축제"를 못 찾는다.
+-- events_ngram(rowid 정렬 동기화)에 bigram 토큰을 적재해 부분일치 재현율을 높인다.
+CREATE VIRTUAL TABLE events_ngram USING fts5(ngram, tokenize='unicode61');
 """
+
+# flat-file SSOT 불변: ngram은 events 텍스트에서 빌드타임에 파생(재생성 가능).
+_NGRAM_N = 2
+
+
+def _ngrams(text: str, n: int = _NGRAM_N) -> list[str]:
+    """공백으로 나눈 각 어절의 슬라이딩 문자 N-gram 토큰. 어절이 n보다 짧으면 그대로."""
+    out: list[str] = []
+    for word in (text or "").split():
+        if len(word) < n:
+            out.append(word)
+        else:
+            out.extend(word[i:i + n] for i in range(len(word) - n + 1))
+    return out
+
+
+def _ngram_text(e: dict) -> str:
+    """행사 1건의 검색 대상 텍스트(name+description+themes) → N-gram 토큰 문자열."""
+    parts = [e.get("name") or "", e.get("description") or ""]
+    parts.extend(e.get("themes") or [])
+    return " ".join(_ngrams(" ".join(parts)))
+
 
 
 def _has_fts5() -> bool:
@@ -119,6 +145,19 @@ def build(db_path: Path | str | None = None, events: list[dict] | None = None) -
             "INSERT INTO events_fts(rowid, name, description, themes) "
             "SELECT rowid, name, COALESCE(description,''), themes FROM events"
         )
+        # N-gram 색인 채우기(rowid 동기화) — 한국어 부분일치 보강.
+        ng_rows = con.execute("SELECT rowid, name, description, themes FROM events").fetchall()
+        con.executemany(
+            "INSERT INTO events_ngram(rowid, ngram) VALUES (?, ?)",
+            [
+                (rid, _ngram_text({
+                    "name": name, "description": desc,
+                    "themes": json.loads(themes or "[]"),
+                }))
+                for rid, name, desc, themes in ng_rows
+            ],
+        )
+
         con.commit()
         n = con.execute("SELECT COUNT(*) FROM events").fetchone()[0]
     finally:
@@ -141,12 +180,35 @@ def search(
     con = sqlite3.connect(path)
     con.row_factory = sqlite3.Row
     try:
-        where, params = [], []
-        joins = ""
+        where: list[str] = []
+        params: list = []
         if text:
-            joins = "JOIN events_fts f ON f.rowid = e.rowid"
-            where.append("events_fts MATCH ?")
-            params.append(text)
+            # unicode61 전문검색(어절 단위) ∪ N-gram 부분일치 → rowid 합집합.
+            rowids: set[int] = set()
+            try:
+                rowids.update(
+                    r[0] for r in con.execute(
+                        "SELECT rowid FROM events_fts WHERE events_fts MATCH ?", (text,)
+                    )
+                )
+            except sqlite3.OperationalError:
+                pass  # FTS 특수문자 등으로 파싱 실패 시 N-gram만 사용
+            ngram_query = " ".join(_ngrams(text))
+            if ngram_query:
+                try:
+                    rowids.update(
+                        r[0] for r in con.execute(
+                            "SELECT rowid FROM events_ngram WHERE events_ngram MATCH ?",
+                            (ngram_query,),
+                        )
+                    )
+                except sqlite3.OperationalError:
+                    pass
+            if not rowids:
+                return []
+            placeholders = ",".join("?" * len(rowids))
+            where.append(f"e.rowid IN ({placeholders})")
+            params.extend(sorted(rowids))
         if sido:
             where.append("e.sido = ?")
             params.append(sido)
@@ -156,7 +218,7 @@ def search(
         if theme:
             where.append("e.themes LIKE ?")
             params.append(f'%"{theme}"%')
-        sql = f"SELECT e.* FROM events e {joins}"
+        sql = "SELECT e.* FROM events e"
         if where:
             sql += " WHERE " + " AND ".join(where)
         sql += " ORDER BY e.start_date LIMIT ?"
@@ -164,6 +226,7 @@ def search(
         rows = con.execute(sql, params).fetchall()
     finally:
         con.close()
+
     out = []
     for r in rows:
         d = dict(r)

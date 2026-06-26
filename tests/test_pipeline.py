@@ -20,9 +20,13 @@ from scripts.notify import dispatch as notify
 from scripts.macro import apply as macro
 from scripts.ingest import websearch
 from scripts.build import build_sqlite
+from scripts.build import build_index
+from scripts.build import build_pages
 from scripts.recommend import ai_planner
+
 from scripts.normalize import geocode
 from scripts.common import http as common_http
+from scripts.ops import usage_report
 
 
 class TestConfig(unittest.TestCase):
@@ -153,6 +157,22 @@ class TestRecommend(unittest.TestCase):
         cands = rank.recommend(prof, self._events())
         plan = rank.plan_week(prof, cands)
         self.assertEqual(len(plan["days"][0]["items"]), 1)
+
+    def test_scored_event_to_record_preserves_contract(self):
+        # ScoredEvent.to_record는 행사 필드 + _score(반올림)/_reasons 계약을 보존한다.
+        se = rank.ScoredEvent(event={"id": "a", "name": "x"}, score=3.456,
+                              reasons=["지역일치"])
+        rec = se.to_record()
+        self.assertEqual(rec["id"], "a")
+        self.assertEqual(rec["_score"], 3.46)
+        self.assertEqual(rec["_reasons"], ["지역일치"])
+
+    def test_recommend_sorted_by_score_desc(self):
+        prof = {"regions": ["서울특별시"], "themes": ["공연"], "age_band": "어린이",
+                "prefs": {}}
+        recs = rank.recommend(prof, self._events())
+        scores = [r["_score"] for r in recs]
+        self.assertEqual(scores, sorted(scores, reverse=True))
 
     def test_haversine_zero(self):
         d = rank._haversine({"lat": 37.5, "lng": 127.0}, 37.5, 127.0)
@@ -424,6 +444,19 @@ class TestSqlite(unittest.TestCase):
         hits = build_sqlite.search(self.db, text="축제")
         self.assertEqual([h["id"] for h in hits], ["a"])
 
+    def test_fts_korean_partial_match_improved(self):
+        # unicode61은 "음악"으로 "음악축제"를 못 찾지만 N-gram 색인은 부분일치를 찾는다.
+        hits = build_sqlite.search(self.db, text="음악")
+        self.assertEqual([h["id"] for h in hits], ["a"])
+        # 부분일치는 다른 행사로 새어나가지 않는다(정밀도 회귀 가드).
+        self.assertEqual(build_sqlite.search(self.db, text="현대미술")[0]["id"], "b")
+        self.assertEqual(build_sqlite.search(self.db, text="음악", sido="부산광역시"), [])
+
+    def test_ngrams_helper_bigrams(self):
+        self.assertEqual(build_sqlite._ngrams("음악축제"), ["음악", "악축", "축제"])
+        self.assertEqual(build_sqlite._ngrams("a"), ["a"])  # n보다 짧은 어절은 그대로
+
+
     def test_filter_sido_and_theme(self):
         self.assertEqual([h["id"] for h in build_sqlite.search(self.db, sido="부산광역시")],
                          ["b"])
@@ -633,6 +666,167 @@ class TestCommonHttp(unittest.TestCase):
         self.assertEqual(len(calls), 1)
 
 
+class TestDisplayStatus(unittest.TestCase):
+    TODAY = "2026-07-09"
+
+    def _ev(self, **over):
+        e = {"status": "Scheduled", "application_start": "2026-07-01",
+             "application_end": "2026-07-31"}
+        e.update(over)
+        return e
+
+    def test_closed_status_is_margam(self):
+        self.assertEqual(build_index.derive_status(self._ev(status="Closed"), self.TODAY), "마감")
+
+    def test_past_application_end_is_margam(self):
+        self.assertEqual(
+            build_index.derive_status(self._ev(application_end="2026-07-01"), self.TODAY), "마감")
+
+    def test_future_application_start_is_before(self):
+        self.assertEqual(
+            build_index.derive_status(self._ev(application_start="2026-08-01"), self.TODAY), "신청전")
+
+    def test_open_window_is_open(self):
+        self.assertEqual(
+            build_index.derive_status(self._ev(status="Open", application_end="2026-07-31"),
+                                      self.TODAY), "오픈")
+
+    def test_imminent_within_three_days(self):
+        # 마감 D-3 이내(경계 포함)는 마감임박.
+        self.assertEqual(
+            build_index.derive_status(self._ev(status="Open", application_end="2026-07-11"),
+                                      self.TODAY), "마감임박")
+        self.assertEqual(
+            build_index.derive_status(self._ev(status="Open", application_end="2026-07-09"),
+                                      self.TODAY), "마감임박")
+
+    def test_open_inferred_from_window_without_open_status(self):
+        # status가 Open이 아니어도 신청기간 안이면 오픈으로 파생.
+        self.assertEqual(
+            build_index.derive_status(self._ev(status="Scheduled"), self.TODAY), "오픈")
+
+class TestBuildPages(unittest.TestCase):
+    """S2-T1: 행사별 정적 상세 HTML(JSON-LD) 빌드 — 멱등 + schema.org 임베드."""
+
+    EVENTS = [
+        {"id": "kopis:PF1", "name": "여름 음악축제", "start_date": "2026-07-18",
+         "end_date": "2026-07-20", "sido": "서울", "sigungu": "종로구",
+         "url": "https://ex.com/pf1", "status": "Open", "price": "free",
+         "lat": 37.57, "lng": 126.98, "organizer": "서울문화재단",
+         "description": "한여름 밤의 음악 <축제>"},
+        {"id": "tour:F2", "name": "강릉 등불 전시", "start_date": "2026-08-01",
+         "sido": "강원", "url": "https://ex.com/f2", "status": "Scheduled"},
+    ]
+
+    def test_writes_one_page_per_event_with_jsonld(self):
+        with tempfile.TemporaryDirectory() as d:
+            res = build_pages.build(out_dir=d, events=self.EVENTS)
+            self.assertEqual(res["pages"], 2)
+            html = (Path(d) / f"{okf._safe_id('kopis:PF1')}.html").read_text(encoding="utf-8")
+            self.assertIn('<script type="application/ld+json">', html)
+            self.assertIn('"@type": "Event"', html)
+            self.assertIn('"name": "여름 음악축제"', html)
+            # schema.org status URL + 무료 Offer price 0.
+            self.assertIn("https://schema.org/EventScheduled", html)
+            self.assertIn('"price": "0"', html)
+            # 사용자 텍스트의 HTML 특수문자는 이스케이프(XSS/깨짐 방지).
+            self.assertIn("&lt;축제&gt;", html)
+
+    def test_jsonld_is_valid_json(self):
+        ld = build_pages.event_jsonld(self.EVENTS[0])
+        # 직렬화/역직렬화 왕복이 동일 — 유효한 JSON-LD.
+        round_trip = json.loads(json.dumps(ld, ensure_ascii=False))
+        self.assertEqual(round_trip["@context"], "https://schema.org")
+        self.assertEqual(round_trip["location"]["geo"]["latitude"], 37.57)
+
+    def test_idempotent_same_input_same_bytes(self):
+        with tempfile.TemporaryDirectory() as d:
+            build_pages.build(out_dir=d, events=self.EVENTS)
+            first = (Path(d) / f"{okf._safe_id('kopis:PF1')}.html").read_bytes()
+            build_pages.build(out_dir=d, events=self.EVENTS)
+            second = (Path(d) / f"{okf._safe_id('kopis:PF1')}.html").read_bytes()
+            self.assertEqual(first, second)
+
+    def test_removes_stale_pages(self):
+        with tempfile.TemporaryDirectory() as d:
+            build_pages.build(out_dir=d, events=self.EVENTS)
+            self.assertEqual(len(list(Path(d).glob("*.html"))), 2)
+            # 행사가 사라지면 묵은 페이지도 제거(파생물 정합).
+            build_pages.build(out_dir=d, events=self.EVENTS[:1])
+            self.assertEqual(len(list(Path(d).glob("*.html"))), 1)
+class TestUsageReport(unittest.TestCase):
+    """S4-T3: 무료티어 사용률 추정 — 페이징/검색 호출량 + 한도 상태(ok/warn/over)."""
+
+    SEARCH = {
+        "default_provider": "exa",
+        "queries": ["q1", "q2", "q3"],
+        "providers": {"exa": {"free_tier": "월 1,000 검색(무료 크레딧)"}},
+    }
+
+    def test_paging_source_calls_scale_with_collected(self):
+        # 250건 수집 → 100건/페이지 ⇒ 3 호출/run.
+        r = usage_report.estimate_source(
+            {"key": "kopis", "rate_limit_per_day": 5000}, collected=250)
+        self.assertEqual(r["calls_per_run"], 3)
+        self.assertEqual(r["daily_estimate"], 3)
+        self.assertEqual(r["status"], "ok")
+
+    def test_zero_collected_still_counts_one_call(self):
+        r = usage_report.estimate_source(
+            {"key": "tourapi", "rate_limit_per_day": 10000}, collected=0)
+        self.assertEqual(r["calls_per_run"], 1)
+
+    def test_websearch_uses_query_count_and_monthly_free(self):
+        r = usage_report.estimate_source(
+            {"key": "websearch", "provider": "exa", "rate_limit_per_day": 1000},
+            collected=9, search_cfg=self.SEARCH)
+        self.assertEqual(r["calls_per_run"], 3)           # 질의 3개
+        self.assertEqual(r["monthly_free"], 1000)          # '월 1,000' 파싱
+        self.assertEqual(r["monthly_estimate"], 90)        # 3*30
+        self.assertEqual(r["status"], "ok")
+
+    def test_over_limit_flags_status_over(self):
+        # 일 한도 2인데 5000건(50 호출) ⇒ over.
+        r = usage_report.estimate_source(
+            {"key": "kopis", "rate_limit_per_day": 2}, collected=5000)
+        self.assertEqual(r["status"], "over")
+
+    def test_warn_band_between_80_and_100_percent(self):
+        # 90 호출 / 일한도 100 = 0.9 ⇒ warn.
+        r = usage_report.estimate_source(
+            {"key": "kopis", "rate_limit_per_day": 100}, collected=9000)
+        self.assertEqual(r["calls_per_run"], 90)
+        self.assertEqual(r["status"], "warn")
+
+    def test_build_report_skips_disabled_and_sorts(self):
+        sources = [
+            {"key": "tourapi", "enabled": True, "rate_limit_per_day": 10000},
+            {"key": "kopis", "enabled": True, "rate_limit_per_day": 5000},
+            {"key": "datagokr", "enabled": False, "rate_limit_per_day": 10000},
+        ]
+        rep = usage_report.build_report(sources, {"kopis": 100, "tourapi": 50})
+        self.assertEqual([r["source"] for r in rep["rows"]], ["kopis", "tourapi"])
+        self.assertTrue(rep["within_free_tier"])
+
+    def test_build_report_within_free_tier_false_on_over(self):
+        sources = [{"key": "kopis", "enabled": True, "rate_limit_per_day": 1}]
+        rep = usage_report.build_report(sources, {"kopis": 1000})
+        self.assertEqual(rep["over"], ["kopis"])
+        self.assertFalse(rep["within_free_tier"])
+
+    def test_load_runs_picks_latest_snapshot_per_source(self):
+        with tempfile.TemporaryDirectory() as d:
+            base = Path(d)
+            (base / "kopis-2026-06-25.md").write_text(
+                "---\nsource: kopis\ndate: 2026-06-25\ncollected: 3\n---\n", encoding="utf-8")
+            (base / "kopis-2026-06-26.md").write_text(
+                "---\nsource: kopis\ndate: 2026-06-26\ncollected: 7\n---\n", encoding="utf-8")
+            runs = usage_report.load_runs(base)
+            self.assertEqual(runs, {"kopis": 7})   # 최신 날짜 우선
+
+
 
 if __name__ == "__main__":
+    unittest.main()
+
     unittest.main()

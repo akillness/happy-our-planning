@@ -10,9 +10,9 @@ import hashlib
 import json
 import os
 import sys
-from pathlib import Path
 
 from scripts.common.config import ROOT
+from scripts.common.dates import KST
 
 EVENTS_JSON = ROOT / "web" / "public" / "data" / "events.json"
 SENT_PATH = ROOT / "knowledge" / "notify" / "sent.json"
@@ -148,7 +148,7 @@ def _send_webpush(notif: dict, subscription: dict | None = None) -> bool:
 
 
 def dispatch(events: list[dict], subscriptions: list[dict], now: dt.datetime | None = None) -> dict:
-    now = now or dt.datetime.now(dt.timezone(dt.timedelta(hours=9)))
+    now = now or dt.datetime.now(KST)
     sent = _load_sent()
     candidates = compute_notifications(events, subscriptions, now)
     delivered, suppressed = 0, 0
@@ -177,7 +177,7 @@ def main() -> int:
     events = json.loads(EVENTS_JSON.read_text(encoding="utf-8"))
     subs = [{"id": "demo-seoul-kids", "filters": {"sido": "서울특별시"}, "channel": "stdout"}]
     # 데모: 기준시각을 데모 행사 마감 D-1 로 맞춰 알람이 보이게 함
-    now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=dt.timezone(dt.timedelta(hours=9)))
+    now = dt.datetime(2026, 7, 9, 10, 0, tzinfo=KST)
     print(dispatch(events, subs, now))
     return 0
 

@@ -8,13 +8,48 @@ import hashlib
 import json
 import re
 from pathlib import Path
-from typing import Iterator
+from typing import Iterator, TypedDict
 
 import yaml
 
 from scripts.common.config import ROOT, sido_slug
 
 EVENTS_DIR = ROOT / "knowledge" / "events"
+
+
+class OkfLocation(TypedDict, total=False):
+    """OKF 행사의 위치 블록(schema.org/Place 평면화)."""
+    sido: str
+    sigungu: str
+    address: str
+    lat: float
+    lng: float
+
+
+class OkfEvent(TypedDict, total=False):
+    """schema.org/Event 정규 레코드의 형태 계약(지식 DB 단위).
+
+    total=False: 소스/단계별로 일부 필드만 존재할 수 있다(점진 보강). 필수 키
+    (id/name/start_date/url/source/fetched_at/content_hash)는 validate.py가 게이트.
+    """
+    id: str
+    name: str
+    start_date: str
+    end_date: str
+    url: str
+    source: str
+    fetched_at: str
+    content_hash: str
+    status: str
+    price: object
+    description: str
+    organizer: str
+    themes: list[str]
+    age_bands: list[str]
+    event_type: str
+    location: OkfLocation
+    application_start: str
+    application_end: str
 
 # content_hash 계산에서 제외하는 휘발성/메타 필드
 _VOLATILE = {"fetched_at", "content_hash", "x_lastSeen"}

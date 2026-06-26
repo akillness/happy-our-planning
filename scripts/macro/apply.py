@@ -13,7 +13,6 @@ import json
 import re
 import sys
 from functools import lru_cache
-from pathlib import Path
 
 import yaml
 
@@ -37,7 +36,7 @@ def match_site(url: str) -> dict | None:
 
 
 def _resolve(token: str, ctx: dict) -> str:
-    cur = ctx
+    cur: object = ctx
     for part in token.split("."):
         if isinstance(cur, dict):
             cur = cur.get(part)

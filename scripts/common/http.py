@@ -33,6 +33,8 @@ class HttpError(Exception):
 class _Resp(Protocol):
     status_code: int
 
+    def json(self) -> dict: ...
+
 
 def request_with_retry(
     send: Callable[[], _Resp],

@@ -10,7 +10,7 @@ import logging
 import subprocess
 import sys
 
-from scripts.build import build_index, build_sqlite, wiki_index
+from scripts.build import build_index, build_pages, build_sqlite, wiki_index
 from scripts.common.config import ROOT
 from scripts.normalize import to_okf
 
@@ -33,6 +33,9 @@ def main(argv: list[str]) -> int:
 
     log.info("== 3. 인덱스 빌드 ==")
     build_index.build()
+
+    log.info("== 3b. 행사별 정적 상세 HTML(JSON-LD) 빌드 ==")
+    build_pages.build()
 
     log.info("== 4. SQLite(libSQL) 쿼리 인덱스 빌드 ==")
     try:

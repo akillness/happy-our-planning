@@ -25,6 +25,7 @@ from scripts.common.config import (
     search_config,
     search_provider,
 )
+from scripts.common.dates import KST, combine_kst
 from scripts.common.okf import content_hash
 from scripts.ingest.base import SourceAdapter, now_kst
 
@@ -64,13 +65,12 @@ def _to_kst_datetime(value: str | None, end: bool = False) -> str | None:
         if "T" in value:
             d = dt.datetime.fromisoformat(value)
             if d.tzinfo is None:
-                d = d.replace(tzinfo=dt.timezone(dt.timedelta(hours=9)))
+                d = d.replace(tzinfo=KST)
             return d.isoformat()
         day = dt.date.fromisoformat(value[:10])
     except ValueError:
         return None
-    t = dt.time(23, 59, 59) if end else dt.time(0, 0, 0)
-    return dt.datetime.combine(day, t, dt.timezone(dt.timedelta(hours=9))).isoformat()
+    return combine_kst(day, end)
 
 
 def _guess_theme(hit: dict) -> str | None:

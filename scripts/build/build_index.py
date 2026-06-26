@@ -11,9 +11,10 @@ from __future__ import annotations
 import datetime as dt
 import json
 from collections import Counter, defaultdict
-from pathlib import Path
+
 
 from scripts.common.config import ROOT, age_bands, all_regions
+from scripts.common.dates import now_kst
 from scripts.common.okf import iter_events
 
 OUT_DIR = ROOT / "web" / "public" / "data"
@@ -50,7 +51,39 @@ def _flatten(fm: dict) -> dict:
     }
 
 
+
+
+# 사용자 노출용 4상태 라벨(신청전/오픈/마감임박/마감). schema.org status(Open/Closed/
+# Scheduled)와 신청기간을 결합해 FOMO 방어 배지/CTA 분기의 근거를 빌드타임에 파생한다.
+_IMMINENT_DAYS = 3
+
+
+def _date10(s: str | None) -> str:
+    return (s or "")[:10]
+
+
+def derive_status(e: dict, today: str) -> str:
+    """행사 1건의 표시 상태 라벨. today는 'YYYY-MM-DD'(KST 기준)."""
+    status = e.get("status") or ""
+    astart, aend = _date10(e.get("application_start")), _date10(e.get("application_end"))
+    if status == "Closed":
+        return "마감"
+    if aend and today > aend:
+        return "마감"
+    if astart and today < astart:
+        return "신청전"
+    open_now = status == "Open" or (astart and astart <= today and (not aend or today <= aend))
+    if open_now:
+        if aend:
+            d = (dt.date.fromisoformat(aend) - dt.date.fromisoformat(today)).days
+            if 0 <= d <= _IMMINENT_DAYS:
+                return "마감임박"
+        return "오픈"
+    return "신청전"
+
+
 def build() -> dict:
+
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     events: list[dict] = []
     archived = 0
@@ -71,8 +104,13 @@ def build() -> dict:
     # 정렬: 시작일 오름차순
     events.sort(key=lambda e: (e.get("start_date") or "9999"))
 
-    # facets
-    facets = {
+    # 표시 상태 라벨 파생(FOMO 방어 배지/CTA 분기 근거).
+    today = now_kst()[:10]
+    for e in events:
+        e["display_status"] = derive_status(e, today)
+
+
+    facets: dict[str, Counter] = {
         "sido": Counter(),
         "theme": Counter(),
         "age_band": Counter(),
@@ -99,11 +137,11 @@ def build() -> dict:
 
     facets_out = {k: dict(v) for k, v in facets.items()}
 
-    regions_out = []
+    regions_out: list[dict] = []
     region_meta = {r["name"]: r for r in all_regions()}
     for name, cnt in sorted(region_count.items(), key=lambda x: -x[1]):
-        acc = region_coord.get(name)
-        centroid = ([acc[0] / acc[2], acc[1] / acc[2]] if acc and acc[2] else None)
+        racc = region_coord.get(name)
+        centroid = ([racc[0] / racc[2], racc[1] / racc[2]] if racc and racc[2] else None)
         regions_out.append({
             "sido": name,
             "slug": region_meta.get(name, {}).get("slug", "unknown"),
@@ -112,7 +150,7 @@ def build() -> dict:
         })
 
     updated = {
-        "generated_at": dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).isoformat(timespec="seconds"),
+        "generated_at": now_kst(),
         "total_active": len(events),
         "archived": archived,
         "by_source": dict(by_source_count),
