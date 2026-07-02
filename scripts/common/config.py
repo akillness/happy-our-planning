@@ -44,11 +44,21 @@ def canonical_sido(name: str | None) -> str | None:
         return name
     if name in aliases:
         return aliases[name]
-    # 부분 일치(예: "서울시" → "서울특별시")
-    for canon in by_name:
-        if canon.startswith(name) or name.startswith(canon[:2]):
-            return canon
-    return name  # 미지의 값은 보존(검증 단계에서 노출)
+    # 부분 일치: 표준명이 입력으로 시작하면(예: "서울" → "서울특별시") 단일 후보만 채택
+    by_full = [c for c in by_name if c.startswith(name)]
+    if len(by_full) == 1:
+        return by_full[0]
+    # 짧은 표기(예: "서울시" → "서울특별시")는 2자 코어로 매칭하되,
+    # 같은 2자 접두를 공유하는 형제 시/도(충청남/북·경상남/북)는 보조 글자(남/북)로 판별
+    by_core = [c for c in by_name if name.startswith(c[:2])]
+    if len(by_core) == 1:
+        return by_core[0]
+    if len(by_core) > 1:
+        for c in by_core:
+            marker = c[2:3]  # 남/북 등 형제 구분 글자
+            if marker and marker in name:
+                return c
+    return name  # 미지/모호한 값은 보존(검증 단계에서 노출)
 
 
 def sido_slug(name: str | None) -> str:

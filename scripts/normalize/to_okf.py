@@ -56,7 +56,6 @@ def run(only: list[str] | None = None, *, use_network: bool = False) -> dict:
             events = adapter_cls().collect()
             events = geocode.enrich(events, use_network=use_network)
             stats = upsert(events, processed_sources={key})
-            stats = upsert(events, processed_sources={key})
             _write_log(key, len(events), stats)
             summary[key] = {"collected": len(events), **stats}
             print(f"[{key}] {len(events)}건 → {stats}")

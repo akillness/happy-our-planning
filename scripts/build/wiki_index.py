@@ -4,7 +4,6 @@
 """
 from __future__ import annotations
 
-import datetime as dt
 import re
 from collections import Counter
 
@@ -25,6 +24,7 @@ def build() -> None:
     regions: Counter = Counter()
     themes: Counter = Counter()
     sources: Counter = Counter()
+    last_seen: dict[str, str] = {}  # 소스별 최신 fetched_at(YYYY-MM-DD)
     active = 0
     for _p, fm, _b in iter_events():
         if fm.get("status") == "archived":
@@ -36,12 +36,19 @@ def build() -> None:
         for t in fm.get("themes") or []:
             themes[t] += 1
         if fm.get("source"):
-            sources[fm["source"]] += 1
+            src = fm["source"]
+            sources[src] += 1
+            fetched = (fm.get("fetched_at") or "")[:10]
+            if fetched and fetched > last_seen.get(src, ""):
+                last_seen[src] = fetched
 
     region_lines = [f"- {k} — {v}건" for k, v in sorted(regions.items(), key=lambda x: -x[1])]
     theme_lines = [f"- {k} — {v}건" for k, v in sorted(themes.items(), key=lambda x: -x[1])]
-    today = dt.date.today().isoformat()
-    source_lines = [f"- {k} — {v}건 (최근 갱신 {today})" for k, v in sorted(sources.items(), key=lambda x: -x[1])]
+    # 최근 갱신은 소스별 실제 fetched_at에서 파생 → 데이터 무변경 시 index.md 재생성 멱등.
+    source_lines = [
+        f"- {k} — {v}건" + (f" (최근 갱신 {last_seen[k]})" if last_seen.get(k) else "")
+        for k, v in sorted(sources.items(), key=lambda x: -x[1])
+    ]
 
     text = INDEX.read_text(encoding="utf-8")
     text = _replace_block(text, "REGIONS", region_lines)

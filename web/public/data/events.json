@@ -25,7 +25,8 @@
     "image": "https://tong.visitkorea.or.kr/festival/3001001.jpg",
     "source": "tourapi",
     "verification": null,
-    "confidence": null
+    "confidence": null,
+    "display_status": "신청전"
   },
   {
     "id": "websearch:8ab4dbb10bae",
@@ -53,7 +54,8 @@
     "image": null,
     "source": "websearch",
     "verification": "web-discovered",
-    "confidence": 0.88
+    "confidence": 0.88,
+    "display_status": "신청전"
   },
   {
     "id": "tourapi:3001002",
@@ -81,7 +83,8 @@
     "image": "https://tong.visitkorea.or.kr/festival/3001002.jpg",
     "source": "tourapi",
     "verification": null,
-    "confidence": null
+    "confidence": null,
+    "display_status": "신청전"
   },
   {
     "id": "kopis:PF200001",
@@ -109,7 +112,8 @@
     "image": "https://www.kopis.or.kr/poster/PF200001.jpg",
     "source": "kopis",
     "verification": null,
-    "confidence": null
+    "confidence": null,
+    "display_status": "신청전"
   },
   {
     "id": "example:demo-application",
@@ -144,7 +148,8 @@
     "image": "https://example.org/poster/demo.jpg",
     "source": "example",
     "verification": null,
-    "confidence": null
+    "confidence": null,
+    "display_status": "오픈"
   },
   {
     "id": "kopis:PF200002",
@@ -172,7 +177,8 @@
     "image": "https://www.kopis.or.kr/poster/PF200002.jpg",
     "source": "kopis",
     "verification": null,
-    "confidence": null
+    "confidence": null,
+    "display_status": "신청전"
   },
   {
     "id": "tourapi:3001003",
@@ -200,7 +206,8 @@
     "image": "https://tong.visitkorea.or.kr/festival/3001003.jpg",
     "source": "tourapi",
     "verification": null,
-    "confidence": null
+    "confidence": null,
+    "display_status": "신청전"
   },
   {
     "id": "websearch:b254ade704ec",
@@ -228,7 +235,8 @@
     "image": null,
     "source": "websearch",
     "verification": "web-discovered",
-    "confidence": 1.0
+    "confidence": 1.0,
+    "display_status": "신청전"
   },
   {
     "id": "kopis:PF200003",
@@ -256,7 +264,8 @@
     "image": "https://www.kopis.or.kr/poster/PF200003.jpg",
     "source": "kopis",
     "verification": null,
-    "confidence": null
+    "confidence": null,
+    "display_status": "신청전"
   },
   {
     "id": "websearch:bb38c44890b9",
@@ -284,6 +293,7 @@
     "image": null,
     "source": "websearch",
     "verification": "web-discovered",
-    "confidence": 0.63
+    "confidence": 0.63,
+    "display_status": "신청전"
   }
 ]

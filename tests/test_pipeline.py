@@ -22,6 +22,7 @@ from scripts.ingest import websearch
 from scripts.build import build_sqlite
 from scripts.build import build_index
 from scripts.build import build_pages
+from scripts.build import wiki_index
 from scripts.recommend import ai_planner
 
 from scripts.normalize import geocode
@@ -34,6 +35,15 @@ class TestConfig(unittest.TestCase):
         self.assertEqual(config.canonical_sido("부산"), "부산광역시")
         self.assertEqual(config.canonical_sido("경기"), "경기도")
         self.assertEqual(config.canonical_sido("서울특별시"), "서울특별시")
+        # 형제 시/도(같은 2자 접두)는 보조 글자(남/북)로 정확히 판별 — 첫 항목으로 붕괴 금지
+        self.assertEqual(config.canonical_sido("충청남도 천안시"), "충청남도")
+        self.assertEqual(config.canonical_sido("충청북도 청주시"), "충청북도")
+        self.assertEqual(config.canonical_sido("경상남도 창원시"), "경상남도")
+        self.assertEqual(config.canonical_sido("경상북도 포항시"), "경상북도")
+        # 짧은 표기는 여전히 동작
+        self.assertEqual(config.canonical_sido("서울시"), "서울특별시")
+        # 모호한 bare 접두(남/북 단서 없음)는 임의로 고르지 않고 보존
+        self.assertEqual(config.canonical_sido("경상"), "경상")
 
     def test_age_bands_ranges(self):
         self.assertEqual(config.age_bands("7-13"), ["어린이"])
@@ -131,6 +141,37 @@ class TestUpsert(unittest.TestCase):
         # 두 번째엔 이미 archived → 다시 archive 안 함
         s2 = upsert_mod.upsert([], processed_sources={"kopis"})
         self.assertEqual(s2["archived"], 0)
+
+
+class TestToOkfRun(unittest.TestCase):
+    """정규화 오케스트레이터가 실제 적재량을 정확히 보고하는지(중복 upsert 회귀 가드)."""
+
+    def setUp(self):
+        from scripts.normalize import to_okf
+        self.to_okf = to_okf
+        self.tmp = tempfile.TemporaryDirectory()
+        self.logs = tempfile.TemporaryDirectory()
+        self._orig_dir = okf.EVENTS_DIR
+        self._orig_logs = to_okf.SOURCES_LOG_DIR
+        okf.EVENTS_DIR = Path(self.tmp.name)
+        to_okf.SOURCES_LOG_DIR = Path(self.logs.name)
+
+    def tearDown(self):
+        okf.EVENTS_DIR = self._orig_dir
+        self.to_okf.SOURCES_LOG_DIR = self._orig_logs
+        self.tmp.cleanup()
+        self.logs.cleanup()
+
+    def test_run_reports_created_not_all_skipped(self):
+        # 빈 DB에 오프라인 픽스처를 적재하면 created == collected(>0)여야 한다.
+        # 중복 upsert 버그가 있으면 두 번째 호출이 모두 skip으로 덮어써 created=0이 된다.
+        summary = self.to_okf.run(["kopis"], use_network=False)
+        stats = summary["kopis"]
+        self.assertNotIn("error", stats)
+        self.assertGreater(stats["collected"], 0)
+        self.assertEqual(stats["created"], stats["collected"])
+        self.assertEqual(stats["skipped"], 0)
+
 
 
 class TestRecommend(unittest.TestCase):
@@ -379,6 +420,12 @@ class TestWebSearch(unittest.TestCase):
         trusted = ad._confidence({"url": "https://busan.go.kr/a", "score": 0.5})
         self.assertAlmostEqual(plain, 0.5, places=3)
         self.assertAlmostEqual(trusted, 0.6, places=3)
+
+    def test_lookalike_domain_no_confidence_bump(self):
+        # 라벨 경계가 아닌 유사 도메인(notgo.kr)은 신뢰 도메인(go.kr) 가점 미적용.
+        ad = websearch.WebSearchAdapter(offline=True)
+        lookalike = ad._confidence({"url": "https://notgo.kr/a", "score": 0.5})
+        self.assertAlmostEqual(lookalike, 0.5, places=3)
 
     def test_sido_extracted_from_text_when_missing(self):
         hit = {"title": "경기도 수원 행사", "url": "https://e.go.kr/a",
@@ -705,6 +752,34 @@ class TestDisplayStatus(unittest.TestCase):
         self.assertEqual(
             build_index.derive_status(self._ev(status="Scheduled"), self.TODAY), "오픈")
 
+    def test_deadline_only_is_open(self):
+        # 마감일만 있는(신청 시작일 부재) 정부지원형도 기간 내면 오픈.
+        self.assertEqual(
+            build_index.derive_status(
+                self._ev(application_start=None, application_end="2026-07-31"),
+                self.TODAY), "오픈")
+
+    def test_deadline_only_imminent(self):
+        # 마감일만 있는 행사도 마감 D-3 이내면 마감임박(핵심 FOMO 배지).
+        self.assertEqual(
+            build_index.derive_status(
+                self._ev(application_start=None, application_end="2026-07-11"),
+                self.TODAY), "마감임박")
+
+    def test_deadline_only_past_is_margam(self):
+        self.assertEqual(
+            build_index.derive_status(
+                self._ev(application_start=None, application_end="2026-07-01"),
+                self.TODAY), "마감")
+
+    def test_no_dates_non_open_stays_before(self):
+        # 날짜 정보가 전혀 없고 status도 Open이 아니면 오픈으로 오판하지 않는다.
+        self.assertEqual(
+            build_index.derive_status(
+                self._ev(application_start=None, application_end=None, status="Scheduled"),
+                self.TODAY), "신청전")
+
+
 class TestBuildPages(unittest.TestCase):
     """S2-T1: 행사별 정적 상세 HTML(JSON-LD) 빌드 — 멱등 + schema.org 임베드."""
 
@@ -823,10 +898,53 @@ class TestUsageReport(unittest.TestCase):
                 "---\nsource: kopis\ndate: 2026-06-26\ncollected: 7\n---\n", encoding="utf-8")
             runs = usage_report.load_runs(base)
             self.assertEqual(runs, {"kopis": 7})   # 최신 날짜 우선
+            self.assertEqual(runs, {"kopis": 7})   # 최신 날짜 우선
 
+
+class TestWikiIndex(unittest.TestCase):
+    """SOURCES 블록의 '최근 갱신'은 fetched_at에서 파생 → SSOT 재생성 멱등."""
+
+    TEMPLATE = (
+        "# index\n"
+        "<!-- REGIONS:START -->\nx\n<!-- REGIONS:END -->\n"
+        "<!-- THEMES:START -->\nx\n<!-- THEMES:END -->\n"
+        "<!-- SOURCES:START -->\nx\n<!-- SOURCES:END -->\n"
+    )
+
+    EVENTS = [
+        (None, {"status": "Scheduled", "source": "kopis", "location": {"sido": "서울특별시"},
+                "themes": ["공연"], "fetched_at": "2026-06-20T00:00:00+09:00"}, ""),
+        (None, {"status": "Scheduled", "source": "kopis", "location": {"sido": "부산광역시"},
+                "themes": ["공연"], "fetched_at": "2026-06-25T00:00:00+09:00"}, ""),
+    ]
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.index = Path(self.tmp.name) / "index.md"
+        self.index.write_text(self.TEMPLATE, encoding="utf-8")
+        self._orig_index = wiki_index.INDEX
+        self._orig_iter = wiki_index.iter_events
+        wiki_index.INDEX = self.index
+        wiki_index.iter_events = lambda: iter(self.EVENTS)
+
+    def tearDown(self):
+        wiki_index.INDEX = self._orig_index
+        wiki_index.iter_events = self._orig_iter
+        self.tmp.cleanup()
+
+    def test_source_last_seen_from_max_fetched_at(self):
+        wiki_index.build()
+        text = self.index.read_text(encoding="utf-8")
+        # 소스의 최신 fetched_at(2026-06-25)이 노출되어야 한다(오늘 날짜가 아니라).
+        self.assertIn("kopis — 2건 (최근 갱신 2026-06-25)", text)
+
+    def test_regeneration_is_idempotent(self):
+        wiki_index.build()
+        first = self.index.read_text(encoding="utf-8")
+        wiki_index.build()
+        second = self.index.read_text(encoding="utf-8")
+        self.assertEqual(first, second)
 
 
 if __name__ == "__main__":
-    unittest.main()
-
     unittest.main()

@@ -61,8 +61,8 @@ def compute_notifications(events: list[dict], subscriptions: list[dict],
                     # 24시간 이내 수집된 행사인지 확인
                     if 0 <= (now - fetched).total_seconds() <= 86400:
                         out.append(_mk(sub, e, "new-event", "신규 행사 발견"))
-                except Exception:
-                    pass
+                except (ValueError, TypeError):
+                    pass  # fetched_at 형식 이상 → new-event 트리거 생략
     return out
 
 

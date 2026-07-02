@@ -49,3 +49,32 @@
 
 ## 4. 다음 단계 (Next step)
 TypedDict/dataclass 도입은 mypy를 CI에 추가하는 작업과 묶어 별도 슬라이스로 진행. logging 전면 전환은 notify의 stdout 계약을 구조화 로그로 옮길지 제품 결정 후 확대.
+
+
+## 5. 후속 리뷰 — 정확성 버그 수정 (2026-06-28, critic 라우팅)
+
+> 베이스라인(96 tests·mypy clean·`OFFLINE=1 run_pipeline` rc==0) 위에서 오프라인 검증 가능한 정확성 버그만 수정. 외부 키·네트워크·브라우저·경계데이터 의존 항목(BLOCKED)은 제외.
+
+| 결함 | 위치 | 영향 | 수정 |
+|---|---|---|---|
+| 🔴 중복 `upsert` 호출 | `normalize/to_okf.py:58-59` | 동일 `upsert` 2회 → 2번째가 모두 `skipped`로 덮어써 `created/updated` 항상 0 보고(수집 로그·summary 왜곡), 파일 IO 2배 | 중복 라인 제거(단일 호출) |
+| 🟠 형제 시/도 접두 붕괴 | `common/config.py:49` | `name.startswith(canon[:2])`가 같은 2자 접두 공유 시/도(충청남/북·경상남/북)를 `regions.yaml` 첫 항목으로 붕괴 → 부분/더티 입력 ~절반 오분류 | 단일 후보만 채택 + 형제는 남/북 보조 글자로 판별, 모호하면 보존 |
+| 🟡 광범위 `except` 은폐 | `notify/dispatch.py:64` | `fetched_at` 파싱 실패를 `except Exception: pass`로 삼켜 `new-event` 트리거 무단 누락 | `(ValueError, TypeError)`로 좁힘 |
+
+**검증:** 단위 테스트 **97 tests(94 pass / 3 skip)** — 신규 회귀 가드 `test_run_reports_created_not_all_skipped`(중복 upsert), `test_canonical_sido_alias_and_partial` 확장(형제 시/도 4건 + 모호 보존). mypy rc==0, `OFFLINE=1 run_pipeline` rc==0, `validate.py` 10/10 rc==0. C1–C7 불변.
+
+> 검토했으나 **의도적 미수정**: `dispatch.delivered`가 dry-run도 카운트하는 것은 `test_*`가 고정한 stdout/dedupe 계약(AGENTS.md notify §)이라 보존.
+
+
+## 6. 후속 리뷰 2 — 빌드/발견 정확성 (2026-06-28, critic 라우팅 #2)
+
+> 미검토였던 build/normalize/ingest 10개 모듈 전수 critic 리뷰. 오프라인 검증 가능한 정확성 결함만 수정.
+
+| 결함 | 위치 | 영향 | 수정 |
+|---|---|---|---|
+| 🟠 마감일만 있는 행사 배지 누락 | `build/build_index.py:75` `derive_status` | `application_start` 부재(정부지원형 다수) + `status≠Open` 행사는 `open_now`가 항상 False → 마감 전까지 "신청전", 마감 후 곧장 "마감"으로 점프. **핵심 FOMO 배지 "오픈/마감임박"이 도달 불가** | open 윈도 확장: 시작일 미상이어도 기간 내(`not astart or astart<=today`)면 오픈, 단 날짜·상태 신호가 전혀 없으면 신청전 보존 |
+| 🟠 SOURCES 인덱스 비멱등 | `build/wiki_index.py:43` | "최근 갱신"에 `dt.date.today()`를 전 소스 동일 스탬프 → 값 부정확 + 데이터 무변경에도 매 실행 `knowledge/index.md`(SSOT) 재기록(허위 git diff) | 소스별 실제 `fetched_at` 최댓값에서 파생 → 연속 실행 byte-identical |
+| 🟡 신뢰 도메인 경계 오매칭 | `ingest/websearch.py:218` `_confidence` | `dom.endswith("go.kr")`가 `notgo.kr` 등 라벨 경계 아닌 유사 도메인에 +0.1 가점 → `min_confidence` 우회 가능 | `dom == t or dom.endswith("." + t)` 라벨 경계 매칭 |
+| 🟡 Brave 날짜 오파싱(잠재) | `ingest/websearch.py:113` `parse_brave` | 상대표현 `age`("3 days ago")를 ISO `page_age`보다 우선해 `[:10]` 절단 → "3 days ag". 현재 `published` 미소비라 무해하나 잠재 버그 | ISO `page_age` 우선 |
+
+**검증:** 단위 테스트 **104 tests(101 pass / 3 skip, +7)** — `derive_status` 마감일전용 3건 + 무날짜 비오픈 보존 1건, `_confidence` 유사도메인 무가점 1건, `wiki_index` fetched_at 파생·재생성 멱등 2건. mypy rc==0, `OFFLINE=1 run_pipeline` rc==0(연속 실행 `index.md` byte-identical 확인), `validate.py` 10/10 rc==0. C1–C7 불변.

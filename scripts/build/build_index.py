@@ -72,7 +72,12 @@ def derive_status(e: dict, today: str) -> str:
         return "마감"
     if astart and today < astart:
         return "신청전"
-    open_now = status == "Open" or (astart and astart <= today and (not aend or today <= aend))
+    # astart 부재(마감일만 있는 정부지원형) 도 신청기간 내면 오픈으로 본다.
+    open_now = status == "Open" or (
+        (not astart or astart <= today)
+        and (not aend or today <= aend)
+        and (astart or aend or status == "Open")
+    )
     if open_now:
         if aend:
             d = (dt.date.fromisoformat(aend) - dt.date.fromisoformat(today)).days

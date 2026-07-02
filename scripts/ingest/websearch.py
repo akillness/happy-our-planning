@@ -110,7 +110,8 @@ def parse_brave(resp: dict) -> list[dict]:
             "title": r.get("title") or "",
             "url": r.get("url") or "",
             "snippet": r.get("description") or "",
-            "published": (r.get("age") or r.get("page_age") or "")[:10] or None,
+            # page_age(ISO) 우선, 없으면 age(상대표현) — ISO만 날짜로 신뢰.
+            "published": (r.get("page_age") or r.get("age") or "")[:10] or None,
             # Brave는 score를 주지 않음 → 랭크 역수로 근사(상위일수록 높게)
             "score": None,
             "provider": "brave",
@@ -215,7 +216,7 @@ class WebSearchAdapter(SourceAdapter):
     def _confidence(self, hit: dict) -> float:
         base = float(hit.get("score") or 0.0)
         dom = _domain(hit.get("url", ""))
-        if any(dom.endswith(t) for t in self.scfg.get("trusted_domains", [])):
+        if any(dom == t or dom.endswith("." + t) for t in self.scfg.get("trusted_domains", [])):
             base = min(1.0, base + 0.1)
         return round(base, 3)
 
