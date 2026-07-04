@@ -55,7 +55,7 @@
     "source": "websearch",
     "verification": "web-discovered",
     "confidence": 0.88,
-    "display_status": "신청전"
+    "display_status": "오픈"
   },
   {
     "id": "tourapi:3001002",
