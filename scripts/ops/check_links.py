@@ -2,6 +2,12 @@
 
 기본 파이프라인은 이 모듈을 호출하지 않는다. 실행 시에도 URL 정책을 먼저
 검사하고, 공용 IP를 모두 확인한 뒤 선택한 IP에 TLS 연결을 고정한다.
+
+예약(offers.url) URL은 정보(url) URL과 동일한 단일 sha256 캐시를 공유하지만
+``role="booking"``으로 독립 검증한다(큐레이션된 예약처 호스트만 추가 허용,
+정보 링크 허용목록은 그대로). 동일 URL이 한 이벤트의 정보 링크이면서 다른
+이벤트의 예약 링크면 예약 쪼으로 한 번만 실제 검사하고, 각 역할의 읽기는
+캐시에 저장된 role과 무관하게 매번 자기 role 기준으로 재검증한다.
 """
 from __future__ import annotations
 
@@ -40,7 +46,9 @@ def _policy_value(name: str, default: int) -> int:
         return default
 
 
-def _entry(url: str, fields: Mapping[str, Any], now: datetime) -> dict[str, Any]:
+def _entry(
+    url: str, fields: Mapping[str, Any], now: datetime, *, role: str = "info"
+) -> dict[str, Any]:
     """Build one output cache record, re-validating any ``verified`` claim.
 
     This is the single choke point every write path (a fresh ``check_url``
@@ -51,6 +59,10 @@ def _entry(url: str, fields: Mapping[str, Any], now: datetime) -> dict[str, Any]
     "verified". The SHA-256 key already binds this result to the exact
     input; this is the second half - don't trust what the cache *claims*
     about that url without rechecking it against today's policy and clock.
+
+    ``role`` re-derives trust the same way ``links.link_fields`` does: a
+    booking-role write never lets a non-curated host through just because
+    some other, unrelated record's write happened to look similar.
     """
     status = fields.get("link_status", "unchecked")
     checked_at = fields.get("link_checked_at")
@@ -58,7 +70,7 @@ def _entry(url: str, fields: Mapping[str, Any], now: datetime) -> dict[str, Any]
     link_url: str | None = None
     if status == "verified":
         parsed_checked = links._parse_iso(checked_at)
-        valid_url, policy_reason = links.validate_url(fields.get("link_url"))
+        valid_url, policy_reason = links.validate_url(fields.get("link_url"), role=role)
         if parsed_checked is None or parsed_checked > now or policy_reason or not valid_url:
             status, reason = "blocked", "검증 URL 정책 불일치"
         else:
@@ -123,6 +135,14 @@ def _priority_key(
     return (bucket, rotation[0], rotation[1], effective or _FAR_FUTURE)
 
 
+def _event_booking_url(event: Mapping[str, Any]) -> str | None:
+    offers = event.get("offers")
+    if not isinstance(offers, Mapping):
+        return None
+    url = offers.get("url")
+    return url if isinstance(url, str) and url else None
+
+
 def check_events(
     events: Iterable[Mapping[str, Any]],
     *,
@@ -140,18 +160,31 @@ def check_events(
     ``send`` and ``resolver`` are injected for deterministic tests. The returned
     object is directly serializable as ``link-checks.json``.
 
+    Provider-declared booking URLs (``event["offers"]["url"]``) share the
+    exact same ``sha256(url)`` cache/budget as info URLs (``event["url"]``)
+    but are queued and verified independently, under ``role="booking"``
+    (curated vendor hosts), *before* any info URL - and, within each kind,
+    upcoming child-experience/family events before other current events,
+    before already-ended ones (same ``_priority_key`` bucketing as before).
+    A URL that is simultaneously one event's info URL and another event's
+    booking URL is checked exactly once, as a booking URL (never the other
+    way around) - its one cache entry is still independently re-derived per
+    role by every reader (``links.link_fields``/``booking_link_fields``),
+    so an info-role read of that same URL never inherits a booking-role
+    "verified" claim.
+
     ``previous`` is this run's starting point - normally the on-disk cache,
     which ``run()`` loads and passes through. A URL whose prior proof is
-    still within TTL and ``verified`` is republished as-is without spending
-    any of this run's network budget. A URL this run defers (budget or
-    wall-clock exhausted first) keeps its exact prior entry instead of being
-    overwritten by a placeholder, so a large backlog of older URLs can never
-    permanently erase another, still-valid proof just by outnumbering it
-    across scheduled runs; a URL deferred with no prior entry still gets the
-    unchecked/unverified placeholder, same as before ``previous`` existed.
-    Pruning needs no extra step: the output is built strictly from this
-    run's current event set, so a URL no longer published is never carried
-    forward.
+    still within TTL and ``verified`` (under its own role) is republished
+    as-is without spending any of this run's network budget. A URL this run
+    defers (budget or wall-clock exhausted first) keeps its exact prior
+    entry instead of being overwritten by a placeholder, so a large backlog
+    of older URLs can never permanently erase another, still-valid proof
+    just by outnumbering it across scheduled runs; a URL deferred with no
+    prior entry still gets the unchecked/unverified placeholder, same as
+    before ``previous`` existed. Pruning needs no extra step: the output is
+    built strictly from this run's current event set (both URL kinds), so a
+    URL no longer published under either kind is never carried forward.
     """
     clock = monotonic or globals()["monotonic"]
     current = _utc_now(now)
@@ -160,34 +193,48 @@ def check_events(
     deadline = clock() + max(0, time_limit)
     prior_checks = links._cache_mapping(previous)
 
-    ordered: list[tuple[str, Mapping[str, Any]]] = []
-    seen: set[str] = set()
-    for event in events:
-        if not isinstance(event, Mapping):
-            continue
-        url = event.get("url")
-        if not isinstance(url, str) or not url or url in seen:
-            continue
-        seen.add(url)
-        ordered.append((url, event))
+    materialized = [event for event in events if isinstance(event, Mapping)]
+
+    def _build_group(
+        extract: Callable[[Mapping[str, Any]], str | None], seen: set[str]
+    ) -> list[tuple[str, Mapping[str, Any]]]:
+        group: list[tuple[str, Mapping[str, Any]]] = []
+        for event in materialized:
+            url = extract(event)
+            if not url or url in seen:
+                continue
+            seen.add(url)
+            group.append((url, event))
+        return group
 
     def _sort_key(item: tuple[str, Mapping[str, Any]]) -> tuple[int, int, datetime, datetime]:
         prior = prior_checks.get(links._url_key(item[0]))
         checked_at = prior.get("link_checked_at") if isinstance(prior, Mapping) else None
         return _priority_key(item[1], current, checked_at)
 
-    # Stable sort: ties (e.g. two records with no date, both never checked)
-    # keep their original relative order, only the priority bucket/rotation
-    # state/date actually reorders work.
-    ordered.sort(key=_sort_key)
+    seen: set[str] = set()
+    # Booking candidates claim a shared URL first (``seen`` is shared across
+    # both passes), so the info pass below silently skips any URL a booking
+    # candidate already took - never the reverse.
+    booking_group = _build_group(_event_booking_url, seen)
+    info_group = _build_group(lambda event: event.get("url") if isinstance(event.get("url"), str) else None, seen)
+
+    # Stable sort within each kind: ties (e.g. two records with no date,
+    # both never checked) keep their original relative order, only the
+    # priority bucket/rotation state/date actually reorders work.
+    booking_group.sort(key=_sort_key)
+    info_group.sort(key=_sort_key)
+    ordered: list[tuple[str, Mapping[str, Any], str]] = [
+        (url, event, "booking") for url, event in booking_group
+    ] + [(url, event, "info") for url, event in info_group]
 
     checks: dict[str, Any] = {}
     count = 0
-    for url, _event in ordered:
+    for url, _event, role in ordered:
         key = links._url_key(url)
-        fresh = links.link_fields(url, previous, current)
+        fresh = links.link_fields(url, previous, current, role=role)
         if fresh.get("link_status") == "verified":
-            checks[key] = _entry(url, fresh, current)
+            checks[key] = _entry(url, fresh, current, role=role)
             continue
         if count >= max(0, url_limit):
             deferred, fallback = True, {
@@ -208,7 +255,7 @@ def check_events(
         if deferred:
             assert fallback is not None  # deferred is only True alongside a non-None fallback dict (see branches above)
             raw_prior = prior_checks.get(key)
-            checks[key] = _entry(url, raw_prior if isinstance(raw_prior, Mapping) else fallback, current)
+            checks[key] = _entry(url, raw_prior if isinstance(raw_prior, Mapping) else fallback, current, role=role)
             count += 1
             continue
         fields = links.check_url(
@@ -219,8 +266,9 @@ def check_events(
             monotonic=clock,
             sleep=sleep,
             deadline=deadline,
+            role=role,
         )
-        checks[key] = _entry(url, fields, current)
+        checks[key] = _entry(url, fields, current, role=role)
         count += 1
     return {"version": 1, "generated_at": _iso(current), "checks": checks}
 

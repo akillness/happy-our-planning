@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://notchima.vercel.app/sitemap.xml
+Sitemap: https://happy-our-planning.vercel.app/sitemap.xml

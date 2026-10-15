@@ -16,7 +16,7 @@ from collections import Counter, defaultdict
 
 from scripts.common.config import ROOT, age_bands, all_regions, search_config
 from scripts.common.dates import now_kst
-from scripts.common.links import link_fields, load_link_checks
+from scripts.common.links import booking_link_fields, link_fields, load_link_checks
 from scripts.common.okf import iter_events
 
 OUT_DIR = ROOT / "web" / "public" / "data"
@@ -274,6 +274,16 @@ def _flatten(fm: dict, *, link_checks: dict | None = None, now: dt.datetime | No
             "link_url": None,
             "link_reason": "공식 홈페이지 없음",
         }
+    # 예약(booking) 링크는 원문이 명시한 offers.url에서만 독립적으로 파생한다
+    # (role="booking", 동일 단일 캐시) - 정보 url의 검증 결과를 빌려오지 않는다.
+    offers = fm.get("offers") if isinstance(fm.get("offers"), dict) else None
+    booking_fields = booking_link_fields(fm, checks=link_checks, now=now)
+    booking_publication_fields = {
+        "booking_link_status": booking_fields["link_status"],
+        "booking_link_checked_at": booking_fields["link_checked_at"],
+        "booking_link_url": booking_fields["link_url"],
+        "booking_link_reason": booking_fields["link_reason"],
+    }
     return {
         "id": fm.get("id"),
         "name": fm.get("name"),
@@ -301,7 +311,12 @@ def _flatten(fm: dict, *, link_checks: dict | None = None, now: dt.datetime | No
         "experience_summary": experience_summary,
         "is_experience": is_experience,
         "price": fm.get("price"),
+        "price_text": fm.get("price_text"),
+        "duration_text": fm.get("duration_text"),
+        "duration": fm.get("duration"),
         **publication_link_fields,
+        "offers": offers,
+        **booking_publication_fields,
         "organizer": fm.get("organizer"),
         "url": fm.get("url"),
         "image": fm.get("image"),
@@ -351,31 +366,42 @@ def _is_publishable(fm: dict, *, today: str, days: int) -> bool:
 
 
 def derive_status(e: dict, today: str) -> str:
-    """행사 1건의 표시 상태 라벨. today는 'YYYY-MM-DD'(KST 기준)."""
-    end = _date10(e.get("end_date"))
+    """행사 상태와 명시된 신청기간을 사실대로 결합한 표시 상태."""
+    end = _date10(e.get("end_date") or e.get("start_date"))
+    start = _date10(e.get("start_date"))
     if end and today > end:
         return "종료"
+
     status = e.get("status") or ""
-    astart, aend = _date10(e.get("application_start")), _date10(e.get("application_end"))
-    if status == "Closed":
-        return "마감"
-    if aend and today > aend:
-        return "마감"
-    if astart and today < astart:
-        return "신청전"
-    # astart 부재(마감일만 있는 정부지원형) 도 신청기간 내면 오픈으로 본다.
-    open_now = status == "Open" or (
-        (not astart or astart <= today)
-        and (not aend or today <= aend)
-        and (astart or aend or status == "Open")
-    )
-    if open_now:
-        if aend:
-            d = (dt.date.fromisoformat(aend) - dt.date.fromisoformat(today)).days
-            if 0 <= d <= _IMMINENT_DAYS:
-                return "마감임박"
-        return "오픈"
-    return "신청전"
+    astart = _date10(e.get("application_start"))
+    aend = _date10(e.get("application_end"))
+    has_application_window = bool(astart or aend)
+    if has_application_window:
+        if status == "Closed" or (aend and today > aend):
+            return "마감"
+        if astart and today < astart:
+            return "신청전"
+        open_now = ((not astart or astart <= today)
+                    and (not aend or today <= aend))
+        if open_now:
+            if aend:
+                try:
+                    days = (dt.date.fromisoformat(aend) - dt.date.fromisoformat(today)).days
+                except ValueError:
+                    days = None
+                if days is not None and 0 <= days <= _IMMINENT_DAYS:
+                    return "마감임박"
+            return "오픈"
+
+    # Open/Scheduled from a provider is not application evidence.  Without an
+    # explicit application period, report only the performance schedule.
+    if start and today < start:
+        return "예정"
+    if start and (not end or today <= end):
+        return "진행중"
+    if end and today <= end:
+        return "진행중"
+    return "정보 없음"
 def _load_collection_status() -> dict:
     path = ROOT / "knowledge" / "sources" / "collection-status.json"
     try:

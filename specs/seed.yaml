@@ -3,7 +3,7 @@
 # 방향은 단방향: spec.md -> seed.yaml. 두 파이프라인을 병렬 SSOT로 돌리지 않는다.
 seed:
   name: notchima-event-infra
-  spec_ref: specs/spec.md@1.3.1
+  spec_ref: specs/spec.md@1.6.0
   ambiguity: 0.15            # 인터뷰 후 잔여 모호도(<=0.2 통과)
   weighting: brownfield     # 성숙 코드베이스(1975 LOC, 40 tests) 위에 증분
 
@@ -14,6 +14,9 @@ tools:
   sqlite:     "python -m scripts.build.build_sqlite" # events.db 재생성(파생물)
   tests:      "python -m unittest discover -s tests"
   macro:      "playwright"                            # F3.4 러너 — 헤드리스, mock 우선
+  ui:         "python3 specs/verify/run_ui_check.py"  # 기존 탐색 행위 + 지도 우선 레이아웃
+  map_ui:     "python3 specs/verify/map_viewport_check.py" # 실제 Leaflet 지오메트리/오버레이
+  locale_ui:  "python3 specs/verify/ui_locale_check.py" # 하단 검색/우측 결과·한영 전환·종료·모바일 아이콘·투명도
   notify:     "telegram-bot-api"                      # F4.3 — 토큰 없으면 dry-run
   survey_validator: "python3 ~/.agents/skills/survey/scripts/validate_survey_artifacts.py"
 
@@ -39,12 +42,14 @@ constraints:
     rule: "derive_experiences(...)는 name·description·themes 원문에서 손-활동 근거만 읽어 허용된 한국어 범주·짧은 근거·is_experience을 결정한다. 공연·인형극·음악 감상만으로 true 금지."
   - id: C10-link-proof
     rule: "원본 url은 flat-file에 보존하고 link_fields()의 link_status/link_checked_at/link_url/link_reason을 붙인다. 검증기는 브라우저와 같은 bounded GET 하나만 사용해 모든 GET 리다이렉트(최대 3회)를 수동 검증하며 HEAD는 proof로 사용하지 않는다. 기본 sender는 config/search.yaml max_response_bytes(기본 64KB)까지만 스트림을 읽고 닫고, Content-Length가 더 커도 제한 내 도달한 2xx 응답은 검증 가능하다. 전체 HTML 다운로드·파싱·JS 실행은 하지 않는다. 최근 7일 verified 자격증명 없는 HTTPS만 외부 클릭 노출하고, 오프라인·실패·만료에도 이벤트를 버리지 않는다. 공개 link-checks.json은 원본 URL SHA-256 해시 키와 안전한 verified 최종 link_url만 저장하며 raw URL/userinfo/credential query는 저장하지 않는다."
+    status_policy: "신청기간 없는 Open/Scheduled를 신청오픈/신청전으로 추론 금지; 행사일정의 예정/진행중/종료 또는 정보없음 사용. 명시적 신청마감과 행사종료는 분리."
+    booking_policy: "info는 기존 trusted_domains만, booking만 근거 있는 booking_trusted_domains 추가 허용. 최초 URL·매 redirect·캐시 읽기/재사용/쓰기에서 role 정책 재검증; 검색랭킹 불변; 기존 URL SHA-256 단일 키 유지. HTTP 예약 원천은 같은 호스트/경로/쿼리 HTTPS 전환만 허용하며 원천 예약 URL 원문은 기존 상세 캐시에 보존."
   - id: C11-cron-visibility
     rule: "기존 03:00 KST 단일 cron만 사용하고 동시 실행 직렬화. 실패·부분 실패는 Actions 상태와 knowledge/sources/collection-status.json source mode/last_success_at/error 및 updated.json 집계로 드러낸다. fixture build 시각은 live 성공이 아니다."
   - id: C12-publication-retention
     rule: "파생 공개는 config/search.yaml publication_policy.retention_days(기본 90 KST 일)를 사용한다. effective_end=end_date||start_date가 주입한 KST today-retention_days보다 엄격히 이전인 행사만 events.json/정적 상세에서 제외하고 knowledge 원본은 삭제하지 않는다. 경계일은 보존하며 updated.json.publication에 retained/excluded를 보고한다."
   - id: C13-link-queue-budget
-    rule: "일일 링크 큐는 현재 공개 대상 URL만 사용하고 fresh verified proof(7일 이내)는 재사용해 네트워크 검사를 생략한다. 실제 검사 최대 40건·총 120초 이내, 예정 어린이 경험 우선, 비공개 URL 증명 prune, 동일 link-checks.json 해시 캐시만 허용한다."
+    rule: "현재 공개 예약·정보 URL의 fresh verified proof(7일 이내)는 재사용한다. 실제 검사 합산 최대 40건·총 120초 이내, 예약 URL 우선 후 각 종류 내 예정/진행 어린이 경험·가족·기타 현재·종료 순, 비공개 URL 증명 prune, 동일 link-checks.json 해시 캐시만 허용한다."
 
 # success_criteria: spec.md 의 AC 를 기계검증형으로 미러링. evaluate 단계가 증거를 요구.
 success_criteria:
@@ -79,14 +84,32 @@ success_criteria:
     check: "주입 KST 시계에서 effective_end가 today-90과 같으면 보존, 엄격히 이전이면 events.json/정적 상세에서 제외; search.yaml publication_policy.retention_days 재정의 적용; updated.json.publication에 retention_days/retained/excluded 보고; knowledge 원본 유지"
     evidence: "injected-clock boundary tests + events/static output + updated.json publication counts"
   - id: AC-F2-link-queue
-    check: "fresh verified proof 재사용으로 네트워크 호출 생략; 실제 검사 40건 이하·총 120초 이하; 예정 어린이 경험 우선 큐; 현재 공개 집합에 없는 URL 증명 prune; 두 번째 캐시 없음"
+    check: "fresh verified proof 재사용으로 네트워크 호출 생략; 예약·정보 실제 검사 합산 40건 이하·총 120초 이하; 예약 URL 우선 후 각 종류 내 예정/진행 어린이 경험·가족 우선; 현재 공개 집합에 없는 URL 증명 prune; 두 번째 링크 캐시 없음"
     evidence: "injected-clock queue fixture logs + cache before/after + bounded request counters"
-  - id: AC-F2.9-watercolor-layout
-    check: "1440px 히어로 그림 높이 180px 이하, 필터가 활동 바로가기보다 먼저, 360px 목록이 지도보다 먼저; 과학·탐구/만들기·예술 정적 장식 이미지 로드와 빈 alt, 텍스트 이름/건수/선택 상태 및 activity URL 동기화 유지; 그림 없는 실제 범주는 텍스트 탐색, 44px 타깃/출처/상태 보존"
-    evidence: "specs/verify/ui-checklist.md 및 run_ui_check.py Chrome 스냅샷/JSON"
+  - id: AC-F2.9-map-first-layout
+    check: "1440×900/1280×800/360×800/390×844 지도 네 변1px·하단 중앙 검색도크 중심2px/하단12–24px; 위로 여는 조건팝업 내부스크롤; 우측12–24px 결과팝업 목록/페이지네이션·문서넘침없음; 모바일결과기본접힘/아이콘우측드로어/지도폭56px보존·검색조건과상호배타; 핀끝/말풍선포인터2px·동일latlng·pan/zoom/resize/그룹/긴내용/가장자리정합·가림방지·Leaflettransform보존; 열린조건에서먼지역선택→지도눌러닫아도결과핀보임·첫드래그전줌/중심점프없음; 기존탐색·URL·정렬/거리/위치·링크상태·오류/초점·44px·reduced-motion유지"
+    evidence: "개정 specs/verify/run_ui_check.py 및 지도 geometry 브라우저 체크의 JSON/스크린샷과 ui-checklist.md"
   - id: AC-F2.10-vercel-release
-    check: "기존 happy-our-planning Vercel 프로젝트에 브라우저 정적 산출물만 배포하고 DB/설계 원본/Worker 제외; production alias의 HTML/events.json/양쪽 히어로 HTTP200 및 로컬 일치; 실제 브라우저 활동 선택/URL/360px 넘침 없음"
+    check: "기존 happy-our-planning에 검증된 정적브라우저산출물만 배포(DB/설계원본/Worker/QA제외); production HTML/CSS/JS/언어리소스/events/활동그림 HTTP200·커밋일치; 전체지도/하단검색조건/우측결과페이지/모바일아이콘/한영전환/종료표시/핀팝업/실제예약연결 스모크; mixed/live/fixture와테스트증거구분"
     evidence: "Vercel deployment ID/URL, inspect 결과, production HTTP·해시 및 브라우저 스모크 결과"
+  - id: AC-F2.11-event-details
+    check: "같은 행사 ID의 목록/지도 상세와 정적 상세가 원문 설명·장소/주소·일정·연령·요금·소요시간·출처를 보존하고 누락값은 명시; 공식 정보 링크와 실제 예약 링크의 목적/라벨을 분리"
+    evidence: "원천→OKF→events.json→동적/정적 상세 필드 비교 및 실제 상세 클릭 결과"
+  - id: AC-F2.12-booking-links
+    check: "원천 KOPIS relates/relateurl 예약 URL을 offers.url로 보존; 기존 단일 캐시·HTTPS/리다이렉트/SSRF/7일 TTL·합산 40건/120초 예산·예약 우선 큐 준수; live 일일 공개 경로에 검증 결과 반영·오프라인 build 무네트워크; 검증 예약 링크/유효 신청기간 근거 없이는 신청가능·예약가능 표시 금지; 판매/잔여석 미확인은 예매처에서 확인; 현재 예정/진행 가족 예약 후보 40개 이하에서는 검사/유효 proof 적용률100%, 예약 가능 표시의 검증·기간 근거100%, 실제 현재 행사 최소1건 상세→공식 예약 사이트 연결; KOPIS 상세 조회 실행별 상한·캐시 재사용·무료 API 예산 준수"
+    evidence: "실제 공개 전체/가족 후보 검사 적용률·verified 정보/예약 링크 비율, 실제 행사 원천/예약 URL과 검증 시각, 브라우저 연결 결과 및 정적 산출물; 홈페이지 smoke·주입 fixture는 실제 예약 증거에서 제외"
+  - id: AC-F2.13-ended-schedules
+    check: "C12의 유효종료일(end_date||start_date)과 KST오늘 기준 종료판정; 목록/지도팝업/상세 날짜취소선 및 붉은종료/Ended배지; 신청마감만으로 미래행사날짜취소선금지; 상태텍스트와색동시제공"
+    evidence: "주입시계종료/미래/신청마감경계fixture와 실제화면 날짜장식/배지/대비"
+  - id: AC-F2.14-mobile-icons
+    check: "모바일지도/결과/조건도구의 시각적한글설명제거·아이콘유지, 번역접근성명/상태·44px·폼라벨/오류/저작권보존"
+    evidence: "360/390 스냅샷·접근성트리·실제타깃측정"
+  - id: AC-F2.15-ko-en
+    check: "한영토글 UI/필터/날짜요금/상태/상세예약안내전환, lang URL/html/lang저장동기화·필터페이지지도뷰보존; 공식번역없는원문유지안내·단일정적언어리소스·런타임번역호출없음"
+    evidence: "ko/en 직접URL·토글·새로고침·필터/초기화·상세/팝업 언어 및 지도뷰보존 브라우저검증"
+  - id: AC-F2.16-transparent-surfaces
+    check: "팝업배경알파대략0.88이상·텍스트/컨트롤opacity1, 최악밝고어두운지도상텍스트4.5:1, reduced-transparency불투명/blur해제·포커스/클릭/저작권가림없음"
+    evidence: "계산스타일/합성대비·감소설정·1440/1280/360/390 실제화면"
   - id: AC-F3-gate
     check: "tests::TestMacro 4건 green (자동/반자동 게이팅)"
     evidence: "unittest 요약"

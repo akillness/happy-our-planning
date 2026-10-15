@@ -48,6 +48,22 @@ trusted_domains:
   - go.kr
   - or.kr
   - ac.kr
+# 예약(booking) 전용 큐레이션 신뢰 호스트 — 위 trusted_domains(정보 링크, 변경 없음)와
+# 완전히 분리된 별도 허용목록. role="booking"일 때만 적용되며 정보 링크 검증을 넓히지
+# 않는다. KOPIS 상세 relates/relateurl 실응답에서 관찰된 실제 호스트만 등재
+# (BookingKopisIngestion, 2026-10-15 실시간 조회 9건 — 추측/와일드카드 금지,
+# 정확한 호스트 문자열만; 레지스터블 도메인 전체가 아니라 관측된 호스트 자체만 신뢰).
+# ticketlink.co.kr/ticket.interpark.com/playticket.co.kr/yywc.moonhwain.net은 소스에서
+# http로만 응답했으나, 이 목록에 있는 호스트에 대해서만 scripts.common.links가 동일
+# 호스트/경로/쿼리에서 https로만 업그레이드해 검증한다(호스트 변경 아님).
+booking_trusted_domains:
+  - ticketlink.co.kr
+  - www.ticketlink.co.kr
+  - ticket.interpark.com
+  - playticket.co.kr
+  - booking.naver.com
+  - yywc.moonhwain.net
+  - ticket.yes24.com
 # 링크 검증 정책: 기본 빌드는 오프라인이며 명시적 checker 실행 때만 사용.
 link_policy:
   proof_ttl_days: 7

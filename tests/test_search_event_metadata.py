@@ -16,8 +16,8 @@ class _FakeLiveWebSearchAdapter(websearch.WebSearchAdapter):
         self._response = response
 
     def _expand_queries(self):
-        # subTest마다 응답이 다르므로 캐시 키 충돌 방지용 고유 질의.
-        return [f"전국 어린이 행사 2026 #{id(self)}"]
+        # 각 수집 호출은 테스트 헬퍼가 격리된 캐시 경로를 제공한다.
+        return ["전국 어린이 행사 2026"]
 
     def _call_provider(self, httpx, query, num):
         return self._response
@@ -52,17 +52,17 @@ class TestSearchEventMetadata(unittest.TestCase):
     providers = ("exa", "brave", "tavily")
 
     def setUp(self):
-        # live 캐시가 실제 raw/ 캐시를 오염시켜 테스트 간 간섭을 일으키는 것을 방지.
         self._tmp = tempfile.TemporaryDirectory()
-        self._cache_patch = mock.patch.object(
-            websearch, "_cache_path",
-            return_value=Path(self._tmp.name) / "_cache.json",
-        )
-        self._cache_patch.start()
+        self._collect_count = 0
 
     def tearDown(self):
-        self._cache_patch.stop()
         self._tmp.cleanup()
+
+    def _collect(self, provider, response):
+        cache_path = Path(self._tmp.name) / f"cache-{self._collect_count}.json"
+        self._collect_count += 1
+        with mock.patch.object(websearch, "_cache_path", return_value=cache_path):
+            return _FakeLiveWebSearchAdapter(provider, response).collect()
 
     def test_live_fake_provider_results_extract_dates_from_event_text(self):
         cases = {
@@ -90,7 +90,7 @@ class TestSearchEventMetadata(unittest.TestCase):
                     provider,
                     _result(provider, title=title, url=url, text=text),
                 )
-                rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                rows = self._collect(provider, response)
 
                 self.assertEqual(len(rows), 1)
                 event = rows[0]
@@ -127,7 +127,7 @@ class TestSearchEventMetadata(unittest.TestCase):
                     provider,
                     _result(provider, title=title, url=url, text=text),
                 )
-                rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                rows = self._collect(provider, response)
 
                 self.assertEqual(len(rows), 1)
                 event = rows[0]
@@ -149,7 +149,7 @@ class TestSearchEventMetadata(unittest.TestCase):
                         text=text,
                     ),
                 )
-                rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                rows = self._collect(provider, response)
                 self.assertEqual(rows, [])
 
 
@@ -174,7 +174,7 @@ class TestSearchEventMetadata(unittest.TestCase):
                         **fields,
                     ),
                 )
-                rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                rows = self._collect(provider, response)
 
                 self.assertEqual(len(rows), 1)
                 event = rows[0]
@@ -218,7 +218,7 @@ class TestSearchEventMetadata(unittest.TestCase):
             for provider in self.providers:
                 with self.subTest(case=case_name, provider=provider):
                     response = _provider_response(provider, make_result(provider))
-                    rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                    rows = self._collect(provider, response)
                     self.assertEqual(rows, [])
 
     def test_ambiguous_multiple_schedules_and_invalid_calendar_dates_are_rejected(self):
@@ -256,7 +256,7 @@ class TestSearchEventMetadata(unittest.TestCase):
                         provider,
                         _result(provider, title=title, url=url, text=text),
                     )
-                    rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                    rows = self._collect(provider, response)
                     self.assertEqual(rows, [])
 
     def test_explicit_application_fields_are_not_hybrid_filled_from_context(self):
@@ -281,7 +281,7 @@ class TestSearchEventMetadata(unittest.TestCase):
                             **explicit,
                         ),
                     )
-                    rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                    rows = self._collect(provider, response)
 
                     self.assertEqual(len(rows), 1)
                     event = rows[0]
@@ -319,7 +319,7 @@ class TestSearchEventMetadata(unittest.TestCase):
                             **explicit,
                         ),
                     )
-                    rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                    rows = self._collect(provider, response)
                     self.assertEqual(rows, [])
 
     def test_region_and_confidence_gates_still_reject_date_bearing_hits(self):
@@ -363,7 +363,7 @@ class TestSearchEventMetadata(unittest.TestCase):
                         result["published_date"] = "2026-01-15"
                     result["title"] = template["title"].replace("{provider}", provider)
                     response = _provider_response(provider, result)
-                    rows = _FakeLiveWebSearchAdapter(provider, response).collect()
+                    rows = self._collect(provider, response)
                     self.assertEqual(rows, [])
 
 

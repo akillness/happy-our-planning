@@ -17,6 +17,7 @@ from __future__ import annotations
 import datetime as dt
 import hashlib
 import os
+from pathlib import Path
 import re
 from urllib.parse import urlsplit
 

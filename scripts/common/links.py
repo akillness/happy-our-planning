@@ -148,12 +148,9 @@ def _proof_ttl() -> timedelta:
     return timedelta(days=max(0, days))
 
 
-def _trusted_domains(trusted_domains: Iterable[str] | None = None) -> tuple[str, ...]:
-    if trusted_domains is None:
-        cfg = search_config()
-        trusted_domains = cfg.get("trusted_domains", []) if isinstance(cfg, dict) else []
+def _normalise_domain_list(domains: Iterable[str] | None) -> tuple[str, ...]:
     result: list[str] = []
-    for item in trusted_domains or []:
+    for item in domains or []:
         if not isinstance(item, str):
             continue
         domain = item.strip().lower().rstrip(".")
@@ -162,8 +159,44 @@ def _trusted_domains(trusted_domains: Iterable[str] | None = None) -> tuple[str,
     return tuple(result)
 
 
-def _host_allowed(host: str, trusted_domains: Iterable[str] | None = None) -> bool:
-    return any(host == domain or host.endswith("." + domain) for domain in _trusted_domains(trusted_domains))
+def _booking_trusted_domains() -> tuple[str, ...]:
+    """Curated, evidence-based booking-vendor hosts (``role="booking"`` only).
+
+    Separate from ``trusted_domains`` (go.kr/or.kr/ac.kr, the unchanged info
+    allowlist): real ticket vendors are commercial domains and must never
+    widen what an info ``url`` can verify against. Populated from
+    ``config/search.yaml``'s ``booking_trusted_domains`` - exact hosts only,
+    observed from real KOPIS relates/relateurl responses, never a registrable
+    suffix/wildcard.
+    """
+    cfg = search_config()
+    value = cfg.get("booking_trusted_domains", []) if isinstance(cfg, dict) else []
+    return _normalise_domain_list(value)
+
+
+def _trusted_domains(
+    trusted_domains: Iterable[str] | None = None, *, role: str = "info"
+) -> tuple[str, ...]:
+    if trusted_domains is not None:
+        return _normalise_domain_list(trusted_domains)
+    cfg = search_config()
+    base = _normalise_domain_list(cfg.get("trusted_domains", []) if isinstance(cfg, dict) else [])
+    if role != "booking":
+        return base
+    merged = list(base)
+    for domain in _booking_trusted_domains():
+        if domain not in merged:
+            merged.append(domain)
+    return tuple(merged)
+
+
+def _host_allowed(
+    host: str, trusted_domains: Iterable[str] | None = None, *, role: str = "info"
+) -> bool:
+    return any(
+        host == domain or host.endswith("." + domain)
+        for domain in _trusted_domains(trusted_domains, role=role)
+    )
 
 
 def _placeholder_host(host: str) -> bool:
@@ -203,7 +236,23 @@ def _safe_ip(value: object) -> bool:
     return not any(parsed in network for network in special)
 
 
-def _normalise_url(url: object, *, trusted_domains: Iterable[str] | None = None) -> str:
+def _booking_http_upgrade_eligible(host: str) -> bool:
+    """Exact-host, booking-role-only HTTP->HTTPS upgrade.
+
+    Several evidenced KOPIS relateurl vendors (ticketlink.co.kr,
+    ticket.interpark.com, playticket.co.kr, yywc.moonhwain.net) are only ever
+    observed as plain ``http://`` from the source API. This upgrades the
+    *scheme* alone on the *same* host/path/query - never a host change, never
+    applied to an unlisted host, and never applied outside ``role="booking"``.
+    Exact membership only (no suffix broadening): a curated host matches
+    itself, never a sibling subdomain that happens to share a parent domain.
+    """
+    return host in _booking_trusted_domains()
+
+
+def _normalise_url(
+    url: object, *, trusted_domains: Iterable[str] | None = None, role: str = "info"
+) -> str:
     if not isinstance(url, str) or not url.strip():
         raise LinkPolicyError(_POLICY_REASONS["empty"])
     if url != url.strip() or any(ord(char) < 32 or ord(char) == 127 for char in url) or "\\" in url:
@@ -214,7 +263,10 @@ def _normalise_url(url: object, *, trusted_domains: Iterable[str] | None = None)
         port = parsed.port
     except (TypeError, ValueError):
         raise LinkPolicyError(_POLICY_REASONS["invalid"]) from None
-    if parsed.scheme.lower() != "https":
+    scheme = parsed.scheme.lower()
+    if scheme == "http" and role == "booking" and host and _booking_http_upgrade_eligible(host.lower().rstrip(".")):
+        scheme = "https"
+    if scheme != "https":
         raise LinkPolicyError(_POLICY_REASONS["scheme"])
     if parsed.username is not None or parsed.password is not None:
         raise LinkPolicyError(_POLICY_REASONS["credentials"])
@@ -232,7 +284,7 @@ def _normalise_url(url: object, *, trusted_domains: Iterable[str] | None = None)
         raise LinkPolicyError(_POLICY_REASONS["placeholder"])
     if ascii_host == "apis.data.go.kr" and "detailcommon2" in (parsed.path or "").lower():
         raise LinkPolicyError(_POLICY_REASONS["api"])
-    if not _host_allowed(ascii_host, trusted_domains):
+    if not _host_allowed(ascii_host, trusted_domains, role=role):
         raise LinkPolicyError(_POLICY_REASONS["trust"])
     try:
         literal = ipaddress.ip_address(ascii_host)
@@ -251,10 +303,22 @@ def _normalise_url(url: object, *, trusted_domains: Iterable[str] | None = None)
     return urlunsplit(rebuilt)
 
 
-def validate_url(url: object, *, trusted_domains: Iterable[str] | None = None) -> tuple[str | None, str | None]:
-    """Return a sanitized HTTPS URL and a short policy reason, without I/O."""
+def validate_url(
+    url: object, *, trusted_domains: Iterable[str] | None = None, role: str = "info"
+) -> tuple[str | None, str | None]:
+    """Return a sanitized HTTPS URL and a short policy reason, without I/O.
+
+    ``role="info"`` (default) validates against the unchanged
+    ``trusted_domains`` allowlist only. ``role="booking"`` additionally
+    allows the curated ``booking_trusted_domains`` vendor hosts (and, only
+    for those exact hosts, a same-host HTTP->HTTPS scheme upgrade) - it never
+    widens what an info-role caller accepts, and an explicit
+    ``trusted_domains`` override (tests) bypasses role-based domain
+    resolution entirely while still gating the booking-only HTTP upgrade on
+    the real role argument.
+    """
     try:
-        return _normalise_url(url, trusted_domains=trusted_domains), None
+        return _normalise_url(url, trusted_domains=trusted_domains, role=role), None
     except LinkPolicyError as exc:
         return None, exc.reason
 
@@ -275,6 +339,16 @@ def _safe_reason(value: object, fallback: str) -> str:
         return fallback
     cleaned = " ".join(value.split())
     return cleaned[:120] or fallback
+
+
+def _optional_reason(value: object) -> str | None:
+    """Like ``_safe_reason`` but preserves "no reason recorded" as ``None``
+    instead of substituting a filler string - only meaningful once a link is
+    already ``verified``, where a reason is a bonus detail, not evidence."""
+    if not isinstance(value, str):
+        return None
+    cleaned = " ".join(value.split())
+    return cleaned[:120] or None
 
 
 def _fresh(checked_at: object, now: datetime, ttl: timedelta = DEFAULT_TTL) -> bool:
@@ -298,9 +372,19 @@ def link_fields(
     url: object,
     checks: Mapping[str, Any] | None = None,
     now: datetime | None = None,
+    *,
+    role: str = "info",
 ) -> dict[str, Any]:
-    """Purely derive publication fields from one exact original URL and cache."""
-    sanitized, policy_reason = validate_url(url)
+    """Purely derive publication fields from one exact original URL and cache.
+
+    ``role`` re-derives trust (and, for ``"booking"``, the same-host HTTP->
+    HTTPS upgrade) on *every* call - a cache entry's stored status is never
+    trusted blindly across roles. A URL verified only under ``role="booking"``
+    (a curated vendor host) always re-validates as ``"blocked"`` when read
+    with ``role="info"`` (the unchanged go.kr/or.kr/ac.kr allowlist), even
+    though both reads share the exact same ``sha256(url)`` cache entry.
+    """
+    sanitized, policy_reason = validate_url(url, role=role)
     if policy_reason:
         return {
             "link_status": "blocked",
@@ -319,15 +403,15 @@ def link_fields(
     status = entry.get("link_status")
     if status not in LINK_STATUSES:
         return _unchecked("검증 기록 형식 오류", checked_at)
-    reason = _safe_reason(entry.get("link_reason"), "검증 결과 확인 필요")
     if status != "verified":
+        reason = _safe_reason(entry.get("link_reason"), "검증 결과 확인 필요")
         return {
             "link_status": status,
             "link_checked_at": checked_at if isinstance(checked_at, str) else None,
             "link_url": None,
             "link_reason": reason,
         }
-    final_url, final_reason = validate_url(entry.get("link_url"))
+    final_url, final_reason = validate_url(entry.get("link_url"), role=role)
     if final_reason or not final_url:
         return {
             "link_status": "blocked",
@@ -339,7 +423,7 @@ def link_fields(
         "link_status": "verified",
         "link_checked_at": checked_at if isinstance(checked_at, str) else None,
         "link_url": final_url,
-        "link_reason": reason or "연결 확인",
+        "link_reason": _optional_reason(entry.get("link_reason")),
     }
 
 
@@ -361,9 +445,49 @@ def verified_link(
     now: datetime | None = None,
     checks: Mapping[str, Any] | None = None,
 ) -> str | None:
-    """Return an external link only when its cached proof is fresh and verified."""
+    """Return the canonical info link only when its proof is fresh+verified
+    under ``role="info"`` - the unchanged go.kr/or.kr/ac.kr allowlist."""
     cache = checks if checks is not None else load_link_checks()
     fields = link_fields(event.get("url") if isinstance(event, Mapping) else None, cache, now)
+    value = fields.get("link_url")
+    return value if fields.get("link_status") == "verified" and isinstance(value, str) else None
+
+
+def _event_offers_url(event: Mapping[str, Any] | None) -> str | None:
+    """Provider-declared booking URL only - never inferred from ``url``."""
+    if not isinstance(event, Mapping):
+        return None
+    offers = event.get("offers")
+    if not isinstance(offers, Mapping):
+        return None
+    url = offers.get("url")
+    return url if isinstance(url, str) and url else None
+
+
+def booking_link_fields(
+    event: Mapping[str, Any] | None,
+    checks: Mapping[str, Any] | None = None,
+    now: datetime | None = None,
+) -> dict[str, Any]:
+    """Independently derive ``booking_link_*`` from ``offers.url`` alone.
+
+    Same cache, same ``link_fields`` policy function as the info ``url``,
+    verified under ``role="booking"`` (curated vendor hosts) - never falls
+    back to the event's own info ``url`` when no provider booking
+    destination is declared.
+    """
+    return link_fields(_event_offers_url(event), checks, now, role="booking")
+
+
+def verified_booking_link(
+    event: Mapping[str, Any],
+    now: datetime | None = None,
+    checks: Mapping[str, Any] | None = None,
+) -> str | None:
+    """Return the provider's booking URL only when its own proof is
+    fresh+verified under ``role="booking"`` - independent of (and never
+    borrowed from) the info link's verification."""
+    fields = booking_link_fields(event, checks, now)
     value = fields.get("link_url")
     return value if fields.get("link_status") == "verified" and isinstance(value, str) else None
 
@@ -375,10 +499,12 @@ __all__ = [
     "LinkResponse",
     "LinkSender",
     "Resolver",
+    "booking_link_fields",
     "check_url",
     "link_fields",
     "load_link_checks",
     "validate_url",
+    "verified_booking_link",
     "verified_link",
 ]
 
@@ -639,23 +765,31 @@ def check_url(
     monotonic: Callable[[], float] | None = None,
     sleep: Callable[[float], None] | None = None,
     deadline: float | None = None,
+    role: str = "info",
 ) -> dict[str, Any]:
-    """Check one URL with bounded GET redirects and pinned public IP."""
+    """Check one URL with bounded GET redirects and pinned public IP.
+
+    ``role`` gates trust (and the booking-only same-host HTTP->HTTPS
+    upgrade) and is re-applied on *every* redirect hop below, not just the
+    first request - a booking-role check can never be smuggled onto an
+    unlisted host via a redirect, since each hop's target is re-validated
+    against the same role-scoped allowlist before it is ever resolved/sent.
+    """
     checked_at = _iso(now)
     sender = send or _default_send
     clock = monotonic or time.monotonic
     policy = _policy()
     max_redirects = int(policy.get("max_redirects", 3) or 3)
     timeout = float(policy.get("request_timeout_seconds", 4) or 4)
-    trusted = _trusted_domains()
-    current, reason = validate_url(url, trusted_domains=trusted)
+    trusted = _trusted_domains(role=role)
+    current, reason = validate_url(url, trusted_domains=trusted, role=role)
     if reason or not current:
         return _result("blocked", checked_at, reason or _POLICY_REASONS["invalid"])
     seen: set[str] = set()
     for hop in range(max_redirects + 1):
         if deadline is not None and clock() >= deadline:
             return _result("unverified", checked_at, "검사 시간 초과")
-        current, reason = validate_url(current, trusted_domains=trusted)
+        current, reason = validate_url(current, trusted_domains=trusted, role=role)
         if reason or not current:
             return _result("blocked", checked_at, reason or "리디렉션 대상 정책 위반")
         if current in seen:

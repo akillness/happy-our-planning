@@ -143,8 +143,42 @@
         }
       ]
     },
+    "price_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "원문 요금 안내 verbatim(예: '전석 33,000원', 'R석 143,000원,S석 132,000원'). canonical price가 단일/무료로 명확할 때만 파생되고, 복수 등급 등 모호하면 price는 생략되지만 price_text는 항상 보존."
+    },
     "organizer": {
       "type": "string"
+    },
+    "duration_text": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "원문 소요시간 문구 verbatim(예: '90분', '약 2시간(인터미션 포함)'). 항상 원문 보존, 가공 금지."
+    },
+    "duration": {
+      "type": "string",
+      "format": "duration",
+      "description": "duration_text가 명확한 단일 값(분/시간)일 때만 파생하는 ISO 8601 duration(예: PT90M). 모호하면 생략.",
+      "pattern": "^PT(?=\\d)(?:\\d+H)?(?:\\d+M)?(?:\\d+S)?$"
+    },
+    "offers": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "description": "제공자가 명시한 예약/구매 URL(schema.org/Offer 평면화). 정보 URL(url)에서 추론하지 않음.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^[A-Za-z][A-Za-z0-9+.-]*://\\S+$"
+        }
+      }
     },
     "url": {
       "type": "string",

@@ -49,7 +49,7 @@ jobs:
           set -euo pipefail
           git config user.name "hop-bot"
           git config user.email "bot@happy-our-planning"
-          git add knowledge/ web/public/data/ web/public/events/
+          git add knowledge/ web/public/data/ web/public/events/ web/public/sitemap.xml
           if git diff --cached --quiet; then
             echo "No generated changes; nothing to commit."
             exit 0

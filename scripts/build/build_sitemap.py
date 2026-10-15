@@ -16,7 +16,7 @@ from scripts.common.okf import _safe_id
 
 OUT = ROOT / "web" / "public" / "sitemap.xml"
 EVENTS_JSON = ROOT / "web" / "public" / "data" / "events.json"
-SITE = "https://notchima.vercel.app"
+SITE = "https://happy-our-planning.vercel.app"
 
 NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 ET.register_namespace("", NS)

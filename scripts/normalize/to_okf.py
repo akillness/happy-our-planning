@@ -96,6 +96,28 @@ def _collection_flags(adapter: object) -> tuple[bool, bool, bool]:
     )
 
 
+# adapter.collection_metadata["detail"](예: KopisAdapter._attach_details)에서
+# 끌어와 run log/상태에 반영하는 정수 카운터만의 화이트리스트. URL/키/기타
+# 임의 메타데이터는 절대 통과시키지 않는다(공개 로그 안전).
+_DETAIL_METRIC_FIELDS = ("candidates", "cached", "fetched", "failed", "capped", "stale")
+
+
+def _detail_metrics(adapter: object) -> dict[str, int]:
+    """상세 조회 통계(정수만) — adapter.collection_metadata["detail"]에서 추출.
+
+    키/URL/기타 필드는 전달하지 않는다. 필드가 없거나 int가 아니면 생략(발명 금지).
+    """
+    metadata = getattr(adapter, "collection_metadata", None)
+    detail = metadata.get("detail") if isinstance(metadata, dict) else None
+    if not isinstance(detail, dict):
+        return {}
+    return {
+        field: detail[field]
+        for field in _DETAIL_METRIC_FIELDS
+        if isinstance(detail.get(field), int)
+    }
+
+
 def run(only: list[str] | None = None, *, use_network: bool = False) -> dict:
     enabled = [s["key"] for s in sources() if s.get("enabled")]
     targets = [k for k in enabled if (not only or k in only)]
@@ -177,6 +199,9 @@ def run(only: list[str] | None = None, *, use_network: bool = False) -> dict:
 
             events = geocode.enrich(events, use_network=use_network)
             stats = upsert(events, processed_sources={key} if snapshot_complete else None)
+            # 상세 조회 실패/상한은 목록 레코드를 전혀 막지 않는다(부분 실패와
+            # 전체 소스 실패를 구분) — 있으면 정수 카운터만 run log/상태에 반영.
+            detail_metrics = _detail_metrics(adapter)
             _write_log(key, len(events), stats)
             summary[key] = {"collected": len(events), **stats}
             statuses[key] = {
@@ -188,6 +213,9 @@ def run(only: list[str] | None = None, *, use_network: bool = False) -> dict:
                 "complete": complete,
                 "truncated": truncated,
             }
+            if detail_metrics:
+                summary[key]["detail"] = detail_metrics
+                statuses[key]["detail"] = detail_metrics
             print(f"[{key}] {len(events)}건 → {stats} ({adapter_mode})")
         except Exception as exc:  # 소스 격리
             error = _safe_error(exc) or "CollectionError"

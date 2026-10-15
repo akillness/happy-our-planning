@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import datetime as dt
 import json
+import re
 import time
 import urllib.parse
 import xml.etree.ElementTree as ET
@@ -13,7 +14,7 @@ from scripts.common.config import canonical_sido
 from scripts.common.dates import KST, combine_kst
 from scripts.common.http import HttpError, request_with_retry
 from scripts.common.okf import content_hash
-from scripts.ingest.base import SourceAdapter, now_kst
+from scripts.ingest.base import SourceAdapter, log, now_kst
 
 _GENRE_THEME = {
     "연극": ("공연", "Event"),
@@ -51,6 +52,12 @@ class CollectionError(RuntimeError):
 # 결과는 knowledge/_geocache.json에 영속(부정 캐시 포함) — CI 재실행 시 신규만 조회.
 _VENUE_CACHE_FILENAME = "_geocache.json"
 _VENUE_NEW_LIMIT = 250  # 1회 수집당 신규 공연장 조회 상한(쿼터 보호)
+
+# 상세(/pblprfr/{id}) 조회 영속 캐시. 성공분만 저장(실패는 캐시하지 않음 — 다음
+# 실행에서 재시도될 기회를 보존, venue 캐시의 부정 캐시와 다른 성격).
+_DETAIL_CACHE_FILENAME = "_detailcache.json"
+_DETAIL_MAX_CALLS_DEFAULT = 0   # 설정 미지정 시 비활성(기존 테스트/도구 호환). sources.yaml이 운영값(40)을 명시.
+_DETAIL_CACHE_TTL_HOURS_DEFAULT = 24.0
 
 
 def _venue_cache_path():
@@ -154,6 +161,22 @@ def _clock_date(clock: Callable[[], Any] | None) -> dt.date:
     raise ValueError("unsupported clock value")
 
 
+def _clock_datetime(clock: Callable[[], Any] | None) -> dt.datetime:
+    """상세 캐시 신선도 비교용 tz-aware datetime(날짜만 있으면 00:00 KST)."""
+    value = clock() if clock else dt.datetime.now(KST)
+    if isinstance(value, dt.datetime):
+        return value if value.tzinfo is not None else value.replace(tzinfo=KST)
+    if isinstance(value, dt.date):
+        return dt.datetime.combine(value, dt.time(0, 0, 0), KST)
+    if isinstance(value, str):
+        try:
+            parsed = dt.datetime.fromisoformat(value)
+        except ValueError:
+            return dt.datetime.now(KST)
+        return parsed if parsed.tzinfo is not None else parsed.replace(tzinfo=KST)
+    return dt.datetime.now(KST)
+
+
 def _clock_iso(clock: Callable[[], Any] | None) -> str:
     value = clock() if clock else now_kst()
     if isinstance(value, dt.datetime):
@@ -183,7 +206,8 @@ def _local(tag: str) -> str:
     return tag.rsplit("}", 1)[-1].lower()
 
 
-def _parse_remote_xml(text: str) -> list[dict]:
+def _validated_root(text: str) -> ET.Element:
+    """Parse+validate a KOPIS XML payload, shared by list and detail endpoints."""
     if not text.strip():
         raise CollectionError("empty_payload")
     if "openapi_serviceresponse" in text.lower():
@@ -202,12 +226,171 @@ def _parse_remote_xml(text: str) -> list[dict]:
             raise CollectionError("provider_error")
         if name in {"resultcode", "returnreasoncode"} and value not in {"", "0", "00", "0000", "ok"}:
             raise CollectionError("provider_error")
+    return root
+
+
+def _parse_remote_xml(text: str) -> list[dict]:
+    root = _validated_root(text)
     rows: list[dict] = []
     for item in root.iter():
         if _local(item.tag) != "db":
             continue
         rows.append({_local(child.tag): (child.text or "").strip() for child in item})
     return rows
+
+
+# 상세(/pblprfr/{id}) 응답에서 끌어와 목록 행에 병합하는 필드. map_to_okf가 읽는
+# 키와 1:1 대응(원문 그대로 보존 — 가공/추론 없음).
+_DETAIL_MERGE_FIELDS = (
+    "sty", "prfage", "pcseguidance", "prfruntime",
+    "entrpsnm", "entrpsnmh", "entrpsnmp", "entrpsnma", "entrpsnms",
+    "relatenm", "relateurl",
+)
+
+
+def _flatten_detail_item(item: ET.Element) -> dict:
+    """<db> 1건 → 평탄 dict. relates/relate(복수 가능)는 첫 건의 relatenm/relateurl만 채택.
+
+    실 API 응답(2026-10-15 bounded probe 확인)에서 relate가 2건 이상인 레코드가
+    존재한다(예: NHN티켓링크 + 네이버N예약) — 문서 순서상 첫 항목을 단일 예약
+    제공자로 채택한다(발명 없음, 임의 선택 명시).
+    """
+    row: dict[str, str] = {}
+    for child in item:
+        tag = _local(child.tag)
+        if tag == "relates":
+            relate = next(iter(child), None)
+            if relate is not None:
+                for sub in relate:
+                    row[_local(sub.tag)] = (sub.text or "").strip()
+            continue
+        row[tag] = (child.text or "").strip()
+    return row
+
+
+def _parse_detail_xml(text: str) -> dict:
+    """상세 응답 → 평탄 dict(없으면 빈 dict). 목록 파서와 동일 검증 공유."""
+    root = _validated_root(text)
+    for item in root.iter():
+        if _local(item.tag) == "db":
+            return _flatten_detail_item(item)
+    return {}
+
+
+# "90분" / "1시간 30분" / "2시간" 처럼 숫자+시간·분 단위만으로 이뤄진 경우에만
+# ISO 8601 duration을 파생한다. "약 90분(인터미션 포함)" 등 수식어·부가설명이
+# 붙으면 모호하다고 보고 duration_text(원문)만 유지한다(발명 금지).
+_DURATION_RE = re.compile(r"^(?:(\d+)\s*시간)?\s*(?:(\d+)\s*분)?$")
+
+
+# pcseguidance 원문 예(실 API, 2026-10-15 bounded probe): "전석무료", "전석 30,000원",
+# "전석 33,000원", "R석 143,000원,S석 132,000원"(복수 등급). canonical price는 무료
+# 단일판정 또는 단일 금액일 때만 파생 — 복수 등급/모호 문구는 None(발명 금지,
+# 임의 등급 선택·0원 대체 금지). 원문은 price_text로 항상 보존.
+_PRICE_FREE_RE = re.compile(r"^(?:전석\s*)?무료$")
+_PRICE_SINGLE_RE = re.compile(r"^(?:전석\s*)?([\d,]+)\s*원$")
+
+
+def _parse_canonical_price(text: str | None) -> str | int | None:
+    cleaned = (text or "").strip()
+    if not cleaned:
+        return None
+    if _PRICE_FREE_RE.fullmatch(cleaned):
+        return "free"
+    match = _PRICE_SINGLE_RE.fullmatch(cleaned)
+    if match:
+        try:
+            return int(match.group(1).replace(",", ""))
+        except ValueError:
+            return None
+    return None
+
+
+def _parse_duration_iso(text: str | None) -> str | None:
+    cleaned = (text or "").strip()
+    if not cleaned:
+        return None
+    match = _DURATION_RE.fullmatch(cleaned)
+    if not match:
+        return None
+    hours = int(match.group(1) or 0)
+    minutes = int(match.group(2) or 0)
+    if not hours and not minutes:
+        return None
+    out = "PT"
+    if hours:
+        out += f"{hours}H"
+    if minutes:
+        out += f"{minutes}M"
+    return out
+
+
+def _detail_cache_path():
+    from scripts.common.config import ROOT
+
+    return ROOT / "knowledge" / _DETAIL_CACHE_FILENAME
+
+
+def _load_detail_cache() -> dict:
+    try:
+        payload = json.loads(_detail_cache_path().read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _save_detail_cache(cache: dict) -> None:
+    try:
+        _detail_cache_path().write_text(
+            json.dumps(cache, ensure_ascii=False, indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+    except OSError as exc:
+        # 조용히 삼키지 않는다 — 저장 실패 시 다음 실행의 캐시 재사용이 깨지므로
+        # (상한 내 신규 호출만 늘어날 뿐 수집은 계속됨) 가시화한다. 비밀/경로는
+        # 로그에 남기지 않는다(타입명만).
+        log.warning("[kopis] detail cache 저장 실패: %s", type(exc).__name__)
+
+
+def _cache_entry_fresh(entry: Any, *, now: dt.datetime, ttl_hours: float) -> bool:
+    if not isinstance(entry, dict):
+        return False
+    fetched_at = entry.get("fetched_at")
+    if not isinstance(fetched_at, str):
+        return False
+    try:
+        fetched = dt.datetime.fromisoformat(fetched_at)
+    except ValueError:
+        return False
+    if fetched.tzinfo is None:
+        fetched = fetched.replace(tzinfo=KST)
+    return (now - fetched) <= dt.timedelta(hours=max(0.0, ttl_hours))
+
+
+def _row_ended(row: dict) -> bool:
+    return (row.get("prfstate") or "").strip() == "공연완료"
+
+
+def _row_family_priority(row: dict) -> bool:
+    """현재 목록 응답만으로 가족/아동 우선도를 추정하는 가벼운 신호.
+
+    KOPIS 목록 API는 실제 아동공연 플래그(상세의 `child` 필드)를 주지 않으므로
+    (2026-10-15 bounded probe로 확인됨) 상세 호출 이전에는 제목만으로 판별 가능.
+    build_index.derive_family_flags와 같은 어휘를 재사용해 별도 2번째 분류
+    정책을 만들지 않는다 — 상세 병합 후 최종 family_friendly 판정은 그 함수가
+    전담(여기서는 상한 내 호출 순서를 정하는 용도로만 사용).
+    """
+    from scripts.build.build_index import derive_family_flags
+
+    family, _ = derive_family_flags(
+        age=None, age_bands=None, audience=None,
+        name=row.get("prfnm"), description=None, themes=None,
+    )
+    return family
+
+
+def _detail_priority_key(row: dict) -> tuple[int, int]:
+    return (1 if _row_ended(row) else 0, 0 if _row_family_priority(row) else 1)
 
 
 class KopisAdapter(SourceAdapter):
@@ -352,9 +535,93 @@ class KopisAdapter(SourceAdapter):
         self.complete = self.complete or not self.truncated
         self.collection_metadata["complete"] = self.complete
         self.collection_metadata["empty"] = not rows
+        self._attach_details(rows, sender)
         if sender is None and self.sender is None and self.client is None and self.api_key:
             self._attach_venue_geo(rows)
         return rows
+
+    def _attach_details(
+        self,
+        rows: list[dict],
+        sender: Callable[[str, dict, float], Any] | None = None,
+    ) -> dict:
+        """목록 행에 상세(/pblprfr/{id})를 병합. 실행당 신규 호출 상한 + 만료 캐시 재사용.
+
+        AC-F2.12: 상세 조회는 기존 무료 API 예산 안에서 실행별 상한(기본 0=비활성,
+        운영 설정 sources.yaml에서 40)과 만료 캐시 재사용을 적용하며 원격 실패를
+        숨기지 않는다 — 실패한 행은 목록에서 얻은 필드만 그대로 유지한다(발명 금지).
+        """
+        max_calls = max(0, int(self._setting("detail_max_calls_per_run", _DETAIL_MAX_CALLS_DEFAULT)))
+        stats = {"candidates": 0, "cached": 0, "fetched": 0, "failed": 0, "capped": 0, "stale": 0}
+        self.collection_metadata["detail"] = stats
+        if max_calls <= 0 or not rows:
+            return stats
+
+        persist = sender is None and self.sender is None and self.client is None
+        cache = _load_detail_cache() if persist else {}
+        ttl_hours = float(self._setting("detail_cache_ttl_hours", _DETAIL_CACHE_TTL_HOURS_DEFAULT))
+        now = _clock_datetime(self.clock)
+
+        endpoint = str((self.cfg.get("endpoints") or {}).get("detail", "/pblprfr/{id}"))
+        base = str(self.cfg.get("base_url", "")).rstrip("/")
+
+        candidates = [row for row in rows if str(row.get("mt20id") or "").strip()]
+        candidates.sort(key=_detail_priority_key)
+        stats["candidates"] = len(candidates)
+
+        fresh_calls = 0
+        for row in candidates:
+            mt20id = str(row["mt20id"]).strip()
+            cached = cache.get(mt20id)
+            stale_entry = cached if isinstance(cached, dict) else None
+            if stale_entry is not None and _cache_entry_fresh(stale_entry, now=now, ttl_hours=ttl_hours):
+                self._merge_detail_fields(row, stale_entry)
+                stats["cached"] += 1
+                continue
+            if fresh_calls >= max_calls:
+                # 신규 호출 상한 도달. upsert가 frontmatter 전체를 교체하므로,
+                # 과거 성공분을 버리면 알던 offers/price_text/description이
+                # 통째로 사라진다 — 만료됐더라도 있던 캐시를 그대로 서빙해 보존.
+                # 신선한 fetched_at으로 갱신하지 않음(다음 실행에도 여전히 만료로
+                # 보여 재시도 기회가 남는다 — stale을 fresh로 위장하지 않는다).
+                if stale_entry:
+                    self._merge_detail_fields(row, stale_entry)
+                    stats["stale"] += 1
+                stats["capped"] += 1
+                continue
+            fresh_calls += 1
+            path = endpoint.split("?", 1)[0].replace("{id}", urllib.parse.quote(mt20id, safe=""))
+            url = f"{base}/{path.lstrip('/')}"
+            params = {self._auth_param: self.api_key}
+            try:
+                response = self._request(url, params, sender)
+                detail = _parse_detail_xml(_text(response))
+            except CollectionError:
+                detail = None
+            if not detail:
+                # 원격 갱신 실패. 신선한 provider 결과가 없을 때만 과거 성공분으로
+                # 대체한다 — 성공 시엔 provider의 최신 상태(필드 제거 포함)가
+                # 항상 이긴다(여기 도달하지 않음, 발명 금지는 그대로 유지).
+                if stale_entry:
+                    self._merge_detail_fields(row, stale_entry)
+                    stats["stale"] += 1
+                stats["failed"] += 1
+                continue
+            entry = {**{k: v for k, v in detail.items() if k in _DETAIL_MERGE_FIELDS and v},
+                     "fetched_at": now.isoformat()}
+            cache[mt20id] = entry
+            self._merge_detail_fields(row, entry)
+            stats["fetched"] += 1
+        if persist:
+            _save_detail_cache(cache)
+        return stats
+
+    @staticmethod
+    def _merge_detail_fields(row: dict, detail: dict) -> None:
+        for field in _DETAIL_MERGE_FIELDS:
+            value = detail.get(field)
+            if value:
+                row[field] = value
 
     def _venue_request(self, path: str, params: dict,
                        sender: Callable[[str, dict, float], Any] | None = None) -> list[dict]:
@@ -465,6 +732,29 @@ class KopisAdapter(SourceAdapter):
             event["end_date"] = end
         if n.get("poster"):
             event["image"] = n["poster"]
+        # 상세(/pblprfr/{id}) 병합 필드 — 원문 그대로 보존, 발명 없음(AC-F2.11/.12).
+        if n.get("sty"):
+            event["description"] = n["sty"]
+        if n.get("prfage"):
+            event["age"] = n["prfage"]
+        if n.get("pcseguidance"):
+            event["price_text"] = n["pcseguidance"]
+            canonical_price = _parse_canonical_price(n["pcseguidance"])
+            if canonical_price is not None:
+                event["price"] = canonical_price
+        if n.get("prfruntime"):
+            event["duration_text"] = n["prfruntime"]
+            iso_duration = _parse_duration_iso(n["prfruntime"])
+            if iso_duration:
+                event["duration"] = iso_duration
+        organizer = (
+            n.get("entrpsnmh") or n.get("entrpsnm") or n.get("entrpsnmp") or n.get("entrpsnms")
+        )
+        if organizer:
+            event["organizer"] = organizer
+        if n.get("relateurl"):
+            # 제공자가 명시한 예약 URL만 offers.url — 정보 URL(위 "url")에서 추론 금지.
+            event["offers"] = {"url": n["relateurl"]}
         event["content_hash"] = content_hash(event)
         return event
 

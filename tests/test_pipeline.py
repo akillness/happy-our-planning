@@ -153,18 +153,22 @@ class TestToOkfRun(unittest.TestCase):
         self.logs = tempfile.TemporaryDirectory()
         self._orig_dir = okf.EVENTS_DIR
         self._orig_logs = to_okf.SOURCES_LOG_DIR
+        self._orig_status = to_okf.COLLECTION_STATUS_PATH
         okf.EVENTS_DIR = Path(self.tmp.name)
         to_okf.SOURCES_LOG_DIR = Path(self.logs.name)
+        to_okf.COLLECTION_STATUS_PATH = Path(self.logs.name) / "collection-status.json"
 
     def tearDown(self):
         okf.EVENTS_DIR = self._orig_dir
         self.to_okf.SOURCES_LOG_DIR = self._orig_logs
+        self.to_okf.COLLECTION_STATUS_PATH = self._orig_status
         self.tmp.cleanup()
         self.logs.cleanup()
 
     def test_run_reports_created_not_all_skipped(self):
         # 빈 DB에 오프라인 픽스처를 적재하면 created == collected(>0)여야 한다.
         # 중복 upsert 버그가 있으면 두 번째 호출이 모두 skip으로 덮어써 created=0이 된다.
+        self.assertEqual(self.to_okf.COLLECTION_STATUS_PATH.parent, Path(self.logs.name))
         summary = self.to_okf.run(["kopis"], use_network=False)
         stats = summary["kopis"]
         self.assertNotIn("error", stats)
@@ -772,12 +776,12 @@ class TestDisplayStatus(unittest.TestCase):
                 self._ev(application_start=None, application_end="2026-07-01"),
                 self.TODAY), "마감")
 
-    def test_no_dates_non_open_stays_before(self):
-        # 날짜 정보가 전혀 없고 status도 Open이 아니면 오픈으로 오판하지 않는다.
+    def test_no_dates_non_open_is_unknown(self):
+        # 날짜 정보가 전혀 없고 status도 Open이 아니면 정보 없음으로 남긴다.
         self.assertEqual(
             build_index.derive_status(
                 self._ev(application_start=None, application_end=None, status="Scheduled"),
-                self.TODAY), "신청전")
+                self.TODAY), "정보 없음")
 
 
 class TestBuildPages(unittest.TestCase):

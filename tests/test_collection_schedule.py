@@ -207,9 +207,11 @@ class TestCollectionStatus(unittest.TestCase):
                  mock.patch.object(run_pipeline.build_index, "build"), \
                  mock.patch.object(run_pipeline.build_pages, "build"), \
                  mock.patch.object(run_pipeline.build_sqlite, "build", return_value={"events": 2}) as sqlite, \
+                 mock.patch.object(run_pipeline.build_sitemap, "build") as sitemap, \
                  mock.patch.object(run_pipeline.wiki_index, "build"):
                 self.assertEqual(run_pipeline.main(["fixture"]), 0)
         self.assertEqual(sqlite.call_args.kwargs["events"], events)
+        self.assertEqual(sitemap.call_args.kwargs["events"], events)
 
     def test_pipeline_malformed_public_json_fails_before_publication(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -240,7 +242,7 @@ class TestCollectionStatus(unittest.TestCase):
         pages.assert_not_called()
         wiki.assert_not_called()
 
-    def test_link_check_opt_in_orders_rebuild_sqlite_pages_and_wiki(self):
+    def test_link_check_opt_in_orders_rebuild_sqlite_pages_sitemap_and_wiki(self):
         order = []
         events = [{"id": "public-1"}]
         with mock.patch.dict(os.environ, {"NOTCHIMA_CHECK_LINKS": "1"}, clear=False), \
@@ -251,9 +253,10 @@ class TestCollectionStatus(unittest.TestCase):
              mock.patch.object(run_pipeline, "_load_public_events", return_value=events), \
              mock.patch.object(run_pipeline.build_sqlite, "build", side_effect=lambda **kwargs: order.append("sqlite") or {"events": len(kwargs["events"])}), \
              mock.patch.object(run_pipeline.build_pages, "build", side_effect=lambda **kwargs: order.append("pages")), \
+             mock.patch.object(run_pipeline.build_sitemap, "build", side_effect=lambda **kwargs: order.append("sitemap")), \
              mock.patch.object(run_pipeline.wiki_index, "build", side_effect=lambda: order.append("wiki")):
             self.assertEqual(run_pipeline.main([]), 0)
-        self.assertEqual(order, ["validate", "index", "links", "index", "sqlite", "pages", "wiki"])
+        self.assertEqual(order, ["validate", "index", "links", "index", "sqlite", "pages", "sitemap", "wiki"])
 
     def test_pipeline_propagates_live_collection_failure_before_build_outputs(self):
         with mock.patch.object(run_pipeline.to_okf, "run", return_value={"failed": True, "failed_live": True, "sources": {"x": {"mode": "error"}}}), \

@@ -16,6 +16,8 @@ sources:
       request_timeout_seconds: 20
       retries: 2
       backoff_seconds: 0.5
+      detail_max_calls_per_run: 40  # 1회 실행당 신규 /pblprfr/{id} 상세 조회 상한(무료 API 예산 보호)
+      detail_cache_ttl_hours: 24    # 만료 전 상세 캐시 재사용(상한 계산에서 제외)
     map_profile: kopis
 
   - key: tourapi

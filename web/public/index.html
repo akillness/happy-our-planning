@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#fffaf0" />
   <meta name="description" content="놓치마: 전국 가족 행사(공연·축제·전시·체험)를 지도에서 찾고 지역·나이·테마·거리순으로 좁혀보는 무료 행사 발견 서비스" />
-  <link rel="canonical" href="https://notchima.vercel.app/" />
+  <link rel="canonical" href="https://happy-our-planning.vercel.app/" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="ko_KR" />
   <meta property="og:site_name" content="놓치마" />
   <meta property="og:title" content="놓치마 - 아이와 함께 찾는 이번 주말 행사" />
   <meta property="og:description" content="전국 가족 행사를 지도에서 찾고 지역·나이·테마·거리순으로 좁혀보세요" />
-  <meta property="og:url" content="https://notchima.vercel.app/" />
-  <meta property="og:image" content="https://notchima.vercel.app/assets/family-outing.webp" />
+  <meta property="og:url" content="https://happy-our-planning.vercel.app/" />
+  <meta property="og:image" content="https://happy-our-planning.vercel.app/assets/family-outing.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>놓치마 - 아이와 함께 찾는 이번 주말 행사</title>
   <link rel="icon" type="image/png" href="./favicon.png" />
@@ -20,125 +20,132 @@
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="./" aria-label="놓치마 홈">
-      <img src="./icon.png" alt="" width="36" height="36" />
-      <span>놓치마 <small>Notchima</small></span>
-    </a>
-    <p class="brand-note">아이와 해볼 일을, 근거와 함께</p>
+  <header class="brand-tile" aria-label="놓치마 소개" data-i18n-aria-label="brand.introAria">
+    <div class="brand-row">
+      <a class="brand" href="./" aria-label="놓치마 홈" data-i18n-aria-label="brand.homeAria">
+        <img src="./icon.png" alt="" width="36" height="36" />
+        <span>놓치마 <small>Notchima</small></span>
+      </a>
+      <span class="hero-stat"><strong id="heroCount">0</strong><span data-i18n="common.countUnit">건</span></span>
+    </div>
+    <h1 id="heroTitle" class="sr-only" data-i18n="brand.heroTitle">아이와 어디서, 무엇을 해볼까요?</h1>
+    <p class="brand-note" data-i18n="brand.tagline">아이와 해볼 일을, 근거와 함께</p>
     <p id="freshness" class="freshness" role="status" aria-live="polite">행사를 불러오는 중입니다</p>
   </header>
 
-  <main>
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-copy">
-        <p class="hero-eyebrow">전국 행사 지도 · 가족 근거 표시 · 출처 상태 공개</p>
-        <h1 id="heroTitle">아이와 어디서, 무엇을 해볼까요?</h1>
-        <p class="hero-lede">지역과 나이, 하고 싶은 활동을 골라보세요.<br />필요한 정보와 출처 상태를 한눈에 확인해요.</p>
-        <div class="hero-stats" aria-label="현재 목록 요약">
-          <span class="hero-stat"><strong id="heroCount">0</strong>건 표시 중</span>
-          <span class="hero-stat">무료·신청가능·체험 필터 지원</span>
-        </div>
+  <main id="mapWorkspace" aria-label="행사 지도 탐색" data-i18n-aria-label="map.ariaLabel">
+    <section class="map-panel" aria-label="행사 위치 지도" data-i18n-aria-label="map.ariaLabel">
+      <div id="map" aria-label="행사 위치 지도" data-i18n-aria-label="map.ariaLabel"></div>
+      <div class="map-tools">
+        <button id="locateBtn" type="button" class="button button-quiet icon-btn">
+          <svg class="control-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+          <span class="control-label" data-i18n="map.locate">내 위치에서 찾기</span>
+        </button>
+        <button id="languageToggle" type="button" class="button button-quiet icon-btn">
+          <svg class="control-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.4 3.6 5.6 3.6 9s-1.2 6.6-3.6 9c-2.4-2.4-3.6-5.6-3.6-9S9.6 5.4 12 3Z"/></svg>
+          <span class="control-label">English</span>
+        </button>
+        <p id="locateHint" class="map-hint" role="status" aria-live="polite" data-i18n="map.locateHint.default">내 위치를 사용하면 가까운 순으로 정렬합니다. 위치는 저장되지 않습니다.</p>
       </div>
-      <figure class="hero-art">
-        <picture>
-          <source media="(max-width: 600px)" srcset="./assets/family-outing-mobile.webp" />
-          <img src="./assets/family-outing.webp" alt="호숫가를 산책하는 가족을 그린 장식용 수채화" width="1200" height="675" />
-        </picture>
-      </figure>
+      <p id="mapFallback" class="map-fallback" role="status" aria-live="polite" hidden data-i18n="map.fallback">지도를 불러오지 못했어요. 목록에서 행사 위치를 확인할 수 있습니다.</p>
     </section>
 
-    <form id="filters" class="filters" aria-label="행사 검색 필터">
+    <form id="searchDock" class="search-dock" aria-label="행사 검색 필터" data-i18n-aria-label="search.ariaLabel">
       <div class="search-row">
-        <label class="search-label" for="q">무엇을 찾나요?
-          <input id="q" type="search" autocomplete="off" placeholder="예: 축제, 체험, 공연" />
+        <label class="search-label" for="q">
+          <span class="sr-only" data-i18n="search.inputSrLabel">무엇을 찾나요?</span>
+          <input id="q" type="search" autocomplete="off" placeholder="축제, 체험, 공연을 찾아보세요" data-i18n-placeholder="search.placeholder" />
         </label>
       </div>
-      <div class="filter-grid">
-        <label for="sido">지역
-          <select id="sido"><option value="">전체 지역</option></select>
-        </label>
-        <label for="theme">테마
-          <select id="theme"><option value="">전체 테마</option></select>
-        </label>
-        <label for="age">나이대
-          <select id="age"><option value="">전체 나이대</option></select>
-        </label>
-        <label for="activity">아이와 해볼 활동
-          <select id="activity"><option value="">전체 활동</option></select>
-        </label>
-        <label for="from">기간 시작
-          <input id="from" type="date" title="검색 기간 시작" />
-        </label>
-        <label for="to">기간 종료
-          <input id="to" type="date" title="검색 기간 종료" />
-        </label>
-      </div>
-      <div class="filter-options">
-        <label class="check-pill" for="kids"><input id="kids" type="checkbox" checked /> 아이와 함께</label>
-        <label class="check-pill" for="freeOnly"><input id="freeOnly" name="free_only" type="checkbox" /> 무료만</label>
-        <label class="check-pill" for="applyable"><input id="applyable" type="checkbox" /> 지금 신청 가능</label>
-        <button id="reset" type="button" class="button button-quiet">필터 초기화</button>
-      </div>
-      <div class="source-notes">
-        <p class="date-hint">지정한 기간과 겹치는 행사를 보여드려요.</p>
-        <p class="data-note">샘플 기록이 포함된 정적 목록입니다. 날짜·비용은 출처에서 확인하세요.</p>
-        <p id="sourceStatus" class="source-freshness" role="status" aria-live="polite"></p>
-      </div>
-    </form>
-    <section class="quick-experiences" aria-labelledby="activityTitle">
-      <div class="section-kicker"><h2 id="activityTitle">아이와 해볼 수 있는 것</h2><span>현재 조건에 맞는 체험</span></div>
-      <div id="activityQuick" class="region-quick" role="list"></div>
-    </section>
-
-    <section class="quick-regions" aria-labelledby="regionTitle">
-      <div class="section-kicker"><h2 id="regionTitle">지역별로 빠르게 보기</h2><span>현재 필터 기준</span></div>
-      <div id="regionQuick" class="region-quick" role="list"></div>
-    </section>
-
-    <section class="subfacets" id="subFacetsSection" aria-labelledby="subFacetsTitle" hidden>
-      <div class="section-kicker"><h2 id="subFacetsTitle">조건에 맞는 세부 항목</h2><span>고르면 필터에 바로 반영됩니다</span></div>
-      <div id="subFacets" class="subfacets-body"></div>
-    </section>
-
-    <div id="loading" class="state-panel" role="status">행사 정보를 준비하고 있습니다…</div>
-    <div id="loadError" class="state-panel error-panel" role="alert" hidden>
-      <strong>행사 정보를 불러오지 못했어요.</strong>
-      <p>잠시 후 다시 시도하거나, 출처 사이트를 직접 확인해 주세요.</p>
-      <button id="retry" type="button" class="button button-primary">다시 불러오기</button>
-    </div>
-
-    <section class="workspace" aria-label="행사 탐색 결과">
-      <section class="results" aria-labelledby="resultsTitle">
-        <div class="results-head">
-          <div class="results-summary"><h2 id="resultsTitle">찾은 행사</h2><p class="result-count"><strong id="count">0</strong><span>건</span></p></div>
-          <button id="aiBtn" type="button" class="button button-primary">조건 맞춤 추천</button>
+      <details id="filterMenu" class="filter-menu">
+        <summary id="filterToggle" class="icon-btn">
+          <svg class="control-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18"><path d="M4 6h16M8 12h12M11 18h9"/><circle cx="6" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/></svg>
+          <span class="filter-label-open control-label" data-i18n="filter.openLabel">필터 열기</span>
+          <span class="filter-label-close control-label" data-i18n="filter.closeLabel">필터 닫기</span>
+          <span class="filter-toggle-hint" data-i18n="filter.toggleHint">지역 · 테마 · 나이 · 활동</span>
+        </summary>
+        <div class="filter-drawer">
+          <div class="filter-grid">
+            <label for="sido" data-i18n="filter.sido">지역
+              <select id="sido"><option value="" data-i18n="filter.sidoAll">전체 지역</option></select>
+            </label>
+            <label for="theme" data-i18n="filter.theme">테마
+              <select id="theme"><option value="" data-i18n="filter.themeAll">전체 테마</option></select>
+            </label>
+            <label for="age" data-i18n="filter.age">나이대
+              <select id="age"><option value="" data-i18n="filter.ageAll">전체 나이대</option></select>
+            </label>
+            <label for="activity" data-i18n="filter.activity">아이와 해볼 활동
+              <select id="activity"><option value="" data-i18n="filter.activityAll">전체 활동</option></select>
+            </label>
+            <label for="from" data-i18n="filter.from">기간 시작
+              <input id="from" type="date" title="검색 기간 시작" />
+            </label>
+            <label for="to" data-i18n="filter.to">기간 종료
+              <input id="to" type="date" title="검색 기간 종료" />
+            </label>
+          </div>
+          <div class="filter-options">
+            <label class="check-pill" for="kids"><input id="kids" type="checkbox" checked /> <span data-i18n="filter.kids">아이와 함께</span></label>
+            <label class="check-pill" for="freeOnly"><input id="freeOnly" name="free_only" type="checkbox" /> <span data-i18n="filter.freeOnly">무료만</span></label>
+            <label class="check-pill" for="applyable"><input id="applyable" type="checkbox" /> <span data-i18n="filter.applyable">지금 신청 가능</span></label>
+            <button id="reset" type="button" class="button button-quiet" data-i18n="filter.reset">필터 초기화</button>
+          </div>
+          <section class="quick-experiences" aria-labelledby="activityTitle">
+            <div class="section-kicker"><h2 id="activityTitle" data-i18n="activity.sectionTitle">아이와 해볼 수 있는 것</h2><span data-i18n="activity.sectionHint">현재 조건에 맞는 체험</span></div>
+            <div id="activityQuick" class="region-quick" role="list"></div>
+          </section>
+          <section class="quick-regions" aria-labelledby="regionTitle">
+            <div class="section-kicker"><h2 id="regionTitle" data-i18n="region.sectionTitle">지역별로 빠르게 보기</h2><span data-i18n="region.sectionHint">현재 필터 기준</span></div>
+            <div id="regionQuick" class="region-quick" role="list"></div>
+          </section>
+          <section class="subfacets" id="subFacetsSection" aria-labelledby="subFacetsTitle" hidden>
+            <div class="section-kicker"><h2 id="subFacetsTitle" data-i18n="subfacets.sectionTitle">조건에 맞는 세부 항목</h2><span data-i18n="subfacets.sectionHint">고르면 필터에 바로 반영됩니다</span></div>
+            <div id="subFacets" class="subfacets-body"></div>
+          </section>
+          <div class="source-notes">
+            <p class="date-hint" data-i18n="filter.dateHint">지정한 기간과 겹치는 행사를 보여드려요.</p>
+            <p class="data-note" data-i18n="filter.dataNote">샘플 기록이 포함된 정적 목록입니다. 날짜·비용은 출처에서 확인하세요.</p>
+            <p id="sourceStatus" class="source-freshness" role="status" aria-live="polite"></p>
+          </div>
         </div>
-        <div class="sort-row" role="group" aria-label="정렬 방식">
-          <button id="sortRel" type="button" class="sort-chip" aria-pressed="true">관련도순</button>
-          <button id="sortNew" type="button" class="sort-chip" aria-pressed="false">다가오는 순</button>
-          <button id="sortDist" type="button" class="sort-chip" aria-pressed="false" disabled>거리순</button>
+      </details>
+    </form>
+
+    <section id="resultsPanel" class="results" data-collapsed="true" aria-labelledby="resultsTitle">
+      <div class="results-head">
+        <div class="results-summary"><h2 id="resultsTitle" data-i18n="results.title">찾은 행사</h2><p class="result-count"><strong id="count">0</strong><span data-i18n="common.countUnit">건</span></p></div>
+        <div class="results-head-actions">
+          <button id="aiBtn" type="button" class="button button-primary" data-i18n="results.aiButton">조건 맞춤 추천</button>
+          <button id="resultsToggle" type="button" class="button button-quiet results-toggle icon-btn" aria-controls="resultsScroll" aria-expanded="false">
+            <svg class="control-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            <span class="control-label" data-i18n="results.toggleExpand">결과 펼치기</span>
+          </button>
+        </div>
+      </div>
+      <div id="resultsScroll" class="results-body">
+        <div id="loading" class="state-panel" role="status" data-i18n="results.loading">행사 정보를 준비하고 있습니다…</div>
+        <div id="loadError" class="state-panel error-panel" role="alert" hidden>
+          <strong data-i18n="results.errorTitle">행사 정보를 불러오지 못했어요.</strong>
+          <p data-i18n="results.errorBody">잠시 후 다시 시도하거나, 출처 사이트를 직접 확인해 주세요.</p>
+          <button id="retry" type="button" class="button button-primary" data-i18n="results.retry">다시 불러오기</button>
+        </div>
+        <div class="sort-row" role="group" aria-label="정렬 방식" data-i18n-aria-label="sort.ariaLabel">
+          <button id="sortRel" type="button" class="sort-chip" aria-pressed="true" data-i18n="sort.relevance">관련도순</button>
+          <button id="sortNew" type="button" class="sort-chip" aria-pressed="false" data-i18n="sort.upcoming">다가오는 순</button>
+          <button id="sortDist" type="button" class="sort-chip" aria-pressed="false" disabled data-i18n="sort.distance">거리순</button>
         </div>
         <p id="resultHint" class="result-hint" role="status" aria-live="polite"></p>
         <div id="empty" class="state-panel" hidden>
-          <strong>조건에 맞는 행사가 없어요.</strong>
-          <p>지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.</p>
+          <strong data-i18n="results.emptyTitle">조건에 맞는 행사가 없어요.</strong>
+          <p data-i18n="results.emptyBody">지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.</p>
         </div>
-        <ul id="list" class="cards" aria-label="행사 목록"></ul>
-        <nav id="pager" class="pager" aria-label="행사 목록 페이지" hidden>
-          <button id="pagePrev" type="button" class="button button-quiet">이전</button>
+        <ul id="list" class="cards" aria-label="행사 목록" data-i18n-aria-label="results.listAriaLabel"></ul>
+        <nav id="pager" class="pager" aria-label="행사 목록 페이지" hidden data-i18n-aria-label="pager.ariaLabel">
+          <button id="pagePrev" type="button" class="button button-quiet" data-i18n="pager.prev">이전</button>
           <p id="pageInfo" class="page-info" role="status" aria-live="polite"></p>
-          <button id="pageNext" type="button" class="button button-quiet">다음</button>
+          <button id="pageNext" type="button" class="button button-quiet" data-i18n="pager.next">다음</button>
         </nav>
-      </section>
-      <div class="map-panel">
-        <div class="panel-heading">
-          <div><h2>지도에서 보기</h2><span>핀을 선택하면 상세 정보를 확인할 수 있어요.</span></div>
-          <button id="locateBtn" type="button" class="button button-quiet">내 위치에서 찾기</button>
-        </div>
-        <div id="map" aria-label="행사 위치 지도"></div>
-        <p id="locateHint" class="map-hint" role="status" aria-live="polite">내 위치를 사용하면 가까운 순으로 정렬합니다. 위치는 저장되지 않습니다.</p>
-        <p id="mapFallback" class="map-fallback" hidden>지도를 불러오지 못했어요. 목록에서 행사 위치를 확인할 수 있습니다.</p>
       </div>
     </section>
   </main>
@@ -148,6 +155,7 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+  <script src="./i18n.js"></script>
   <script src="./app.js"></script>
   <noscript><p class="state-panel">자바스크립트를 켜면 행사 목록과 지도를 볼 수 있습니다. 정적 상세 페이지는 <a href="./data/events.json">events.json</a>에서 직접 확인할 수 있어요.</p></noscript>
 </body>
