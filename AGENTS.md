@@ -1,4 +1,4 @@
-<!-- Generated: 2026-06-25 23:02 KST | Updated: 2026-06-25 23:02 KST -->
+<!-- Generated: 2026-06-25 23:02 KST | Updated: 2026-10-15 -->
 
 # 놓치마 (Notchima) — happy-our-planning
 
@@ -22,7 +22,7 @@
 | `web/` | 정적 프런트엔드(Leaflet+Fuse.js) + Cloudflare Worker 엣지 함수 (see `web/AGENTS.md`) |
 | `config/` | 통제 어휘 YAML: sources/regions/themes/age-bands/search/macro-sites (see `config/AGENTS.md`) |
 | `knowledge/` | flat-file 지식 DB (llm-wiki): index.md + events/** + schema/ (see `knowledge/AGENTS.md`) |
-| `tests/` | unittest 스위트 (58종, 회귀 가드) (see `tests/AGENTS.md`) |
+| `tests/` | unittest 회귀 스위트 (see `tests/AGENTS.md`) |
 | `docs/` | 설계 문서 00–14 + CODE_REVIEW (see `docs/AGENTS.md`) |
 | `specs/` | spec-stack 동결 번들 (SSOT): spec/seed/tasks/harness (see `specs/AGENTS.md`) |
 | `wiki/` | Obsidian 보관함 + 전략 산출물 루트 (llm-wiki root) (see `wiki/AGENTS.md`) |
@@ -39,7 +39,7 @@
 ### Testing Requirements
 bash
 python -m scripts.run_pipeline        # 수집→검증→인덱스→SQLite→wiki (오프라인 픽스처로 키 없이 통과)
-python -m unittest discover -s tests  # 58종, validate.py rc==0 게이트
+python -m unittest discover -s tests  # 전체 회귀 가드, validate.py rc==0 게이트
 
 완료 정의(DoD): 40+ green, `validate.py` rc==0, `events.db` 재생성 동일 카운트, C1–C7 만족.
 

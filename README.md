@@ -85,7 +85,7 @@ assets/       브랜드 자산 (마스코트·아이콘 원본)
 ```bash
 pip install -r requirements.txt
 python -m scripts.run_pipeline          # 수집(웹검색 포함)→정규화→검증→인덱스→SQLite→wiki
-python -m unittest discover -s tests    # 단위 테스트 200개 (197 통과 / 3 스킵: 기존 매크로 E2E 3종은 번들 Chromium 미설치로 스킵)
+python -m unittest discover -s tests    # 통과/스킵 수는 상단 배지 참조; 매크로 E2E 3종은 Playwright/번들 Chromium 설치 시 실행
 python -m scripts.ingest.websearch      # 웹검색 발견 후보(Exa/Brave/Tavily, 오프라인 픽스처)
 python -m scripts.build.build_sqlite --query 축제   # SQLite FTS5 전문검색 데모
 python -m scripts.recommend.rank        # 규칙기반 추천 + 주간 플랜(JSON)
@@ -113,7 +113,7 @@ cp .env.example .env   # 후 .env에 키 입력 (에디터로, 채팅 금지)
 python -m scripts.ops.check_keys          # 보유 현황만 확인 (값 미출력)
 python -m scripts.ops.check_keys --probe  # 출처별 1회 소량 요청으로 키 유효성 확인
 python -m scripts.run_pipeline            # live 수집 → 검증 → 빌드 (키 있으면 자동 live)
-python -m unittest discover -s tests      # 206종 회귀 가드
+python -m unittest discover -s tests      # 회귀 가드 (통과/스킵 수는 상단 배지 참조)
 ```
 - 일일 cron도 동일 키 사용: GitHub repo Settings → Secrets에 위 키 등록 (`.github/workflows/ingest.yml`에 이미 secrets 패스스루 구성됨).
 - 키 없이도 파이프라인은 fixture 모드로 rc==0 보장 (제약 C1).

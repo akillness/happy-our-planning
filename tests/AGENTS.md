@@ -1,17 +1,17 @@
 <!-- Parent: ../AGENTS.md -->
-<!-- Generated: 2026-06-25 23:02 KST | Updated: 2026-06-25 23:02 KST -->
+<!-- Generated: 2026-06-25 23:02 KST | Updated: 2026-10-15 -->
 
 # tests/
 
 ## Purpose
-unittest 스위트(58종). spec.md의 기계검증형 수용기준(AC)을 코드로 미러링 — 행위 보존 리팩터의 회귀 가드이자 DoD 게이트. 키/브라우저 부재 시 자동 폴백을 검증한다.
+unittest 회귀 스위트. spec.md의 기계검증형 수용기준(AC)을 코드로 미러링 — 행위 보존 리팩터의 회귀 가드이자 DoD 게이트. 키/브라우저 부재 시 자동 폴백을 검증한다. 통과/스킵 수는 [README.md 상단 배지](../README.md)를 참조한다.
 
 ## Key Files
 
 | File | Description |
 |------|-------------|
-| `test_pipeline.py` | 코어 53 테스트: 수집/upsert 멱등/시도정규화/SQLite FTS/필터/알람/매크로 게이팅/AI 플래너 |
-| `test_runner.py` | Playwright 매크로 러너 E2E(5 테스트, playwright 미설치 시 skip) |
+| `test_pipeline.py` | 코어 회귀: 수집/upsert 멱등/시도정규화/SQLite FTS/필터/알람/매크로 게이팅/AI 플래너 |
+| `test_runner.py` | Playwright 매크로 러너 E2E(의존성/번들 Chromium 미설치 시 일부 skip) |
 | `fixtures/` | 오프라인 테스트 픽스처 |
 
 ## For AI Agents
@@ -24,7 +24,7 @@ unittest 스위트(58종). spec.md의 기계검증형 수용기준(AC)을 코드
 ### Testing Requirements
 bash
 python -m unittest discover -s tests       # 전체
-python -m unittest discover -s tests -v     # 상세(현재 55 pass / 3 skip)
+python -m unittest discover -s tests -v     # 상세
 
 
 ### Common Patterns
