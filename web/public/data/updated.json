@@ -1,23 +1,23 @@
 {
-  "generated_at": "2026-10-15T15:54:38+09:00",
-  "total_active": 308,
+  "generated_at": "2026-10-15T16:39:28+09:00",
+  "total_active": 310,
   "archived": 0,
   "publication": {
-    "retained": 308,
-    "excluded": 2,
+    "retained": 310,
+    "excluded": 4,
     "retention_days": 90
   },
   "freshness": {
+    "websearch": "2026-06-21T09:44:16+09:00",
     "tourapi": "2026-10-15T11:38:38+09:00",
     "example": "2026-06-20T03:11:00+09:00",
-    "kopis": "2026-06-21T09:44:16+09:00",
-    "websearch": "2026-06-21T09:44:16+09:00"
+    "kopis": "2026-06-21T09:44:16+09:00"
   },
   "sources": {
     "kopis": {
       "mode": "live",
-      "attempted_at": "2026-10-15T15:54:35+09:00",
-      "last_success_at": "2026-10-15T15:54:36+09:00",
+      "attempted_at": "2026-10-15T16:38:57+09:00",
+      "last_success_at": "2026-10-15T16:39:00+09:00",
       "error": null,
       "collected": 300,
       "complete": false,
@@ -25,7 +25,7 @@
     },
     "tourapi": {
       "mode": "fixture",
-      "attempted_at": "2026-10-15T15:54:36+09:00",
+      "attempted_at": "2026-10-15T16:39:00+09:00",
       "last_success_at": null,
       "error": null,
       "collected": 3,
@@ -33,18 +33,18 @@
       "truncated": false
     },
     "websearch": {
-      "mode": "fixture",
-      "attempted_at": "2026-10-15T15:54:37+09:00",
-      "last_success_at": null,
+      "mode": "live",
+      "attempted_at": "2026-10-15T16:39:01+09:00",
+      "last_success_at": "2026-10-15T16:39:27+09:00",
       "error": null,
-      "collected": 3,
+      "collected": 5,
       "complete": false,
       "truncated": false
     }
   },
   "source_mode": "mixed",
-  "last_success_at": "2026-10-15T15:54:36+09:00",
-  "collection_started_at": "2026-10-15T15:54:37+09:00",
+  "last_success_at": "2026-10-15T16:39:27+09:00",
+  "collection_started_at": "2026-10-15T16:39:27+09:00",
   "collection_error_count": 0,
   "collection_errors": []
 }

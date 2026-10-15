@@ -1,6 +1,9 @@
 """Regression tests for source-grounded event-date extraction in web search hits."""
 
+import tempfile
 import unittest
+from pathlib import Path
+from unittest import mock
 
 from scripts.ingest import websearch
 
@@ -13,7 +16,8 @@ class _FakeLiveWebSearchAdapter(websearch.WebSearchAdapter):
         self._response = response
 
     def _expand_queries(self):
-        return ["전국 어린이 행사 2026"]
+        # subTest마다 응답이 다르므로 캐시 키 충돌 방지용 고유 질의.
+        return [f"전국 어린이 행사 2026 #{id(self)}"]
 
     def _call_provider(self, httpx, query, num):
         return self._response
@@ -46,6 +50,19 @@ def _result(provider, *, title, url, text, score=0.9, **fields):
 
 class TestSearchEventMetadata(unittest.TestCase):
     providers = ("exa", "brave", "tavily")
+
+    def setUp(self):
+        # live 캐시가 실제 raw/ 캐시를 오염시켜 테스트 간 간섭을 일으키는 것을 방지.
+        self._tmp = tempfile.TemporaryDirectory()
+        self._cache_patch = mock.patch.object(
+            websearch, "_cache_path",
+            return_value=Path(self._tmp.name) / "_cache.json",
+        )
+        self._cache_patch.start()
+
+    def tearDown(self):
+        self._cache_patch.stop()
+        self._tmp.cleanup()
 
     def test_live_fake_provider_results_extract_dates_from_event_text(self):
         cases = {

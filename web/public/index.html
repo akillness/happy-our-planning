@@ -4,6 +4,16 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#fffaf0" />
+  <meta name="description" content="놓치마: 전국 가족 행사(공연·축제·전시·체험)를 지도에서 찾고 지역·나이·테마·거리순으로 좁혀보는 무료 행사 발견 서비스" />
+  <link rel="canonical" href="https://notchima.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ko_KR" />
+  <meta property="og:site_name" content="놓치마" />
+  <meta property="og:title" content="놓치마 - 아이와 함께 찾는 이번 주말 행사" />
+  <meta property="og:description" content="전국 가족 행사를 지도에서 찾고 지역·나이·테마·거리순으로 좁혀보세요" />
+  <meta property="og:url" content="https://notchima.vercel.app/" />
+  <meta property="og:image" content="https://notchima.vercel.app/assets/family-outing.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
   <title>놓치마 - 아이와 함께 찾는 이번 주말 행사</title>
   <link rel="icon" type="image/png" href="./favicon.png" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -86,6 +96,11 @@
       <div id="regionQuick" class="region-quick" role="list"></div>
     </section>
 
+    <section class="subfacets" id="subFacetsSection" aria-labelledby="subFacetsTitle" hidden>
+      <div class="section-kicker"><h2 id="subFacetsTitle">조건에 맞는 세부 항목</h2><span>고르면 필터에 바로 반영됩니다</span></div>
+      <div id="subFacets" class="subfacets-body"></div>
+    </section>
+
     <div id="loading" class="state-panel" role="status">행사 정보를 준비하고 있습니다…</div>
     <div id="loadError" class="state-panel error-panel" role="alert" hidden>
       <strong>행사 정보를 불러오지 못했어요.</strong>
@@ -99,16 +114,26 @@
           <div class="results-summary"><h2 id="resultsTitle">찾은 행사</h2><p class="result-count"><strong id="count">0</strong><span>건</span></p></div>
           <button id="aiBtn" type="button" class="button button-primary">조건 맞춤 추천</button>
         </div>
+        <div class="sort-row" role="group" aria-label="정렬 방식">
+          <button id="sortRel" type="button" class="sort-chip" aria-pressed="true">관련도순</button>
+          <button id="sortNew" type="button" class="sort-chip" aria-pressed="false">다가오는 순</button>
+          <button id="sortDist" type="button" class="sort-chip" aria-pressed="false" disabled>거리순</button>
+        </div>
         <p id="resultHint" class="result-hint" role="status" aria-live="polite"></p>
         <div id="empty" class="state-panel" hidden>
           <strong>조건에 맞는 행사가 없어요.</strong>
           <p>지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.</p>
         </div>
         <ul id="list" class="cards" aria-label="행사 목록"></ul>
+        <button id="moreBtn" type="button" class="button button-quiet more-btn" hidden>더 보기</button>
       </section>
       <div class="map-panel">
-        <div class="panel-heading"><h2>지도에서 보기</h2><span>핀을 선택하면 상세 정보를 확인할 수 있어요.</span></div>
+        <div class="panel-heading">
+          <div><h2>지도에서 보기</h2><span>핀을 선택하면 상세 정보를 확인할 수 있어요.</span></div>
+          <button id="locateBtn" type="button" class="button button-quiet">내 위치에서 찾기</button>
+        </div>
         <div id="map" aria-label="행사 위치 지도"></div>
+        <p id="locateHint" class="map-hint" role="status" aria-live="polite">내 위치를 사용하면 가까운 순으로 정렬합니다. 위치는 저장되지 않습니다.</p>
         <p id="mapFallback" class="map-fallback" hidden>지도를 불러오지 못했어요. 목록에서 행사 위치를 확인할 수 있습니다.</p>
       </div>
     </section>

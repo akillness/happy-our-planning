@@ -37,6 +37,12 @@ queries:
   - "{region} 어린이 만들기 워크숍 {year}"
 # 발견 후보 신뢰도 가드: 아래 점수 미만은 적재하지 않음(노이즈 차단).
 min_confidence: 0.45
+# 응답 캐시(쿼터·속도·메모리): TTL 이내 질의는 재호출 없이 캐시 사용.
+# 동기화 시점(TTL 경과 후 첫 수집)에만 live 갱신. CI는 캐시 없이 매번 live.
+cache:
+  enabled: true
+  ttl_hours: 20            # 일 1회 cron 기준: 하루 1회만 live 호출
+  max_text_chars: 2000    # 캐시 저장 시 결과별 본문 상한 (메모리)
 # 도메인 화이트리스트(가점). 공공/지자체/공식 도메인 우선.
 trusted_domains:
   - go.kr

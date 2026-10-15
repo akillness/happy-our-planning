@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-15T15:57:39+09:00",
+  "generated_at": "2026-10-15T16:45:00+09:00",
   "sources": {
     "kopis": {
       "mode": "fixture",
-      "attempted_at": "2026-10-15T15:57:39+09:00",
-      "last_success_at": "2026-10-15T15:54:36+09:00",
+      "attempted_at": "2026-10-15T16:45:00+09:00",
+      "last_success_at": "2026-10-15T16:39:00+09:00",
       "error": null,
       "collected": 3,
       "complete": false,
@@ -12,7 +12,7 @@
     },
     "tourapi": {
       "mode": "fixture",
-      "attempted_at": "2026-10-15T15:54:36+09:00",
+      "attempted_at": "2026-10-15T16:39:00+09:00",
       "last_success_at": null,
       "error": null,
       "collected": 3,
@@ -20,11 +20,11 @@
       "truncated": false
     },
     "websearch": {
-      "mode": "fixture",
-      "attempted_at": "2026-10-15T15:54:37+09:00",
-      "last_success_at": null,
+      "mode": "live",
+      "attempted_at": "2026-10-15T16:39:01+09:00",
+      "last_success_at": "2026-10-15T16:39:27+09:00",
       "error": null,
-      "collected": 3,
+      "collected": 5,
       "complete": false,
       "truncated": false
     }

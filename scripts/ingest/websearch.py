@@ -28,7 +28,98 @@ from scripts.common.config import (
 )
 from scripts.common.dates import KST, combine_kst
 from scripts.common.okf import content_hash
-from scripts.ingest.base import SourceAdapter, now_kst
+from scripts.ingest.base import RAW_DIR, SourceAdapter, now_kst
+
+# 웹검색 응답 캐시: 동기화 시점(TTL 내)에만 재사용해 쿼터·속도·메모리를 지킨다.
+# - 위치: raw/websearch/_cache.json (raw/** gitignore → 커밋 안 됨, CI는 매번 live)
+# - 키: sha1(provider|num|query), 값: {fetched_at, query, response}
+# - 메모리 상한: 결과별 text/summary를 cache_max_text_chars로 잘라 저장.
+_CACHE_VERSION = 1
+_CACHE_FILENAME = "_cache.json"
+_DEFAULT_CACHE_TTL_HOURS = 20
+_DEFAULT_CACHE_MAX_TEXT_CHARS = 2000
+
+
+def _cache_path() -> "Path":
+    from pathlib import Path
+
+    return Path(RAW_DIR) / "websearch" / _CACHE_FILENAME
+
+
+def _cache_key(provider: str, num: int, query: str) -> str:
+    return hashlib.sha1(f"{provider}|{num}|{query}".encode("utf-8")).hexdigest()
+
+
+def _cache_fresh(fetched_at: str, ttl_hours: float, now: dt.datetime | None = None) -> bool:
+    """캐시 시각이 TTL 이내인가. 파싱 실패면 stale(false). 테스트용 now 주입."""
+    try:
+        ts = dt.datetime.fromisoformat(str(fetched_at))
+    except (ValueError, TypeError):
+        return False
+    if ts.tzinfo is None:
+        ts = ts.replace(tzinfo=KST)
+    ref = now or dt.datetime.now(KST)
+    if ref.tzinfo is None:
+        ref = ref.replace(tzinfo=KST)
+    return (ref - ts).total_seconds() <= float(ttl_hours) * 3600
+
+
+def _trim_response(response: object, max_chars: int) -> object:
+    """캐시 저장 전 text/summary 길이 상한. 원본 응답 구조는 유지."""
+    if not isinstance(response, dict) or max_chars <= 0:
+        return response
+    try:
+        results = response.get("results")
+    except AttributeError:
+        return response
+    if not isinstance(results, list):
+        return response
+    trimmed = []
+    for item in results:
+        if isinstance(item, dict):
+            item = dict(item)
+            for field in ("text", "summary"):
+                value = item.get(field)
+                if isinstance(value, str) and len(value) > max_chars:
+                    item[field] = value[:max_chars]
+        trimmed.append(item)
+    out = dict(response)
+    out["results"] = trimmed
+    return out
+
+
+def _load_cache() -> dict:
+    import json
+
+    try:
+        payload = json.loads(_cache_path().read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    if not isinstance(payload, dict) or payload.get("version") != _CACHE_VERSION:
+        return {}
+    items = payload.get("items")
+    return items if isinstance(items, dict) else {}
+
+
+def _save_cache(items: dict) -> None:
+    import json
+
+    # 메모리 상한: fetched_at 오래된 순으로 최대 300 슬롯만 유지.
+    try:
+        ordered = sorted(items.items(), key=lambda kv: str((kv[1] or {}).get("fetched_at") or ""))
+        items = dict(ordered[-300:])
+    except (TypeError, AttributeError):
+        pass
+    path = _cache_path()
+    try:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps({"version": _CACHE_VERSION, "items": items},
+                       ensure_ascii=False, sort_keys=True),
+            encoding="utf-8",
+        )
+    except OSError:
+        pass
 
 # 표준 테마 → schema.org event_type (event.schema.json enum)
 _THEME_EVENT_TYPE = {
@@ -461,6 +552,16 @@ def _domain(url: str) -> str:
 
 # ---- 제공자별 응답 → 공통 hit -------------------------------------------------
 
+def _opt_score(value: object) -> float | None:
+    """제공자 점수 보존: null/결측은 None으로 두어 _confidence 중립 prior가 동작."""
+    if value is None:
+        return None
+    try:
+        return float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None
+
+
 def parse_exa(resp: dict) -> list[dict]:
     out = []
     for r in resp.get("results", []) or []:
@@ -469,7 +570,7 @@ def parse_exa(resp: dict) -> list[dict]:
             "url": r.get("url") or "",
             "snippet": r.get("text") or r.get("summary") or "",
             "published": (r.get("publishedDate") or "")[:10] or None,
-            "score": float(r.get("score", 0.0) or 0.0),
+            "score": _opt_score(r.get("score")),
             "provider": "exa",
         }, r))
     return out
@@ -503,7 +604,7 @@ def parse_tavily(resp: dict) -> list[dict]:
             "url": r.get("url") or "",
             "snippet": r.get("content") or "",
             "published": (r.get("published_date") or "")[:10] or None,
-            "score": float(r.get("score", 0.0) or 0.0),
+            "score": _opt_score(r.get("score")),
             "provider": "tavily",
         }, r))
     return out
@@ -553,16 +654,47 @@ class WebSearchAdapter(SourceAdapter):
 
         hits: list[dict] = []
         num = int(self.prov_cfg.get("num_results", 10))
+        ttl = float((self.scfg.get("cache") or {}).get("ttl_hours", _DEFAULT_CACHE_TTL_HOURS))
+        max_chars = int((self.scfg.get("cache") or {}).get("max_text_chars", _DEFAULT_CACHE_MAX_TEXT_CHARS))
+        use_cache = bool((self.scfg.get("cache") or {}).get("enabled", True)) and ttl > 0
+        cache = _load_cache() if use_cache else {}
+        dirty = False
+        cached_n = 0
         for query in self._expand_queries():
+            resp = None
+            if use_cache:
+                slot = cache.get(_cache_key(self.provider, num, query))
+                if isinstance(slot, dict) and _cache_fresh(str(slot.get("fetched_at") or ""), ttl):
+                    resp = slot.get("response")
+                    cached_n += 1
+            if resp is None:
+                try:
+                    resp = self._call_provider(httpx, query, num)
+                except Exception as exc:
+                    self.collection_errors.append(exc)
+                    print(f"[websearch:{self.provider}] query failed: {type(exc).__name__}")
+                    continue
+                if use_cache:
+                    cache[_cache_key(self.provider, num, query)] = {
+                        "fetched_at": now_kst(),
+                        "query": query,
+                        "response": _trim_response(resp, max_chars),
+                    }
+                    dirty = True
             try:
-                resp = self._call_provider(httpx, query, num)
+                parsed = _PARSERS.get(self.provider, parse_exa)(resp)
             except Exception as exc:
                 self.collection_errors.append(exc)
-                print(f"[websearch:{self.provider}] query failed: {type(exc).__name__}")
+                print(f"[websearch:{self.provider}] parse failed: {type(exc).__name__}")
                 continue
-            for h in _PARSERS.get(self.provider, parse_exa)(resp):
+            for h in parsed:
                 h.setdefault("query", query)
                 hits.append(h)
+        if dirty:
+            _save_cache(cache)
+        if use_cache:
+            print(f"[websearch:{self.provider}] 캐시 적중 {cached_n}건/TTL {ttl:g}h")
+        self.cache_stats = {"cached": cached_n, "ttl_hours": ttl}
         return hits
 
     def _expand_queries(self) -> list[str]:  # pragma: no cover - 네트워크 경로
@@ -592,7 +724,14 @@ class WebSearchAdapter(SourceAdapter):
 
     # ---- 매핑 ---------------------------------------------------------------
     def _confidence(self, hit: dict) -> float:
-        base = float(hit.get("score") or 0.0)
+        raw = hit.get("score")
+        # Exa는 contents 포함 시 score를 null으로 줄 수 있다. 점수 없음은
+        # 무관련이 아니라 신호 부재이므로 중립 prior에서 시작하고,
+        # 날짜·지역·링크 가드(후단)가 노이즈를 최종 차단한다.
+        try:
+            base = float(raw) if raw is not None else 0.5
+        except (TypeError, ValueError):
+            base = 0.5
         dom = _domain(hit.get("url", ""))
         if any(dom == t or dom.endswith("." + t) for t in self.scfg.get("trusted_domains", [])):
             base = min(1.0, base + 0.1)

@@ -12,7 +12,7 @@ import os
 import subprocess
 import sys
 
-from scripts.build import build_index, build_pages, build_sqlite, wiki_index
+from scripts.build import build_index, build_pages, build_sitemap, build_sqlite, wiki_index
 from scripts.common.config import ROOT
 from scripts.common.env import load_dotenv
 from scripts.normalize import to_okf
@@ -93,6 +93,9 @@ def main(argv: list[str]) -> int:
 
     log.info("== 3d. 행사별 정적 상세 HTML(JSON-LD) 빌드 ==")
     build_pages.build(events=public_events)
+
+    log.info("== 3e. sitemap.xml 빌드 ==")
+    build_sitemap.build(events=public_events)
 
     log.info("== 4. 지식 wiki 갱신 ==")
     wiki_index.build()

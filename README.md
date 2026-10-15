@@ -16,24 +16,26 @@
 무료 공공 API + flat-file 지식 DB(llm-wiki) + 무료 SaaS(free tier)로 **월 0원** 운영을 목표로 한다. <sub>(코드네임: happy-our-planning)</sub>
 
 ## 핵심 기능
-- 🗺️ 지역(시/도·시군구) · 기간 · 나이대 · 테마 · 키워드 5축 검색 + 가족 행사 기본 탐색(`kids=true`, URL `kids=0` 해제)
+- 🗺️ 지역(시/도·시군구) · 기간 · 나이대 · 테마 · 키워드 5축 검색 + 가족 행사 기본 탐색(`kids=true`, URL `kids=0` 해제) + 검색어 하이라이트 + 관련도/다가오는 순/거리순 정렬
+- 🧭 종속 세부 패싯: 필터 단계마다 현재 결과 기준 테마·지역·나이대·활동 상위 항목 칩으로 좁히기 + 내 위치 찾기(거리 표시·거리순, 위치 미저장)
 - 🤖 신청기간 내 신청 보조 매크로 (Playwright 러너, 약관 준수로 반자동 강등)
 - 🔔 마감임박·신규 알람 + 중복억제 (Telegram/dry-run, 채널 토큰 주입 시 실전송)
 - 🧠 프로필 기반 AI 주간 플랜 추천 (규칙 랭킹 + Gemini 구조화, 폴백 보장)
+- 🔍 검색엔진 노출: `sitemap.xml`(311 URL)·`robots.txt`·OG/캐노니컬·행사별 JSON-LD 상세 페이지
 
 ## 설계 한 줄 요약
 공공 API → 정규화(schema.org/Event = Open Knowledge Format) → **git 안의 Markdown 파일 = 지식 DB** →
 사전 빌드 JSON → 정적 UI(검색/지도). 신청 매크로와 알람은 백엔드 스크립트(Playwright/Telegram)에만 구현; 스크립트가 적재·매크로·알람을 구동.
 
-## 미리보기 (2026-10-15 live 빌드 실캡처, 실데이터 308건 기준)
-> 로컬 정적 서버 + Playwright Chromium 실렌더. KOPIS live 303건 적재 후: 히어로(통계 pill·수채화 오버레이), 5축 필터 + mixed 모드 출처 고지(`kopis 실시간(live)`), 체험/지역 퀵칩, Leaflet 지도 마커(다건 카운트 배지), 신청전 실데이터 카드까지 한 화면 검증.
+## 미리보기 (2026-10-15 live 빌드 실캡처, 실데이터 310건 기준)
+> 로컬 정적 서버 + Playwright Chromium 실렌더. KOPIS live + Exa live 적재 후: 검색 하이라이트·종속 세부 패싯(테마/지역/나이대/활동 좁히기)·정렬 3종(관련도/다가오는 순/거리순)·내 위치 찾기·풍부 팝업·더 보기 페이지네이션까지 한 화면 검증.
 <p align="center">
-  <img src="assets/preview/notchima-20261015-live-desktop.png" alt="놓치마 데스크톱 미리보기 1440px - live 308건, 히어로, 필터, 지도, 실데이터 카드" width="100%" />
+  <img src="assets/preview/notchima-20261015-search-desktop.png" alt="놓치마 데스크톱 미리보기 1440px - live 310건, 검색 하이라이트, 세부 패싯, 정렬, 지도" width="100%" />
 </p>
 <p align="center">
-  <img src="assets/preview/notchima-20261015-live-mobile.png" alt="놓치마 모바일 미리보기 390px - 히어로, 필터 스택" width="240" />
+  <img src="assets/preview/notchima-20261015-search-query.png" alt="놓치마 검색 미리보기 - 서커스 검색 하이라이트와 세부 항목" width="100%" />
 </p>
-- CLI 직접 배포: **https://notchima.vercel.app/** (Vercel Hobby, 2026-10-15 15:55 production Ready, `/data/events.json` 308건 sha 일치 실측)
+- CLI 직접 배포: **https://notchima.vercel.app/** (Vercel Hobby, 2026-10-15 16:41 production Ready, 7경로 sha 일치 실측)
 - Git 연동 운영 배포: **https://happy-our-planning.vercel.app/** (Vercel Hobby, `akillness/happy-our-planning`의 `main`, Root Directory `web/public`). `main` 푸시 시 live 빌드 산출물로 자동 재배포된다.
 - 캡처 검증: 데스크톱 1440x2400 풀페이지 + 모바일 390x844, 360px 가로 넘침 없음, 44px 터치 타깃 유지
 - 초기 fixture 캡처: `assets/preview/notchima-20261015-desktop.png` / `-mobile.png` (8건 기준, 변경 전 기록 보존)
@@ -101,7 +103,7 @@ cd web/public && python -m http.server 8000   # → http://localhost:8000
 실제 운영 시 `.env`(`.env.example` 참고)에 무료 API 키를 넣으면 어댑터가 원격 수집으로 전환.
 
 ## 실데이터 live 수집 (fixture → 실데이터 전환)
-> 현재 공개 데이터는 KOPIS live + 잔여 fixture의 mixed 308건(2026-10-15 실측). TourAPI·웹검색 키를 추가하면 다음 파이프라인부터 해당 출처도 실데이터로 수집된다.
+> 현재 공개 데이터는 KOPIS live + Exa live + 잔여 fixture의 mixed 310건(2026-10-15 실측). TourAPI 키를 추가하면 다음 파이프라인부터 해당 출처도 실데이터로 수집된다.
 > 키는 채팅에 붙여넣지 말고 로컬 `.env` 파일에만 기록 (`.env`는 gitignore, 커밋·로그에 값 미출력).
 
 | 키 | 발급처 (무료) | 용도 |

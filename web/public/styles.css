@@ -16,6 +16,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { min-width: 0; background: var(--cream); }
 body {
   min-width: 0;
@@ -135,9 +136,10 @@ main { width: min(1440px, 100%); margin: 0 auto; padding: 0 clamp(16px, 2.3vw, 3
 
 .quick-regions { padding: 18px 0 20px; }
 .quick-experiences { padding: 18px 0 0; }
-.section-kicker, .panel-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+.section-kicker, .panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .section-kicker h2, .panel-heading h2, .results-head h2 { margin: 0; font-size: 1.05rem; letter-spacing: -.02em; }
 .section-kicker span, .panel-heading span { color: var(--muted); font-size: .78rem; }
+.map-hint { margin: 0; padding: 10px 18px 14px; color: var(--muted); font-size: .8125rem; }
 .region-quick { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 11px; }
 .region-chip {
   display: inline-flex;
@@ -186,6 +188,22 @@ main { width: min(1440px, 100%); margin: 0 auto; padding: 0 clamp(16px, 2.3vw, 3
 .result-count strong { font-size: 1.6rem; line-height: 1; }
 .result-count span { color: var(--muted); font-size: .82rem; }
 .result-hint { min-height: 1.4em; margin: 12px 0; color: var(--muted); font-size: .875rem; }
+.sort-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 0; }
+.sort-chip {
+  min-height: 44px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--paper); color: var(--ink-soft); font-size: .82rem; font-weight: 750;
+  transition: background-color .18s ease, border-color .18s ease;
+}
+.sort-chip[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: #fff; }
+.sort-chip:disabled { opacity: .45; cursor: not-allowed; }
+.more-btn { width: 100%; margin-top: 12px; }
+.card-distance { color: var(--green-dark); font-weight: 750; }
+mark { padding: 0 2px; border-radius: 4px; background: #ffe9b8; color: inherit; }
+.subfacets { padding: 4px 0 18px; }
+.subfacets-body { display: grid; gap: 10px; margin-top: 11px; }
+.subfacet-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 12px; border: 1px solid var(--line); border-radius: 14px; background: var(--paper); }
+.subfacet-label { min-width: 90px; color: var(--muted); font-size: .78rem; font-weight: 750; }
+.subfacet-chip { min-height: 40px; font-size: .78rem; }
 .source-notes { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 12px; }
 .date-hint, .data-note, .source-freshness { margin: 0; color: var(--muted); font-size: .8125rem; }
 .region-chip { transition: background-color .18s ease, border-color .18s ease, transform .18s ease; }
@@ -240,7 +258,14 @@ dialog .close { position: absolute; top: 12px; right: 14px; min-width: 44px; min
 .leaflet-control-zoom a { min-width: 44px; min-height: 44px; line-height: 44px; }
 .event-marker { width: 44px !important; height: 44px !important; border: 3px solid #fff !important; border-radius: 50% !important; background: var(--green) !important; box-shadow: 0 3px 10px rgba(25, 60, 53, .24); }
 .event-marker span { display: block; width: 10px; height: 10px; margin: 14px auto; border-radius: 50%; background: var(--orange); }
-.map-popup-list { display: grid; gap: 7px; min-width: 220px; }
+.map-popup-list { display: grid; gap: 7px; min-width: 220px; max-width: 300px; }
+.map-popup { display: grid; gap: 6px; min-width: 220px; max-width: 300px; }
+.map-popup-title { padding: 0; border: 0; background: transparent; color: var(--green-dark); text-align: left; font-size: 1rem; font-weight: 800; line-height: 1.35; }
+.map-popup-title:hover { text-decoration: underline; }
+.map-popup-meta { color: var(--muted); font-size: .8rem; }
+.map-popup-dist { color: var(--green-dark); font-size: .8rem; font-weight: 750; }
+.map-popup-actions { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.map-popup-actions .button { min-height: 40px; padding: 4px 10px; font-size: .8rem; }
 .map-popup-event { display: grid; gap: 2px; padding-top: 7px; border-top: 1px solid var(--line); }
 .map-popup-event button { min-height: 44px; padding: 5px 0; border: 0; background: transparent; color: var(--green-dark); text-align: left; font-weight: 800; }
 .map-popup-event small { color: var(--muted); }

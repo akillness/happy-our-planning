@@ -3,10 +3,13 @@
   "use strict";
 
   const DATA = "./data/";
+  const PAGE_SIZE = 60;
   const state = {
     events: [], regions: [], facets: {}, fuse: null,
-    map: null, markers: null, mapReady: false,
+    map: null, markers: null, userMarker: null, mapReady: false,
     filteredRows: [], lastFocus: null, wired: false,
+    page: 0, sortMode: "relevance", userPos: null, lastQuery: "",
+    _search: null,
   };
 
   const $ = (id) => document.getElementById(id);
@@ -84,6 +87,55 @@
   function setHidden(id, hidden) {
     const node = $(id);
     if (node) node.hidden = hidden;
+  }
+
+  function disposeState() {
+    // 동적 메모리 정리: 이전 인덱스·마커·검색 캐시·페이지 상태를 버린다.
+    state.fuse = null;
+    state._search = null;
+    state.page = 0;
+    if (state.markers) state.markers.clearLayers();
+    if (state.userMarker && state.map) {
+      state.map.removeLayer(state.userMarker);
+      state.userMarker = null;
+    }
+    const list = $("list");
+    if (list) clear(list);
+  }
+
+  function escHtml(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, (ch) => (
+      { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[ch]
+    ));
+  }
+
+  function highlight(text, query) {
+    const safe = escHtml(text);
+    const needle = String(query || "").trim();
+    if (!needle || needle.length < 2) return safe;
+    const idx = safe.toLowerCase().indexOf(needle.toLowerCase());
+    if (idx < 0) return safe;
+    return `${safe.slice(0, idx)}<mark>${safe.slice(idx, idx + needle.length)}</mark>${safe.slice(idx + needle.length)}`;
+  }
+
+  function haversineKm(aLat, aLng, bLat, bLng) {
+    const rad = (d) => (d * Math.PI) / 180;
+    const R = 6371;
+    const dLat = rad(bLat - aLat);
+    const dLng = rad(bLng - aLng);
+    const s = Math.sin(dLat / 2) ** 2
+      + Math.cos(rad(aLat)) * Math.cos(rad(bLat)) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(s));
+  }
+
+  function eventDist(event) {
+    if (!state.userPos || typeof event.lat !== "number" || typeof event.lng !== "number") return null;
+    return haversineKm(state.userPos.lat, state.userPos.lng, event.lat, event.lng);
+  }
+
+  function fmtDist(km) {
+    if (km == null) return "";
+    return km < 1 ? `약 ${Math.round(km * 1000)}m` : `약 ${km.toFixed(1)}km`;
   }
 
 
@@ -229,10 +281,16 @@
   }
 
   function searchedEvents(query) {
-    if (!query) return state.events;
-    if (state.fuse) return state.fuse.search(query).map((result) => result.item);
-    const needle = query.toLowerCase();
-    return state.events.filter((event) => textForSearch(event).includes(needle));
+    if (!query) { state._search = null; return state.events; }
+    if (state._search && state._search.q === query) return state._search.items;
+    let items;
+    if (state.fuse) items = state.fuse.search(query).map((result) => result.item);
+    else {
+      const needle = query.toLowerCase();
+      items = state.events.filter((event) => textForSearch(event).includes(needle));
+    }
+    state._search = { q: query, items };
+    return items;
   }
 
   function filterRows(filters, includeSido) {
@@ -289,12 +347,14 @@
     return `events/${safeId(event.id)}.html`;
   }
 
-  function card(event) {
+  function card(event, query) {
     const li = make("li", "card");
     const article = make("article");
     const heading = make("h3", "card-title");
-    const open = make("button", "card-open", event.name || "이름 없는 행사");
+    const open = make("button", "card-open", "");
     open.type = "button";
+    open.innerHTML = highlight(event.name || "이름 없는 행사", query);
+    open.setAttribute("aria-label", `${event.name || "이름 없는 행사"} 상세 보기`);
     open.addEventListener("click", () => showDetail(event));
     heading.appendChild(open);
     article.appendChild(heading);
@@ -302,6 +362,8 @@
     const meta = make("div", "card-meta");
     meta.appendChild(make("span", "card-location", [event.sido, event.sigungu].filter(Boolean).join(" ") || "지역 정보 없음"));
     meta.appendChild(make("span", "card-date", dateLabel(event)));
+    const dist = eventDist(event);
+    if (dist != null) meta.appendChild(make("span", "card-distance", fmtDist(dist)));
     if (event.age) meta.appendChild(make("span", "card-age", `대상 ${event.age}`));
     meta.appendChild(make("span", "card-price", priceLabel(event)));
     meta.appendChild(renderBadges(event));
@@ -335,22 +397,34 @@
     return li;
   }
   function popup(event) {
-    const wrap = make("div");
-    wrap.appendChild(make("strong", null, event.name || "이름 없는 행사"));
-    wrap.appendChild(make("br"));
-    wrap.appendChild(make("span", null, `${event.sido || "지역 정보 없음"} · ${dateLabel(event)}`));
+    const wrap = make("div", "map-popup");
+    const open = make("button", "map-popup-title", "");
+    open.type = "button";
+    open.innerHTML = escHtml(event.name || "이름 없는 행사");
+    open.addEventListener("click", () => showDetail(event));
+    wrap.appendChild(open);
+    wrap.appendChild(make("div", "map-popup-meta", `${event.sido || "지역 정보 없음"} · ${dateLabel(event)}`));
+    const status = statusInfo(event);
+    if (status) wrap.appendChild(badge(status.label, status.className));
+    if (isFree(event.price)) wrap.appendChild(badge("무료", "free"));
+    const dist = eventDist(event);
+    if (dist != null) wrap.appendChild(make("div", "map-popup-dist", fmtDist(dist)));
     const proof = linkProof(event);
-    wrap.appendChild(make("br"));
+    const row = make("div", "map-popup-actions");
+    const detail = make("button", "button button-quiet", "상세 보기");
+    detail.type = "button";
+    detail.addEventListener("click", () => showDetail(event));
+    row.appendChild(detail);
     if (proof.allowed) {
-      wrap.appendChild(linkStatusNode(event));
-      const link = make("a", "map-source-link", "연결 확인");
+      const link = make("a", "button button-primary", "연결 확인");
       link.href = proof.href;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
-      wrap.appendChild(link);
+      row.appendChild(link);
     } else {
-      wrap.appendChild(linkStatusNode(event));
+      row.appendChild(linkStatusNode(event));
     }
+    wrap.appendChild(row);
     return wrap;
   }
 
@@ -413,7 +487,7 @@
       marker.addTo(state.markers);
       points.push([first.lat, first.lng]);
     }
-    if (points.length) state.map.fitBounds(points, { padding: [24, 24], maxZoom: 11 });
+    if (points.length) state.map.fitBounds(points, { padding: [24, 24], maxZoom: 15 });
     else state.map.setView([36.5, 127.8], 7);
   }
 
@@ -487,10 +561,26 @@
     }
   }
 
-  function sortRows(rows) {
+  function sortRows(rows, rankOf) {
+    const rank = rankOf || new Map();
+    let seq = 0;
+    const order = new Map();
+    for (const event of rows) if (!order.has(event)) order.set(event, seq++);
     return rows.slice().sort((a, b) => {
       const endedDelta = Number(isEnded(a)) - Number(isEnded(b));
       if (endedDelta) return endedDelta;
+      if (state.sortMode === "distance" && state.userPos) {
+        const da = eventDist(a);
+        const db = eventDist(b);
+        const delta = (da == null ? Infinity : da) - (db == null ? Infinity : db);
+        if (delta) return delta;
+      } else if (state.sortMode === "upcoming") {
+        const delta = String(a.start_date || "9999").localeCompare(String(b.start_date || "9999"));
+        if (delta) return delta;
+      } else {
+        const delta = (rank.get(a) ?? order.get(a) ?? 0) - (rank.get(b) ?? order.get(b) ?? 0);
+        if (delta) return delta;
+      }
       return Number(isExperience(b)) - Number(isExperience(a));
     });
   }
@@ -499,24 +589,103 @@
     $("count").textContent = String(rows.length);
     if ($("heroCount")) $("heroCount").textContent = String(rows.length);
     clear($("list"));
-    for (const event of rows) $("list").appendChild(card(event));
+    const shown = rows.slice(0, (state.page + 1) * PAGE_SIZE);
+    for (const event of shown) $("list").appendChild(card(event, state.lastQuery));
     setHidden("empty", rows.length > 0);
+    const more = $("moreBtn");
+    if (more) {
+      const rest = rows.length - shown.length;
+      more.hidden = rest <= 0;
+      more.textContent = rest > 0 ? `더 보기 (${rest}건 남음)` : "더 보기";
+    }
     const ended = rows.filter(isEnded).length;
     const unmapped = rows.filter((e) => typeof e.lat !== "number" || typeof e.lng !== "number").length;
     const note = ended ? `종료된 행사 ${ended}건은 날짜에 '종료'로 표시했습니다.` : "출처 페이지에서 일정과 신청 조건을 한 번 더 확인하세요.";
     const mapNote = unmapped ? ` 지도 미표시 ${unmapped}건(위치 정보 없음).` : "";
-    $("resultHint").textContent = `${rows.length}건. ${note}${mapNote}`;
+    const sortNote = state.sortMode === "distance" && state.userPos ? " 내 위치 가까운 순." : "";
+    $("resultHint").textContent = `${rows.length}건. ${note}${mapNote}${sortNote}`;
     renderMap(rows);
+  }
+
+  function renderSubFacets(rows, filters) {
+    const root = $("subFacets");
+    if (!root) return;
+    clear(root);
+    const groups = [];
+    if (!filters.theme) {
+      const counts = new Map();
+      for (const event of rows) for (const theme of event.themes || []) counts.set(theme, (counts.get(theme) || 0) + 1);
+      groups.push({ dim: "theme", label: "테마 좁히기", items: topN(counts, 5) });
+    }
+    if (!filters.sido) {
+      const counts = new Map();
+      for (const event of rows) if (event.sido) counts.set(event.sido, (counts.get(event.sido) || 0) + 1);
+      groups.push({ dim: "sido", label: "지역 좁히기", items: topN(counts, 5) });
+    }
+    if (!filters.age) {
+      const counts = new Map();
+      for (const event of rows) for (const age of event.age_bands || []) counts.set(age, (counts.get(age) || 0) + 1);
+      groups.push({ dim: "age", label: "나이대 좁히기", items: topN(counts, 5) });
+    }
+    if (!filters.activity) {
+      const counts = new Map();
+      for (const event of rows) {
+        if (!isExperience(event)) continue;
+        for (const category of experienceCategories(event)) counts.set(category, (counts.get(category) || 0) + 1);
+      }
+      groups.push({ dim: "activity", label: "활동 좁히기", items: topN(counts, 5) });
+    }
+    const visible = groups.filter((group) => group.items.length > 0);
+    setHidden("subFacetsSection", visible.length === 0);
+    for (const group of visible) {
+      const box = make("div", "subfacet-group");
+      box.appendChild(make("span", "subfacet-label", group.label));
+      for (const [value, count] of group.items) {
+        const chip = make("button", "region-chip subfacet-chip");
+        chip.type = "button";
+        chip.dataset.dim = group.dim;
+        chip.dataset.value = value;
+        chip.appendChild(make("span", null, value));
+        chip.appendChild(make("strong", null, `${count}건`));
+        chip.addEventListener("click", () => {
+          const control = $(group.dim === "sido" ? "sido" : group.dim);
+          if (control) {
+            if (control.tagName === "SELECT"
+              && !Array.from(control.options).some((option) => option.value === value)) {
+              const option = make("option", null, `${value} (현재 목록 없음)`);
+              option.value = value;
+              control.appendChild(option);
+            }
+            control.value = value;
+          }
+          applyFilters();
+        });
+        box.appendChild(chip);
+      }
+      root.appendChild(box);
+    }
+  }
+
+  function topN(counts, n) {
+    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]).slice(0, n);
   }
 
   function applyFilters() {
     const filters = currentFilters();
+    state._search = null;
+    state.page = 0;
+    state.lastQuery = filters.q;
     const activityBaseRows = filterRows({ ...filters, activity: "" }, true);
     const baseRows = filterRows(filters, false);
-    const rows = sortRows(filters.sido ? baseRows.filter((event) => event.sido === filters.sido) : baseRows);
+    const inScope = filters.sido ? baseRows.filter((event) => event.sido === filters.sido) : baseRows;
+    const rankOf = new Map();
+    if (state._search) state._search.items.forEach((event, idx) => rankOf.set(event, idx));
+    const rows = sortRows(inScope, rankOf);
     state.filteredRows = rows;
     renderRegionQuick(baseRows);
     renderActivityQuick(activityBaseRows);
+    renderSubFacets(inScope, filters);
+    updateSortUI();
     render(rows);
     writeURL(filters);
   }
@@ -635,6 +804,51 @@
     openDialog(dialog);
   }
 
+  function updateSortUI() {
+    const modes = [["relevance", "sortRel"], ["upcoming", "sortNew"], ["distance", "sortDist"]];
+    for (const [mode, id] of modes) {
+      const btn = $(id);
+      if (!btn) continue;
+      btn.setAttribute("aria-pressed", state.sortMode === mode ? "true" : "false");
+      if (mode === "distance") btn.disabled = !state.userPos;
+    }
+    const hint = $("locateHint");
+    if (hint) {
+      hint.textContent = state.userPos
+        ? "내 위치 기준 거리순 정렬이 켜졌습니다. 위치는 저장되지 않습니다."
+        : "내 위치를 사용하면 가까운 순으로 정렬합니다. 위치는 저장되지 않습니다.";
+    }
+  }
+
+  function locateUser() {
+    const btn = $("locateBtn");
+    const hint = $("locateHint");
+    if (!state.mapReady || !("geolocation" in navigator)) {
+      if (hint) hint.textContent = "이 브라우저에서는 위치 찾기를 지원하지 않습니다.";
+      return;
+    }
+    if (btn) btn.disabled = true;
+    if (hint) hint.textContent = "위치를 확인하는 중입니다…";
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        state.userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        if (state.userMarker && state.map) state.map.removeLayer(state.userMarker);
+        state.userMarker = window.L.circleMarker([state.userPos.lat, state.userPos.lng], {
+          radius: 9, color: "#fff", weight: 3, fillColor: "#24755c", fillOpacity: 1,
+        }).addTo(state.map).bindPopup("내 위치");
+        state.map.setView([state.userPos.lat, state.userPos.lng], 14);
+        state.sortMode = "distance";
+        if (btn) btn.disabled = false;
+        applyFilters();
+      },
+      () => {
+        if (btn) btn.disabled = false;
+        if (hint) hint.textContent = "위치를 가져오지 못했습니다. 브라우저 권한을 확인해 주세요.";
+      },
+      { timeout: 8000, maximumAge: 600000 },
+    );
+  }
+
   function wire() {
     if (state.wired) return;
     state.wired = true;
@@ -654,6 +868,15 @@
     });
     $("aiBtn").addEventListener("click", showAI);
     $("retry").addEventListener("click", loadData);
+    const sortBind = [["sortRel", "relevance"], ["sortNew", "upcoming"], ["sortDist", "distance"]];
+    for (const [id, mode] of sortBind) {
+      const btn = $(id);
+      if (btn) btn.addEventListener("click", () => { state.sortMode = mode; state.page = 0; updateSortUI(); render(state.filteredRows); });
+    }
+    const locate = $("locateBtn");
+    if (locate) locate.addEventListener("click", locateUser);
+    const more = $("moreBtn");
+    if (more) more.addEventListener("click", () => { state.page += 1; render(state.filteredRows); });
     window.addEventListener("popstate", () => { restoreFromURL(); applyFilters(); });
     let resizeFrame;
     window.addEventListener("resize", () => {
@@ -690,6 +913,7 @@
   async function loadData() {
     setHidden("loadError", true);
     setHidden("loading", false);
+    disposeState();
     try {
       const [events, facets, regions, updated] = await Promise.all([
         getJSON("events.json"), getJSON("facets.json"), getJSON("regions.json"), getJSON("updated.json"),
