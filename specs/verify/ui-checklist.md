@@ -53,7 +53,7 @@ PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH='/Applications/Google Chrome.app/Contents/Ma
 
 `python3 -m scripts.run_pipeline` 종료코드 0: OKF 10/10 검증, JSON/SQLite/정적 상세 각 8건, JSON과 SQLite ID 일치, 원본 knowledge 보존. 세 새 원본과 네 runtime variant의 byte 수·SHA-256은 manifest와 일치했다.
 
-사용자 확인에 따라 실제 배포 대상은 기존 Vercel `happy-our-planning` 프로젝트로 정정했다. Hobby 플랜·기존 CLI 인증·Root Directory `web/public`을 확인한 뒤, 검증된 21개 정적 파일만 prebuilt 업로드하고 운영에 승격했다. 운영 주소 https://happy-our-planning.vercel.app/ 의 9개 필수 파일은 인증 우회 없이 HTTP 200이고 로컬 SHA-256과 일치한다. DB·환경 파일·Worker는 404다. 배포 ID는 `dpl_71VHevFRT9QSSrbu6Kjt6ZenrnEK`, 상세 증거는 `evidence/vercel-release.json`이다. 이전 Cloudflare 인증 차단은 잘못 지정한 배포 대상에 대한 조사였으며 현재 배포 차단 사유가 아니다.
+사용자 확인에 따라 실제 배포 대상은 기존 Vercel `happy-our-planning` 프로젝트로 정정했다. Hobby 플랜·기존 CLI 인증·Root Directory `web/public`을 확인한 뒤, 검증된 21개 정적 파일만 prebuilt 업로드하고 운영에 승격했다. 초기 수동 배포 ID는 `dpl_71VHevFRT9QSSrbu6Kjt6ZenrnEK`이다. 당시 운영 주소 https://happy-our-planning.vercel.app/ 의 9개 필수 파일은 인증 우회 없이 HTTP 200·로컬 SHA-256 일치, DB·환경 파일·Worker는 404를 확인했다. 상세 증거 `evidence/vercel-release.json`은 초기 수동 배포와 이후 Git 소스 배포를 구분한다. 이전 Cloudflare 인증 조사는 현재 배포 차단 사유가 아니다.
 
 ### 이번 개편의 완료 게이트 재실행
 

@@ -1,0 +1,217 @@
+{
+  "spec_version": "1.3.1",
+  "production_url": "https://happy-our-planning.vercel.app/",
+  "initial_manual_release": {
+    "deployment_id": "dpl_71VHevFRT9QSSrbu6Kjt6ZenrnEK",
+    "deployment_url": "https://happy-our-planning-281nzk3ax-akillness-projects.vercel.app",
+    "project": "happy-our-planning",
+    "scope": "akillness-projects",
+    "plan": "hobby",
+    "target": "production",
+    "observed_status": "Ready",
+    "artifact": "web/dist/notchima-static-20261015.zip",
+    "browser_files": 21,
+    "artifact_sha256": "98b71f734728df806544467d696635abe0a82b192aa0c3c441156cf948fce88b",
+    "commands": [
+      "vercel deploy --prebuilt --prod --skip-domain --yes --scope akillness-projects",
+      "vercel promote https://happy-our-planning-281nzk3ax-akillness-projects.vercel.app --yes --scope akillness-projects",
+      "vercel inspect https://happy-our-planning.vercel.app --scope akillness-projects"
+    ],
+    "public_http_method": "Unauthenticated HTTP GET via httpx.Client; no protection bypass",
+    "public_http_checks": [
+      {
+        "path": "/",
+        "http_status": 200,
+        "bytes": 6248,
+        "sha256": "04a9416381e9da842eddb01b8ac30f7569be7027efea520823678985e3a10758",
+        "matches_verified_artifact": true
+      },
+      {
+        "path": "/data/events.json",
+        "http_status": 200,
+        "bytes": 9525,
+        "sha256": "cebec5b33769da478f5353a7970f4a000aac0a2511489839fa2375b4bbed53d6",
+        "matches_verified_artifact": true,
+        "event_count": 8,
+        "family_count": 4
+      },
+      {
+        "path": "/assets/family-outing.webp",
+        "http_status": 200,
+        "bytes": 161798,
+        "sha256": "08010bb7e2b829f07d9bffa19387ea17de5e89f5f31a12bd3a37705e95631cf1",
+        "matches_verified_artifact": true
+      },
+      {
+        "path": "/assets/family-outing-mobile.webp",
+        "http_status": 200,
+        "bytes": 73390,
+        "sha256": "082dae66ea8a5c195f2ffaf8af30461a67b9349204f9b6833723294d9d1b416c",
+        "matches_verified_artifact": true
+      },
+      {
+        "path": "/app.js",
+        "http_status": 200,
+        "bytes": 31422,
+        "sha256": "6df3ffb38b23f45f4990ae50cdbb2a3696d8f9889aa44c9c4a7f908c6b2ccdbd",
+        "matches_verified_artifact": true
+      },
+      {
+        "path": "/styles.css",
+        "http_status": 200,
+        "bytes": 13901,
+        "sha256": "b7d571ee0e1f385867ea067277cd6157f8f776f1e68802e17d60dfed9e8d1d47",
+        "matches_verified_artifact": true
+      },
+      {
+        "path": "/assets/family-science-spot.webp",
+        "http_status": 200,
+        "bytes": 19702,
+        "sha256": "a3278a4094cbfacedac706a2ac17796e3e93ee268237ee220035d11d68935e57",
+        "matches_verified_artifact": true
+      },
+      {
+        "path": "/assets/family-craft-spot.webp",
+        "http_status": 200,
+        "bytes": 21634,
+        "sha256": "d2834219d14e6900790b50fe1d171fea2ff4843cfba9171dc420c2f5b448e938",
+        "matches_verified_artifact": true
+      },
+      {
+        "path": "/data/updated.json",
+        "http_status": 200,
+        "bytes": 1231,
+        "sha256": "ba65b39e6b522c8afd6eb70d49aa928f396bd86f050f297cd6c102b6fa1797c4",
+        "matches_verified_artifact": true,
+        "source_mode": "offline"
+      }
+    ],
+    "excluded_file_checks": [
+      {
+        "path": "/data/events.db",
+        "http_status": 404
+      },
+      {
+        "path": "/.env.local",
+        "http_status": 404
+      },
+      {
+        "path": "/worker/ai-proxy.js",
+        "http_status": 404
+      }
+    ],
+    "production_browser": {
+      "production_url_verified": "https://happy-our-planning.vercel.app/",
+      "url_stability": "URL never redirected or left this origin across the entire session (confirmed via `get url` after every navigation/action); no external links were clicked.",
+      "session": "Fresh named agent-browser session `vercel-live-qa`; opened only this URL; no state/auth loaded; closed cleanly at end (`session list` -> \"No active sessions\" post-close).",
+      "desktop_1440_scenarios": {
+        "actual_title": {
+          "value": "놓치마 — 아이와 함께 찾는 이번 주말 행사",
+          "status": "PASS"
+        },
+        "family_default_4_from_live_payload": {
+          "observed": "Header build/footer counter reads \"8건\" total dataset (fetched live from /data/events.json, /data/facets.json, /data/regions.json, /data/updated.json — all real 200 network fetches, zero mocking/interception); default filtered list (family checkbox '아이와 함께' checked by default) shows '찾은 행사 4 건' with 4 real cards.",
+          "status": "PASS"
+        },
+        "hero_science_craft_images_load": {
+          "hero": "assets/family-outing.webp — natural 1200x675, complete=true, displayed 160x497.78px",
+          "science_chip": "assets/family-science-spot.webp — natural 384x384, complete=true, displayed 56x56px",
+          "craft_chip": "assets/family-craft-spot.webp — natural 384x384, complete=true, displayed 56x56px",
+          "status": "PASS"
+        },
+        "hero_160px_desktop": {
+          "observed": "figure.hero-art bounding box height = 160px exactly at 1440 viewport",
+          "status": "PASS"
+        },
+        "static_science_craft_chips": {
+          "observed": "Two static chip buttons '과학·탐구 1건' and '만들기·예술 1건' with icon images, rendered in 'region 아이와 해볼 수 있는 것'",
+          "status": "PASS"
+        },
+        "filters_precede_activities": {
+          "observed": "DOM/visual order: searchbox + region/theme/age/activity comboboxes + date range + checkboxes + reset button, THEN the science/craft activity-chip region. Confirmed in both accessibility-tree order and the full-page screenshot.",
+          "status": "PASS"
+        },
+        "map_left_list_right": {
+          "observed": "At 1440px: map box x=33 w=557.9 (right edge ≈591) vs list/cards box x=615.9 w=792 — map strictly left of list, confirmed by bounding-box coordinates and screenshot.",
+          "status": "PASS"
+        },
+        "source_offline_sample_disclosure": {
+          "observed_text": "지정한 기간과 겹치는 행사를 보여드려요. 샘플 기록이 포함된 정적 목록입니다. 날짜·비용은 출처에서 확인하세요. 수집 모드: 오프라인(offline) · 예약 설정: 매일 03:00 KST · 최근 실시간 성공 기록 없음 · 출처별: kopis 기존 기록(fixture) · tourapi 기존 기록(fixture) · websearch 기존 기록(fixture)",
+          "status": "PASS — explicitly states offline collection mode and sample/fixture records, never implies live inventory"
+        },
+        "activate_science_activity": {
+          "click_target": "'과학·탐구 1건' chip button",
+          "select_sync": "Activity combobox value updated from '전체 활동' to '과학·탐구 (1)' (option selected=true) — confirms chip click drives the real <select> state.",
+          "activity_url": "URL updated to https://happy-our-planning.vercel.app/?activity=%EA%B3%BC%ED%95%99%C2%B7%ED%83%90%EA%B5%AC (과학·탐구, URL-encoded)",
+          "matching_results": "Result list narrowed from 4 to 1 card: '경기도 어린이 과학 체험전 2026 (수원)'; map markers also narrowed to 1.",
+          "status": "PASS"
+        },
+        "reset_filter": {
+          "action": "Clicked '필터 초기화'",
+          "observed": "URL returned to clean https://happy-our-planning.vercel.app/ (no query params); activity combobox returned to '전체 활동'; family checkbox remained checked (default true); result count restored to 4.",
+          "status": "PASS"
+        },
+        "kids_0_releases_family_filter": {
+          "action": "Unchecked '아이와 함께' checkbox",
+          "observed": "URL updated to https://happy-our-planning.vercel.app/?kids=0; checkbox checked=false; result count changed from 4 to 8, matching the full live-payload dataset size shown in the header ('8건').",
+          "status": "PASS"
+        },
+        "open_close_internal_detail_focus_return": {
+          "open": "Clicked '상세 보기' on the first card -> native <dialog id=\"detail\"> opened (open=true, populated with 848 chars of real event detail: title '서울 어린이 여름 음악축제(신청형 데모)', full metadata); focus moved into dialog onto its '닫기' close button (standard native-dialog focus trap — confirmed the rest of the page became inaccessible to the a11y tree while open, i.e. proper modal semantics).",
+          "close": "Clicked the dialog's '창 닫기' button -> dialog.open became false.",
+          "focus_return": "document.activeElement after close was the originating '상세 보기' trigger button (confirmed by text match) — focus correctly returned to the invoking control.",
+          "status": "PASS",
+          "methodology_note": "[INFERENCE/tooling caveat, not a site defect] The first two attempts to click the detail button via agent-browser's `click` command silently no-op'd because the target was far below the fold on this long single-page layout and the CLI did not auto-scroll it into the visual viewport (elementFromPoint at the button's reported coordinates returned null, i.e. outside the rendered viewport at scrollY=0). Running `scrollintoview` immediately before `click` fixed this, and a direct native `.click()` via eval also opened the dialog instantly — proving the site's click handler itself works correctly and this was purely an agent-browser scroll-timing quirk, not a production bug."
+        }
+      },
+      "mobile_360_scenarios": {
+        "setup": "Fresh navigation (not just a resize) to https://happy-our-planning.vercel.app/ at 360x800 viewport, networkidle-waited.",
+        "no_horizontal_overflow": {
+          "observed": "window.innerWidth=360, document.documentElement.scrollWidth=360, document.body.scrollWidth=360 → hasHorizontalOverflow=false",
+          "status": "PASS"
+        },
+        "result_cards_before_map": {
+          "observed": "'찾은 행사' results region top y=1378.7 vs '행사 위치 지도' map region top y=2991.4 — cards render well above the map in document order and visual stacking.",
+          "status": "PASS"
+        },
+        "image_loads": {
+          "observed": "Hero now serves the responsive mobile variant assets/family-outing-mobile.webp (natural 720x480, complete=true, displayed 112px tall); science/craft chip images also loaded.",
+          "status": "PASS"
+        },
+        "major_tap_targets_44px": {
+          "observed": "Primary controls all meet/exceed 44px: filter-checkbox label wrappers (아이와 함께/무료만/지금 신청 가능) = 164x44 / 136x44 / 166x44; '필터 초기화' 134x44; science/craft chips 336x84; '조건 맞춤 추천' 336x44; all '상세 보기' buttons 76x44; event-title row buttons 306x44.",
+          "minor_exceptions_not_major_controls": "Brand logo link '놓치마 Notchima' = 91x36 (secondary nav, not a primary interactive control); Leaflet attribution link 'Leaflet' = 54x15 (mandatory OSM/Leaflet map-attribution convention). Raw <input type=checkbox> boxes measure 18x18 but their clickable <label> wrapper is 44px — the real hit area meets the threshold.",
+          "status": "PASS for major/changed targets"
+        }
+      },
+      "console_and_network_errors": {
+        "console_logs": "Empty across the entire session (desktop + mobile reload) — zero warnings/logs captured.",
+        "page_errors": "Empty across the entire session — zero uncaught exceptions.",
+        "real_errors_found": "None.",
+        "total_network_requests_observed": 73,
+        "http_failures_4xx_5xx": "0",
+        "osm_tile_requests": "17 unique OpenStreetMap tile requests across zoom levels 6/7/11 on a.tile/b.tile/c.tile.openstreetmap.org — ALL returned HTTP 200. No OSM tile was canceled or failed in this run.",
+        "benign_canceled_same_origin_requests_distinguished_from_errors": [
+          "GET /assets/family-outing-mobile.webp (requestId 306.36) — no status recorded, occurred while the page was at the 1440px desktop viewport. This is the <picture>/responsive-image candidate NOT selected by the browser for that viewport (desktop chose family-outing.webp, 200 OK, instead). Not a failure.",
+          "GET /assets/family-outing.webp (requestId 306.110) — no status recorded, occurred during the 360px mobile reload. This is the complementary unselected <picture> candidate for that viewport (mobile chose family-outing-mobile.webp, confirmed 200 then 304-cached). Not a failure."
+        ],
+        "explanation": "Both 'no status' entries are standard browser <picture>-element candidate preloading/cancellation (the browser speculatively starts a request for an alternate responsive-image source, then abandons it once media-query resolution picks the other source). Same-origin, zero rendering impact, and in each case the selected sibling image loaded successfully with 200/304. These were correctly excluded from the error count."
+      },
+      "screenshots": [
+        "specs/verify/evidence/vercel-live-desktop.png (full-page, 1440x1999, 738142 bytes)",
+        "specs/verify/evidence/vercel-live-mobile.png (full-page, 360x3334, 420112 bytes)"
+      ],
+      "non_goals_respected": "No repo/code edits, no test files created, no formatters/linters run, no provider/API mutation, no network route/mock/intercept used anywhere in this run, no external links clicked, no form submitted. Browser session was closed at the end.",
+      "overall_verdict": "PASS — every desktop-1440 and mobile-360 scenario in the Change section verified true against the live production deployment, with zero console errors, zero page errors, and zero failed HTTP requests. Two screenshots saved as specified."
+    }
+  },
+  "git_source": {
+    "repository": "https://github.com/akillness/happy-our-planning.git",
+    "branch": "main",
+    "root_directory": "web/public",
+    "publication_authorized": true,
+    "reason": "Daily ingestion pushes otherwise redeploy old committed UI/data builders"
+  },
+  "data_boundary": "Public catalog contains offline/sample fixture records; no live API or hosted ingestion success claimed",
+  "cloudflare_workers": "Excluded; no Worker deployment performed"
+}

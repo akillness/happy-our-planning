@@ -14,6 +14,7 @@ import sys
 
 from scripts.build import build_index, build_pages, build_sqlite, wiki_index
 from scripts.common.config import ROOT
+from scripts.common.env import load_dotenv
 from scripts.normalize import to_okf
 
 log = logging.getLogger("notchima.pipeline")
@@ -50,6 +51,9 @@ def main(argv: list[str]) -> int:
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
     log.info("== 1. 수집·정규화·적재 ==")
+    dotenv_loaded = load_dotenv()
+    if dotenv_loaded:
+        log.info(".env에서 %d건 로드 (%s)", len(dotenv_loaded), ", ".join(dotenv_loaded))
     collection = to_okf.run(argv or None)
     if collection.get("failed"):
         log.error("수집 실패 — 기존 행사 보존, 빌드 중단")

@@ -1,6 +1,6 @@
 {
   "total_checks": 57,
-  "passed": 57,
+  "passed": 54,
   "data_context": "deterministic routed fixture (fixed KST 2026-10-15), not production events.json",
   "checks": [
     {
@@ -16,7 +16,7 @@
     {
       "check": "1440px 히어로 canonical 경로·렌더링·높이",
       "ok": true,
-      "detail": "{\"src\": \"http://127.0.0.1:65112/assets/family-outing.webp\", \"box\": {\"x\": 910.21875, \"y\": 88, \"width\": 497.78125, \"height\": 160}}"
+      "detail": "{\"src\": \"http://127.0.0.1:57992/assets/family-outing.webp\", \"box\": {\"x\": 910.21875, \"y\": 104.828125, \"width\": 497.78125, \"height\": 160}}"
     },
     {
       "check": "히어로 아트 DOM UI 텍스트 없음",
@@ -26,7 +26,7 @@
     {
       "check": "필터가 활동 바로가기보다 먼저",
       "ok": true,
-      "detail": "{\"filters\": {\"x\": 32, \"y\": 268, \"width\": 1376, \"height\": 291.5}, \"activity\": {\"x\": 32, \"y\": 559.5, \"width\": 1376, \"height\": 138.1875}}"
+      "detail": "{\"filters\": {\"x\": 32, \"y\": 301.671875, \"width\": 1376, \"height\": 291.5}, \"activity\": {\"x\": 32, \"y\": 593.171875, \"width\": 1376, \"height\": 138.1875}}"
     },
     {
       "check": "출처 링크는 검증 증거 없이는 외부 앵커 금지",
@@ -105,7 +105,7 @@
     },
     {
       "check": "가족·서울·무료 → 추천 범위 일치",
-      "ok": true,
+      "ok": false,
       "detail": "닫기\n조건 맞춤 추천\n\n현재 필터 결과 안에서 가족 근거, 무료 여부, 신청 가능 여부를 기준으로 정리했습니다.\n\n서울 어린이 여름 음악축제 · 서울특별시\n가족 근거 확인 · 무료 · 신청가능 · 테마 축제"
     },
     {
@@ -150,8 +150,8 @@
     },
     {
       "check": "결정적 활성 행사만 추천",
-      "ok": true,
-      "detail": "[\"서울 10월 가족 체험\"]"
+      "ok": false,
+      "detail": "[]"
     },
     {
       "check": "신선한 verified 출처만 외부 clickout",
@@ -185,8 +185,8 @@
     },
     {
       "check": "activity → 추천 범위 동기화",
-      "ok": true,
-      "detail": "[\"서울 10월 가족 체험\"]"
+      "ok": false,
+      "detail": "[]"
     },
     {
       "check": "activity → reset 복귀",
@@ -246,7 +246,7 @@
     {
       "check": "360px 리사이즈 후 지도 마커 가시영역",
       "ok": true,
-      "detail": "{\"map\": {\"left\": 13, \"top\": 2419, \"right\": 347, \"bottom\": 2719}, \"markers\": [{\"left\": 209, \"top\": 2615, \"right\": 253, \"bottom\": 2659}, {\"left\": 110, \"top\": 2479, \"right\": 154, \"bottom\": 2523}, {\"left\": 107, \"top\": 2480, \"right\": 151, \"bottom\": 2524}]}"
+      "detail": "{\"map\": {\"left\": 13, \"top\": 2508, \"right\": 347, \"bottom\": 2808}, \"markers\": [{\"left\": 209, \"top\": 2704, \"right\": 253, \"bottom\": 2748}, {\"left\": 110, \"top\": 2590, \"right\": 154, \"bottom\": 2634}, {\"left\": 107, \"top\": 2613, \"right\": 151, \"bottom\": 2657}]}"
     },
     {
       "check": "360px 가족 기본 스냅샷",
@@ -261,7 +261,7 @@
     {
       "check": "360px 결과가 지도보다 먼저 표시",
       "ok": true,
-      "detail": "{\"results\": {\"x\": 12, \"y\": 1195.703125, \"width\": 336, \"height\": 1135.390625}, \"map\": {\"x\": 12, \"y\": 2343.09375, \"width\": 336, \"height\": 376.90625}}"
+      "detail": "{\"results\": {\"x\": 12, \"y\": 1284.703125, \"width\": 336, \"height\": 1135.390625}, \"map\": {\"x\": 12, \"y\": 2432.09375, \"width\": 336, \"height\": 376.90625}}"
     },
     {
       "check": "360px 주요 터치 타깃 44px",
@@ -281,7 +281,7 @@
     {
       "check": "모바일 WebP 이미지 로드",
       "ok": true,
-      "detail": "http://127.0.0.1:65112/assets/family-outing-mobile.webp"
+      "detail": "http://127.0.0.1:57992/assets/family-outing-mobile.webp"
     },
     {
       "check": "데스크톱 필터 스냅샷",

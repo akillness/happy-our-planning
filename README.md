@@ -4,7 +4,7 @@
   <sub>기회, 다 챙겨드릴게요.</sub>
 </h1>
 
-[![ingest](https://github.com/jellyggumi/happy-our-planning/actions/workflows/ingest.yml/badge.svg)](https://github.com/jellyggumi/happy-our-planning/actions/workflows/ingest.yml)
+[![ingest](https://github.com/akillness/happy-our-planning/actions/workflows/ingest.yml/badge.svg)](https://github.com/akillness/happy-our-planning/actions/workflows/ingest.yml)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![Tests 197 passing + 3 skipped](https://img.shields.io/badge/tests-197%20passing%20%2B%203%20skipped-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
 [![Knowledge Format](https://img.shields.io/badge/data-schema.org%2FEvent-orange?logo=json&logoColor=white)](docs/02-data-model-okf.md)
@@ -33,7 +33,7 @@
 <p align="center">
   <img src="assets/preview/notchima-20261015-mobile.png" alt="놓치마 모바일 미리보기 390px - 히어로, 필터 스택" width="240" />
 </p>
-- 라이브 배포: **https://notchima.vercel.app** (Vercel Hobby, `web/public` 정적 배포, 2026-10-15 production Ready 검증)
+- Git 연동 운영 배포: **https://happy-our-planning.vercel.app/** (Vercel Hobby, `akillness/happy-our-planning`의 `main`, Root Directory `web/public`). `https://notchima.vercel.app/`은 Git 연결이 없는 별도 Vercel 프로젝트이며 이번 자동 배포 소스와 구분한다.
 - 캡처 검증: 데스크톱 1440x2400 풀페이지 + 모바일 390x844, 360px 가로 넘침 없음, 44px 터치 타깃 유지
 
 <p align="center">
@@ -98,6 +98,26 @@ cd web/public && python -m http.server 8000   # → http://localhost:8000
 ```
 실제 운영 시 `.env`(`.env.example` 참고)에 무료 API 키를 넣으면 어댑터가 원격 수집으로 전환.
 
+## 실데이터 live 수집 (fixture → 실데이터 전환)
+> 현재 공개 데이터는 fixture 기반 offline 8건. 아래 키를 넣으면 다음 파이프라인부터 실데이터로 수집된다.
+> 키는 채팅에 붙여넣지 말고 로컬 `.env` 파일에만 기록 (`.env`는 gitignore, 커밋·로그에 값 미출력).
+
+| 키 | 발급처 (무료) | 용도 |
+|---|---|---|
+| `KOPIS_KEY` | kopis.or.kr 회원가입 → 오픈API 인증키 | 공연/전시 live 수집 |
+| `TOURAPI_KEY` | data.go.kr → 한국관광공사 국문관광정보서비스 활용신청 | 축제 live 수집 |
+| `EXA_API_KEY` / `BRAVE_API_KEY` / `TAVILY_API_KEY` (택1) | 각 제공자 무료 티어 | 웹검색 행사 발견 |
+
+```bash
+cp .env.example .env   # 후 .env에 키 입력 (에디터로, 채팅 금지)
+python -m scripts.ops.check_keys          # 보유 현황만 확인 (값 미출력)
+python -m scripts.ops.check_keys --probe  # 출처별 1회 소량 요청으로 키 유효성 확인
+python -m scripts.run_pipeline            # live 수집 → 검증 → 빌드 (키 있으면 자동 live)
+python -m unittest discover -s tests      # 206종 회귀 가드
+```
+- 일일 cron도 동일 키 사용: GitHub repo Settings → Secrets에 위 키 등록 (`.github/workflows/ingest.yml`에 이미 secrets 패스스루 구성됨).
+- 키 없이도 파이프라인은 fixture 모드로 rc==0 보장 (제약 C1).
+
 ## 일일 자동 수집 (GitHub Actions, KST 03:00 = UTC 18:00)
 ```yaml
 # .github/workflows/ingest.yml
@@ -156,7 +176,8 @@ concurrency:
 - 정적 이미지 자산 — 기존 `family-outing.webp`/`family-outing-mobile.webp` 경로에 새 자연·가족 수채화 적용(161,798/73,390 bytes), 과학·만들기 활동 그림 추가. Codex 생성 이력·SHA-256은 `assets/design/family-assets.json`에 보존하며 런타임 제공자 호출은 없다.
 - Pencil 새 시안 A/B/C 비교 후 **A · 선명한 탐색** 적용 — 검색 우선, 160px 데스크톱 그림, 모바일 목록 우선. 시안·모바일·상태 설계와 선정 근거: [`assets/design/pencil-proposals/selection.json`](assets/design/pencil-proposals/selection.json).
 - 수채화 개편 검증: Chrome **57/57** (고정 KST·통제 fixture), 360px 가로 넘침 없음, 44px 타깃·활동 이미지 로드/선택/URL·글자 대비 확인. 별도 Vercel 운영 검증에서 HTML·행사 JSON·JS/CSS·네 그림·수집 메타데이터 9개 경로의 HTTP 200과 로컬 SHA-256 일치를 확인했다. 공개 데이터는 여전히 샘플/오프라인이며 실시간 수집 성공을 뜻하지 않는다.
-- Vercel Hobby 운영 주소: **https://notchima.vercel.app/** (2026-10-15 `web/public` 정적 배포, production Ready). 배포 검증: `/data/updated.json` 8건·offline 모드 라이브 일치 확인. 파생 DB·설계 원본·별도 Cloudflare Worker는 배포하지 않았다.
+- Vercel Hobby 운영 주소: **https://happy-our-planning.vercel.app/**. `web/public` 정적 Git 배포이며 파생 DB·설계 원본·별도 Cloudflare Worker는 배포하지 않는다. 초기 수동 업로드와 이후 Git 배포의 관측 기록은 [`specs/verify/evidence/vercel-release.json`](specs/verify/evidence/vercel-release.json)에서 구분한다.
+- 일일 수집 push에도 개편이 유지되도록 UI·수집/빌드 코드·테스트·네 WebP를 같은 `origin/main` 변경 집합으로 관리한다. 별도 `notchima` 프로젝트의 연결이나 배포 설정은 변경하지 않았다.
 - Fancy UI 개편 (2026-10-15): 히어로 eyebrow 배지 + 통계 pill + 수채화 그라디언트 오버레이, 카드 entrance 애니메이션, 다이얼로그 등장 모션, 지도 다건 카운트 배지, 칩 hover 전환, 로딩 shimmer, 전역 reduced-motion 대응. 사용자 노출 em-dash 제거.
 - ✅ 공통 HTTP 재시도 헬퍼(`scripts/common/http.py`) — 429/5xx 지수 백오프, 4xx 즉시 실패, AI 플래너 연동
 

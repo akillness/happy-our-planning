@@ -20,5 +20,8 @@ web/public/data/*.db
 # 에이전트 survey 스크래치
 .survey/
 
+# zvec-grep 로컬 코드검색 인덱스 캐시(RocksDB/IPC, 재생성 가능) — 커밋 안 함
+.zvec-grep/
+
 # UI 검증 스냅샷(재생성 가능, 바이너리) — JSON 증거만 커밋
 specs/verify/evidence/*.png

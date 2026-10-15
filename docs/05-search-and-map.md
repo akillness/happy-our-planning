@@ -143,4 +143,4 @@ updated: 2026-10-15
 
 인증된 `vercel curl`로 보호된 배포 URL의 HTML·행사 JSON·양쪽 히어로를 확인한 뒤 `vercel promote`로 같은 배포를 운영에 승격했다. 운영 URL은 인증 우회 없이 9개 필수 파일의 HTTP 200·SHA-256 일치, DB/환경 파일/Worker의 404를 확인했다. 상세 증거는 `specs/verify/evidence/vercel-release.json`에 남긴다.
 
-이번 배포는 로컬 산출물의 직접 업로드이며 Git 커밋·푸시는 하지 않았다. 기존 Git 연동은 변경하지 않았으므로 다음 `main` 푸시는 저장소에 커밋된 `web/public` 내용으로 다시 배포한다. 새 UI와 네 WebP도 후속 커밋에 포함해야 같은 상태가 유지된다.
+초기 배포는 검증한 로컬 산출물의 직접 업로드였다. 기존 Git 연동은 `akillness/happy-our-planning`의 `main`을 감시하며, 일일 수집 push도 자동 배포를 시작한다. 개편의 영구 반영은 UI·수집/빌드 코드·테스트·네 WebP를 함께 `origin/main`에 커밋·push하는 방식으로 관리한다. 초기 수동 업로드와 이후 Git 소스 배포의 재검증은 `specs/verify/evidence/vercel-release.json`에서 구분한다. `notchima.vercel.app`은 Git 연결이 없는 별도 프로젝트이며 이번 Git 배포 대상이 아니다.

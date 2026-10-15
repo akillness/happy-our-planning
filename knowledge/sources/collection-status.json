@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-15T14:09:55+09:00",
+  "generated_at": "2026-10-15T14:49:32+09:00",
   "sources": {
     "kopis": {
       "mode": "fixture",
-      "attempted_at": "2026-10-15T14:09:55+09:00",
+      "attempted_at": "2026-10-15T14:49:32+09:00",
       "last_success_at": null,
       "error": null,
       "collected": 3,
