@@ -17,10 +17,18 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303478
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303478
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T00:08:16+09:00'
 end_date: '2026-11-20T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303478_261015_143526.jpg
-content_hash: sha256:0cfb076d17a0538f4d7ba3ecfe558d0a802865720d0550c222af3ceccd911259
+age: 만 7세 이상
+price_text: 전석 30,000원
+price: 30000
+duration_text: 1시간 30분
+duration: PT1H30M
+organizer: 예인예술기획
+offers:
+  url: https://classicbusan.busan.go.kr/product/performance/253338
+content_hash: sha256:a1c6b7baba76558e8c7c6aec7d533e88027f49cb7ef16560b2a32e923b50f031
 ---
 
 # 첼리스트 허정인 리사이틀 [부산]

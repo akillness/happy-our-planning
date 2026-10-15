@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-16T06:10:33+09:00",
-  "total_active": 310,
+  "generated_at": "2026-10-16T06:35:57+09:00",
+  "total_active": 341,
   "archived": 0,
   "publication": {
-    "retained": 310,
+    "retained": 341,
     "excluded": 4,
     "retention_days": 90
   },
@@ -16,8 +16,8 @@
   "sources": {
     "kopis": {
       "mode": "fixture",
-      "attempted_at": "2026-10-16T06:09:08+09:00",
-      "last_success_at": "2026-10-15T17:34:32+09:00",
+      "attempted_at": "2026-10-16T06:10:35+09:00",
+      "last_success_at": "2026-10-16T00:08:16+09:00",
       "error": null,
       "collected": 3,
       "complete": false,
@@ -43,8 +43,8 @@
     }
   },
   "source_mode": "offline",
-  "last_success_at": "2026-10-15T17:34:33+09:00",
-  "collection_started_at": "2026-10-16T06:09:09+09:00",
+  "last_success_at": "2026-10-16T00:08:16+09:00",
+  "collection_started_at": "2026-10-16T06:10:35+09:00",
   "collection_error_count": 0,
   "collection_errors": []
 }

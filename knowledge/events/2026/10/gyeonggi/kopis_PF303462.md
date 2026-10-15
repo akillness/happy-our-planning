@@ -17,10 +17,18 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303462
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303462
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T00:08:16+09:00'
 end_date: '2026-10-16T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303462_261015_140431.jpg
-content_hash: sha256:14a8feafc6c3d16edfa830f500657392a45d4104067874f15d0b18c22f5178c1
+age: 36개월 이상
+price_text: 전석무료
+price: free
+duration_text: 1시간 30분
+duration: PT1H30M
+organizer: (재)의정부문화재단 (의정부예술의전당)
+offers:
+  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014547
+content_hash: sha256:0b75ba240864a621f1fded20d17c4d88a99c6bf1359b2e1f264a75e043ce7674
 ---
 
 # 족두리가 돌아왔다: 의순공주와 북벌이야기 [의정부]

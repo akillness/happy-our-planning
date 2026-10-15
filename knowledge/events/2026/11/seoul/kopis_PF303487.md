@@ -17,10 +17,18 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303487
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303487
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T00:08:16+09:00'
 end_date: '2026-11-21T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303487_261015_145406.gif
-content_hash: sha256:6d0dcb01995631bafcd84fd5a2a877bed96931e8e03455b86a08549e41c1df2f
+age: 만 7세 이상
+price_text: 전석 15,000원
+price: 15000
+duration_text: 1시간 30분
+duration: PT1H30M
+organizer: (재)성북문화재단
+offers:
+  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014648
+content_hash: sha256:7e15ac2f9c2a53007c8444b53a4f9f137e51d3ff3620bfe32c12816f9063e34e
 ---
 
 # 브런치콘서트 11시11분, 비바 바르셀로나: 안토니 가우디

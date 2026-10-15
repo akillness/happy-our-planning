@@ -17,10 +17,17 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303463
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303463
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T00:08:16+09:00'
 end_date: '2026-10-28T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303463_261015_140803.gif
-content_hash: sha256:25305996b722c707df74ab15dc32f4379ac1113948e6651413db1748cfc33f8e
+age: 만 4세 이상
+price_text: 1층석 5,000원
+duration_text: 1시간
+duration: PT1H
+organizer: 함양군청
+offers:
+  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014575
+content_hash: sha256:9141e42e9f85f145f15a38c3b13482f8b5182327362a11d2aa18aa4b13b45017
 ---
 
 # 서커스디랩: 더블빌 [함양]

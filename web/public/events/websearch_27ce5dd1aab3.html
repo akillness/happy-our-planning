@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<base href="../">
 <title>다양한 공모전 소식 및 대외활동 정보를 한눈에! | 곰랩 공모전소식 - 놓치마</title>
 <meta name="description" content="다양한 공모전 소식 및 대외활동 정보를 한눈에! | 곰랩 공모전소식
 
@@ -18,6 +19,8 @@
 
  AD 
 ">
+<link rel="stylesheet" href="styles.css">
+<style>html,body{height:auto;min-height:100%;overflow:auto}.event-detail{max-width:720px;margin:2rem auto;padding:1.25rem;line-height:1.6}.language-toggle{min-width:44px;min-height:44px}.event-date.ended{color:#b42318;text-decoration:line-through}.status-badge.ended{color:#b42318;font-weight:700;text-decoration:none}.event-actions{display:flex;gap:.75rem;flex-wrap:wrap}.event-actions>p[data-i18n-template="detail.source"]{min-width:0;max-width:100%;overflow-wrap:anywhere}.event-actions a{display:inline-block;padding:.5rem .75rem;min-height:44px}.booking-disclaimer{font-weight:700}</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -32,7 +35,7 @@
       "latitude": 36.4919,
       "longitude": 128.8889
     },
-    "name": "경상북도"
+    "name": "다양한 공모전 소식 및 대외활동 정보를 한눈에! | 곰랩 공모전소식"
   },
   "name": "다양한 공모전 소식 및 대외활동 정보를 한눈에! | 곰랩 공모전소식",
   "startDate": "2026-11-22T00:00:00+09:00"
@@ -40,10 +43,20 @@
 </script>
 </head>
 <body>
+<main class="event-detail">
+<button id="languageToggle" type="button" class="language-toggle" aria-label="English"><span class="control-label">English</span></button>
 <h1>다양한 공모전 소식 및 대외활동 정보를 한눈에! | 곰랩 공모전소식</h1>
-<p>🗓 2026-11-22</p>
-<p>📍 경상북도</p>
-<p>다양한 공모전 소식 및 대외활동 정보를 한눈에! | 곰랩 공모전소식
+<p class="event-date">🗓 <span data-i18n="detail.schedule">일정: </span>2026-11-22T00:00:00+09:00</p>
+<p class="event-status"><span data-i18n="status.prefix">상태: </span><span class="status-value" data-status-key="status.upcoming">예정</span></p>
+<p data-i18n-template="detail.region" data-i18n-value="경상북도">지역: 경상북도</p>
+<p data-i18n-template="detail.venue" data-i18n-value="정보 없음">장소: 정보 없음</p>
+<p class="detail-address"><span data-i18n="detail.address">주소: </span>정보 없음</p>
+<p data-i18n-template="detail.age" data-i18n-value="정보 없음">대상 연령: 정보 없음</p>
+<p data-i18n-template="detail.price" data-i18n-value="정보 없음">비용: 정보 없음</p>
+<p data-i18n-template="detail.duration" data-i18n-value="정보 없음">소요시간: 정보 없음</p>
+<p data-i18n-template="detail.organizer" data-i18n-value="정보 없음">주최: 정보 없음</p>
+<p data-i18n-template="detail.applicationDeadline" data-i18n-value="정보 없음">신청 마감: 정보 없음</p>
+<p class="description">다양한 공모전 소식 및 대외활동 정보를 한눈에! | 곰랩 공모전소식
 
 # 공모전 소식
 
@@ -180,7 +193,14 @@ NGO 사단법인 나마스떼코리아
 | 접수중 D-30 | 2026 대한민국 과일대전 숏폼 영상 공모전 | 농림축산식품부 / 한국과수농협연합회 | 2026.10.12 ~ 2026.11.13 |
 | 접수중 D-29 | 2026 양양군 영상 공모전 | 양양군 | 2026.10.13 ~ 2026.11.12 |
 | 접수중 D-39 | [한국야쿠르트] 펫쿠르트 왈Rx 환승사료 숏폼 공모전 | hy (에치와이) / hy 큐토펫 | 2026.10.12 ~ 202</p>
-<p data-link-status="blocked">외부 링크: blocked - 신뢰 도메인 아님</p>
-<p><a href="../index.html">← 전체 행사 보기</a></p>
+<p data-i18n="detail.sourceLanguageNotice">제목·설명·장소·주소는 원문(한국어) 그대로이며 공식 번역이 없습니다.</p>
+<div class="event-actions">
+<p data-i18n-template="detail.source" data-i18n-value="https://www.gomlab.com/contest">출처: https://www.gomlab.com/contest</p>
+<p class="info-link"><span class="link-status" data-i18n="link.status.blocked">연결 미확인</span> <span class="link-reason">신뢰 도메인 아님</span></p>
+<p class="booking-link"><span class="booking-disclaimer" data-i18n="link.bookingDisclaimer">예매처에서 확인</span> <span class="link-status" data-i18n="link.status.blocked">연결 미확인</span> <span class="booking-reason">원본 URL 없음</span></p>
+</div>
+<p><a href="index.html" data-i18n="staticPage.backToAll">← 전체 행사 보기</a></p>
+</main>
 </body>
+<script src="../i18n.js"></script>
 </html>

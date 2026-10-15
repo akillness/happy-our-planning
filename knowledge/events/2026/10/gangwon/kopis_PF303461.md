@@ -17,10 +17,18 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303461
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303461
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T00:08:16+09:00'
 end_date: '2026-10-24T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303461_261015_140422.jpg
-content_hash: sha256:89b5cc8e9f64562f1ed065438e9c34b154033ae100ff82bbfad1d10353849b9a
+age: 전체 관람가
+price_text: 전석무료
+price: free
+duration_text: 1시간
+duration: PT1H
+organizer: (재)양양문화재단
+offers:
+  url: http://yywc.moonhwain.net/rsvc/rsv_pm.html?b_id=yywc&p_idx=55
+content_hash: sha256:cb558bacf503b61eae6a9ca9029bfea31bf43258f5d77ed1e5141a0865b6c011
 ---
 
 # 호랑이오빠 얼쑤! [양양]

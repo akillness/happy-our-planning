@@ -48,6 +48,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "063565b0f6bb0599a1a262908ed3ee53040023924bab631e0a33e992fe796114": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "0802ea9adac4554462bd0a1896f05e8e35fd494cec66d3856dfb92dfb9c34246": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -66,11 +72,23 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "0bcd3641f0c9c872ecc43c56945123de8b6ab21b2a6d13f3cade7a948517f554": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "0cedbc8e2ab6f046575fcfbe571ec32cd43d6bce9a8cea5eb1d11ce9f844b3aa": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "0d4380823805129c747e7caf2f107946d2bde2bb2fd4b717e3650a10b83656d1": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66287"
     },
     "0d7839c55f437de9c5daaeb29668d13809fb797027144459d635dbf3edffc563": {
       "link_checked_at": null,
@@ -84,6 +102,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "0da68be51a042b8e0b7b768666d8b6287373b03e91a1020432f571cb65bd0aad": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "0db04996e9fdc085cd8974a2bc0a0e4e38ed32ae0cdea4f50db7d4281b3fbf92": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -91,6 +115,12 @@
       "link_url": null
     },
     "0f5acba5a2ffe1928092912ac14ebb5c0bcc8dbbc8e1f75ab62a09fbad8710be": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "0f629e3b9708ee5021523dac91dcf3c3754e1990cd9af401f8dcaa7b73ef8c85": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -108,7 +138,25 @@
       "link_status": "verified",
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303311"
     },
+    "10f6c181e6c09aaf26c1ef0699dbf9c71aea626d2c6a2c75452c012700f21c1b": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "1145fea288beab5cfaf371f6f7823e65971c0d0e0fc062e542e07ca982ae7e38": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://ygcf.or.kr/Home/H10000/H10200/concertDetail?conct_no=2878"
+    },
     "11540c333e7702952eab09578e157c25a706cd73627456a394da6ddc9a09a6f8": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "116c654f8ac6e4efbcd40adbf43be9c612756c718128e8bf48a39e1b61bc1fd1": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -150,10 +198,22 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "141a484267f2d7f00df7a042a7c01d2e2484185efd00c4c4133344fcccbabd86": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "14435cbe71a53b8fdcdad580cc18ea478e27b7316cae5f86b6506670128f6df5": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
+      "link_url": null
+    },
+    "149cf32a43e4f27c57f076267f93584a14ab5f4222950e1c76cbfe3dccc860a3": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
       "link_url": null
     },
     "1591eaacbb98ecf7b15f69f7870703a73b2c3a30a0f39bc1dde74142f3963ac0": {
@@ -163,6 +223,12 @@
       "link_url": null
     },
     "15e390fcb5c40976c23bacfa5cb401ad29077ac872ab3d6e57b92cea728eca68": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "170511c5ddb0fa55dcd3c6dbb3bed340958a2cce368fed800e0e1559a4a349f0": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -222,10 +288,22 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "1dbbff90fdebfb9467fcec458354f7952f5ac1564363e0bb223e07ea1fcf7cf2": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "일시적 연결 실패",
+      "link_status": "unverified",
+      "link_url": null
+    },
     "1e25125cbd73b2117ca0da66a389080da52df0e217e9c47d254c16ea453cba4b": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
+      "link_url": null
+    },
+    "1f0d9d23837bb596d22ba70c037437861829c4da81ae7fe89e946c8f2c884dd6": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "HTTPS만 허용",
+      "link_status": "blocked",
       "link_url": null
     },
     "1f518f4764a99346af742c94a0094bff740c427c95bd454a62434b4b74ea525a": {
@@ -252,7 +330,19 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "21b2bd6fa6a7ada0a4e7ed0db51f4a085c458a62620a2bcd3f7502f3c2c20e6d": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "23c592ad5308018a77015f1dac27ecd3f48f19ea1b696db138c65cd92d36b2be": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "23fabb27189046d67d044872c2643c6ae8b0efb32941153d7d9cb0dba5963bf8": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -271,6 +361,12 @@
       "link_url": null
     },
     "247a57610f2629fc2b748de6bdec53fcf664e0354c2d21080af9a6179ad94746": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "248912985c78cfd14e26a1ee4d40d5d8aad7045ff0a92699239a8da1189cd371": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -378,6 +474,12 @@
       "link_status": "verified",
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303388"
     },
+    "36fc4b591716ef10503e06fdbd61756fd213b030eb6ce2974346e91fb45bf2ca": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "373c10e321a380309ba3f6039faa75b5d36428a2d36566b0345f55f725e9d0db": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -408,10 +510,22 @@
       "link_status": "verified",
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303230"
     },
+    "3b250872c8f435fa8864d4b4438d25c72511f93fdf49a701e058a8c65f09378b": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/65950"
+    },
     "3be44d8e6483d9f185d5e240b7d48656bbf2fff33072d79949db460cf9464d44": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
+      "link_url": null
+    },
+    "3c08a9b07b68b47a5bf66d979a64bdf96da99f37a8f85d607e570820ded594d3": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
       "link_url": null
     },
     "3d6486d9c4e205be54c49fe667f7a5806ec6dd0e16b41ed263af711fc735e916": {
@@ -421,6 +535,12 @@
       "link_url": null
     },
     "3f0ab04bb54a9aab77c6bcf0cfe3bd0d1966e7de44e7aac06a37d85125f038a2": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "3ffd5fd74820f69b5d9c057bcde1bc49190f9f4cd1704b99d3563acc4b0bac23": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -474,11 +594,23 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "483d277dbed28eb5808267afc077978e8588e98955a7d7e714b9b3d80814d715": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "4845c92ac6d07e86a99441409f0ecfddc0665459b0772f5a24af45380d06b29b": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "48c4edf3f3482ebd6b7be25b4511b04068a9eef9c61aee7c19dd5ad17eaa7c87": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://ticket.yes24.com/Perf/60635"
     },
     "4969cf9d71f6269d3ee1811affe80db99a72c3a44856b2c3ebd081fad5ff5a8f": {
       "link_checked_at": null,
@@ -492,6 +624,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "4a9aa91f0a169b5954a481f83819bb7c4ca6bb82c4c8fa8e2e36d417adb4485a": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://theater.arko.or.kr/product/performance/259583"
+    },
     "4aa76b47253b4318c679f19ba3ce9b67af046f42623c1153c9442bcf4d828676": {
       "link_checked_at": "2026-10-15T21:09:11.246025Z",
       "link_reason": "연결 확인",
@@ -499,6 +637,12 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303430"
     },
     "4ada55ff22afe2198237a46e6b19e2b4bb30cbd9c30c41ca8a36e89184bc373d": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "4b59cfb705628970bf6ca3c6b5baef53a2ad9d2606add79a70febba1b3f092b6": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -540,11 +684,23 @@
       "link_status": "verified",
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303267"
     },
+    "4e684e2bc9e16434fc4072a3d002958bf1971ac09174d72c5eae31b719b224f4": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "5175ddb571af177334f0f87f44ffe588338ab5565a245f282802ee8ebcf7e73d": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "5244b24f5b5ae54a633cfeed7e44a57d5fd875c480f70f42b0864cfbb4a8ceda": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66255"
     },
     "52bfa6a0322899f12d6fef68572da9ccfee585bd62136ef431586e2ac20ffd50": {
       "link_checked_at": null,
@@ -563,6 +719,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "533f8815c824b9f0d886f7fb6c147b6237d9961ffb8f41574c1e6dfb367cb44a": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://booking.naver.com/booking/5/bizes/1749435"
     },
     "5560eea1b9ae79f9d94bbeb6ef8375c51d72d8a881ccd878829fcbc82e54ef4b": {
       "link_checked_at": null,
@@ -600,13 +762,37 @@
       "link_status": "verified",
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303370"
     },
+    "59dcfd6d6c490b43296c6a97182fb419b22164620673f4e98efc83e675f9e487": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "5ab34d65c30c337942fa76bf3ebadf152050995169f87c823f7e25e7621b370a": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "비표준 포트 차단",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "5adb3ebf5c168b04025cef9dc61066abdc4ec797c5efa4cad2668a11b2fb7aa0": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
     },
+    "5b7e43b24322cddae6e11ff701b97d385a92f9b4faae679783d3f8cdee39b758": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "5bfffaeef40b8c297d89c0262852818235dfcf3debc393df5815e32f48c0f1ad": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "5c96397e5bca1ecdade63764de1a468e06bc462aaf2eed7a271204120f1240bb": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -625,6 +811,12 @@
       "link_url": null
     },
     "5e2f150fb3782344ab998e3ba4daa543f1d60b7194a11838ab0f87ba54ab81d8": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "5ebc5def5f091f6e01bd53addb463c54a5b248d51d20e682da3a89add2bcb1c3": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -654,6 +846,18 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "60549d3bfc1f2c7d188c18e0c513b167763c2c4295afdd63676d0725d7f584f8": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "610f7bdd46d11871a885cd5d449225aa08a55a4fce2880f73f39b1df8ad7a8d1": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66278"
+    },
     "62428c76b0a28ab4f92d88ad5ba0b7ffde1016821585c1aa71c98ba66c40a7c7": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -665,6 +869,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "6455bb1042e3beeb4bce6e62cbcdbcec1bcf28ae14353b7e226ac7a5829e5844": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://ticket.yes24.com/Perf/60615"
     },
     "64e43ba81d489c6f44d3979139e69dd2ab21accda1d762f7c051327bed33ad01": {
       "link_checked_at": null,
@@ -702,6 +912,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "6a6ff05294d3ec2cb7ab72b7fef996716f03779f9152a2428105e8409fa10b8c": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "6af95b4490389c0db30829dd2ad0b82b16312874eb32a77a53fc66b3680f98c0": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -726,10 +942,22 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "6c8a595f7f2d2eb858019691419134d977c806ee68427776dcc2776f3e803e58": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66260"
+    },
     "6cc3c799f82c3e9d33c529734f357dadb5a4eec34f35956d1226b26e7f80a26d": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
+      "link_url": null
+    },
+    "6ce915226d8e1b4b9b1eb996c0d6991c3a4b81eca3e897d238eddcc7cd489750": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
       "link_url": null
     },
     "6d451c276234dea753f711d6898c6efce882261fac98e12c0f6d8d5e9f7ab324": {
@@ -749,6 +977,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "6fe54d5b222bb52a04f573d2c59df5c2ae1c305d6857128652ddf7c575b5d7e8": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66273"
     },
     "6fea99524bcd28b47303e725902c30c7dfb6f6402b2fe0bd0e191dfeca1fa7cd": {
       "link_checked_at": null,
@@ -773,6 +1007,30 @@
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303231"
+    },
+    "714a675b1a0f7e5a28b50f8d1ee4a2d7827a3e109a056000a4fbddcbee27b572": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://ticket.yes24.com/Perf/60617"
+    },
+    "71c9fec3830bf670594029feeb0372e40eb58f187d257a71ca3a605083a44cd0": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "723dbf480de7877739916fdd7c72714529b553ae3dde919290de0fe8fb29ee3f": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://theater.arko.or.kr/product/performance/259584"
+    },
+    "7309e4dda4bb61237722e97aa4267da88120aec2601be57f120ec14b713f0245": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
     },
     "7349b3b8ab9c3deb197df9ccd2e5db09d3e49a18984b36763529b9a705d9372a": {
       "link_checked_at": null,
@@ -834,6 +1092,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "7832cd170649f71c2e42a5236aba9b31193185ef9c464429cc9e5c4ff42fb238": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://yywc.moonhwain.net/rsvc/rsv_pm.html?b_id=yywc&p_idx=55"
+    },
     "7afd80294433f53ececeb492a0e50740b3036b826c81ac118648e29f8f9db39b": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -876,7 +1140,19 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "7d680e3f64d542f044aa8ceaa179f6654f91f574719fc01ba8306fdf7a464eee": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66208"
+    },
     "7e74eec39c17d93a4d5a5115861579d3261ad53a9cfad4d4d2c610f9bddc8241": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "7e93d8e61397ba8a370baf7b4f7c616cc1b0b86f5fb8f98f6776403561f6bf70": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -912,6 +1188,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "83188825f4f817499242ac040e2f8f4ef40162476c02c1d592e99ff293eeeafd": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "83b396c99b57e390e1de28df14489a22325b1b36067c07792ca8f687d5215aa7": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -923,6 +1205,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "84f655047f6a9119f6921ce98a62418a3444252b364101ea578b7bab33533366": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://ygcf.or.kr/Home/H10000/H10200/concertDetail?conct_no=2880"
     },
     "85742a0b9cdbd254753f40ca5371758e5bfe333a3a0289909aefaccc48bfda5f": {
       "link_checked_at": null,
@@ -978,6 +1266,18 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "8921f407c11e9d3d590f808c640ded13d8fe3f44a383a928c06b916cc638ab67": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
+    "8953f619ef2c0410f8695a84dd46bf290a03a9fc9fb8f37198d101651ee52fdc": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "8a3f30f226db03abfb7e681166a7dae9383dfb4c73cbfcb1604df26d7b209ac5": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -995,6 +1295,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "8ca7ce2e463e82ba7073c69b5444b66e86b46009027c9118767381244ec4907d": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://ticket.yes24.com/Perf/60589"
     },
     "8d0705cd265392136a81ae2ed0591f8b5260d22116055ebc49a5af325f672079": {
       "link_checked_at": null,
@@ -1019,6 +1325,18 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "8f1f9c378d948f019aa30220f6e6fd578f73ef5084bb01e97645b2d0b242871a": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "8f470c588b29f1868d2e64f7366734297a0bba992dff38cbe0ee60bd3be5edc3": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://playticket.co.kr/nav/detail.html?idx=4620"
     },
     "8f72a3a3a892fe76d41b0dca7e7343e09642bbd0f73546ef3c9c50ace143ecff": {
       "link_checked_at": null,
@@ -1061,6 +1379,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "938c8028cf4b53a040928a93e79336db4d0510eac3a3ecbc988b5ce4f2c31023": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://ygcf.or.kr/Home/H10000/H10200/concertDetail?conct_no=2879"
     },
     "94cb2dda2a58223834884eb31e3f1916158e9208c7c814ae72dd6c1ef2c827ce": {
       "link_checked_at": null,
@@ -1110,6 +1434,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "99b488ab9cb46c4fce5a23dfd519ddedf21af393d60533b8ba61e3cf03512737": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66235"
+    },
     "9b4e95e0798e4dcef8aed8349c215687a1ccb72d0171e63842449477e10da833": {
       "link_checked_at": "2026-10-15T21:09:11.246025Z",
       "link_reason": "연결 확인",
@@ -1128,7 +1458,19 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "9c43d1b767a7e88c0634e3a20f32b6136af6815318ae13c451230a3e60fb84b0": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://classicbusan.busan.go.kr/product/performance/253338"
+    },
     "9c82ac17c6a69bee428354ad6986983a2662188219ecbd787c58129570b5d7fb": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "9ca353ccd2a74142b62bd776e45aa9a450baff499314c0b4ed71e837dac9d766": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -1164,6 +1506,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "a0add55c90fb3f2238d6ad48aeb4e7e0198ecc1e51d0aba3c0fe93a3661d4cf8": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "a0d1b93677f71558ef20d1c308650cb175cf48a89cb4b460e448030c711ac389": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -1181,6 +1529,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "a49a10709387de584f36e252b7db5bd47a1d743beee4ba10a72a44bdfa5b126e": {
+      "link_checked_at": "2026-10-15T15:19:53.865236Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://booking.naver.com/booking/12/bizes/634281"
     },
     "a503fef47449da138ddfc7e58637c06778f048c4ec5bde5574356d4a110ecd04": {
       "link_checked_at": "2026-10-15T21:09:11.246025Z",
@@ -1200,10 +1554,22 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "a907fb567e2d94146a1e04e1fe7aabdf07019aa79dcd6d24e4df7bb435b35a9a": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "a9e5af28a23f345acfc1fdba4751ac9a872cbd081b865cc5e8308be4d2e7c2ea": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
+      "link_url": null
+    },
+    "ad6e17f5392d47059906ba35008d59e4c34abf72a92720c983418d89598cd721": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
       "link_url": null
     },
     "adc960e15b6f5c37a45816e1ef607447bfb9b59988a7ab1eb824a29eb9d28fce": {
@@ -1321,6 +1687,12 @@
       "link_url": null
     },
     "b9453f2e2662e544d1bbec67c5ff4a70199108cca9cb8d9f8562be883a71aadc": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "b94a1330409fe749d2967013b1bb3d85ee7cbd5fdd4fd8024a6a5dc29a8f85a4": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -1458,6 +1830,24 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "d06bf3a229c3407d318a8cd1c2c4fbb15abc030dee3134e22bb41d1dca0bdcaf": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
+    "d09cd945fb9619f74b10b6180dd5d2ba151f1ae2c215142f721a64b4b150813d": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "d32ec2cd36bfb3d3470bc423df194a16349219d0507ad98a21e2fe0bcba6d143": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
+    },
     "d3edd207d2e06070467fc86dfbd89884640208510b982274506a2cd29864460e": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -1482,6 +1872,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "d50ea65a3891ebe2ad94c2187c4d4a3244cffd69cb1937ab9e82ef65c1b33a75": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "d6460cb54950bba79ff0a578af172310230376ef5db54e6415546280cb269562": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -1492,6 +1888,12 @@
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
+      "link_url": null
+    },
+    "d6daba4396e18d30fc23e537e15a113c9e987d2e13478d4e0a1c3257bf3c2a08": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
       "link_url": null
     },
     "d75ecd1aab1bcc31459c8d181f516e4134b3e30d25482544ae90a690f2d22307": {
@@ -1530,6 +1932,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "da119c9f49117ee7da39c26fbcdebe9364898444e8d003f3936c5288e3da9bba": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66137"
+    },
     "dcd166592fa492b352f8aeb83dde85346339c8681b1bdf37c2a76b39e6750f52": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -1541,6 +1949,12 @@
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303302"
+    },
+    "dcdf3097e25834239d37d0b836cd7530c2765bf7e6d4d2e395a7753637aa18e1": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
+      "link_url": null
     },
     "dd44302f19015a784540067da6c764f23b4c85841e0ba059548d1f2927febaa0": {
       "link_checked_at": null,
@@ -1601,6 +2015,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "e179e0999ad8dcb8278c4cb090cfd8910126dee876f8593507e351e6347624b8": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66233"
     },
     "e370003c115b51aeb355c8e4fde0a7549cde9dfc74187bc8056fcf17b11dba4e": {
       "link_checked_at": null,
@@ -1668,6 +2088,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "eebfd6a26910628b1fb5a0846d86680af2e262e3dc0421207968d2c801916499": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://ticket.yes24.com/Perf/60619"
+    },
     "f03d85f57da9e2d2eb9d07ae45fbc4039e4b9bf839c98d94af4469c051b71771": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -1681,6 +2107,12 @@
       "link_url": null
     },
     "f1e55618b546b6b4fa02e58a53b297703a13c58737f69e4fe10c3b30d029d07d": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "f2165be6889abfe8207c6c1a08bc711e68e471c346a2ddb43c1bc5e47eeae342": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
@@ -1740,6 +2172,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "f4280fb4975c099df72d064775461aa8f8b01b903ee0dac771066078b20fdb5c": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "f4613cf631d223841cff5b1245b912712aa0fd0ea5ce4641fe96b023ba9e672e": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -1751,6 +2189,12 @@
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
       "link_url": null
+    },
+    "f74803e6d9619477f81a843b33bd6a6a1ae814b0da56beb233fe1ad01f54cd4d": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "연결 확인",
+      "link_status": "verified",
+      "link_url": "https://www.ticketlink.co.kr/product/66259"
     },
     "f81250f0507753c541f49a38c88a06067e31bf678db5cf2ec0122bc3655be161": {
       "link_checked_at": "2026-10-15T21:09:11.246025Z",
@@ -1782,6 +2226,12 @@
       "link_status": "unchecked",
       "link_url": null
     },
+    "f9609131a1f73f10d10d323517b099687c408924c9f4d8dac96ccfa02530ff01": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
     "f9631d73e08b8b7aeb2a7d8d2fef8a759f2bdf422ce0352000fdc4ecabff718e": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
@@ -1792,6 +2242,12 @@
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
+      "link_url": null
+    },
+    "faaf8d7d2713a11bd7a4e9978e52648befe34aa3038ce8893aaba9672bb9b352": {
+      "link_checked_at": "2026-10-15T15:24:12.458857Z",
+      "link_reason": "신뢰 도메인 아님",
+      "link_status": "blocked",
       "link_url": null
     },
     "fb6b0e39ececdc66c228bda90c56009a815b4597a834a958bde9b8963b45bc0a": {
@@ -1819,6 +2275,12 @@
       "link_url": null
     },
     "fcf254d394a4bdf5716e8828c89a890599ae29de3990896c327d71b753c9ce25": {
+      "link_checked_at": null,
+      "link_reason": "검사 한도 초과",
+      "link_status": "unchecked",
+      "link_url": null
+    },
+    "fd3d361caf5ddc25002901b6921c6fb79070ff5ffdde10e576289b7d30618add": {
       "link_checked_at": null,
       "link_reason": "검사 한도 초과",
       "link_status": "unchecked",
