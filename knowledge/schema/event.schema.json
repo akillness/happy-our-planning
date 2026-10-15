@@ -3,47 +3,170 @@
   "$id": "https://happy-our-planning/knowledge/schema/event.schema.json",
   "title": "OKF Event (schema.org/Event aligned)",
   "type": "object",
-  "required": ["id", "name", "start_date", "url", "location", "source", "fetched_at", "content_hash"],
+  "required": [
+    "id",
+    "name",
+    "start_date",
+    "url",
+    "location",
+    "source",
+    "fetched_at",
+    "content_hash"
+  ],
   "additionalProperties": true,
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9_-]+:[^\\s]+$" },
-    "name": { "type": "string", "minLength": 1 },
-    "description": { "type": "string" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_-]+:[^\\s]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
     "event_type": {
       "type": "string",
-      "enum": ["Festival", "MusicEvent", "ExhibitionEvent", "EducationEvent", "BusinessEvent", "SportsEvent", "Event"]
+      "enum": [
+        "Festival",
+        "MusicEvent",
+        "ExhibitionEvent",
+        "EducationEvent",
+        "BusinessEvent",
+        "SportsEvent",
+        "Event"
+      ]
     },
-    "themes": { "type": "array", "items": { "type": "string" } },
-    "start_date": { "type": "string", "format": "date-time" },
-    "end_date": { "type": "string", "format": "date-time" },
-    "application_start": { "type": "string", "format": "date-time" },
-    "application_end": { "type": "string", "format": "date-time" },
-    "status": {
-      "type": "string",
-      "enum": ["Scheduled", "Postponed", "Cancelled", "Moved", "Open", "Closed", "archived"]
-    },
-    "attendance_mode": { "type": "string", "enum": ["Offline", "Online", "Mixed"] },
-    "location": {
-      "type": "object",
-      "required": ["sido"],
-      "properties": {
-        "name": { "type": "string" },
-        "sido": { "type": "string" },
-        "sigungu": { "type": "string" },
-        "address": { "type": "string" },
-        "lat": { "type": "number", "minimum": 33, "maximum": 39 },
-        "lng": { "type": "number", "minimum": 124, "maximum": 132 }
+    "themes": {
+      "type": "array",
+      "items": {
+        "type": "string"
       }
     },
-    "age": { "type": "string" },
-    "audience": { "type": "array", "items": { "type": "string" } },
-    "price": { "oneOf": [{ "type": "number", "minimum": 0 }, { "type": "string", "const": "free" }] },
-    "organizer": { "type": "string" },
-    "url": { "type": "string", "format": "uri" },
-    "image": { "type": "string", "format": "uri" },
-    "source": { "type": "string" },
-    "source_url": { "type": "string", "format": "uri" },
-    "fetched_at": { "type": "string", "format": "date-time" },
-    "content_hash": { "type": "string" }
+    "start_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "application_start": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "application_end": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "Scheduled",
+        "Postponed",
+        "Cancelled",
+        "Moved",
+        "Open",
+        "Closed",
+        "archived"
+      ]
+    },
+    "attendance_mode": {
+      "type": "string",
+      "enum": [
+        "Offline",
+        "Online",
+        "Mixed"
+      ]
+    },
+    "location": {
+      "type": "object",
+      "required": [
+        "sido"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "sido": {
+          "type": "string"
+        },
+        "sigungu": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "lat": {
+          "type": "number",
+          "minimum": 33,
+          "maximum": 39
+        },
+        "lng": {
+          "type": "number",
+          "minimum": 124,
+          "maximum": 132
+        },
+        "venue": {
+          "type": "string"
+        },
+        "geo_precision": {
+          "type": "string",
+          "enum": [
+            "venue",
+            "vworld",
+            "address-cache",
+            "sido-centroid"
+          ]
+        }
+      }
+    },
+    "age": {
+      "type": "string"
+    },
+    "audience": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "price": {
+      "oneOf": [
+        {
+          "type": "number",
+          "minimum": 0
+        },
+        {
+          "type": "string",
+          "const": "free"
+        }
+      ]
+    },
+    "organizer": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "image": {
+      "type": "string",
+      "format": "uri"
+    },
+    "source": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "fetched_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "content_hash": {
+      "type": "string"
+    }
   }
 }

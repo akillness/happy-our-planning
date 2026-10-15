@@ -10,19 +10,19 @@ attendance_mode: Offline
 location:
   name: 금호아트홀 연세
   sido: 서울특별시
-  lat: 37.5665
-  lng: 126.978
-  geo_precision: sido-centroid
+  address: 서울특별시 서대문구 연세로 50 (신촌동) 연세대학교 백양누리 B1 금호아트홀 연세
+  lat: 37.564089
+  lng: 126.93898089999993
+  geo_precision: venue
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303250
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303250
-fetched_at: '2026-10-15T15:54:36+09:00'
+fetched_at: '2026-10-15T17:33:55+09:00'
 end_date: '2026-11-01T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303250_261013_164502.gif
-content_hash: sha256:ad25a3c164a9d1dbea06eb2f9d78e216d468b4aabc1865a83a7c163241c1789b
+content_hash: sha256:b2683f776bd901bf6820fac6c38e30675710e3c21a130728aa2a3f1197472f7f
 ---
 
 # 바이올리니스트 박지영 독주회
 
 > 출처: kopis · 수집 2026-10-15T15:54:36+09:00
-

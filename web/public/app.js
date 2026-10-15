@@ -360,6 +360,7 @@
 
     const meta = make("div", "card-meta");
     meta.appendChild(make("span", "card-location", [event.sido, event.sigungu].filter(Boolean).join(" ") || "지역 정보 없음"));
+    if (event.venue) meta.appendChild(make("span", "card-venue", event.venue));
     meta.appendChild(make("span", "card-date", dateLabel(event)));
     const dist = eventDist(event);
     if (dist != null) meta.appendChild(make("span", "card-distance", fmtDist(dist)));
@@ -402,7 +403,9 @@
     open.innerHTML = escHtml(event.name || "이름 없는 행사");
     open.addEventListener("click", () => showDetail(event));
     wrap.appendChild(open);
+    if (event.venue) wrap.appendChild(make("div", "map-popup-venue", event.venue));
     wrap.appendChild(make("div", "map-popup-meta", `${event.sido || "지역 정보 없음"} · ${dateLabel(event)}`));
+    if (event.address) wrap.appendChild(make("div", "map-popup-addr", event.address));
     const status = statusInfo(event);
     if (status) wrap.appendChild(badge(status.label, status.className));
     if (isFree(event.price)) wrap.appendChild(badge("무료", "free"));
@@ -765,6 +768,7 @@
     }
     const meta = make("div", "detail-meta");
     meta.appendChild(make("span", null, `지역: ${[event.sido, event.sigungu].filter(Boolean).join(" ") || "정보 없음"}`));
+    if (event.venue) meta.appendChild(make("span", null, `장소: ${event.venue}${event.address ? ` (${event.address})` : ""}`));
     meta.appendChild(make("span", null, `일정: ${dateLabel(event)}`));
     meta.appendChild(make("span", null, `비용: ${priceLabel(event)}`));
     const status = statusInfo(event);

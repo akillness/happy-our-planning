@@ -10,19 +10,19 @@ attendance_mode: Offline
 location:
   name: 강릉아트센터 (구. 강릉문화예술관)
   sido: 강원특별자치도
-  lat: 37.8228
-  lng: 128.1555
-  geo_precision: sido-centroid
+  address: 강원도 강릉시 종합운동장길 84 (교동)
+  lat: 37.7716846
+  lng: 128.895305
+  geo_precision: venue
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303158
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303158
-fetched_at: '2026-10-15T15:54:36+09:00'
+fetched_at: '2026-10-15T17:33:55+09:00'
 end_date: '2026-10-28T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303158_261013_124636.jpg
-content_hash: sha256:0db92268e139c7fa8bd141f4be269bc30471261d5939421136e8389ce1f5c837
+content_hash: sha256:1d6162e4b91c015280271958ae8344873ba13273398fc45e7290319559ba26a4
 ---
 
 # 제7회 아트필 재즈밴드 정기연주회: Jazz in Motion [강릉]
 
 > 출처: kopis · 수집 2026-10-15T15:54:36+09:00
-

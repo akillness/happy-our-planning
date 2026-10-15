@@ -10,19 +10,19 @@ attendance_mode: Offline
 location:
   name: 금사락
   sido: 부산광역시
-  lat: 35.1796
-  lng: 129.0756
-  geo_precision: sido-centroid
+  address: 부산광역시 금정구 개좌로 162 (회동동) 예술지구 내 금사락
+  lat: 35.2257448
+  lng: 129.1182007
+  geo_precision: venue
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303171
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303171
-fetched_at: '2026-10-15T15:54:36+09:00'
+fetched_at: '2026-10-15T17:33:55+09:00'
 end_date: '2026-10-31T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303171_261013_132440.jpg
-content_hash: sha256:f60c881498b68d62a75e1be5b499fd2f967a175c52bd0fe2636b9ed6520178dd
+content_hash: sha256:a1932220ae0f392a856cbdb96e142e632226dd063c5fb4df6081e0db45279b88
 ---
 
 # Hathaw9y Universe ep.4 with Gogohawk [부산]
 
 > 출처: kopis · 수집 2026-10-15T15:54:36+09:00
-

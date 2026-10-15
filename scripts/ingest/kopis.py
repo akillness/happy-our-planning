@@ -46,6 +46,88 @@ class CollectionError(RuntimeError):
         super().__init__(f"KOPIS collection {reason}{suffix}")
 
 
+# 공연장(fcltynm) → 실제 주소 좌표. 목록 API는 공연장명만 주므로 시설검색
+# (/prfplc?shprfnmfct=) + 시설상세(/prfplc/{mt10id}의 adres/la/lo)로 보강한다.
+# 결과는 knowledge/_geocache.json에 영속(부정 캐시 포함) — CI 재실행 시 신규만 조회.
+_VENUE_CACHE_FILENAME = "_geocache.json"
+_VENUE_NEW_LIMIT = 250  # 1회 수집당 신규 공연장 조회 상한(쿼터 보호)
+
+
+def _venue_cache_path():
+    from pathlib import Path
+
+    from scripts.common.config import ROOT
+
+    return ROOT / "knowledge" / _VENUE_CACHE_FILENAME
+
+
+def _load_venue_cache() -> dict:
+    import json as _json
+
+    try:
+        payload = _json.loads(_venue_cache_path().read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return payload if isinstance(payload, dict) else {}
+
+
+def _save_venue_cache(cache: dict) -> None:
+    import json as _json
+
+    try:
+        _venue_cache_path().write_text(
+            _json.dumps(cache, ensure_ascii=False, indent=2, sort_keys=True),
+            encoding="utf-8",
+        )
+    except OSError:
+        pass
+
+
+def _norm_venue(name: object) -> str:
+    import re as _re
+
+    return _re.sub(r"\s+", "", str(name or "")).lower()
+
+
+def _venue_search_names(name: str) -> list[str]:
+    """전체 이름 → 괄호 메모 제거형 순으로 최대 2회 검색."""
+    full = (name or "").strip()
+    if not full:
+        return []
+    out = [full]
+    short = full.split("(")[0].strip()
+    if short and short != full:
+        out.append(short)
+    return out
+
+
+def _pick_facility(rows: list[dict], name: str) -> dict | None:
+    """시설검색 결과에서 공연장명 정확 일치만 채택(오매칭 방지)."""
+    want = _norm_venue(name)
+    if not want:
+        return None
+    for row in rows:
+        if _norm_venue(row.get("fcltynm")) == want:
+            return row
+    return None
+
+
+def _geo_from_facility(detail: dict) -> dict | None:
+    """시설상세 → {lat, lng, address, mt10id}. 한국 영역 밖이면 None."""
+    try:
+        lat = float(str(detail.get("la") or "").strip())
+        lng = float(str(detail.get("lo") or "").strip())
+    except (TypeError, ValueError):
+        return None
+    if not (33.0 <= lat <= 39.0 and 124.0 <= lng <= 132.0):
+        return None
+    address = str(detail.get("adres") or "").strip()
+    if not address:
+        return None
+    return {"lat": lat, "lng": lng, "address": address,
+            "mt10id": str(detail.get("mt10id") or "").strip() or None}
+
+
 def _kst_date(value: str, end: bool = False) -> str | None:
     """'2026.07.18' → ISO 8601(KST). end=True면 23:59:59."""
     value = (value or "").replace("-", ".").strip()
@@ -270,7 +352,77 @@ class KopisAdapter(SourceAdapter):
         self.complete = self.complete or not self.truncated
         self.collection_metadata["complete"] = self.complete
         self.collection_metadata["empty"] = not rows
+        if sender is None and self.sender is None and self.client is None and self.api_key:
+            self._attach_venue_geo(rows)
         return rows
+
+    def _venue_request(self, path: str, params: dict,
+                       sender: Callable[[str, dict, float], Any] | None = None) -> list[dict]:
+        base = str(self.cfg.get("base_url", "")).rstrip("/") or "https://www.kopis.or.kr/openApi/restful"
+        url = f"{base}/{path.lstrip('/')}"
+        try:
+            response = self._request(url, params, sender)
+        except CollectionError:
+            return []
+        try:
+            return _parse_remote_xml(_text(response))
+        except CollectionError:
+            return []
+
+    def _attach_venue_geo(self, rows: list[dict],
+                          sender: Callable[[str, dict, float], Any] | None = None) -> dict:
+        """공연장명 → 시설검색+상세로 실제 좌표 부착. 결과는 영속 캐시(부정 포함).
+
+        반환: {"resolved": n, "missed": m, "cached": c} 통계.
+        """
+        cache = _load_venue_cache()
+        names: list[str] = []
+        for row in rows:
+            venue = str(row.get("fcltynm") or "").strip()
+            if venue and venue not in names:
+                names.append(venue)
+        stats = {"resolved": 0, "missed": 0, "cached": 0, "capped": 0}
+        fresh = 0  # 이번 실행의 신규 조회(쿼터 보호 대상)
+        for venue in names:
+            hit = cache.get(venue)
+            if isinstance(hit, dict) and not hit.get("miss"):
+                stats["cached"] += 1
+                continue
+            if isinstance(hit, dict) and hit.get("miss"):
+                stats["missed"] += 1
+                continue
+            if fresh >= _VENUE_NEW_LIMIT:
+                stats["capped"] += 1
+                continue
+            fresh += 1
+            geo = None
+            for query in _venue_search_names(venue):
+                found = self._venue_request("prfplc", {
+                    self._auth_param: self.api_key,
+                    "cpage": 1, "rows": 10, "shprfnmfct": query,
+                }, sender)
+                picked = _pick_facility(found, venue)
+                if picked and picked.get("mt10id"):
+                    detail = self._venue_request(f"prfplc/{str(picked['mt10id']).strip()}", {
+                        self._auth_param: self.api_key,
+                    }, sender)
+                    if detail:
+                        geo = _geo_from_facility(detail[0])
+                    break
+            if geo:
+                cache[venue] = {**geo, "venue": venue}
+                stats["resolved"] += 1
+            else:
+                cache[venue] = {"miss": True}
+                stats["missed"] += 1
+        _save_venue_cache(cache)
+        for row in rows:
+            venue = str(row.get("fcltynm") or "").strip()
+            hit = cache.get(venue) if venue else None
+            if isinstance(hit, dict) and not hit.get("miss") and hit.get("lat") is not None:
+                row["_venue_geo"] = hit
+        self.collection_metadata["venue_geo"] = stats
+        return stats
 
     def _now(self) -> str:
         return _clock_iso(self.clock)
@@ -303,6 +455,12 @@ class KopisAdapter(SourceAdapter):
             "source_url": f"{self.cfg.get('base_url','')}/pblprfr/{mt20id}",
             "fetched_at": self._now(),
         }
+        venue_geo = n.get("_venue_geo") if isinstance(n.get("_venue_geo"), dict) else None
+        if venue_geo:
+            event["location"]["address"] = venue_geo.get("address")
+            event["location"]["lat"] = venue_geo.get("lat")
+            event["location"]["lng"] = venue_geo.get("lng")
+            event["location"]["geo_precision"] = "venue"
         if end:
             event["end_date"] = end
         if n.get("poster"):
