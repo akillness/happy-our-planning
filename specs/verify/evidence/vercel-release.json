@@ -211,7 +211,277 @@
     "branch": "main",
     "root_directory": "web/public",
     "publication_authorized": true,
-    "reason": "Daily ingestion pushes otherwise redeploy old committed UI/data builders"
+    "reason": "Daily ingestion pushes otherwise redeploy old committed UI/data builders",
+    "verification_scope": "Immutable application-release snapshot; later receipt-only commits may advance main without changing the verified runtime files",
+    "application_commit_sha": "e0d0a1e68d6cdde9089b1618d263cde6e14fecf7",
+    "parent_sha": "960005d31618af1982b4dd563df34980346acd83",
+    "push_type": "normal fast-forward",
+    "push_receipt": "To https://github.com/akillness/happy-our-planning.git\n   960005d..e0d0a1e  main -> main",
+    "upstream_equality_observed": true,
+    "published_file_count": 34,
+    "intentional_local_exclusions": [
+      "knowledge/sources/collection-status.json (test-side-effect metadata)"
+    ],
+    "verified_deployment": {
+      "id": "dpl_8NZpnYVzNTDuaPdTuibi1s2cogMn",
+      "url": "happy-our-planning-oippnotet-akillness-projects.vercel.app",
+      "project": "happy-our-planning",
+      "ready_state": "READY",
+      "target": "production",
+      "source": "git",
+      "git_source": {
+        "ref": "main",
+        "repoId": 1287154418,
+        "sha": "e0d0a1e68d6cdde9089b1618d263cde6e14fecf7",
+        "type": "github",
+        "prId": null
+      }
+    },
+    "public_http_method": "Unauthenticated HTTP GET with redirects disabled; no protection bypass",
+    "public_http_checks": [
+      {
+        "path": "/",
+        "http_status": 200,
+        "bytes": 6844,
+        "sha256": "510cd16d8d1575700a89e3f0066a5f22876cd95d26f9d9fc406bb31e4f82c3eb",
+        "expected_sha256": "510cd16d8d1575700a89e3f0066a5f22876cd95d26f9d9fc406bb31e4f82c3eb",
+        "matches_published_source": true
+      },
+      {
+        "path": "/data/events.json",
+        "http_status": 200,
+        "bytes": 9510,
+        "sha256": "f1992c1d87397e62bf23fd1de3d7624776f76e08e6767ce143183b33dba0f821",
+        "expected_sha256": "f1992c1d87397e62bf23fd1de3d7624776f76e08e6767ce143183b33dba0f821",
+        "matches_published_source": true
+      },
+      {
+        "path": "/assets/family-outing.webp",
+        "http_status": 200,
+        "bytes": 161798,
+        "sha256": "08010bb7e2b829f07d9bffa19387ea17de5e89f5f31a12bd3a37705e95631cf1",
+        "expected_sha256": "08010bb7e2b829f07d9bffa19387ea17de5e89f5f31a12bd3a37705e95631cf1",
+        "matches_published_source": true
+      },
+      {
+        "path": "/assets/family-outing-mobile.webp",
+        "http_status": 200,
+        "bytes": 73390,
+        "sha256": "082dae66ea8a5c195f2ffaf8af30461a67b9349204f9b6833723294d9d1b416c",
+        "expected_sha256": "082dae66ea8a5c195f2ffaf8af30461a67b9349204f9b6833723294d9d1b416c",
+        "matches_published_source": true
+      },
+      {
+        "path": "/app.js",
+        "http_status": 200,
+        "bytes": 32586,
+        "sha256": "29fb618b2c90d01ea81f9820e122aa8798cc33f361e94141cac644de5fb1f459",
+        "expected_sha256": "29fb618b2c90d01ea81f9820e122aa8798cc33f361e94141cac644de5fb1f459",
+        "matches_published_source": true
+      },
+      {
+        "path": "/styles.css",
+        "http_status": 200,
+        "bytes": 16167,
+        "sha256": "c1eff24aef9e966f67a3ac8dee6263df5b3469ddacaaa045a3ad2d85e9192439",
+        "expected_sha256": "c1eff24aef9e966f67a3ac8dee6263df5b3469ddacaaa045a3ad2d85e9192439",
+        "matches_published_source": true
+      },
+      {
+        "path": "/assets/family-science-spot.webp",
+        "http_status": 200,
+        "bytes": 19702,
+        "sha256": "a3278a4094cbfacedac706a2ac17796e3e93ee268237ee220035d11d68935e57",
+        "expected_sha256": "a3278a4094cbfacedac706a2ac17796e3e93ee268237ee220035d11d68935e57",
+        "matches_published_source": true
+      },
+      {
+        "path": "/assets/family-craft-spot.webp",
+        "http_status": 200,
+        "bytes": 21634,
+        "sha256": "d2834219d14e6900790b50fe1d171fea2ff4843cfba9171dc420c2f5b448e938",
+        "expected_sha256": "d2834219d14e6900790b50fe1d171fea2ff4843cfba9171dc420c2f5b448e938",
+        "matches_published_source": true
+      },
+      {
+        "path": "/data/updated.json",
+        "http_status": 200,
+        "bytes": 1231,
+        "sha256": "85271b9d16bcc0fbe48c46314c6ab37cdf205dd7d06b104e9cd791e46ae5f911",
+        "expected_sha256": "85271b9d16bcc0fbe48c46314c6ab37cdf205dd7d06b104e9cd791e46ae5f911",
+        "matches_published_source": true
+      }
+    ],
+    "excluded_file_checks": [
+      {
+        "path": "/data/events.db",
+        "http_status": 404
+      },
+      {
+        "path": "/.env.local",
+        "http_status": 404
+      },
+      {
+        "path": "/worker/ai-proxy.js",
+        "http_status": 404
+      }
+    ],
+    "ci": {
+      "run_id": 38692688064,
+      "url": "https://github.com/akillness/happy-our-planning/actions/runs/38692688064",
+      "head_sha": "e0d0a1e68d6cdde9089b1618d263cde6e14fecf7",
+      "conclusion": "success",
+      "observed_step_results": {
+        "Type check (mypy gate, S3-T3/G6)": "success",
+        "Unit tests": "success",
+        "OKF schema validate (rc==0 gate, C3)": "success"
+      }
+    },
+    "production_browser": {
+      "target": "https://happy-our-planning.vercel.app/",
+      "sha_verified": "e0d0a1e68d6cdde9089b1618d263cde6e14fecf7",
+      "tool": "agent-browser (vercel-labs/agent-browser), fresh named session 'notchima-verify', closed at end",
+      "overall_verdict": "PASS — all scenarios pass with measured evidence; zero errors, zero failed requests, no mocked/live-inventory claims made",
+      "evidence": [
+        "specs/verify/evidence/vercel-live-desktop.png (1440x2033 PNG, full-page)",
+        "specs/verify/evidence/vercel-live-mobile.png (360x3423 PNG, full-page)"
+      ],
+      "scenarios": [
+        {
+          "id": "title",
+          "viewport": "both",
+          "verdict": "PASS",
+          "measurement": "document.title === '놓치마 - 아이와 함께 찾는 이번 주말 행사' on both 1440 and 360 loads"
+        },
+        {
+          "id": "hero-eyebrow / hero-stat / hero-title additions",
+          "viewport": 1440,
+          "verdict": "PASS",
+          "measurement": ".hero-eyebrow text='전국 행사 지도 · 가족 근거 표시 · 출처 상태 공개'; #heroTitle='아이와 어디서, 무엇을 해볼까요?'; two .hero-stat pills read '4건 표시 중' (bound to #heroCount, live-updates with filters) and '무료·신청가능·체험 필터 지원' (static descriptor)"
+        },
+        {
+          "id": "8-payload / 4-family counts",
+          "viewport": 1440,
+          "verdict": "PASS",
+          "measurement": "#freshness text includes '· 8건' (total payload, confirmed independently against web/public/data/events.json = 8 objects); default (kids checked) #count/#heroCount/cardsInList all = 4 (family_friendly:true count in events.json = 4, cross-checked with python3 json load)"
+        },
+        {
+          "id": "hero/science/craft image load",
+          "viewport": "both",
+          "verdict": "PASS",
+          "measurement": "hero-art img .complete=true naturalWidth=1200/naturalHeight=675 desktop (family-outing.webp) and naturalWidth=720 mobile currentSrc=family-outing-mobile.webp (picture source swap confirmed live, not assumed); both activity-art imgs (family-science-spot.webp, family-craft-spot.webp) .complete=true naturalWidth=384/384 on both viewports"
+        },
+        {
+          "id": "desktop 160px hero art / map-left list-right / filter order",
+          "viewport": 1440,
+          "verdict": "PASS",
+          "measurement": "hero-art img renderedHeight=160 (<=180 bound satisfied); getComputedStyle(.workspace).gridTemplateAreas='\"map results\"'; mapPanelRect.left=32/right=591.9 strictly left of resultsRect.left=615.9/right=1408; #filters.getBoundingClientRect().bottom=616.7 < .quick-experiences.getBoundingClientRect().top=616.7 (filters renders immediately above activities, confirmed both DOM order and visual position)"
+        },
+        {
+          "id": "science chip -> 1 result + URL/select/count sync",
+          "viewport": 1440,
+          "verdict": "PASS",
+          "measurement": "click '과학·탐구 1건' chip -> location.href becomes '?activity=%EA%B3%BC%ED%95%99%C2%B7%ED%83%90%EA%B5%AC'; #activity select value synced to '과학·탐구'; #count/#heroCount/cardsInList all =1; chip aria-pressed='true', sibling craft chip aria-pressed='false' (mutually exclusive)"
+        },
+        {
+          "id": "reset -> 4 (family default)",
+          "viewport": 1440,
+          "verdict": "PASS",
+          "measurement": "click #reset -> location.href reverts to clean origin (no query), #activity='', #kids.checked=true, #freeOnly/#applyable=false, count/heroCount/cardsInList all =4"
+        },
+        {
+          "id": "kids=0 -> 8",
+          "viewport": 1440,
+          "verdict": "PASS",
+          "measurement": "uncheck #kids -> URL becomes '?kids=0', count/heroCount/cardsInList all =8, resultHint='8건. 종료된 행사 8건은...'"
+        },
+        {
+          "id": "detail dialog open/close + focus return",
+          "viewport": "both (1440 and 360 independently exercised)",
+          "verdict": "PASS",
+          "measurement": "click a card's '상세 보기' button -> #detail.open=true, document.activeElement becomes '.close' button (닫기) per openDialog() focus-to-close behavior; click .close -> #detail.open=false, document.activeElement === the original triggering button (verified via a transient data-test-tag marker read back after close), confirmed on both 1440 and 360 viewports independently",
+          "tooling_note": "[non-defect] a '상세 보기' button below the current scroll fold silently no-ops on both ref-based and CSS-selector click until scrollintoview is issued first -- this is agent-browser/Playwright actionability behavior, not a site bug; no console/page error was thrown either time, confirming the click simply never reached the element"
+        },
+        {
+          "id": "360px no horizontal overflow",
+          "viewport": 360,
+          "verdict": "PASS",
+          "measurement": "document.documentElement.scrollWidth === clientWidth === 360 at rest AND with the detail dialog open (checked both states)"
+        },
+        {
+          "id": "360px result cards before map",
+          "viewport": 360,
+          "verdict": "PASS",
+          "measurement": "getComputedStyle(.workspace).gridTemplateAreas='\"results\" \"map\"'; actual getBoundingClientRect: .results.top=1467.7 < .map-panel.top=3004.5 (visual order confirmed, not just CSS source)"
+        },
+        {
+          "id": "360px responsive mobile image",
+          "viewport": 360,
+          "verdict": "PASS",
+          "measurement": "hero-art img.currentSrc resolves to '.../assets/family-outing-mobile.webp' (the <source media=\"(max-width:600px)\"> candidate), naturalWidth=720, complete=true; rendered height clamped to 112px per the max-width:640px stylesheet rule (intentional responsive sizing, not a bug)"
+        },
+        {
+          "id": "360px major 44px hit areas",
+          "viewport": 360,
+          "verdict": "PASS",
+          "measurement": "measured 18 interactive controls (.check-pill x3, #reset, .activity-chip x2, .region-chip x3, #aiBtn, .card-actions .button x8, .link-status x1 sampled) via getBoundingClientRect -- 0 of 18 under 44px height (e.g. check-pills=44px, reset=44px, activity-chip=84px, dialog .close=44x51 on mobile)"
+        },
+        {
+          "id": "ended/closed badge contrast (getComputedStyle, not source tokens)",
+          "viewport": 1440,
+          "verdict": "PASS",
+          "measurement": "getComputedStyle on live .badge.ended elements: color=rgb(69,102,93) [#45665d], backgroundColor=rgb(237,240,238) [#edf0ee]; WCAG relative-luminance contrast computed in-browser from these actual values = 5.53:1, exceeds the 4.5:1 AA threshold (matches the ~5.52:1 design target within rounding). Only '.badge.ended' instances were present in the sampled views (4 instances, identical values); '.badge.closed' shares the exact same CSS rule '.badge.closed, .badge.ended' so the measured ratio applies identically to that class, though no literal '마감'/closed-labeled event happened to be in the currently loaded sample set at verification time"
+        },
+        {
+          "id": "console / page errors",
+          "viewport": "both",
+          "verdict": "PASS",
+          "measurement": "agent-browser console and agent-browser errors returned empty output at every checkpoint: initial desktop load, after science-chip/reset/kids toggles, after dialog open/close, initial mobile load, after mobile dialog open/close, final reload before each screenshot -- zero entries throughout the entire session"
+        },
+        {
+          "id": "network requests / failed vs benign cancellation",
+          "viewport": "both",
+          "verdict": "PASS",
+          "measurement": "Every captured request across both viewports resolved 200 (first load) or 304 (cached revalidation) for all document/stylesheet/script/fetch/image/tile requests (styles.css, app.js, leaflet, fuse.js, events/facets/regions/updated.json, OSM tiles, all 4 local asset webps, favicon, icon). One transient blank-status entry for family-outing-mobile.webp appeared only during my own mid-test 'set viewport + open' sequence (the in-flight request from the pre-navigation page context was superseded by the following full navigation, then re-requested and succeeded) -- this is the exact benign responsive-candidate/navigation cancellation pattern called out in the task, reproduced only by my own rapid viewport switch, not by normal page usage. A clean isolated reload (network log cleared, single fresh navigation) showed zero such artifacts and zero real failures (no 4xx/5xx, no aborted/failed terminal status) anywhere in the session"
+        },
+        {
+          "id": "sample/offline disclosure",
+          "viewport": 1440,
+          "verdict": "PASS (observed, not claimed live)",
+          "measurement": "#sourceStatus live text: '수집 모드: 오프라인(offline) · 예약 설정: 매일 03:00 KST · 최근 실시간 성공 기록 없음 · 출처별: kopis 기존 기록(fixture) · tourapi 기존 기록(fixture) · websearch 기존 기록(fixture)'; .data-note text: '샘플 기록이 포함된 정적 목록입니다. 날짜·비용은 출처에서 확인하세요.' Both visible in the desktop screenshot. The deployed app itself explicitly states this is offline/fixture-backed sample data with no recent live success -- reported here as an observed disclosure, not as a claim of real-time inventory."
+        }
+      ],
+      "errors_found": [],
+      "failed_requests_found": [],
+      "constraints_honored": [
+        "Fresh disposable named session ('notchima-verify'), not a reused/logged-in browser; session explicitly closed at the end (confirmed via 'agent-browser session list' -> 'No active sessions')",
+        "No source, test, or config file edits -- git status confirms only the two gitignored evidence PNGs were written (specs/verify/evidence/*.png is gitignored per .gitignore:27); no formatters/linters/suites were run",
+        "No provider mutations, no route mocks/interception (agent-browser 'network route' was never invoked), no external event-link navigation (only internal UI elements -- chips, checkboxes, reset, detail dialog -- were clicked; the example.org/kopis.or.kr/etc outbound link-status badges were observed in the DOM but never clicked)",
+        "notchima.vercel.app was never visited; only https://happy-our-planning.vercel.app/ was navigated",
+        "Did not represent Main's Vercel-API deployment metadata as independently browser-observed; this report's SHA cross-reference came from running 'git log' / 'git status' myself in the repo, and all UI/runtime claims came from my own browser session"
+      ],
+      "out_of_scope_observation": "git status shows specs/verify/evidence/vercel-release.json as modified, but this skill made no writes to that file (only the two gitignored *.png evidence files were written); that diff predates this verification pass and appears to belong to Main's earlier Vercel API capture -- flagged to Main via IRC for awareness, not altered or investigated further here as it is outside this assignment's scope (browser verification only)."
+    },
+    "identity_binding_note": "Main authenticated Vercel API confirmed the same deployment and application SHA before HTTP/browser checks and after the browser pass; browser Git SHA cross-reference alone is not provider identity proof.",
+    "post_browser_identity": {
+      "deployment_id": "dpl_8NZpnYVzNTDuaPdTuibi1s2cogMn",
+      "git_sha": "e0d0a1e68d6cdde9089b1618d263cde6e14fecf7",
+      "ready_state": "READY"
+    },
+    "screenshots": [
+      {
+        "path": "specs/verify/evidence/vercel-live-desktop.png",
+        "bytes": 747973,
+        "sha256": "c2fd17b7889b425206a2e69a3795734a08d591bc531d39bc6a914b4f7531e8dc",
+        "scope": "Local gitignored browser evidence, not a deployed runtime file"
+      },
+      {
+        "path": "specs/verify/evidence/vercel-live-mobile.png",
+        "bytes": 432515,
+        "sha256": "6ea5ace326600785c2e39bd872c0916d058eee878a1aefa6034988a06207201d",
+        "scope": "Local gitignored browser evidence, not a deployed runtime file"
+      }
+    ]
   },
   "data_boundary": "Public catalog contains offline/sample fixture records; no live API or hosted ingestion success claimed",
   "cloudflare_workers": "Excluded; no Worker deployment performed",
