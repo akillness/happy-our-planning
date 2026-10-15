@@ -197,12 +197,13 @@
         ],
         "explanation": "Both 'no status' entries are standard browser <picture>-element candidate preloading/cancellation (the browser speculatively starts a request for an alternate responsive-image source, then abandons it once media-query resolution picks the other source). Same-origin, zero rendering impact, and in each case the selected sibling image loaded successfully with 200/304. These were correctly excluded from the error count."
       },
-      "screenshots": [
+      "non_goals_respected": "No repo/code edits, no test files created, no formatters/linters run, no provider/API mutation, no network route/mock/intercept used anywhere in this run, no external links clicked, no form submitted. Browser session was closed at the end.",
+      "overall_verdict": "PASS — every desktop-1440 and mobile-360 scenario in the Change section verified true against the live production deployment, with zero console errors, zero page errors, and zero failed HTTP requests. Two screenshots saved as specified.",
+      "screenshots_observed_at_initial_run": [
         "specs/verify/evidence/vercel-live-desktop.png (full-page, 1440x1999, 738142 bytes)",
         "specs/verify/evidence/vercel-live-mobile.png (full-page, 360x3334, 420112 bytes)"
       ],
-      "non_goals_respected": "No repo/code edits, no test files created, no formatters/linters run, no provider/API mutation, no network route/mock/intercept used anywhere in this run, no external links clicked, no form submitted. Browser session was closed at the end.",
-      "overall_verdict": "PASS — every desktop-1440 and mobile-360 scenario in the Change section verified true against the live production deployment, with zero console errors, zero page errors, and zero failed HTTP requests. Two screenshots saved as specified."
+      "screenshot_retention_note": "These filenames were reused for newer production captures; historical observations, not immutable initial-release image references."
     }
   },
   "git_source": {
@@ -213,5 +214,54 @@
     "reason": "Daily ingestion pushes otherwise redeploy old committed UI/data builders"
   },
   "data_boundary": "Public catalog contains offline/sample fixture records; no live API or hosted ingestion success claimed",
-  "cloudflare_workers": "Excluded; no Worker deployment performed"
+  "cloudflare_workers": "Excluded; no Worker deployment performed",
+  "local_gates": {
+    "typecheck": {
+      "command": "uvx --python 3.12 --with-requirements requirements.txt mypy scripts/ --ignore-missing-imports",
+      "exit_code": 0,
+      "observed_result": "Success: no issues found in 36 source files",
+      "protocol_fix": "Retry protocol requires only status_code and preserves concrete response type via bounded TypeVar; no LinkResponse.json stub or new swallowed-error fallback"
+    },
+    "ui": {
+      "command": "PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH=\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" DEBUG=pw:api python3 -u specs/verify/run_ui_check.py",
+      "exit_code": 0,
+      "passed": 58,
+      "total_checks": 58,
+      "data_context": "deterministic routed fixture (fixed KST 2026-10-15), not production events.json",
+      "evidence": "specs/verify/evidence/ui-check.json",
+      "contrast_red_observation": {
+        "passed": 57,
+        "total_checks": 58,
+        "rendered_ratio": 4.03789453088102
+      },
+      "contrast_green": [
+        {
+          "check": "종료·마감 배지 렌더 대비 4.5 이상",
+          "ok": true,
+          "detail": "[{\"text\": \"종료\", \"color\": \"rgb(69, 102, 93)\", \"background\": \"rgb(237, 240, 238)\", \"ratio\": 5.525805319709427}]"
+        }
+      ],
+      "diagnostic_note": "120s and 240s outer-wall-timeout attempts were not passes. Final completed run activates original page before desktop screenshot. All 58 assertions retained, including nonvacuous expired-event exclusion."
+    },
+    "reviews": {
+      "collector_and_harness": "IngestHarnessReview: no blocker on type fixes and locator updates; pre-existing vacuous expiry scenario was subsequently rewired to a real expired card plus active recommendation control",
+      "retry_and_build": "LinkProtocolReview: no blocker; reviewed final minimal protocol version, not the superseded json-stub proposal",
+      "ui_and_native_configs": "FancyPreservationReview: no critical/high blocker; contrast and collection-role description findings addressed"
+    },
+    "unit_tests": {
+      "command": "uvx --python 3.12 --with-requirements requirements.txt python -m unittest discover -s tests",
+      "exit_code": 0,
+      "total": 206,
+      "passed": 203,
+      "existing_skipped": 3,
+      "observed_result": "Ran 206 tests in 0.607s; OK (skipped=3)"
+    },
+    "schema": {
+      "command": "uvx --python 3.12 --with-requirements requirements.txt python scripts/build/validate.py",
+      "exit_code": 0,
+      "passed": 10,
+      "total": 10,
+      "failed": 0
+    }
+  }
 }

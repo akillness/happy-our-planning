@@ -42,7 +42,7 @@ def _is_free(price: object) -> bool:
 def event_jsonld(
     e: dict,
     checks: dict | None = None,
-    now: object = None,
+    now: datetime | None = None,
 ) -> dict:
     """행사 dict → schema.org/Event JSON-LD(검증된 링크만 외부 URL로 사용)."""
     place: dict = {"@type": "Place", "name": e.get("sido") or "대한민국"}

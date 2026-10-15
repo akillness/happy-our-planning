@@ -31,7 +31,7 @@ _GENRE_THEME = {
 _STATE = {"공연중": "Scheduled", "공연예정": "Scheduled", "공연완료": "archived"}
 
 
-def _normalize_api_key(value: str | None) -> str | None:
+def _normalize_api_key(value: str) -> str:
     if not isinstance(value, str):
         return value
     return urllib.parse.unquote(value.strip())
@@ -162,8 +162,9 @@ class KopisAdapter(SourceAdapter):
         selected = sender or self.sender
         if selected is not None:
             return lambda: selected(self._request_url, self._request_params, self._timeout)
-        if self.client is not None:
-            return lambda: self.client.get(
+        client = self.client
+        if client is not None:
+            return lambda: client.get(
                 self._request_url, params=self._request_params, timeout=self._timeout
             )
         import httpx

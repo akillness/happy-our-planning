@@ -396,7 +396,7 @@ def _resolve_default(host: str, port: int) -> list[str]:
             address = info[4][0]
         except (IndexError, TypeError):
             continue
-        if address not in result:
+        if isinstance(address, str) and address not in result:
             result.append(address)
     if not result:
         raise LinkDnsError

@@ -25,7 +25,7 @@ class CollectionError(RuntimeError):
         suffix = f" (HTTP {status})" if isinstance(status, int) else ""
         super().__init__(f"TourAPI collection {reason}{suffix}")
 
-def _normalize_api_key(value: str | None) -> str | None:
+def _normalize_api_key(value: str) -> str:
     if not isinstance(value, str):
         return value
     return unquote(value.strip())
@@ -212,8 +212,9 @@ class TourApiAdapter(SourceAdapter):
         selected = sender or self.sender
         if selected is not None:
             return lambda: selected(self._request_url, self._request_params, self._timeout)
-        if self.client is not None:
-            return lambda: self.client.get(
+        client = self.client
+        if client is not None:
+            return lambda: client.get(
                 self._request_url, params=self._request_params, timeout=self._timeout
             )
         import httpx

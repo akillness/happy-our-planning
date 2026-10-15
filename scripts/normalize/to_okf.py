@@ -116,7 +116,8 @@ def run(only: list[str] | None = None, *, use_network: bool = False) -> dict:
         snapshot_complete = False
         complete = False
         truncated = False
-        prior = previous.get(key) if isinstance(previous.get(key), dict) else {}
+        raw_prior = previous.get(key)
+        prior = raw_prior if isinstance(raw_prior, dict) else {}
         adapter_cls = ADAPTERS.get(key)
         if not adapter_cls:
             error = "AdapterMissing"

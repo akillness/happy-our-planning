@@ -1,0 +1,153 @@
+{
+  "created_at": "2026-10-15",
+  "provider": "god-tibo-imagen/private-codex",
+  "image_model": "gpt-image-2.5-flare",
+  "runtime_provider_dependency": false,
+  "concept": "assets/design/family-concept.png",
+  "source": "assets/design/family-outing-source.png",
+  "concept_analysis": {
+    "audience": "아이와 함께 지역 행사를 찾는 부모",
+    "direction": "밝은 수채화와 구아슈 질감의 가족 나들이 일러스트, 크림색 바탕, 진한 초록 글자",
+    "palette": {"cream": "#fffaf0", "ink": "#193c35", "green": "#24755c", "apricot": "#f3a849", "sky": "#cdebf3"},
+    "layout": "HTML 제목과 읽기 쉬운 필터를 삽화와 분리하고, 실제 행사 지도와 목록을 중심에 배치",
+    "not_imported": "컨셉 이미지의 예시 행사명·날짜·로그인·통계는 실제 데이터나 기능이 아니므로 미반영",
+    "use": "장식용 생성 삽화이며 특정 행사장 사진이나 시설 증거가 아님"
+  },
+  "generation": {
+    "concept_requested_size": "1536x1024",
+    "concept_actual_size": "1536x1024",
+    "source_requested_size": "2048x1152",
+    "source_actual_size": "1672x941",
+    "reference": "family-concept.png was supplied as the style reference for the separate no-text runtime illustration",
+    "prompt_summary": "Original Korean family of four walking toward festival tents through yellow wildflowers; watercolor/gouache paper grain, evergreen/cream/sky/apricot palette; no text, UI, logos, signage or factual event claims"
+  },
+  "superseded_runtime_assets": [
+    {"path": "web/public/assets/family-outing.webp", "width": 1200, "height": 675, "bytes": 244526, "quality": 81},
+    {"path": "web/public/assets/family-outing-mobile.webp", "width": 720, "height": 480, "bytes": 110626, "quality": 78}
+  ],
+  "runtime_assets": [
+    {"path": "web/public/assets/family-outing.webp", "width": 1200, "height": 675, "bytes": 161798, "quality": 82, "asset_id": "family-nature-hero"},
+    {"path": "web/public/assets/family-outing-mobile.webp", "width": 720, "height": 480, "bytes": 73390, "quality": 80, "asset_id": "family-nature-hero"}
+  ],
+  "original_art_note": "Three new assets are original decorative category illustrations generated with gti through the private Codex backend. They use hand-painted watercolor/gouache nature and family warmth; they are not real event-venue evidence. Existing mascot/icon and prior provenance records remain unchanged.",
+  "new_assets": [
+    {
+      "id": "family-nature-hero",
+      "role": "hero landscape",
+      "source": {
+        "path": "assets/design/family-nature-hero.png",
+        "format": "PNG",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 3112722,
+        "sha256": "135d69d74c009c66eb1fb68a6fd5d821fc87a5151458019b276282e4a2afac49"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "request_model": "gpt-6-luna",
+        "image_model": "gpt-image-2.5-flare",
+        "requested_size": "1536x1024",
+        "actual_size": "1536x1024",
+        "prompt": "Original hand-painted watercolor and gouache decorative illustration for a family event discovery interface. A calm, airy Korean countryside outing: a small family of four (two adults and two children) strolling beside a quiet lake, with rounded leafy trees and gentle layered green hills in the distance. Warm cream paper, sage green foliage, soft apricot accents, muted blue water, soft afternoon light, subtle paper grain, friendly rounded forms, spacious uncluttered composition with generous breathing room and a clear focal path. Family-friendly and welcoming. No text, lettering, logos, signage, banners, flags, symbols, UI elements, or recognizable characters. No crowded festival scene; decorative category artwork only, not a real venue photograph. Landscape composition, wide 3:2-ish framing, no baked interface.",
+        "dry_run_command": "gti --provider private-codex --image-model gpt-image-2.5-flare --size 1536x1024 --prompt 'Original hand-painted watercolor and gouache decorative illustration for a family event discovery interface. A calm, airy Korean countryside outing: a small family of four (two adults and two children) strolling beside a quiet lake, with rounded leafy trees and gentle layered green hills in the distance. Warm cream paper, sage green foliage, soft apricot accents, muted blue water, soft afternoon light, subtle paper grain, friendly rounded forms, spacious uncluttered composition with generous breathing room and a clear focal path. Family-friendly and welcoming. No text, lettering, logos, signage, banners, flags, symbols, UI elements, or recognizable characters. No crowded festival scene; decorative category artwork only, not a real venue photograph. Landscape composition, wide 3:2-ish framing, no baked interface.' --output assets/design/family-nature-hero.png --dry-run",
+        "dry_run_observed": "mode=dry-run; warnings=[]; image_generation model=gpt-image-2.5-flare; size=1536x1024",
+        "generation_command": "gti --provider private-codex --image-model gpt-image-2.5-flare --size 1536x1024 --prompt 'Original hand-painted watercolor and gouache decorative illustration for a family event discovery interface. A calm, airy Korean countryside outing: a small family of four (two adults and two children) strolling beside a quiet lake, with rounded leafy trees and gentle layered green hills in the distance. Warm cream paper, sage green foliage, soft apricot accents, muted blue water, soft afternoon light, subtle paper grain, friendly rounded forms, spacious uncluttered composition with generous breathing room and a clear focal path. Family-friendly and welcoming. No text, lettering, logos, signage, banners, flags, symbols, UI elements, or recognizable characters. No crowded festival scene; decorative category artwork only, not a real venue photograph. Landscape composition, wide 3:2-ish framing, no baked interface.' --output assets/design/family-nature-hero.png",
+        "generation_observed": "provider=private-codex; httpStatus=200; savedPath=assets/design/family-nature-hero.png; responseId=resp_0c1ba64558df4b5a016ad0533b61ac87d0a5b58419cea640a1"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/family-outing.webp",
+          "format": "WEBP",
+          "width": 1200,
+          "height": 675,
+          "bytes": 161798,
+          "quality": 82,
+          "crop": "center crop of source y=80..944 for the existing 16:9 desktop hero slot",
+          "sha256": "08010bb7e2b829f07d9bffa19387ea17de5e89f5f31a12bd3a37705e95631cf1"
+        },
+        {
+          "path": "web/public/assets/family-outing-mobile.webp",
+          "format": "WEBP",
+          "width": 720,
+          "height": 480,
+          "bytes": 73390,
+          "quality": 80,
+          "crop": "full source composition resized to the existing 3:2 mobile hero slot",
+          "sha256": "082dae66ea8a5c195f2ffaf8af30461a67b9349204f9b6833723294d9d1b416c"
+        }
+      ]
+    },
+    {
+      "id": "family-science-spot",
+      "role": "science and nature-observation spot illustration",
+      "source": {
+        "path": "assets/design/family-science-spot.png",
+        "format": "PNG",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 2630284,
+        "sha256": "f1338bd0499990c94459012ec74c905249ad37bbba269a24d20a16bad8a504b4"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "request_model": "gpt-6-luna",
+        "image_model": "gpt-image-2.5-flare",
+        "requested_size": "1024x1024",
+        "actual_size": "1254x1254",
+        "prompt": "Original hand-painted watercolor and gouache decorative spot illustration for a family event discovery interface. Square composition on warm cream paper: a child holding a magnifying glass over leaves, with a small magnifier, simple safe nature-observation and science objects such as a clear jar, pebble, leaf, twig, and a tiny potted sprout arranged playfully. Rounded friendly forms, airy spacing, sage green foliage, warm apricot and muted teal details, soft afternoon light, subtle paper grain, family-friendly curiosity. No text, lettering, logos, signage, UI, hazards, chemicals, flames, or recognizable characters. Decorative category artwork only, not factual evidence. No baked interface. Square 1:1 composition.",
+        "dry_run_command": "gti --provider private-codex --image-model gpt-image-2.5-flare --size 1024x1024 --prompt 'Original hand-painted watercolor and gouache decorative spot illustration for a family event discovery interface. Square composition on warm cream paper: a child holding a magnifying glass over leaves, with a small magnifier, simple safe nature-observation and science objects such as a clear jar, pebble, leaf, twig, and a tiny potted sprout arranged playfully. Rounded friendly forms, airy spacing, sage green foliage, warm apricot and muted teal details, soft afternoon light, subtle paper grain, family-friendly curiosity. No text, lettering, logos, signage, UI, hazards, chemicals, flames, or recognizable characters. Decorative category artwork only, not factual evidence. No baked interface. Square 1:1 composition.' --output assets/design/family-science-spot.png --dry-run",
+        "dry_run_observed": "mode=dry-run; warnings=[]; image_generation model=gpt-image-2.5-flare; size=1024x1024",
+        "generation_command": "gti --provider private-codex --image-model gpt-image-2.5-flare --size 1024x1024 --prompt 'Original hand-painted watercolor and gouache decorative spot illustration for a family event discovery interface. Square composition on warm cream paper: a child holding a magnifying glass over leaves, with a small magnifier, simple safe nature-observation and science objects such as a clear jar, pebble, leaf, twig, and a tiny potted sprout arranged playfully. Rounded friendly forms, airy spacing, sage green foliage, warm apricot and muted teal details, soft afternoon light, subtle paper grain, family-friendly curiosity. No text, lettering, logos, signage, UI, hazards, chemicals, flames, or recognizable characters. Decorative category artwork only, not factual evidence. No baked interface. Square 1:1 composition.' --output assets/design/family-science-spot.png",
+        "generation_observed": "provider=private-codex; httpStatus=200; savedPath=assets/design/family-science-spot.png; responseId=resp_04f03cd439971dcb016ad0533bc49887d0872ca4ff91cad38e"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/family-science-spot.webp",
+          "format": "WEBP",
+          "width": 384,
+          "height": 384,
+          "bytes": 19702,
+          "quality": 82,
+          "crop": "full square source resized without crop",
+          "sha256": "a3278a4094cbfacedac706a2ac17796e3e93ee268237ee220035d11d68935e57"
+        }
+      ]
+    },
+    {
+      "id": "family-craft-spot",
+      "role": "craft and art spot illustration",
+      "source": {
+        "path": "assets/design/family-craft-spot.png",
+        "format": "PNG",
+        "width": 1254,
+        "height": 1254,
+        "bytes": 2731190,
+        "sha256": "6fc2f6cde64db1e92c497f962d3ec2324629842d8b793b76b92630da1229471e"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "request_model": "gpt-6-luna",
+        "image_model": "gpt-image-2.5-flare",
+        "requested_size": "1024x1024",
+        "actual_size": "1254x1254",
+        "prompt": "Original hand-painted watercolor and gouache decorative spot illustration for a family event discovery interface. Square composition on warm cream paper: child hands making a paper pinwheel with colorful craft paper, surrounded by chunky crayons, folded paper, scissors with rounded safety tips, and small art supplies. Rounded friendly forms, airy spacing, sage green, warm apricot, muted sky blue and terracotta accents, soft afternoon light, subtle paper grain, family-friendly creativity. No text, lettering, logos, signage, UI, sharp dangerous tools, or recognizable characters. Decorative category artwork only, not factual evidence. No baked interface. Square 1:1 composition.",
+        "dry_run_command": "gti --provider private-codex --image-model gpt-image-2.5-flare --size 1024x1024 --prompt 'Original hand-painted watercolor and gouache decorative spot illustration for a family event discovery interface. Square composition on warm cream paper: child hands making a paper pinwheel with colorful craft paper, surrounded by chunky crayons, folded paper, scissors with rounded safety tips, and small art supplies. Rounded friendly forms, airy spacing, sage green, warm apricot, muted sky blue and terracotta accents, soft afternoon light, subtle paper grain, family-friendly creativity. No text, lettering, logos, signage, UI, sharp dangerous tools, or recognizable characters. Decorative category artwork only, not factual evidence. No baked interface. Square 1:1 composition.' --output assets/design/family-craft-spot.png --dry-run",
+        "dry_run_observed": "mode=dry-run; warnings=[]; image_generation model=gpt-image-2.5-flare; size=1024x1024",
+        "generation_command": "gti --provider private-codex --image-model gpt-image-2.5-flare --size 1024x1024 --prompt 'Original hand-painted watercolor and gouache decorative spot illustration for a family event discovery interface. Square composition on warm cream paper: child hands making a paper pinwheel with colorful craft paper, surrounded by chunky crayons, folded paper, scissors with rounded safety tips, and small art supplies. Rounded friendly forms, airy spacing, sage green, warm apricot, muted sky blue and terracotta accents, soft afternoon light, subtle paper grain, family-friendly creativity. No text, lettering, logos, signage, UI, sharp dangerous tools, or recognizable characters. Decorative category artwork only, not factual evidence. No baked interface. Square 1:1 composition.' --output assets/design/family-craft-spot.png",
+        "generation_observed": "provider=private-codex; httpStatus=200; savedPath=assets/design/family-craft-spot.png; responseId=resp_07b3faecaed340ed016ad0533b584487d084dd4b6be68d76f4"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/family-craft-spot.webp",
+          "format": "WEBP",
+          "width": 384,
+          "height": 384,
+          "bytes": 21634,
+          "quality": 82,
+          "crop": "full square source resized without crop",
+          "sha256": "d2834219d14e6900790b50fe1d171fea2ff4843cfba9171dc420c2f5b448e938"
+        }
+      ]
+    }
+  ]
+}

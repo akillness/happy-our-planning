@@ -1,0 +1,5 @@
+name = "collection"
+description = "Cheap deterministic collection and normalization role."
+model = "gpt-6-luna"
+model_reasoning_effort = "low"
+developer_instructions = "Prefer deterministic extraction, normalization, and validation. Follow existing schemas and source adapters exactly, avoid unsupported inference, and report missing or ambiguous source fields instead of inventing values. Any Jevgrep remote use requires a named provider plus explicit approval of the source root, query, and possible cost for each call; never automate auth or expose credentials."

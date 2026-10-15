@@ -1,6 +1,6 @@
 {
-  "total_checks": 57,
-  "passed": 54,
+  "total_checks": 58,
+  "passed": 58,
   "data_context": "deterministic routed fixture (fixed KST 2026-10-15), not production events.json",
   "checks": [
     {
@@ -16,7 +16,7 @@
     {
       "check": "1440px 히어로 canonical 경로·렌더링·높이",
       "ok": true,
-      "detail": "{\"src\": \"http://127.0.0.1:57992/assets/family-outing.webp\", \"box\": {\"x\": 910.21875, \"y\": 104.828125, \"width\": 497.78125, \"height\": 160}}"
+      "detail": "{\"src\": \"http://127.0.0.1:52293/assets/family-outing.webp\", \"box\": {\"x\": 910.21875, \"y\": 104.828125, \"width\": 497.78125, \"height\": 160}}"
     },
     {
       "check": "히어로 아트 DOM UI 텍스트 없음",
@@ -105,7 +105,7 @@
     },
     {
       "check": "가족·서울·무료 → 추천 범위 일치",
-      "ok": false,
+      "ok": true,
       "detail": "닫기\n조건 맞춤 추천\n\n현재 필터 결과 안에서 가족 근거, 무료 여부, 신청 가능 여부를 기준으로 정리했습니다.\n\n서울 어린이 여름 음악축제 · 서울특별시\n가족 근거 확인 · 무료 · 신청가능 · 테마 축제"
     },
     {
@@ -129,14 +129,14 @@
       "detail": ""
     },
     {
-      "check": "만료된 시작일-only 행사 추천 제외",
-      "ok": true,
-      "detail": "[]"
-    },
-    {
       "check": "라우트 fixture age count 중복·facet 오염 방지",
       "ok": true,
       "detail": "어린이 (4)"
+    },
+    {
+      "check": "만료된 시작일-only 행사 추천 제외",
+      "ok": true,
+      "detail": "{\"card\": 1, \"status\": \"종료\", \"recommendations\": [\"서울 10월 가족 체험\"]}"
     },
     {
       "check": "결정적 가족·서울·무료 카드 필터",
@@ -150,8 +150,8 @@
     },
     {
       "check": "결정적 활성 행사만 추천",
-      "ok": false,
-      "detail": "[]"
+      "ok": true,
+      "detail": "[\"서울 10월 가족 체험\"]"
     },
     {
       "check": "신선한 verified 출처만 외부 clickout",
@@ -185,8 +185,8 @@
     },
     {
       "check": "activity → 추천 범위 동기화",
-      "ok": false,
-      "detail": "[]"
+      "ok": true,
+      "detail": "[\"서울 10월 가족 체험\"]"
     },
     {
       "check": "activity → reset 복귀",
@@ -222,6 +222,11 @@
       "check": "수집 mode/failure 상태 노출",
       "ok": true,
       "detail": "수집 모드: 오프라인(offline) · 예약 설정: 매일 03:00 KST · 최근 실시간 성공: 2026. 10. 15. 오전 01:00 · 수집 오류 1건"
+    },
+    {
+      "check": "종료·마감 배지 렌더 대비 4.5 이상",
+      "ok": true,
+      "detail": "[{\"text\": \"종료\", \"color\": \"rgb(69, 102, 93)\", \"background\": \"rgb(237, 240, 238)\", \"ratio\": 5.525805319709427}]"
     },
     {
       "check": "KST 날짜 경계 → 10월 15일 행사만 카드",
@@ -281,7 +286,7 @@
     {
       "check": "모바일 WebP 이미지 로드",
       "ok": true,
-      "detail": "http://127.0.0.1:57992/assets/family-outing-mobile.webp"
+      "detail": "http://127.0.0.1:52293/assets/family-outing-mobile.webp"
     },
     {
       "check": "데스크톱 필터 스냅샷",

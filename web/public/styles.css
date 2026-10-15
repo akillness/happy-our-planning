@@ -214,7 +214,7 @@ dialog { animation: dialog-in .22s ease both; }
 .badge.open { background: #dff3e7; color: #17603f; }
 .badge.before { background: #e7f2f5; color: #356571; }
 .badge.imminent { background: #ffe7d1; color: #8b4b1d; }
-.badge.closed, .badge.ended { background: #edf0ee; color: #6d7772; }
+.badge.closed, .badge.ended { background: #edf0ee; color: var(--ink-soft); }
 .badge.discovered { background: #eaf0fa; color: #375687; }
 .card-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 .badge.experience { background: #dff3e7; color: #17603f; }

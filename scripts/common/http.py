@@ -10,7 +10,7 @@ ai_planner 등 원격 호출이 일시적 장애(타임아웃·연결오류·5xx
 from __future__ import annotations
 
 import time
-from typing import Callable, Protocol
+from typing import Callable, Protocol, TypeVar
 
 # 명시적 재시도 상태 + 그 외 5xx 일반화.
 RETRY_STATUS = {429, 500, 502, 503, 504}
@@ -33,17 +33,18 @@ class HttpError(Exception):
 class _Resp(Protocol):
     status_code: int
 
-    def json(self) -> dict: ...
+
+_RespT = TypeVar("_RespT", bound=_Resp)
 
 
 def request_with_retry(
-    send: Callable[[], _Resp],
+    send: Callable[[], _RespT],
     *,
     retries: int = 2,
     backoff: float = 0.5,
     retry_exceptions: tuple[type[BaseException], ...] = (),
     sleep: Callable[[float], None] = time.sleep,
-) -> _Resp:
+) -> _RespT:
     """`send()`를 호출하고 일시적 장애 시 지수 백오프로 재시도한다.
 
     인자:

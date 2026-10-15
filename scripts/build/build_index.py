@@ -325,7 +325,7 @@ def _retention_days() -> int:
     cfg = search_config()
     policy = cfg.get("publication_policy", {}) if isinstance(cfg, dict) else {}
     value = policy.get("retention_days") if isinstance(policy, dict) else None
-    if isinstance(value, bool):
+    if value is None or isinstance(value, bool):
         return _DEFAULT_RETENTION_DAYS
     try:
         parsed = int(value)
@@ -480,7 +480,7 @@ def build() -> dict:
     else:
         source_mode = "offline"
     successes = sorted(
-        entry.get("last_success_at")
+        str(entry.get("last_success_at"))
         for entry in source_entries
         if isinstance(entry.get("last_success_at"), str) and entry.get("last_success_at")
     )

@@ -6,7 +6,7 @@
 
 [![ingest](https://github.com/akillness/happy-our-planning/actions/workflows/ingest.yml/badge.svg)](https://github.com/akillness/happy-our-planning/actions/workflows/ingest.yml)
 [![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)](https://www.python.org/)
-[![Tests 197 passing + 3 skipped](https://img.shields.io/badge/tests-197%20passing%20%2B%203%20skipped-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
+[![Tests 203 passing + 3 skipped](https://img.shields.io/badge/tests-203%20passing%20%2B%203%20skipped-success?logo=pytest&logoColor=white)](tests/test_pipeline.py)
 [![Knowledge Format](https://img.shields.io/badge/data-schema.org%2FEvent-orange?logo=json&logoColor=white)](docs/02-data-model-okf.md)
 [![Hosting](https://img.shields.io/badge/SaaS-Vercel%20%2B%20GitHub%20Actions-000000?logo=vercel&logoColor=white)](https://happy-our-planning.vercel.app/)
 [![Cost ₩0/month](https://img.shields.io/badge/cost-%E2%82%A90%2Fmonth-2ea44f)](docs/00-overview.md)
@@ -67,7 +67,7 @@
 - **review.toml**: 코드 리뷰, 기존 규칙/패턴 준수 검증
 - **design.toml**: UI/UX 개념, 컴포넌트 설계, 지도 인터랙션
 - **implementation.toml**: 기능 구현, 파이썬 스크립트·JS 모듈
-- **collection.toml**: 종합 오케스트레이션, 사건 당일 수집/검증 조율
+- **collection.toml**: 정해진 스키마에 따른 결정적 데이터 추출·정규화 (저비용 역할, 종합 오케스트레이션 아님)
 
 ## 레이아웃
 ```
@@ -175,7 +175,7 @@ concurrency:
 - ✅ 가족 친화 판정 (`family_friendly`·`family_evidence`) — 명시 근거(`age`, `age_bands`, `audience`, `name`, `description`, `themes`) 보수적 분석, 성인전용/노키즈/정보부족 제외, unknown 보존
 - 정적 이미지 자산 — 기존 `family-outing.webp`/`family-outing-mobile.webp` 경로에 새 자연·가족 수채화 적용(161,798/73,390 bytes), 과학·만들기 활동 그림 추가. Codex 생성 이력·SHA-256은 `assets/design/family-assets.json`에 보존하며 런타임 제공자 호출은 없다.
 - Pencil 새 시안 A/B/C 비교 후 **A · 선명한 탐색** 적용 — 검색 우선, 160px 데스크톱 그림, 모바일 목록 우선. 시안·모바일·상태 설계와 선정 근거: [`assets/design/pencil-proposals/selection.json`](assets/design/pencil-proposals/selection.json).
-- 수채화 개편 검증: Chrome **57/57** (고정 KST·통제 fixture), 360px 가로 넘침 없음, 44px 타깃·활동 이미지 로드/선택/URL·글자 대비 확인. 별도 Vercel 운영 검증에서 HTML·행사 JSON·JS/CSS·네 그림·수집 메타데이터 9개 경로의 HTTP 200과 로컬 SHA-256 일치를 확인했다. 공개 데이터는 여전히 샘플/오프라인이며 실시간 수집 성공을 뜻하지 않는다.
+- 수채화·Fancy UI 최종 검증: Chrome **58/58** (고정 KST·통제 fixture), 360px 가로 넘침 없음, 주요 44px 타깃·활동 이미지/선택/URL·추천/포커스 복귀 확인. 종료·마감 배지 대비는 렌더 값 기준 **5.53:1**이다. 초기 수동 배포 당시의 9개 HTTP 200·SHA-256 검증과 이후 Git 배포 검증은 배포 JSON에서 구분한다. 공개 데이터는 샘플/오프라인이며 실시간 수집 성공을 뜻하지 않는다.
 - Vercel Hobby 운영 주소: **https://happy-our-planning.vercel.app/**. `web/public` 정적 Git 배포이며 파생 DB·설계 원본·별도 Cloudflare Worker는 배포하지 않는다. 초기 수동 업로드와 이후 Git 배포의 관측 기록은 [`specs/verify/evidence/vercel-release.json`](specs/verify/evidence/vercel-release.json)에서 구분한다.
 - 일일 수집 push에도 개편이 유지되도록 UI·수집/빌드 코드·테스트·네 WebP를 같은 `origin/main` 변경 집합으로 관리한다. 별도 `notchima` 프로젝트의 연결이나 배포 설정은 변경하지 않았다.
 - Fancy UI 개편 (2026-10-15): 히어로 eyebrow 배지 + 통계 pill + 수채화 그라디언트 오버레이, 카드 entrance 애니메이션, 다이얼로그 등장 모션, 지도 다건 카운트 배지, 칩 hover 전환, 로딩 shimmer, 전역 reduced-motion 대응. 사용자 노출 em-dash 제거.

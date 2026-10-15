@@ -322,7 +322,7 @@ def main() -> int:
         record("가족·서울·무료 → 지도 일치", map_consistent, f"markers={marker_count} cards={combined_count}")
         page2.click("#aiBtn")
         page2.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
-        rec_names = page2.locator("#aiDialog .recommendations li strong").all_inner_texts()
+        rec_names = page2.locator("#aiDialog .recommendations li .rec-open").all_inner_texts()
         rec_text = page2.locator("#aiDialog").inner_text()
         recommendations_consistent = all(name in card_names for name in rec_names) and len(rec_names) <= combined_count
         if not rec_names:
@@ -351,31 +351,6 @@ def main() -> int:
                f"{kids_count}>={total}")
         record("kids=0 → URL 복원", kids_qs.get("kids", [None])[0] == "0")
         kids_page.close()
-        # With a controlled KST date, a start-only event already in the past must not be recommended.
-        clock_page = browser.new_page(viewport={"width": 1280, "height": 900})
-        _install_data_fixture(clock_page, initial_payloads)
-        clock_page.add_init_script("""
-        (() => {
-          const NativeDate = Date;
-          const fixed = NativeDate.parse("2026-10-14T16:00:00Z");
-          class FixedDate extends NativeDate {
-            constructor(...args) { super(args.length ? args[0] : fixed); }
-            static now() { return fixed; }
-          }
-          FixedDate.parse = NativeDate.parse;
-          FixedDate.UTC = NativeDate.UTC;
-          window.Date = FixedDate;
-        })();
-        """)
-        clock_page.goto(base + "?sido=%EA%B2%BD%EA%B8%B0%EB%8F%84", wait_until="networkidle")
-        clock_page.wait_for_function("document.getElementById('count').textContent !== ''")
-        clock_page.click("#aiBtn")
-        clock_page.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
-        expired_recs = clock_page.locator("#aiDialog .recommendations li strong").all_inner_texts()
-        record("만료된 시작일-only 행사 추천 제외", "경기도 어린이 과학 체험전 2026 (수원)" not in expired_recs,
-               json.dumps(expired_recs, ensure_ascii=False))
-        clock_page.locator("#aiDialog .close").press("Enter")
-        clock_page.close()
         # Deterministic route fixture proves recommendation eligibility rather than accepting
         # an empty recommendation list from expired live data.
         fixture_events = [
@@ -501,8 +476,21 @@ def main() -> int:
                           else fixture_page.locator("#mapFallback").is_visible())
         fixture_page.click("#aiBtn")
         fixture_page.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
-        fixture_recs = fixture_page.locator("#aiDialog .recommendations li strong").all_inner_texts()
+        fixture_recs = fixture_page.locator("#aiDialog .recommendations li .rec-open").all_inner_texts()
         fixture_recommendation_ok = fixture_recs == [expected_name] and expired_name not in fixture_recs
+        expired_fixture_card = fixture_cards.filter(has_text=expired_name)
+        expired_status_badge = expired_fixture_card.locator(".badge.ended")
+        expired_status_text = expired_status_badge.inner_text() if expired_status_badge.count() else ""
+        expired_recommendation_ok = (
+            expired_fixture_card.count() == 1
+            and expired_status_badge.count() == 1
+            and expired_status_text == "종료"
+            and fixture_recs == [expected_name]
+            and expired_name not in fixture_recs
+        )
+        record("만료된 시작일-only 행사 추천 제외", expired_recommendation_ok,
+               json.dumps({"card": expired_fixture_card.count(), "status": expired_status_text,
+                           "recommendations": fixture_recs}, ensure_ascii=False))
         record("결정적 가족·서울·무료 카드 필터", fixture_cards_ok, json.dumps(fixture_names, ensure_ascii=False))
         record("결정적 가족 결과 지도 2건", fixture_map_ok, f"markers={fixture_marker_count}")
         record("결정적 활성 행사만 추천", fixture_recommendation_ok,
@@ -567,7 +555,7 @@ def main() -> int:
                    json.dumps({"names": activity_names, "query": activity_qs}, ensure_ascii=False))
             fixture_page.click("#aiBtn")
             fixture_page.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
-            activity_recs = fixture_page.locator("#aiDialog .recommendations li strong").all_inner_texts()
+            activity_recs = fixture_page.locator("#aiDialog .recommendations li .rec-open").all_inner_texts()
             record("activity → 추천 범위 동기화", activity_recs == [expected_name],
                    json.dumps(activity_recs, ensure_ascii=False))
             fixture_page.locator("#aiDialog .close").press("Enter")
@@ -659,6 +647,31 @@ def main() -> int:
         source_text = source_status.inner_text() if source_status.count() else ""
         record("수집 mode/failure 상태 노출", source_status.count() == 1
                and "수집 모드" in source_text and "오류" in source_text, source_text)
+        expired_card = fixture_page.locator("#list .card").filter(has_text=expired_name)
+        status_badges = expired_card.locator(".badge.closed, .badge.ended")
+        status_badge_details = status_badges.evaluate_all("""
+        els => {
+          const rgb = value => (value.match(/\\d+(?:\\.\\d+)?/g) || []).slice(0, 3).map(Number);
+          const luminance = value => rgb(value).map(channel => {
+            const normalized = channel / 255;
+            return normalized <= 0.03928 ? normalized / 12.92 : ((normalized + 0.055) / 1.055) ** 2.4;
+          }).reduce((sum, channel, index) => sum + channel * [0.2126, 0.7152, 0.0722][index], 0);
+          return els.map(el => {
+            const style = getComputedStyle(el);
+            const foreground = style.color;
+            const background = style.backgroundColor;
+            const light = Math.max(luminance(foreground), luminance(background));
+            const dark = Math.min(luminance(foreground), luminance(background));
+            return {text: el.textContent.trim(), color: foreground, background,
+                    ratio: (light + 0.05) / (dark + 0.05)};
+          });
+        }
+        """)
+        status_badge_contrast_ok = bool(status_badge_details) and all(
+            detail["text"] and detail["ratio"] >= 4.5 for detail in status_badge_details
+        )
+        record("종료·마감 배지 렌더 대비 4.5 이상", status_badge_contrast_ok,
+               json.dumps(status_badge_details, ensure_ascii=False))
         # The activity reset clears all filters; restore the intended Seoul/free scope
         # before asserting the one active event inside the KST date window.
         fixture_page.select_option("#sido", "서울특별시")
@@ -791,6 +804,7 @@ def main() -> int:
         reset_scroll(page)
 
         shot_desktop = EVID / "ui-desktop-filtered.png"
+        page.bring_to_front()
         page.screenshot(path=str(shot_desktop))
         record("데스크톱 필터 스냅샷", shot_desktop.exists(), str(shot_desktop.relative_to(ROOT)))
 

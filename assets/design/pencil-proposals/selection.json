@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-15",
+  "product": "놓치마",
+  "spec_ref": "specs/spec.md@1.3.1",
+  "pencil_document": "notchima-family-proposals.pen (saved and reopened in the local Documents folder)",
+  "local_preview": {"url": "http://127.0.0.1:8046/", "command": "python3 -m http.server 8046 --bind 127.0.0.1 --directory web/public", "verification": "specs/verify/ui-checklist.md"},
+  "primary_job": "보호자가 지역·기간·나이와 실제 참여 활동으로 행사를 좁히고, 근거와 출처 상태를 확인한다.",
+  "art_direction": "오리지널 자연·가족 수채화와 구아슈. 크림·세이지·살구색, 진한 초록 한국어 텍스트. 기존 마스코트 유지. 그림은 장소 사진이나 행사 근거가 아니다.",
+  "proposals": [
+    {"id": "A", "frame": "pCTJj", "image": "pCTJj.png", "title": "선명한 탐색", "layout": "작은 오른쪽 히어로, 전체 필터 우선, 활동·지역 바로가기, 왼쪽 지도와 오른쪽 목록", "scores": [4.9, 4.2, 4.3, 4.7, 4.1], "weighted_total": 89.9},
+    {"id": "B", "frame": "R37JaF", "image": "R37JaF.png", "title": "가족의 작은 여행", "layout": "가로형 에디토리얼 히어로, 전체 필터 다음 활동 바로가기, 왼쪽 목록과 오른쪽 지도", "scores": [4.4, 4.6, 4.9, 4.3, 3.8], "weighted_total": 89.5},
+    {"id": "C", "frame": "aic8F", "image": "aic8F.png", "title": "오늘의 놀이 발견", "layout": "큰 활동 그림·선택을 전체 필터보다 먼저, 왼쪽 목록과 오른쪽 지도", "scores": [3.8, 4.5, 4.7, 3.8, 2.8], "weighted_total": 81.1}
+  ],
+  "rubric": {"scale": "1–5", "axes": ["선정 기준 명료성", "부모 가독성", "가족 친화성", "기능 보존", "모바일 적용 가능성"], "weights": [30, 25, 20, 15, 10], "nature": "독립 디자인 리뷰의 판단값이며 사용자 실험 결과가 아니다. 모바일 점수는 데스크톱 시안 기반 예상이다."},
+  "selected": "A",
+  "decision": "근소한 점수 차이에서 반복 탐색의 명료성과 기존 구조 보존을 우선한다. 모바일은 목록을 지도보다 먼저 배치한다.",
+  "mobile": {"frame": "dSWCq", "width": 390, "image": "dSWCq.png", "runtime_verification_width": 360},
+  "shared_states": {"frame": "UOZpF", "image": "UOZpF.png", "states": ["로딩", "빈 결과", "데이터 오류·재시도", "상세·추천", "연결 확인·미확인·차단"]},
+  "preserve": ["5축 필터·무료·가족·신청 가능", "activity URL 복원·선택·초기화", "지도·목록 동일 결과", "원문 활동·가족 판정 근거", "가격 없음은 무료로 추정하지 않음", "종료 행사 추천 제외", "검증되지 않은 외부 링크 비활성", "샘플·오프라인·수집 시각 구분", "한국어 레이블·대화상자 포커스 복귀", "44px 타깃·360px 가로 넘침 없음"],
+  "category_policy": "그림이 있는 두 범주만 고정 노출하지 않는다. 실제 필터 결과에 존재하는 범주만 표시하고, 그림이 없는 범주는 텍스트로 탐색한다.",
+  "runtime_assets": ["web/public/assets/family-outing.webp", "web/public/assets/family-outing-mobile.webp", "web/public/assets/family-science-spot.webp", "web/public/assets/family-craft-spot.webp"],
+  "provenance": "assets/design/family-assets.json",
+  "verification": "specs/verify/run_ui_check.py",
+  "deployment": "Vercel Hobby production: https://happy-our-planning.vercel.app/; initial prebuilt release and subsequent Git-source verification are recorded separately in specs/verify/evidence/vercel-release.json. Existing Git connection: akillness/happy-our-planning main, Root Directory web/public."
+}

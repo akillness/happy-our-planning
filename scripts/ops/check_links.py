@@ -206,6 +206,7 @@ def check_events(
         else:
             deferred, fallback = False, None
         if deferred:
+            assert fallback is not None  # deferred is only True alongside a non-None fallback dict (see branches above)
             raw_prior = prior_checks.get(key)
             checks[key] = _entry(url, raw_prior if isinstance(raw_prior, Mapping) else fallback, current)
             count += 1

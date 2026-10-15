@@ -8,7 +8,7 @@ updated: 2026-10-15
 
 # UI 검증 체크리스트 (AC-F2.3 · AC-F2.9)
 
-동결 계약: `specs/spec.md@1.3.1` → `specs/seed.yaml`. 마지막 로컬 UI 실행은 **57/57 통과, 종료코드 0**이다. Vercel 운영 검증은 아래 별도 배포 증거로 구분한다.
+동결 계약: `specs/spec.md@1.3.1` → `specs/seed.yaml`. 최종 로컬 UI 실행은 **58/58 통과, 종료코드 0**이다. Vercel 운영 검증은 아래 별도 배포 증거로 구분한다.
 
 ## 재현 명령
 
@@ -57,9 +57,17 @@ PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH='/Applications/Google Chrome.app/Contents/Ma
 
 ### 이번 개편의 완료 게이트 재실행
 
-- `python3 -m unittest discover -s tests`: 200개 실행, 197개 통과, 3개 skip, 종료코드 0.
-- `python3 scripts/build/validate.py`: 10/10 통과, 0 실패, 종료코드 0.
+- 최종 Python 3.12 게이트 `uvx --python 3.12 --with-requirements requirements.txt python -m unittest discover -s tests`: 206개 실행, 203개 통과, 기존 3개 skip, 종료코드 0.
+- 최종 Python 3.12 스키마 게이트 `uvx --python 3.12 --with-requirements requirements.txt python scripts/build/validate.py`: 10/10 통과, 0 실패, 종료코드 0.
 - `web/public/data/events.db`를 실제 삭제한 상태에서 `python3 -m scripts.run_pipeline` 재실행: 종료코드 0, 삭제 전후 8→8건, 동일 ID 집합과 JSON 일치. 실패 시 원본 파생 DB를 복구하도록 메모리 백업한 뒤 검사했다.
 - `node --check web/public/app.js`: 종료코드 0.
-- 배포용 묶음 `web/dist/notchima-static-20261015.zip`: 21개 파일, 331,787 bytes, CRC 검사 통과. SHA-256 `98b71f734728df806544467d696635abe0a82b192aa0c3c441156cf948fce88b`. 브라우저가 사용하지 않는 파생 `events.db`, 디자인 연구용 이미지·원본 PNG·Pencil 시안은 배포 묶음에서 제외하고 DB는 빌드 검증용 canonical 위치에 유지한다. 묶음은 기존 ignore 대상인 `web/dist/`에 둔다.
+- 초기 수동 배포용 묶음 `web/dist/notchima-static-20261015.zip`: 21개 파일, 331,787 bytes, CRC 검사 통과. SHA-256 `98b71f734728df806544467d696635abe0a82b192aa0c3c441156cf948fce88b`. 이후 Fancy UI Git 배포와는 다른 초기 관측 산출물이다. 파생 `events.db`·설계 원본·Pencil 시안은 묶음에서 제외했고 DB는 빌드 검증용 위치에 유지한다. 묶음은 기존 ignore 대상인 `web/dist/`에 둔다.
 - 최종 리뷰 후 같은 Chrome 명령으로 다시 57/57 통과했다. 필터 순서는 1440px 페이지에서 직접 측정하고, 초기 활동 칩의 `aria-pressed=false`와 선택 후 `true`를 모두 확인한다. 새 그림 로드 검사는 Playwright 타임아웃만 잡아 `loaded=false`로 실패를 기록하며 다른 예외를 숨기지 않는다.
+
+### 병합된 Fancy UI 회귀 게이트
+
+동시 반영된 Fancy UI에서 54/57 RED를 재현했다. 추천 제목이 `strong`에서 `.rec-open` 버튼으로 바뀌었는데 테스트가 이전 선택자를 사용한 것이 원인이었다. Tester가 추출 위치를 수정한 뒤 기존 57/57을 재확인했다. 시작일만 있는 종료 행사의 제외 검사도 실제 결정적 fixture의 종료 카드·활성 대조 추천을 요구하도록 바로잡아 빈 목록 통과를 없앴다. 행사 ID/개수·활동 범위·활성 행사만 추천·레이아웃 수용 기준은 그대로 유지했다.
+
+종료·마감 배지의 렌더 대비 검사 1개를 추가해 57/58 RED(4.0379:1)를 확인한 뒤, 전경색만 기존 `--ink-soft`로 변경했다. 최종 실행은 **58/58**, 렌더 전경 `rgb(69, 102, 93)` / 배경 `rgb(237, 240, 238)`, 대비 **5.5258:1**이다. 최종 데스크톱 캡처 전 원래 탭을 활성화해 두 차례의 외부 프로세스 타임아웃 뒤 전체 실행을 완료했으며, 타임아웃은 통과로 계산하지 않았다.
+
+최종 명령: `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH='/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' DEBUG=pw:api python3 -u specs/verify/run_ui_check.py` (종료코드 0). 타입 게이트 `uvx --python 3.12 --with-requirements requirements.txt mypy scripts/ --ignore-missing-imports`도 종료코드 0, 36개 소스 파일 오류 없음이다. HTTP 재시도 프로토콜은 실제 사용 표면만 요구하고 구체 응답 타입을 보존하며, 불필요한 `LinkResponse.json()`이나 새 오류 폴백은 추가하지 않았다.
