@@ -50,6 +50,9 @@ def main(argv: list[str]) -> int:
         level=logging.INFO,
         format="%(asctime)s %(levelname)s %(name)s: %(message)s",
     )
+    # httpx/httpcore INFO 로그는 요청 URL(쿼리 내 키 포함)을 그대로 찍으므로 억제.
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
     log.info("== 1. 수집·정규화·적재 ==")
     dotenv_loaded = load_dotenv()
     if dotenv_loaded:

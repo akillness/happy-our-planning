@@ -2,46 +2,142 @@
   {
     "sido": "서울특별시",
     "slug": "seoul",
-    "count": 4,
+    "count": 141,
     "centroid": [
-      37.55845,
-      126.966125
+      37.56627163120561,
+      126.97766312056694
     ]
   },
   {
     "sido": "경기도",
     "slug": "gyeonggi",
-    "count": 1,
+    "count": 35,
     "centroid": [
-      37.4138,
-      127.5183
-    ]
-  },
-  {
-    "sido": "충청남도",
-    "slug": "chungnam",
-    "count": 1,
-    "centroid": [
-      36.3216,
-      126.5119
+      37.413800000000016,
+      127.51830000000004
     ]
   },
   {
     "sido": "부산광역시",
     "slug": "busan",
-    "count": 1,
+    "count": 29,
     "centroid": [
-      35.1796,
-      129.0756
+      35.17960000000002,
+      129.0756000000001
+    ]
+  },
+  {
+    "sido": "대구광역시",
+    "slug": "daegu",
+    "count": 17,
+    "centroid": [
+      35.8714,
+      128.6014
+    ]
+  },
+  {
+    "sido": "경상북도",
+    "slug": "gyeongbuk",
+    "count": 15,
+    "centroid": [
+      36.491899999999994,
+      128.88889999999998
+    ]
+  },
+  {
+    "sido": "인천광역시",
+    "slug": "incheon",
+    "count": 12,
+    "centroid": [
+      37.4563,
+      126.70520000000003
+    ]
+  },
+  {
+    "sido": "경상남도",
+    "slug": "gyeongnam",
+    "count": 10,
+    "centroid": [
+      35.4606,
+      128.21319999999997
+    ]
+  },
+  {
+    "sido": "전남광주통합특별시",
+    "slug": "unknown",
+    "count": 10,
+    "centroid": null
+  },
+  {
+    "sido": "충청남도",
+    "slug": "chungnam",
+    "count": 9,
+    "centroid": [
+      36.496533333333325,
+      126.76798888888887
+    ]
+  },
+  {
+    "sido": "대전광역시",
+    "slug": "daejeon",
+    "count": 8,
+    "centroid": [
+      36.3504,
+      127.3845
+    ]
+  },
+  {
+    "sido": "강원특별자치도",
+    "slug": "gangwon",
+    "count": 7,
+    "centroid": [
+      37.822799999999994,
+      128.1555
+    ]
+  },
+  {
+    "sido": "충청북도",
+    "slug": "chungbuk",
+    "count": 4,
+    "centroid": [
+      36.6357,
+      127.4917
     ]
   },
   {
     "sido": "제주특별자치도",
     "slug": "jeju",
-    "count": 1,
+    "count": 4,
     "centroid": [
       33.489,
       126.4983
+    ]
+  },
+  {
+    "sido": "전북특별자치도",
+    "slug": "jeonbuk",
+    "count": 3,
+    "centroid": [
+      35.7175,
+      127.153
+    ]
+  },
+  {
+    "sido": "울산광역시",
+    "slug": "ulsan",
+    "count": 3,
+    "centroid": [
+      35.5384,
+      129.3114
+    ]
+  },
+  {
+    "sido": "세종특별자치시",
+    "slug": "sejong",
+    "count": 1,
+    "centroid": [
+      36.4801,
+      127.289
     ]
   }
 ]

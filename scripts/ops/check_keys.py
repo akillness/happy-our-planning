@@ -59,7 +59,7 @@ def _probe_kopis() -> tuple[bool, str]:
     }
     url = "https://www.kopis.or.kr/openApi/restful/pblprfr?" + urllib.parse.urlencode(params)
     try:
-        r = httpx.get(url, timeout=_TIMEOUT)
+        r = httpx.get(url, timeout=_TIMEOUT, follow_redirects=True)
     except Exception as exc:
         return False, f"transport_{type(exc).__name__}"
     if r.status_code != 200:

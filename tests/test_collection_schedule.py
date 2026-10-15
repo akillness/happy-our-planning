@@ -52,6 +52,14 @@ class _IncompleteLiveAdapter:
 
 
 class TestCollectionStatus(unittest.TestCase):
+    def setUp(self):
+        # run_pipeline.main()의 실제 .env 로딩을 차단 — 실키가 테스트 프로세스
+        # os.environ을 오염시켜 후속 fixture 테스트를 live로 바꾸는 것을 방지.
+        self._dotenv_patch = mock.patch.object(run_pipeline, "load_dotenv", return_value=[])
+        self._dotenv_patch.start()
+
+    def tearDown(self):
+        self._dotenv_patch.stop()
     def test_offline_fixture_is_explicit_and_writes_collection_sidecar(self):
         with tempfile.TemporaryDirectory() as tmp:
             old_dir = to_okf.SOURCES_LOG_DIR

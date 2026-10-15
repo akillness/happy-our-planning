@@ -170,7 +170,8 @@ class KopisAdapter(SourceAdapter):
         import httpx
 
         return lambda: httpx.get(
-            self._request_url, params=self._request_params, timeout=self._timeout
+            self._request_url, params=self._request_params, timeout=self._timeout,
+            follow_redirects=True,  # www.kopis.or.kr → kopis.or.kr 301 대응
         )
 
     def _request(self, url: str, params: dict, sender: Callable[[str, dict, float], Any] | None) -> Any:
@@ -239,7 +240,14 @@ class KopisAdapter(SourceAdapter):
                 "cpage": page,
                 "rows": page_size,
             }
-            response = self._request(url, params, sender)
+            try:
+                response = self._request(url, params, sender)
+            except CollectionError as exc:
+                if exc.status != 400:
+                    raise
+                # KOPIS 간헐적 400 스로틀 대응: 동일 페이지 1회만 재시도.
+                self.sleep(2.0)
+                response = self._request(url, params, sender)
             page_rows = _parse_remote_xml(_text(response))
             signature = json.dumps(page_rows, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
             if signature in page_signatures:
