@@ -30,6 +30,12 @@ class SourceAdapter:
         self.api_key = os.environ.get(secret_env or "", "")
         # 키가 없으면 자동으로 offline(fixture) 모드
         self.offline = (not self.api_key) if offline is None else offline
+        self.collection_mode = "fixture" if self.offline else "live"
+        self.collection_errors: list[BaseException] = []
+        # Absence archival requires an adapter-certified complete full snapshot.
+        self.snapshot_complete = False
+        self.complete = False
+        self.truncated = False
 
     # ---- 수집(step1) ---------------------------------------------------------
     def fetch_native(self) -> list[dict]:
@@ -75,7 +81,7 @@ class SourceAdapter:
             try:
                 okf = self.map_to_okf(n)
             except Exception as exc:  # 한 레코드 실패가 전체를 막지 않음
-                log.warning("[%s] map error: %s", self.key, exc)
+                log.warning("[%s] map error: %s", self.key, type(exc).__name__)
                 continue
             if okf:
                 out.append(okf)

@@ -5,9 +5,14 @@ on:
     - cron: "0 18 * * *"
   workflow_dispatch: {}
 
+concurrency:
+  group: ingest
+  cancel-in-progress: false
+
 jobs:
   ingest:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       contents: write
     steps:
@@ -20,6 +25,7 @@ jobs:
       - name: Install deps
         run: pip install -r requirements.txt
       - name: Run pipeline (fetch → normalize → upsert → validate → build → wiki)
+        id: pipeline
         env:
           KOPIS_KEY: ${{ secrets.KOPIS_KEY }}
           TOURAPI_KEY: ${{ secrets.TOURAPI_KEY }}
@@ -30,16 +36,40 @@ jobs:
           TAVILY_API_KEY: ${{ secrets.TAVILY_API_KEY }}
           GOOGLE_AI_STUDIO_KEY: ${{ secrets.GOOGLE_AI_STUDIO_KEY }}
           GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }}
+          NOTCHIMA_CHECK_LINKS: ${{ github.event_name == 'schedule' && '1' || '0' }}
         run: python -m scripts.run_pipeline
 
       - name: Unit tests
         run: python -m unittest discover -s tests
 
 
-      - name: Commit changes
+      - name: Commit generated artifacts
+        if: ${{ success() }}
         run: |
+          set -euo pipefail
           git config user.name "hop-bot"
           git config user.email "bot@happy-our-planning"
-          git add knowledge/ web/public/data/ || true
-          git commit -m "chore(ingest): daily update $(date -u +%F)" || echo "no changes"
-          git push || echo "nothing to push"
+          git add knowledge/ web/public/data/ web/public/events/
+          if git diff --cached --quiet; then
+            echo "No generated changes; nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore(ingest): daily update $(date -u +%F)"
+          git push
+
+      - name: Report failed ingest
+        if: ${{ failure() }}
+        run: |
+          {
+            echo "## Ingest failed"
+            echo "Pipeline outcome: ${{ steps.pipeline.outcome }}"
+            echo "Published data was not changed by this run."
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload collection diagnostics
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ingest-collection-status
+          path: knowledge/sources/collection-status.json
+          if-no-files-found: ignore
+          retention-days: 7

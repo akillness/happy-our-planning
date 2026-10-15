@@ -31,7 +31,10 @@ queries:
   - "{region} {year} 무료 행사 신청"
   - "{region} {theme} 축제 {year}"
   - "{region} 공모전 모집 {year}"
-
+  - "{region} 어린이 체험 {year}"
+  - "{region} 어린이 과학 체험 {year}"
+  - "{region} 어린이 자연 생태 체험 {year}"
+  - "{region} 어린이 만들기 워크숍 {year}"
 # 발견 후보 신뢰도 가드: 아래 점수 미만은 적재하지 않음(노이즈 차단).
 min_confidence: 0.45
 # 도메인 화이트리스트(가점). 공공/지자체/공식 도메인 우선.
@@ -39,3 +42,11 @@ trusted_domains:
   - go.kr
   - or.kr
   - ac.kr
+# 링크 검증 정책: 기본 빌드는 오프라인이며 명시적 checker 실행 때만 사용.
+link_policy:
+  proof_ttl_days: 7
+  max_redirects: 3
+  request_timeout_seconds: 4
+  max_response_bytes: 65536
+  max_urls: 40
+  max_runtime_seconds: 120

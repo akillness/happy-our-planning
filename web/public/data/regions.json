@@ -9,21 +9,12 @@
     ]
   },
   {
-    "sido": "부산광역시",
-    "slug": "busan",
-    "count": 2,
-    "centroid": [
-      35.1796,
-      129.0756
-    ]
-  },
-  {
-    "sido": "강원특별자치도",
-    "slug": "gangwon",
+    "sido": "경기도",
+    "slug": "gyeonggi",
     "count": 1,
     "centroid": [
-      37.7519,
-      128.8761
+      37.4138,
+      127.5183
     ]
   },
   {
@@ -36,21 +27,21 @@
     ]
   },
   {
+    "sido": "부산광역시",
+    "slug": "busan",
+    "count": 1,
+    "centroid": [
+      35.1796,
+      129.0756
+    ]
+  },
+  {
     "sido": "제주특별자치도",
     "slug": "jeju",
     "count": 1,
     "centroid": [
       33.489,
       126.4983
-    ]
-  },
-  {
-    "sido": "경기도",
-    "slug": "gyeonggi",
-    "count": 1,
-    "centroid": [
-      37.4138,
-      127.5183
     ]
   }
 ]

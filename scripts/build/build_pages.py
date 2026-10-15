@@ -15,9 +15,11 @@ from __future__ import annotations
 
 import html
 import json
+from datetime import datetime
 import sys
 from pathlib import Path
 
+from scripts.common import links
 from scripts.common.config import ROOT
 from scripts.common.okf import _safe_id
 
@@ -37,8 +39,12 @@ def _is_free(price: object) -> bool:
     return price in ("free", 0, 0.0)
 
 
-def event_jsonld(e: dict) -> dict:
-    """행사 dict → schema.org/Event JSON-LD(정렬된 결정적 dict)."""
+def event_jsonld(
+    e: dict,
+    checks: dict | None = None,
+    now: object = None,
+) -> dict:
+    """행사 dict → schema.org/Event JSON-LD(검증된 링크만 외부 URL로 사용)."""
     place: dict = {"@type": "Place", "name": e.get("sido") or "대한민국"}
     address = " ".join(x for x in (e.get("sido"), e.get("sigungu")) if x)
     if address:
@@ -60,48 +66,73 @@ def event_jsonld(e: dict) -> dict:
         data["endDate"] = e["end_date"]
     if e.get("description"):
         data["description"] = e["description"]
-    if e.get("url"):
-        data["url"] = e["url"]
+    verified = links.verified_link(e, now=now, checks=checks)
+    if verified:
+        data["url"] = verified
     if e.get("status") in _STATUS_URL:
         data["eventStatus"] = _STATUS_URL[e["status"]]
     if e.get("price") is not None:
-        data["offers"] = {
+        offer: dict[str, str] = {
             "@type": "Offer",
             "price": "0" if _is_free(e["price"]) else str(e["price"]),
             "priceCurrency": "KRW",
-            "url": e.get("url") or "",
         }
+        if verified:
+            offer["url"] = verified
+        data["offers"] = offer
     if e.get("organizer"):
         data["organizer"] = {"@type": "Organization", "name": e["organizer"]}
     return data
 
+def _safe_jsonld(value: dict) -> str:
+    """Serialize JSON-LD without allowing HTML script termination."""
+    return (
+        json.dumps(value, ensure_ascii=False, sort_keys=True, indent=2)
+        .replace("&", "\\u0026")
+        .replace("<", "\\u003c")
+        .replace(">", "\\u003e")
+    )
 
-def render_page(e: dict) -> str:
+
+def render_page(
+    e: dict,
+    checks: dict | None = None,
+    now: datetime | None = None,
+) -> str:
     """행사 1건 → 상세 HTML 문자열(JSON-LD 임베드)."""
     esc = html.escape
+    fields = links.link_fields(e.get("url"), checks=checks, now=now)
+    verified = fields.get("link_url") if fields.get("link_status") == "verified" else None
     name = esc(e.get("name") or "행사")
-    jsonld = json.dumps(event_jsonld(e), ensure_ascii=False, sort_keys=True, indent=2)
+    jsonld = _safe_jsonld(event_jsonld(e, checks=checks, now=now))
     when = esc((e.get("start_date") or "")[:10])
     if e.get("end_date"):
         when += " ~ " + esc((e["end_date"])[:10])
     where = esc(" ".join(x for x in (e.get("sido"), e.get("sigungu")) if x) or "-")
     desc = esc(e.get("description") or "")
-    url = esc(e.get("url") or "")
+    status = esc(fields.get("link_status") or "unchecked")
+    reason = esc(fields.get("link_reason") or "검증 기록 없음")
+    canonical = f'<link rel="canonical" href="{esc(verified)}">\n' if verified else ""
+    source = (
+        f'<p><a href="{esc(verified)}" rel="noopener" data-link-status="verified">연결 확인</a></p>\n'
+        if verified
+        else f'<p data-link-status="{status}">외부 링크: {status} - {reason}</p>\n'
+    )
     return (
         "<!doctype html>\n"
         '<html lang="ko">\n<head>\n'
         '<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-        f"<title>{name} — 놓치마</title>\n"
+        f"<title>{name} - 놓치마</title>\n"
         f'<meta name="description" content="{desc[:150]}">\n'
-        f'<link rel="canonical" href="{url}">\n'
+        f"{canonical}"
         f'<script type="application/ld+json">\n{jsonld}\n</script>\n'
         "</head>\n<body>\n"
         f"<h1>{name}</h1>\n"
         f"<p>🗓 {when}</p>\n"
         f"<p>📍 {where}</p>\n"
         + (f"<p>{desc}</p>\n" if desc else "")
-        + (f'<p><a href="{url}" rel="noopener">신청/상세 페이지</a></p>\n' if url else "")
+        + source
         + '<p><a href="../index.html">← 전체 행사 보기</a></p>\n'
         "</body>\n</html>\n"
     )
@@ -115,13 +146,14 @@ def build(out_dir: Path | str | None = None, events: list[dict] | None = None) -
         events = (json.loads(EVENTS_JSON.read_text(encoding="utf-8"))
                   if EVENTS_JSON.exists() else [])
 
+    checks = links.load_link_checks()
     written = set()
     for e in events:
         eid = e.get("id")
         if not eid:
             continue
         page = out / f"{_safe_id(eid)}.html"
-        page.write_text(render_page(e), encoding="utf-8")
+        page.write_text(render_page(e, checks=checks), encoding="utf-8")
         written.add(page.name)
 
     # 더 이상 존재하지 않는 행사의 묵은 페이지 제거(파생물 정합).

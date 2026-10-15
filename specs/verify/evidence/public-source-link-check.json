@@ -1,0 +1,20 @@
+{
+  "scope": "One real public KOPIS homepage connection smoke; not event-level inventory, authenticated API collection, or hosted cron verification",
+  "command": ["python3", "-m", "scripts.ops.check_links", "--events", "/tmp/notchima-public-link-smoke-20261015-1211-events.json", "--cache", "/tmp/notchima-public-link-smoke-20261015-1211-cache.json", "--max-urls", "1", "--max-seconds", "15"],
+  "event_input": [{"id": "smoke:kopis-public", "url": "https://www.kopis.or.kr/por/main/main.do"}],
+  "exit_code": 0,
+  "elapsed_seconds": 1.39,
+  "stdout": {"checked": 1, "statuses": {"verified": 1}},
+  "cache": {
+    "checks": {
+      "49f89ea05f8ae47cebd69fdbca2680c786975eea5df739111e714108c0a2a3fc": {
+        "link_checked_at": "2026-10-15T03:16:53.956022Z",
+        "link_reason": "연결 확인",
+        "link_status": "verified",
+        "link_url": "https://kopis.or.kr/por/main/main.do"
+      }
+    },
+    "generated_at": "2026-10-15T03:16:53.956022Z",
+    "version": 1
+  }
+}

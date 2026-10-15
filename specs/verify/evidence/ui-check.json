@@ -1,11 +1,47 @@
 {
-  "total_checks": 8,
-  "passed": 8,
+  "total_checks": 57,
+  "passed": 57,
+  "data_context": "deterministic routed fixture (fixed KST 2026-10-15), not production events.json",
   "checks": [
     {
-      "check": "초기 로드 + 카운트",
+      "check": "초기 로드 + 가족 기본 카운트",
       "ok": true,
-      "detail": "활성 10건"
+      "detail": "활성 가족 행사 3건"
+    },
+    {
+      "check": "데스크톱 가족 기본 스냅샷",
+      "ok": true,
+      "detail": "specs/verify/evidence/ui-desktop-family.png"
+    },
+    {
+      "check": "1440px 히어로 canonical 경로·렌더링·높이",
+      "ok": true,
+      "detail": "{\"src\": \"http://127.0.0.1:65112/assets/family-outing.webp\", \"box\": {\"x\": 910.21875, \"y\": 88, \"width\": 497.78125, \"height\": 160}}"
+    },
+    {
+      "check": "히어로 아트 DOM UI 텍스트 없음",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "필터가 활동 바로가기보다 먼저",
+      "ok": true,
+      "detail": "{\"filters\": {\"x\": 32, \"y\": 268, \"width\": 1376, \"height\": 291.5}, \"activity\": {\"x\": 32, \"y\": 559.5, \"width\": 1376, \"height\": 138.1875}}"
+    },
+    {
+      "check": "출처 링크는 검증 증거 없이는 외부 앵커 금지",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "정적 fixture 응답·의미 있는 제목",
+      "ok": true,
+      "detail": "통제된 출처 없는 정적 행사"
+    },
+    {
+      "check": "정적 상세도 fresh proof 없는 외부 앵커 금지",
+      "ok": true,
+      "detail": "{\"status\": \"blocked\", \"external\": []}"
     },
     {
       "check": "5축 필터 → URL 동기화",
@@ -15,7 +51,7 @@
     {
       "check": "필터 적용 결과 카운트",
       "ok": true,
-      "detail": "0/10"
+      "detail": "2/3"
     },
     {
       "check": "URL 복원(새 세션 입력값)",
@@ -25,7 +61,12 @@
     {
       "check": "URL 복원(카운트 일치)",
       "ok": true,
-      "detail": "0==0"
+      "detail": "2==2"
+    },
+    {
+      "check": "오래된 URL 필터값 보존·무결과",
+      "ok": true,
+      "detail": "{\"values\": [\"없는지역\", \"없는테마\", \"없는나이\"], \"labels\": [\"없는지역 (현재 목록 없음)\", \"없는테마 (현재 목록 없음)\", \"없는나이 (현재 목록 없음)\"], \"count\": 0}"
     },
     {
       "check": "360px 모바일 스냅샷",
@@ -35,7 +76,212 @@
     {
       "check": "reset → 전체 복귀",
       "ok": true,
-      "detail": "10==10"
+      "detail": "3==3"
+    },
+    {
+      "check": "reset → 가족/무료 토글 초기화",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "무료만 토글 → 실제 필터링",
+      "ok": true,
+      "detail": "2/3"
+    },
+    {
+      "check": "무료만 → URL 동기화",
+      "ok": true,
+      "detail": "free_only=1"
+    },
+    {
+      "check": "가족·서울·무료 → 카드/카운트 일치",
+      "ok": true,
+      "detail": "1 cards=1"
+    },
+    {
+      "check": "가족·서울·무료 → 지도 일치",
+      "ok": true,
+      "detail": "markers=1 cards=1"
+    },
+    {
+      "check": "가족·서울·무료 → 추천 범위 일치",
+      "ok": true,
+      "detail": "닫기\n조건 맞춤 추천\n\n현재 필터 결과 안에서 가족 근거, 무료 여부, 신청 가능 여부를 기준으로 정리했습니다.\n\n서울 어린이 여름 음악축제 · 서울특별시\n가족 근거 확인 · 무료 · 신청가능 · 테마 축제"
+    },
+    {
+      "check": "무결과 상태 표시",
+      "ok": true,
+      "detail": "조건에 맞는 행사가 없어요.\n\n지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요."
+    },
+    {
+      "check": "무결과 → reset 복구",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "kids=0 → 가족 범위 해제",
+      "ok": true,
+      "detail": "3>=3"
+    },
+    {
+      "check": "kids=0 → URL 복원",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "만료된 시작일-only 행사 추천 제외",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "라우트 fixture age count 중복·facet 오염 방지",
+      "ok": true,
+      "detail": "어린이 (4)"
+    },
+    {
+      "check": "결정적 가족·서울·무료 카드 필터",
+      "ok": true,
+      "detail": "[\"서울 10월 가족 체험\", \"서울 10월 지난 과학 체험\"]"
+    },
+    {
+      "check": "결정적 가족 결과 지도 2건",
+      "ok": true,
+      "detail": "markers=2"
+    },
+    {
+      "check": "결정적 활성 행사만 추천",
+      "ok": true,
+      "detail": "[\"서울 10월 가족 체험\"]"
+    },
+    {
+      "check": "신선한 verified 출처만 외부 clickout",
+      "ok": true,
+      "detail": "https://www.busan.go.kr/active"
+    },
+    {
+      "check": "만료·미검증 출처는 카드/상세 외부 앵커 금지",
+      "ok": true,
+      "detail": "닫기\n서울 10월 지난 과학 체험\n\n지난 날짜의 시작일-only 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 과학·탐구\n\n지난 날짜의 체험\n\n가족 근거: 명시 문구: 가족\n\n지역: 서울특별시 강서구\n일정: 2026-10-14\n비용: 무료\n상태: 종료\n\n출처: 정보 없음\n\n연결 미확인 · 확인 2026. 10. 01. 오전 09:00 · 검증 만료\n공유용 상세"
+    },
+    {
+      "check": "매핑된 사설 IPv4는 카드·상세 외부 앵커 금지",
+      "ok": true,
+      "detail": "닫기\n서울 유료 가족 체험\n\n유료 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 만들기·예술 · 신체·놀이\n\n직접 만들고 놀며 참여하는 공예 체험\n\n가족 근거: 명시 문구: 가족\n\n지역: 서울특별시 마포구\n일정: 2026-10-15 ~ 2026-10-16\n비용: 1,000원\n상태: 신청가능\n\n출처: 정보 없음\n\n연결 차단 · 확인 2026. 10. 15. 오전 12:00\n공유용 상세"
+    },
+    {
+      "check": "NAT64 사설 목적지는 카드·상세 외부 앵커 금지",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "check": "activity 필터 컨트롤 노출",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "activity → 카드·지도·공유 URL 동기화",
+      "ok": true,
+      "detail": "{\"names\": [\"서울 10월 가족 체험\", \"서울 10월 지난 과학 체험\"], \"query\": {\"activity\": [\"과학·탐구\"]}}"
+    },
+    {
+      "check": "activity → 추천 범위 동기화",
+      "ok": true,
+      "detail": "[\"서울 10월 가족 체험\"]"
+    },
+    {
+      "check": "activity → reset 복귀",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "과학·만들기 칩 장식 이미지·접근성 이름",
+      "ok": true,
+      "detail": "{\"과학·탐구\": {\"button\": 1, \"images\": 1, \"loaded\": true, \"contrast\": {\"color\": \"rgb(69, 102, 93)\", \"background\": \"rgb(233, 240, 228)\", \"ratio\": 5.450163517645877}, \"alt\": \"\", \"src\": \"./assets/family-science-spot.webp\"}, \"만들기·예술\": {\"button\": 1, \"images\": 1, \"loaded\": true, \"contrast\": {\"color\": \"rgb(69, 102, 93)\", \"background\": \"rgb(245, 215, 190)\", \"ratio\": 4.634003688466456}, \"alt\": \"\", \"src\": \"./assets/family-craft-spot.webp\"}}"
+    },
+    {
+      "check": "과학·만들기 미선택 count 대비 4.5 이상",
+      "ok": true,
+      "detail": "{\"과학·탐구\": {\"color\": \"rgb(69, 102, 93)\", \"background\": \"rgb(233, 240, 228)\", \"ratio\": 5.450163517645877}, \"만들기·예술\": {\"color\": \"rgb(69, 102, 93)\", \"background\": \"rgb(245, 215, 190)\", \"ratio\": 4.634003688466456}}"
+    },
+    {
+      "check": "출처 기반 무그림 범주는 텍스트 칩 유지",
+      "ok": true,
+      "detail": "신체·놀이\n1건"
+    },
+    {
+      "check": "과학·탐구 칩 → select·URL·결과 동기화",
+      "ok": true,
+      "detail": "{\"before\": [\"서울 10월 가족 체험\", \"서울 유료 가족 체험\", \"부산 무료 가족 체험\", \"서울 10월 지난 과학 체험\"], \"after\": [\"서울 10월 가족 체험\", \"서울 10월 지난 과학 체험\"], \"query\": {\"activity\": [\"과학·탐구\"]}}"
+    },
+    {
+      "check": "만들기·예술 칩 → select·URL·결과 동기화",
+      "ok": true,
+      "detail": "{\"before\": [\"서울 10월 가족 체험\", \"서울 유료 가족 체험\", \"부산 무료 가족 체험\", \"서울 10월 지난 과학 체험\"], \"after\": [\"서울 유료 가족 체험\"], \"query\": {\"activity\": [\"만들기·예술\"]}}"
+    },
+    {
+      "check": "수집 mode/failure 상태 노출",
+      "ok": true,
+      "detail": "수집 모드: 오프라인(offline) · 예약 설정: 매일 03:00 KST · 최근 실시간 성공: 2026. 10. 15. 오전 01:00 · 수집 오류 1건"
+    },
+    {
+      "check": "KST 날짜 경계 → 10월 15일 행사만 카드",
+      "ok": true,
+      "detail": "[\"서울 10월 가족 체험\"]"
+    },
+    {
+      "check": "KST 날짜 경계 → 지도 1건",
+      "ok": true,
+      "detail": "markers=1"
+    },
+    {
+      "check": "라우트 fixture facets 누락 age count",
+      "ok": true,
+      "detail": "어린이 (4)"
+    },
+    {
+      "check": "키보드 상세 열기 → 닫기 포커스",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "360px 리사이즈 후 지도 마커 가시영역",
+      "ok": true,
+      "detail": "{\"map\": {\"left\": 13, \"top\": 2419, \"right\": 347, \"bottom\": 2719}, \"markers\": [{\"left\": 209, \"top\": 2615, \"right\": 253, \"bottom\": 2659}, {\"left\": 110, \"top\": 2479, \"right\": 154, \"bottom\": 2523}, {\"left\": 107, \"top\": 2480, \"right\": 151, \"bottom\": 2524}]}"
+    },
+    {
+      "check": "360px 가족 기본 스냅샷",
+      "ok": true,
+      "detail": "specs/verify/evidence/ui-mobile-family.png"
+    },
+    {
+      "check": "360px 가로 오버플로 없음",
+      "ok": true,
+      "detail": "360/360"
+    },
+    {
+      "check": "360px 결과가 지도보다 먼저 표시",
+      "ok": true,
+      "detail": "{\"results\": {\"x\": 12, \"y\": 1195.703125, \"width\": 336, \"height\": 1135.390625}, \"map\": {\"x\": 12, \"y\": 2343.09375, \"width\": 336, \"height\": 376.90625}}"
+    },
+    {
+      "check": "360px 주요 터치 타깃 44px",
+      "ok": true,
+      "detail": "[{\"selector\": \"check-pill\", \"width\": 163.578125, \"height\": 44}, {\"selector\": \"check-pill\", \"width\": 136.421875, \"height\": 44}, {\"selector\": \"check-pill\", \"width\": 166.125, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 133.875, \"height\": 44}, {\"selector\": \"region-chip activity-chip\", \"width\": 336, \"height\": 84}, {\"selector\": \"region-chip\", \"width\": 164, \"height\": 44}, {\"selector\": \"region-chip\", \"width\": 164, \"height\": 44}, {\"selector\": \"button button-primary\", \"width\": 336, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 75.796875, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 75.796875, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 75.796875, \"height\": 44}]"
+    },
+    {
+      "check": "360px 활동 칩 터치 타깃 44px",
+      "ok": true,
+      "detail": "[{\"width\": 336, \"height\": 84}, {\"width\": 336, \"height\": 84}, {\"width\": 336, \"height\": 84}]"
+    },
+    {
+      "check": "지도 마커 실용적 터치 크기",
+      "ok": true,
+      "detail": "[{\"width\": 44, \"height\": 44}, {\"width\": 44, \"height\": 44}, {\"width\": 44, \"height\": 44}]"
+    },
+    {
+      "check": "모바일 WebP 이미지 로드",
+      "ok": true,
+      "detail": "http://127.0.0.1:65112/assets/family-outing-mobile.webp"
     },
     {
       "check": "데스크톱 필터 스냅샷",

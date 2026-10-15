@@ -9,6 +9,13 @@ sources:
     endpoints:
       list: "/pblprfr?stdate={start}&eddate={end}&cpage={page}&rows=100"
       detail: "/pblprfr/{id}"
+    collection:
+      window_days: 90
+      page_size: 100
+      max_pages: 3
+      request_timeout_seconds: 20
+      retries: 2
+      backoff_seconds: 0.5
     map_profile: kopis
 
   - key: tourapi
@@ -20,6 +27,13 @@ sources:
     endpoints:
       festival: "/searchFestival2?eventStartDate={start}&numOfRows=100&pageNo={page}&MobileOS=ETC&MobileApp=hop&_type=json"
     map_profile: tourapi
+    collection:
+      window_days: 90
+      page_size: 100
+      max_pages: 3
+      request_timeout_seconds: 20
+      retries: 2
+      backoff_seconds: 0.5
   - key: websearch
     enabled: true
     # 웹 검색 API(Exa/Brave/Tavily) 기반 "행사 발견" 어댑터.

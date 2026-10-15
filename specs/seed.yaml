@@ -3,7 +3,7 @@
 # 방향은 단방향: spec.md -> seed.yaml. 두 파이프라인을 병렬 SSOT로 돌리지 않는다.
 seed:
   name: notchima-event-infra
-  spec_ref: specs/spec.md@1.0.0
+  spec_ref: specs/spec.md@1.3.1
   ambiguity: 0.15            # 인터뷰 후 잔여 모호도(<=0.2 통과)
   weighting: brownfield     # 성숙 코드베이스(1975 LOC, 40 tests) 위에 증분
 
@@ -17,10 +17,10 @@ tools:
   notify:     "telegram-bot-api"                      # F4.3 — 토큰 없으면 dry-run
   survey_validator: "python3 ~/.agents/skills/survey/scripts/validate_survey_artifacts.py"
 
-# constraints: spec.md §2 의 C1~C7 을 도구 수준으로 못박음.
+# constraints: spec.md §2 의 C1~C13 을 도구 수준으로 못박음.
 constraints:
   - id: C1-free-only
-    rule: "외부 호출은 무료티어만. 키 부재 시 오프라인 픽스처로 전 파이프라인 rc==0."
+    rule: "외부 호출은 무료티어만. 키 부재 시 오프라인 픽스처로 전 파이프라인 rc==0. 런타임은 provider를 호출하지 않고 정적 산출물만 제공."
   - id: C2-flatfile-ssot
     rule: "events.db 는 삭제 후 재생성 가능한 파생물. flat-file(Markdown+YAML)이 SSOT."
   - id: C3-okf-schema
@@ -32,7 +32,19 @@ constraints:
   - id: C6-ai-guardrail
     rule: "AI 출력 responseSchema 강제 + 환각 id 제거 + 규칙 폴백. 무가드 출력 금지."
   - id: C7-zero-cost
-    rule: "월 0원. 정적 배포(Cloudflare Pages) + 무료 CI(GitHub Actions)."
+    rule: "월 0원(free tier 한도 내). 기존 Vercel 프로젝트에 정적 배포 + 무료 CI(GitHub Actions). 서버 함수·유료 빌드 의존 없음. 생성 이미지·추천 provider는 빌드/개발 선택 사항이며 런타임 필수 의존이 아님. 별도 Cloudflare Worker는 이번 배포에 포함하지 않음."
+  - id: C8-family-evidence
+    rule: "family_friendly/family_evidence는 age·age_bands·audience·name·description·themes의 명시 근거만 사용. 어린이/가족 대상 신호만 true, 수치 연령은 상한 13세 이하 범위만 인정(만 7세 이상 같은 최소 연령·13-18은 제외), 성인 전용·노키즈·어린이/아동/유아/미취학아동/미성년자 토큰 가까이의 불가·금지·제한·사절·입장불은 false, 학부모·보호자 전용/만 참석 대상은 아동 참석 근거가 없으면 false, 부정문처럼 보여도 안전상 false, 전연령 단독·정보 부족은 false+근거 부족으로 unknown 보존. true이면 근거 필수."
+  - id: C9-experience-evidence
+    rule: "derive_experiences(...)는 name·description·themes 원문에서 손-활동 근거만 읽어 허용된 한국어 범주·짧은 근거·is_experience을 결정한다. 공연·인형극·음악 감상만으로 true 금지."
+  - id: C10-link-proof
+    rule: "원본 url은 flat-file에 보존하고 link_fields()의 link_status/link_checked_at/link_url/link_reason을 붙인다. 검증기는 브라우저와 같은 bounded GET 하나만 사용해 모든 GET 리다이렉트(최대 3회)를 수동 검증하며 HEAD는 proof로 사용하지 않는다. 기본 sender는 config/search.yaml max_response_bytes(기본 64KB)까지만 스트림을 읽고 닫고, Content-Length가 더 커도 제한 내 도달한 2xx 응답은 검증 가능하다. 전체 HTML 다운로드·파싱·JS 실행은 하지 않는다. 최근 7일 verified 자격증명 없는 HTTPS만 외부 클릭 노출하고, 오프라인·실패·만료에도 이벤트를 버리지 않는다. 공개 link-checks.json은 원본 URL SHA-256 해시 키와 안전한 verified 최종 link_url만 저장하며 raw URL/userinfo/credential query는 저장하지 않는다."
+  - id: C11-cron-visibility
+    rule: "기존 03:00 KST 단일 cron만 사용하고 동시 실행 직렬화. 실패·부분 실패는 Actions 상태와 knowledge/sources/collection-status.json source mode/last_success_at/error 및 updated.json 집계로 드러낸다. fixture build 시각은 live 성공이 아니다."
+  - id: C12-publication-retention
+    rule: "파생 공개는 config/search.yaml publication_policy.retention_days(기본 90 KST 일)를 사용한다. effective_end=end_date||start_date가 주입한 KST today-retention_days보다 엄격히 이전인 행사만 events.json/정적 상세에서 제외하고 knowledge 원본은 삭제하지 않는다. 경계일은 보존하며 updated.json.publication에 retained/excluded를 보고한다."
+  - id: C13-link-queue-budget
+    rule: "일일 링크 큐는 현재 공개 대상 URL만 사용하고 fresh verified proof(7일 이내)는 재사용해 네트워크 검사를 생략한다. 실제 검사 최대 40건·총 120초 이내, 예정 어린이 경험 우선, 비공개 URL 증명 prune, 동일 link-checks.json 해시 캐시만 허용한다."
 
 # success_criteria: spec.md 의 AC 를 기계검증형으로 미러링. evaluate 단계가 증거를 요구.
 success_criteria:
@@ -42,9 +54,39 @@ success_criteria:
   - id: AC-F1-idempotent
     check: "tests::TestUpsert 3건 green"
     evidence: "unittest --json/요약"
+  - id: AC-F1-remote
+    check: "KopisAdapter/TourApiAdapter _fetch_remote가 PublicApiCollector의 bounded paging/date 계약을 사용해 fake transport 다중 페이지·상한·중복·날짜범위 수집을 통과하고 fixture 모드와 분리"
+    evidence: "bounded fake collector tests + adapter call trace"
   - id: AC-F2-search
-    check: "tests::TestSqlite 4건 green (FTS 한국어 + 교차필터)"
+    check: "tests::TestSqlite 4건 green (FTS 한국어 + 기존 5축/무료 교차필터)"
     evidence: "unittest 요약"
+  - id: AC-F2-family
+    check: "events.json의 family_friendly=true는 모두 비어 있지 않은 family_evidence를 갖고, 성인 전용·아동 접근 제한·보호자 전용·전연령 단독·정보 부족·최소 연령만 표기된 레코드는 true가 아님"
+    evidence: "build_index 순수 판정 smoke + events.json coverage 요약"
+  - id: AC-F2.3-responsive
+    check: "브라우저 스냅샷에서 기존 5축 URL 복원, 360px 가로 스크롤 없음, 주요 터치 타깃 44px 이상"
+    evidence: "specs/verify/ui-checklist.md 및 headless snapshot"
+  - id: AC-F2-assets
+    check: "기존 family-outing.webp/family-outing-mobile.webp 경로에 새 자연·가족 수채화 적용, family-science-spot.webp/family-craft-spot.webp 정적 분류 그림 제공, assets/design/family-concept.png와 family-assets.json 생성 이력 보존"
+    evidence: "파일 stat"
+  - id: AC-F2-experience
+    check: "모든 events.json 레코드에 experience_categories/experience_summary/is_experience가 있으며, 현재 4개 family fixture 수 유지, science hands-on은 true·과학·탐구, puppet/music viewing은 자동 true 아님, 원문 명시 악기·오케스트라 체험/참여는 만들기·예술로 true 가능"
+    evidence: "derive_experiences pure smoke + events.json/facets.json"
+  - id: AC-F2-links
+    check: "오프라인 build가 네트워크 없이 events를 보존하고 link fields를 결정적으로 생성하며, bounded GET 검증의 fresh verified HTTPS만 link_url을 노출하고 HEAD-only proof/공개 raw URL 캐시를 허용하지 않음"
+    evidence: "link cache fixture matrix + build output"
+  - id: AC-F2-retention
+    check: "주입 KST 시계에서 effective_end가 today-90과 같으면 보존, 엄격히 이전이면 events.json/정적 상세에서 제외; search.yaml publication_policy.retention_days 재정의 적용; updated.json.publication에 retention_days/retained/excluded 보고; knowledge 원본 유지"
+    evidence: "injected-clock boundary tests + events/static output + updated.json publication counts"
+  - id: AC-F2-link-queue
+    check: "fresh verified proof 재사용으로 네트워크 호출 생략; 실제 검사 40건 이하·총 120초 이하; 예정 어린이 경험 우선 큐; 현재 공개 집합에 없는 URL 증명 prune; 두 번째 캐시 없음"
+    evidence: "injected-clock queue fixture logs + cache before/after + bounded request counters"
+  - id: AC-F2.9-watercolor-layout
+    check: "1440px 히어로 그림 높이 180px 이하, 필터가 활동 바로가기보다 먼저, 360px 목록이 지도보다 먼저; 과학·탐구/만들기·예술 정적 장식 이미지 로드와 빈 alt, 텍스트 이름/건수/선택 상태 및 activity URL 동기화 유지; 그림 없는 실제 범주는 텍스트 탐색, 44px 타깃/출처/상태 보존"
+    evidence: "specs/verify/ui-checklist.md 및 run_ui_check.py Chrome 스냅샷/JSON"
+  - id: AC-F2.10-vercel-release
+    check: "기존 happy-our-planning Vercel 프로젝트에 브라우저 정적 산출물만 배포하고 DB/설계 원본/Worker 제외; production alias의 HTML/events.json/양쪽 히어로 HTTP200 및 로컬 일치; 실제 브라우저 활동 선택/URL/360px 넘침 없음"
+    evidence: "Vercel deployment ID/URL, inspect 결과, production HTTP·해시 및 브라우저 스모크 결과"
   - id: AC-F3-gate
     check: "tests::TestMacro 4건 green (자동/반자동 게이팅)"
     evidence: "unittest 요약"
@@ -62,14 +104,17 @@ success_criteria:
   - id: AC-F5-ai
     check: "tests::TestAiPlanner 6건 + TestRecommend 3건 green"
     evidence: "unittest 요약"
+  - id: AC-F6-cron
+    check: "기존 03:00 KST 단일 cron 동시 실행 직렬화 및 failure visibility; collection-status sidecar와 updated.json 집계가 fixture/live를 구별"
+    evidence: "workflow concurrency 검토 + sidecar/output fixture"
   - id: AC-full
-    check: "tools.tests = 40+ green && tools.validate rc==0 && events.db 재생성 동일 카운트"
+    check: "tools.tests = 40+ green && tools.validate rc==0 && events.db 재생성 동일 카운트 && family/experience/link/source-status 기준 충족"
     evidence: "통합 실행 로그"
 
 # evaluate: 종료코드가 아니라 산출물을 검증한다.
 evaluate:
   rule: "verify artifacts, not exit codes"
-  artifacts: [events.json, events.db, facets.json, "knowledge/**", "unittest 요약"]
+  artifacts: [events.json, events.db, facets.json, updated.json, "knowledge/**", "unittest 요약"]
   on_repeat_failure: "ooo unstuck (blind retry 금지)"
 
 # drift_guards: 자주 새는 곳.
@@ -77,3 +122,5 @@ drift_guards:
   - "run_pipeline.py 의 중복 dead `return 0` 제거(클린업) — tasks T6"
   - "키 추가 시 search.yaml/ sources.yaml 에 무료티어 한도 주석 유지"
   - "events.db 를 SSOT 로 취급 금지(파생물). knowledge/ 파일이 진실원천"
+  - "경계 GeoJSON 코로플레스가 없는데 구현 완료라고 보고하지 않기"
+  - "experience_summary는 원문 근거만, link_url은 fresh verified HTTPS만"

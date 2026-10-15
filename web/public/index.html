@@ -3,44 +3,123 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>놓치마 (Notchima) — 전국 행사 발견·신청·알람·AI 플래닝</title>
+  <meta name="theme-color" content="#fffaf0" />
+  <title>놓치마 - 아이와 함께 찾는 이번 주말 행사</title>
   <link rel="icon" type="image/png" href="./favicon.png" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
   <header class="topbar">
-    <h1><img src="./icon.png" alt="놓치마 마스코트" width="36" height="36" style="vertical-align:-9px;border-radius:9px" /> 놓치마 <small style="font-weight:400;opacity:.7">Notchima · 기회, 다 챙겨드릴게요</small></h1>
-    <span id="freshness" class="freshness">불러오는 중…</span>
+    <a class="brand" href="./" aria-label="놓치마 홈">
+      <img src="./icon.png" alt="" width="36" height="36" />
+      <span>놓치마 <small>Notchima</small></span>
+    </a>
+    <p class="brand-note">아이와 해볼 일을, 근거와 함께</p>
+    <p id="freshness" class="freshness" role="status" aria-live="polite">행사를 불러오는 중입니다</p>
   </header>
 
-  <section class="filters" aria-label="검색 필터">
-    <input id="q" type="search" placeholder="키워드 검색 (제목·설명·테마)" />
-    <select id="sido"><option value="">전체 지역</option></select>
-    <select id="theme"><option value="">전체 테마</option></select>
-    <select id="age"><option value="">전체 나이대</option></select>
-    <input id="from" type="date" title="시작일(이후)" />
-    <input id="to" type="date" title="종료일(이전)" />
-    <label class="chk"><input id="applyable" type="checkbox" /> 신청가능만</label>
-    <button id="reset" type="button">초기화</button>
-  </section>
-
-  <main class="layout">
-    <div id="map" aria-label="지도"></div>
-    <section class="results">
-      <div class="results-head">
-        <strong id="count">0</strong>건
-        <button id="aiBtn" type="button" class="ai">🧠 AI 추천 플랜</button>
+  <main>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-copy">
+        <p class="hero-eyebrow">전국 행사 지도 · 가족 근거 표시 · 출처 상태 공개</p>
+        <h1 id="heroTitle">아이와 어디서, 무엇을 해볼까요?</h1>
+        <p class="hero-lede">지역과 나이, 하고 싶은 활동을 골라보세요.<br />필요한 정보와 출처 상태를 한눈에 확인해요.</p>
+        <div class="hero-stats" aria-label="현재 목록 요약">
+          <span class="hero-stat"><strong id="heroCount">0</strong>건 표시 중</span>
+          <span class="hero-stat">무료·신청가능·체험 필터 지원</span>
+        </div>
       </div>
-      <ul id="list" class="cards"></ul>
+      <figure class="hero-art">
+        <picture>
+          <source media="(max-width: 600px)" srcset="./assets/family-outing-mobile.webp" />
+          <img src="./assets/family-outing.webp" alt="호숫가를 산책하는 가족을 그린 장식용 수채화" width="1200" height="675" />
+        </picture>
+      </figure>
+    </section>
+
+    <form id="filters" class="filters" aria-label="행사 검색 필터">
+      <div class="search-row">
+        <label class="search-label" for="q">무엇을 찾나요?
+          <input id="q" type="search" autocomplete="off" placeholder="예: 축제, 체험, 공연" />
+        </label>
+      </div>
+      <div class="filter-grid">
+        <label for="sido">지역
+          <select id="sido"><option value="">전체 지역</option></select>
+        </label>
+        <label for="theme">테마
+          <select id="theme"><option value="">전체 테마</option></select>
+        </label>
+        <label for="age">나이대
+          <select id="age"><option value="">전체 나이대</option></select>
+        </label>
+        <label for="activity">아이와 해볼 활동
+          <select id="activity"><option value="">전체 활동</option></select>
+        </label>
+        <label for="from">기간 시작
+          <input id="from" type="date" title="검색 기간 시작" />
+        </label>
+        <label for="to">기간 종료
+          <input id="to" type="date" title="검색 기간 종료" />
+        </label>
+      </div>
+      <div class="filter-options">
+        <label class="check-pill" for="kids"><input id="kids" type="checkbox" checked /> 아이와 함께</label>
+        <label class="check-pill" for="freeOnly"><input id="freeOnly" name="free_only" type="checkbox" /> 무료만</label>
+        <label class="check-pill" for="applyable"><input id="applyable" type="checkbox" /> 지금 신청 가능</label>
+        <button id="reset" type="button" class="button button-quiet">필터 초기화</button>
+      </div>
+      <div class="source-notes">
+        <p class="date-hint">지정한 기간과 겹치는 행사를 보여드려요.</p>
+        <p class="data-note">샘플 기록이 포함된 정적 목록입니다. 날짜·비용은 출처에서 확인하세요.</p>
+        <p id="sourceStatus" class="source-freshness" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+    <section class="quick-experiences" aria-labelledby="activityTitle">
+      <div class="section-kicker"><h2 id="activityTitle">아이와 해볼 수 있는 것</h2><span>현재 조건에 맞는 체험</span></div>
+      <div id="activityQuick" class="region-quick" role="list"></div>
+    </section>
+
+    <section class="quick-regions" aria-labelledby="regionTitle">
+      <div class="section-kicker"><h2 id="regionTitle">지역별로 빠르게 보기</h2><span>현재 필터 기준</span></div>
+      <div id="regionQuick" class="region-quick" role="list"></div>
+    </section>
+
+    <div id="loading" class="state-panel" role="status">행사 정보를 준비하고 있습니다…</div>
+    <div id="loadError" class="state-panel error-panel" role="alert" hidden>
+      <strong>행사 정보를 불러오지 못했어요.</strong>
+      <p>잠시 후 다시 시도하거나, 출처 사이트를 직접 확인해 주세요.</p>
+      <button id="retry" type="button" class="button button-primary">다시 불러오기</button>
+    </div>
+
+    <section class="workspace" aria-label="행사 탐색 결과">
+      <section class="results" aria-labelledby="resultsTitle">
+        <div class="results-head">
+          <div class="results-summary"><h2 id="resultsTitle">찾은 행사</h2><p class="result-count"><strong id="count">0</strong><span>건</span></p></div>
+          <button id="aiBtn" type="button" class="button button-primary">조건 맞춤 추천</button>
+        </div>
+        <p id="resultHint" class="result-hint" role="status" aria-live="polite"></p>
+        <div id="empty" class="state-panel" hidden>
+          <strong>조건에 맞는 행사가 없어요.</strong>
+          <p>지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.</p>
+        </div>
+        <ul id="list" class="cards" aria-label="행사 목록"></ul>
+      </section>
+      <div class="map-panel">
+        <div class="panel-heading"><h2>지도에서 보기</h2><span>핀을 선택하면 상세 정보를 확인할 수 있어요.</span></div>
+        <div id="map" aria-label="행사 위치 지도"></div>
+        <p id="mapFallback" class="map-fallback" hidden>지도를 불러오지 못했어요. 목록에서 행사 위치를 확인할 수 있습니다.</p>
+      </div>
     </section>
   </main>
 
-  <dialog id="detail"></dialog>
-  <dialog id="aiDialog"></dialog>
+  <dialog id="detail" aria-labelledby="detailTitle"></dialog>
+  <dialog id="aiDialog" aria-labelledby="aiTitle"></dialog>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
   <script src="./app.js"></script>
+  <noscript><p class="state-panel">자바스크립트를 켜면 행사 목록과 지도를 볼 수 있습니다. 정적 상세 페이지는 <a href="./data/events.json">events.json</a>에서 직접 확인할 수 있어요.</p></noscript>
 </body>
 </html>
