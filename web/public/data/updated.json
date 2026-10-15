@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-15T17:34:34+09:00",
+  "generated_at": "2026-10-16T06:10:33+09:00",
   "total_active": 310,
   "archived": 0,
   "publication": {
@@ -15,17 +15,17 @@
   },
   "sources": {
     "kopis": {
-      "mode": "live",
-      "attempted_at": "2026-10-15T17:34:30+09:00",
+      "mode": "fixture",
+      "attempted_at": "2026-10-16T06:09:08+09:00",
       "last_success_at": "2026-10-15T17:34:32+09:00",
       "error": null,
-      "collected": 300,
+      "collected": 3,
       "complete": false,
-      "truncated": true
+      "truncated": false
     },
     "tourapi": {
       "mode": "fixture",
-      "attempted_at": "2026-10-15T17:34:32+09:00",
+      "attempted_at": "2026-10-16T06:09:08+09:00",
       "last_success_at": null,
       "error": null,
       "collected": 3,
@@ -33,18 +33,18 @@
       "truncated": false
     },
     "websearch": {
-      "mode": "live",
-      "attempted_at": "2026-10-15T17:34:32+09:00",
+      "mode": "fixture",
+      "attempted_at": "2026-10-16T06:09:09+09:00",
       "last_success_at": "2026-10-15T17:34:33+09:00",
       "error": null,
-      "collected": 4,
+      "collected": 3,
       "complete": false,
       "truncated": false
     }
   },
-  "source_mode": "mixed",
+  "source_mode": "offline",
   "last_success_at": "2026-10-15T17:34:33+09:00",
-  "collection_started_at": "2026-10-15T17:34:33+09:00",
+  "collection_started_at": "2026-10-16T06:09:09+09:00",
   "collection_error_count": 0,
   "collection_errors": []
 }
