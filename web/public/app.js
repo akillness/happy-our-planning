@@ -3,7 +3,6 @@
   "use strict";
 
   const DATA = "./data/";
-  const PAGE_SIZE = 60;
   const state = {
     events: [], regions: [], facets: {}, fuse: null,
     map: null, markers: null, userMarker: null, mapReady: false,
@@ -585,19 +584,25 @@
     });
   }
 
+  function pageSize() {
+    // 화면 높이에 맞는 페이지 크기: 카드 1장 ≈ 140px 기준, 5~12장 범위.
+    const h = (typeof window !== "undefined" && window.innerHeight) || 800;
+    return Math.max(5, Math.min(12, Math.floor(h / 140)));
+  }
+
   function render(rows) {
     $("count").textContent = String(rows.length);
     if ($("heroCount")) $("heroCount").textContent = String(rows.length);
+    const size = pageSize();
+    const pages = Math.max(1, Math.ceil(rows.length / size));
+    if (state.page > pages - 1) state.page = pages - 1;
+    if (state.page < 0) state.page = 0;
+    const start = state.page * size;
+    const shown = rows.slice(start, start + size);
     clear($("list"));
-    const shown = rows.slice(0, (state.page + 1) * PAGE_SIZE);
     for (const event of shown) $("list").appendChild(card(event, state.lastQuery));
     setHidden("empty", rows.length > 0);
-    const more = $("moreBtn");
-    if (more) {
-      const rest = rows.length - shown.length;
-      more.hidden = rest <= 0;
-      more.textContent = rest > 0 ? `더 보기 (${rest}건 남음)` : "더 보기";
-    }
+    renderPager(rows.length, start, shown.length, pages);
     const ended = rows.filter(isEnded).length;
     const unmapped = rows.filter((e) => typeof e.lat !== "number" || typeof e.lng !== "number").length;
     const note = ended ? `종료된 행사 ${ended}건은 날짜에 '종료'로 표시했습니다.` : "출처 페이지에서 일정과 신청 조건을 한 번 더 확인하세요.";
@@ -605,6 +610,37 @@
     const sortNote = state.sortMode === "distance" && state.userPos ? " 내 위치 가까운 순." : "";
     $("resultHint").textContent = `${rows.length}건. ${note}${mapNote}${sortNote}`;
     renderMap(rows);
+  }
+
+  function renderPager(total, start, shownCount, pages) {
+    const nav = $("pager");
+    if (!nav) return;
+    nav.hidden = total === 0;
+    const prev = $("pagePrev");
+    const next = $("pageNext");
+    const info = $("pageInfo");
+    if (prev) {
+      prev.disabled = state.page <= 0;
+      prev.setAttribute("aria-label", "이전 페이지");
+    }
+    if (next) {
+      next.disabled = state.page >= pages - 1;
+      next.setAttribute("aria-label", "다음 페이지");
+    }
+    if (info) {
+      info.textContent = total === 0
+        ? ""
+        : `${state.page + 1} / ${pages} 페이지 (전체 ${total}건 중 ${start + 1}–${start + shownCount}번째)`;
+    }
+  }
+
+  function gotoPage(delta) {
+    state.page += delta;
+    render(state.filteredRows);
+    const list = $("list");
+    if (list && typeof list.scrollIntoView === "function") {
+      list.scrollIntoView({ block: "start", behavior: "smooth" });
+    }
   }
 
   function renderSubFacets(rows, filters) {
@@ -875,14 +911,22 @@
     }
     const locate = $("locateBtn");
     if (locate) locate.addEventListener("click", locateUser);
-    const more = $("moreBtn");
-    if (more) more.addEventListener("click", () => { state.page += 1; render(state.filteredRows); });
+    const prev = $("pagePrev");
+    if (prev) prev.addEventListener("click", () => gotoPage(-1));
+    const next = $("pageNext");
+    if (next) next.addEventListener("click", () => gotoPage(1));
     window.addEventListener("popstate", () => { restoreFromURL(); applyFilters(); });
     let resizeFrame;
+    let lastPageSize = pageSize();
     window.addEventListener("resize", () => {
       window.cancelAnimationFrame(resizeFrame);
       resizeFrame = window.requestAnimationFrame(() => {
         if (state.mapReady) state.map.invalidateSize({ pan: false });
+        const size = pageSize();
+        if (size !== lastPageSize) {
+          lastPageSize = size;
+          if (state.filteredRows.length) render(state.filteredRows);
+        }
       });
     });
   }

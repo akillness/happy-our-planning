@@ -125,7 +125,11 @@
           <p>지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.</p>
         </div>
         <ul id="list" class="cards" aria-label="행사 목록"></ul>
-        <button id="moreBtn" type="button" class="button button-quiet more-btn" hidden>더 보기</button>
+        <nav id="pager" class="pager" aria-label="행사 목록 페이지" hidden>
+          <button id="pagePrev" type="button" class="button button-quiet">이전</button>
+          <p id="pageInfo" class="page-info" role="status" aria-live="polite"></p>
+          <button id="pageNext" type="button" class="button button-quiet">다음</button>
+        </nav>
       </section>
       <div class="map-panel">
         <div class="panel-heading">

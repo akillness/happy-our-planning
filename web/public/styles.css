@@ -196,7 +196,9 @@ main { width: min(1440px, 100%); margin: 0 auto; padding: 0 clamp(16px, 2.3vw, 3
 }
 .sort-chip[aria-pressed="true"] { border-color: var(--green); background: var(--green); color: #fff; }
 .sort-chip:disabled { opacity: .45; cursor: not-allowed; }
-.more-btn { width: 100%; margin-top: 12px; }
+.pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+.pager .button { min-width: 88px; }
+.page-info { margin: 0; color: var(--muted); font-size: .82rem; text-align: center; }
 .card-distance { color: var(--green-dark); font-weight: 750; }
 mark { padding: 0 2px; border-radius: 4px; background: #ffe9b8; color: inherit; }
 .subfacets { padding: 4px 0 18px; }
