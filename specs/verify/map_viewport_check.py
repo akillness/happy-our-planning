@@ -875,8 +875,18 @@ def _run_case(page, viewport: tuple[int, int], checks: list[dict], payloads: dic
 
     search = _rect(page, "#q")
     search_dock = _rect(page, "#searchDock") or _rect(page, ".search-dock")
-    centered = bool(search and abs(search["left"] + search["width"] / 2 - width / 2) <= 2)
-    dock_centered = bool(search_dock and abs(search_dock["left"] + search_dock["width"] / 2 - width / 2) <= 2)
+    panel = _rect(page, "#resultsPanel") or _rect(page, ".results")
+    # Dock must not hide behind the results drawer: >=1353px (or a collapsed
+    # icon drawer) it stays viewport-centered; 641-1352px with a tall viewport
+    # the 380px drawer is expanded, so the dock centers in the free corridor
+    # left of the drawer ((width-396)/2).
+    if 641 <= width <= 1352 and height > 560:
+        expected_center = (width - 396) / 2
+    else:
+        expected_center = width / 2
+    centered = bool(search and search_dock and abs(search["left"] + search["width"] / 2 - (search_dock["left"] + search_dock["width"] / 2)) <= 2
+                      and abs(search_dock["left"] + search_dock["width"] / 2 - expected_center) <= 2)
+    dock_centered = bool(search_dock and abs(search_dock["left"] + search_dock["width"] / 2 - expected_center) <= 2)
     dock_bottom_gap = (height - search_dock["bottom"]) if search_dock else float("inf")
     dock_positioned = bool(search_dock and 8 <= dock_bottom_gap <= 28 and search_dock["width"] > 0)
     _record(checks, f"{width}x{height} 검색 도크 하단 중앙", centered and dock_centered and dock_positioned,

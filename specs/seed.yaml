@@ -87,7 +87,7 @@ success_criteria:
     check: "fresh verified proof 재사용으로 네트워크 호출 생략; 예약·정보 실제 검사 합산 40건 이하·총 120초 이하; 예약 URL 우선 후 각 종류 내 예정/진행 어린이 경험·가족 우선; 현재 공개 집합에 없는 URL 증명 prune; 두 번째 링크 캐시 없음"
     evidence: "injected-clock queue fixture logs + cache before/after + bounded request counters"
   - id: AC-F2.9-map-first-layout
-    check: "1440×900/1280×800/360×800/390×844 지도 네 변1px·하단 중앙 검색도크 중심2px/하단12–24px; 위로 여는 조건팝업 내부스크롤; 우측12–24px 결과팝업 목록/페이지네이션·문서넘침없음; 모바일결과기본접힘/아이콘우측드로어/지도폭56px보존·검색조건과상호배타; 핀끝/말풍선포인터2px·동일latlng·pan/zoom/resize/그룹/긴내용/가장자리정합·가림방지·Leaflettransform보존; 열린조건에서먼지역선택→지도눌러닫아도결과핀보임·첫드래그전줌/중심점프없음; 기존탐색·URL·정렬/거리/위치·링크상태·오류/초점·44px·reduced-motion유지"
+    check: "1440×900/1280×800/360×800/390×844 지도 네 변1px·검색도크 하단12–24px·결과패널 비중첩 범위에서 1353px이상·높이560px이하 접힘은 뷰포트중앙2px/너비641–1352px·높이561px이상은 왼쪽여유공간 중앙2px; 위로 여는 조건팝업 내부스크롤; 우측12–24px 결과팝업 목록/페이지네이션·문서넘침없음; 모바일결과기본접힘/아이콘우측드로어/지도폭56px보존·검색조건과상호배타; 핀끝/말풍선포인터2px·동일latlng·pan/zoom/resize/그룹/긴내용/가장자리정합·가림방지·Leaflettransform보존; 열린조건에서먼지역선택→지도눌러닫아도결과핀보임·첫드래그전줌/중심점프없음; 기존탐색·URL·정렬/거리/위치·링크상태·오류/초점·44px·reduced-motion유지"
     evidence: "개정 specs/verify/run_ui_check.py 및 지도 geometry 브라우저 체크의 JSON/스크린샷과 ui-checklist.md"
   - id: AC-F2.10-vercel-release
     check: "기존 happy-our-planning에 검증된 정적브라우저산출물만 배포(DB/설계원본/Worker/QA제외); production HTML/CSS/JS/언어리소스/events/활동그림 HTTP200·커밋일치; 전체지도/하단검색조건/우측결과페이지/모바일아이콘/한영전환/종료표시/핀팝업/실제예약연결 스모크; mixed/live/fixture와테스트증거구분"

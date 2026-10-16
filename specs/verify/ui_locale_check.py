@@ -328,7 +328,12 @@ def _run(checks: list[dict]) -> int:
                               and abs(map_box["right"] - width) <= 1 and abs(map_box["bottom"] - height) <= 1)
                 _record(checks, f"{viewport} 지도 전체 뷰포트", map_ok, shell)
                 dock = shell["search"]
-                dock_ok = bool(dock and abs((dock["left"] + dock["width"] / 2) - width / 2) <= 2
+                results_box = shell["results"]
+                if 641 <= width <= 1352 and height > 560:
+                    expected_center = (width - 396) / 2
+                else:
+                    expected_center = width / 2
+                dock_ok = bool(dock and abs((dock["left"] + dock["width"] / 2) - expected_center) <= 2
                               and 12 <= height - dock["bottom"] <= 24)
                 _record(checks, f"{viewport} 하단 중앙 검색 dock 12–24px", dock_ok, shell)
                 results = shell["results"]
