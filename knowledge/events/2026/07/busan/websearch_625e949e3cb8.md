@@ -170,7 +170,7 @@ location:
 url: https://www.mcst.go.kr/kor/s_culture/festival/festivalList.jsp
 source: websearch
 source_url: https://www.mcst.go.kr/kor/s_culture/festival/festivalList.jsp
-fetched_at: '2026-10-16T15:10:48+09:00'
+fetched_at: '2026-10-16T16:25:00+09:00'
 x_provider: exa
 x_query: 전국 2026 무료 행사 신청
 x_confidence: 0.6

@@ -17,10 +17,19 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303429
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303429
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-11-06T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303429_261015_125216.gif
-content_hash: sha256:cf079151ad78f500ed91a50e49678c94e437f23e20b371fae338fcc393bd4ce3
+description: '장르: 대중음악 · 공연장: 생기 스튜디오 · 공연시간 안내: 금요일(20:00) · 관람연령: 전체 관람가 · 런타임:
+  1시간 40분 · 티켓가격: 스탠딩 44,000원 · 예매처: 놀유니버스 · 주최·주관: (주)카이트'
+age: 전체 관람가
+price_text: 스탠딩 44,000원
+duration_text: 1시간 40분
+duration: PT1H40M
+organizer: (주)카이트
+offers:
+  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014777
+content_hash: sha256:7e6a11c7716518344669ccb6479652a6337f389cc80fa5749b6cf69a5df30e61
 ---
 
 # 조우 vol.3: 비공정 x 손을모아

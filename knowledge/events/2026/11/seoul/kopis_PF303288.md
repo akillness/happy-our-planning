@@ -17,10 +17,36 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303288
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303288
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-11-24T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303288_261014_130639.png
-content_hash: sha256:e95210cc6e0eebf837145a3afe45b5836f1d3260371e045ac7aa2788cb78c807
+description: '[PROGRAM]
+
+  I. Albéniz (1860-1909)
+
+  Iberia Bk. 1
+
+
+  A. Scriabin (1872-1915)
+
+  Piano Sonata No. 2, Op. 19
+
+
+  INTERMISSION
+
+
+  F. Chopin (1810-1849)
+
+  Étude Op. 25'
+age: 만 7세 이상
+price_text: 전석 30,000원
+price: 30000
+duration_text: 1시간 30분
+duration: PT1H30M
+organizer: 지클레프
+offers:
+  url: https://www.sejongpac.or.kr/portal/performance/performance/performTicket.do?performIdx=37737&menuNo=200320
+content_hash: sha256:c8b5c38ee0b79209d3a50d76850a9cbaeb71cda0f07d5a33e4a2dc8bc0585a8c
 ---
 
 # 장은주 피아노 독주회: EVOCATION

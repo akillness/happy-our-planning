@@ -17,10 +17,24 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303455
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303455
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-11-13T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303455_261015_135442.jpg
-content_hash: sha256:90367e961c56ddad8bb7d72831e34a03a6248e743d949dd47f65780e6b0d6dea
+description: '[공연소개]
+
+
+  좋은 친구들 그리고 멋진 순간들
+
+  〈TWLV x nnn : ‘GOOD FRIENDS’〉'
+age: 전체 관람가
+price_text: 전석 55,000원
+price: 55000
+duration_text: 2시간
+duration: PT2H
+organizer: (주)롤링컬쳐원, 롤링홀
+offers:
+  url: https://ticket.melon.com/performance/index.htm?prodId=214031
+content_hash: sha256:696b8fd253308d6f2965423ecc9b6f8cab7421bf0a94c9a18330784bdc9b1772
 ---
 
 # TWLV x nnn: GOOD FRIENDS

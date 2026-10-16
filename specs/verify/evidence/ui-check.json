@@ -22,10 +22,10 @@
   "source_hashes": {
     "spec.md": "af94b2ef61dd559388e8ff4ac83108ee6e1c3a13e8fa3d88f8523befe99d7729",
     "seed.yaml": "468e7ab87d600aa9b0a0166b9b1b86294f451ed7ce47d5cf8e610253bce20f01",
-    "index.html": "98d43cc50c4d7cec8ad3e8d4bec96da849ad1a180e20f97db3f242b664a0b29c",
-    "app.js": "cdf3e151006ef81a4816ae03a126c53bccce3cb3cc9fb5399799e7a53ce25319",
-    "styles.css": "6984f7fee52ba0f2dbae77e8088555c1b6c2aec76d334a21ab355cbce62da4d7",
-    "locales.json": "3199e7c9a8d4bac3aec6aa7172ffce5a0c9fe54971df53da2161e0b533e0c033",
+    "index.html": "1bef6267d3eb4ec978aca079f61525d61ebe6e4d0247b293aa6f7d0492e71c0c",
+    "app.js": "28ebe46a385ec4b0372850ed2a0bf5a9b2adda0b5c7da7d36e47dbf7f39bd39a",
+    "styles.css": "f11c8b7bf502c57f3a76bfd3a6ef862b513a4aacdffabfca18f405009383b000",
+    "locales.json": "62a8cc23a3ef227281a74c993a0c254829dc55e226658ff6364f5fbd5ce9f033",
     "i18n.js": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
   },
   "checks": [
@@ -182,7 +182,7 @@
     {
       "check": "Retry 성공 시 필터·액션 복구·카운트·URL 보존·브라우저 오류 없음",
       "ok": true,
-      "detail": "{\"attempts\": {\"events.json\": 2}, \"after\": {\"disabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"count\": \"1\", \"errorHidden\": true, \"query\": \"?sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&free_only=1\"}, \"expectedDisabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"browserErrors\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:49683/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"expectedInitial503\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:49683/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"unexpectedErrors\": []}"
+      "detail": "{\"attempts\": {\"events.json\": 2}, \"after\": {\"disabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"count\": \"1\", \"errorHidden\": true, \"query\": \"?sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&free_only=1\"}, \"expectedDisabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"browserErrors\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:52129/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"expectedInitial503\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:52129/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"unexpectedErrors\": []}"
     },
     {
       "check": "지도 초기화 실패 시 Locate가 위치를 가장하지 않음",

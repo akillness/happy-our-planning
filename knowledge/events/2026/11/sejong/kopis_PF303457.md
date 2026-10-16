@@ -17,10 +17,20 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303457
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303457
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-11-28T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303457_261015_135639.gif
-content_hash: sha256:35c93f1110e9b2fbb6f423b28a890638f46359d685d3a8e449450de66ffa3c98
+description: '장르: 서양음악(클래식) · 공연장: 세종예술의전당 · 공연시간 안내: 토요일(17:00) · 관람연령: 만 8세 이상 ·
+  런타임: 1시간 35분 · 티켓가격: 전석 10,000원 · 출연진: 마르틴 덴디벨, 이효 등 · 예매처: 놀유니버스 · 주최·주관: 문화체육관광부'
+age: 만 8세 이상
+price_text: 전석 10,000원
+price: 10000
+duration_text: 1시간 35분
+duration: PT1H35M
+organizer: 문화체육관광부
+offers:
+  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014844
+content_hash: sha256:5daca8d3cc9c76330bf6f2f95ec3eef10117c9a948905b4e93b03d369ae02c11
 ---
 
 # 국립심포니오케스트라, KNSO아카데미: 비상 飛上 [세종]

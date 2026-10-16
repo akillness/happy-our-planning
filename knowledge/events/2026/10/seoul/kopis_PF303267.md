@@ -17,10 +17,56 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303267
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303267
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-10-24T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303267_261014_104258.gif
-content_hash: sha256:a6b6c5ef5a95a8f958ad116c8409b8972730f345d69f47706c6bd109d853b5e5
+description: '[PROGRAM]
+
+  Frédéric Chopin
+
+  Introduction et Polonaise brillante in C Major, Op. 3
+
+  I. Introduction: Lento
+
+  II. Alla Polonaise: Allegro con spirito
+
+
+  Carl Reinecke
+
+  Sonata in E Major, Op. 167 "Undine"
+
+  I. Allegro
+
+  II. Intermezzo: Allegretto vivace
+
+  III. Andante tranquillo
+
+  IV. Finale: Allegro molto agitato ed appassionato, quasi Presto
+
+
+  *Intermission*
+
+
+  César Franck
+
+  Violin Sonata in A major, FWV 8
+
+  I. Allegretto ben moderato
+
+  II. Allegro
+
+  III. Ben moderato: Recitativo-Fantasia
+
+  IV. Allegretto poco mosso'
+age: 만 7세 이상
+price_text: 전석 30,000원
+price: 30000
+duration_text: 1시간 20분
+duration: PT1H20M
+organizer: 톤픽쳐(Tonepicture)
+offers:
+  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014677
+content_hash: sha256:16e334ed90ba8eff15ddde6f1d9bbb042f3eb1b426570a41695b2c34fe954d14
 ---
 
 # 문진성 클라리넷 독주회

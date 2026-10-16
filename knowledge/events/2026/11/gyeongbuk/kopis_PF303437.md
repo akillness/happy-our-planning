@@ -17,10 +17,21 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303437
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303437
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-11-06T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303437_261015_131818.jpg
-content_hash: sha256:be7e850914fa235f82c824771b7460cc8ec8ad74a0db54203d2cf74e07d1e01a
+description: '장르: 연극 · 공연장: 영주문화예술회관 · 공연시간 안내: 목요일 ~ 금요일(19:00) · 관람연령: 전체 관람가 ·
+  런타임: 1시간 · 티켓가격: 전석 10,000원 · 출연진: 김종엽, 추현종, 신재성, 이미정, 임연희, 예병대, 김민수 등 · 예매처: NHN티켓링크
+  · 주최·주관: (사) 한문화아트비전, 문화체육관광부, 영주시'
+age: 전체 관람가
+price_text: 전석 10,000원
+price: 10000
+duration_text: 1시간
+duration: PT1H
+organizer: (사) 한문화아트비전, 문화체육관광부, 영주시
+offers:
+  url: http://www.ticketlink.co.kr/product/66199
+content_hash: sha256:5ff9a6a5ed982d7c45c309f06551159cd95872aa4d981c02c62d7c50c3700b2c
 ---
 
 # 마당놀이 죽계선비뎐 시즌2 [영주]

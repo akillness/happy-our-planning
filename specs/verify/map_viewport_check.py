@@ -1857,7 +1857,10 @@ def _main_impl(checks: list[dict]) -> int:
                         arg={"lat": recovery_before["lat"], "lng": recovery_before["lng"]},
                         timeout=2000,
                     )
-                    tile_failure_page.wait_for_function("document.getElementById('mapFallback')?.hidden === true", timeout=5000)
+                    tile_failure_page.wait_for_function(
+                        "() => document.getElementById('mapFallback')?.hidden === true && !window.__notchimaMap?._animatingZoom && !window.__notchimaMap?._panAnim?._inProgress && !window.__notchimaMap?.dragging?.moving?.()",
+                        timeout=5000,
+                    )
                     recovery_after = tile_failure_page.evaluate("""
                     () => {
                       const map = window.__notchimaMap;

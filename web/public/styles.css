@@ -505,7 +505,7 @@ dialog .close { position: absolute; top: 12px; right: 14px; min-width: 44px; min
   .brand img { width: 32px; height: 32px; }
   .kids-badge { padding: 2px 6px; font-size: .62rem; }
   .hero-stat { min-height: 28px; padding-inline: 7px; font-size: .68rem; }
-  .map-tools { --map-edge: top; top: 80px; right: auto; left: 72px; max-width: 240px; grid-template-columns: max-content max-content; row-gap: 0; }
+  .map-tools { --map-edge: top; top: 80px; right: auto; left: 72px; max-width: 240px; grid-template-columns: repeat(3, max-content); row-gap: 0; }
   .freshness,
   .map-hint,
   .map-tools .button .control-label,

@@ -17,10 +17,22 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303278
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303278
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-12-27T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303278_261014_112314.gif
-content_hash: sha256:183426242861e686149aecba9df91ac895e289d910c3b2ab723dca9484387eda
+description: "[PROGRAM]\n\nW.A. Mozart: Piano Concerto No. 25 in C Major, K.503\n\
+  모차르트: 피아노 협주곡 제25번 다장조, K.503\nPiano 백건우\n\nL.v. Beethoven: Symphony No. 9 in d\
+  \ minor, Op.125 ‘Choral’\n베토벤: 교향곡 제9번 라단조, Op.125 ‘합창’\nSoprano 박소영, Mezzo soprano\
+  \ 이단비, Tenor 손지훈, Baritone 유한승\n고양시립합창단, 안양시립합창단 \n\n※ 상기 프로그램은 출연자의 사정에 의해 변경될\
+  \ 수 있음."
+age: 만 7세 이상
+price_text: R석 70,000원, S석 50,000원, A석 30,000원
+duration_text: 2시간
+duration: PT2H
+organizer: (재) 천안문화재단(천안예술의전당)
+offers:
+  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014389
+content_hash: sha256:33e00fc75bc6581639a6aa56b9fd9815cd2726b101649c2bf6b36c83a93d122d
 ---
 
 # 천안예술의전당 송년음악회: FROM MOZART TO BEETHOVEN [천안]

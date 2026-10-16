@@ -16,13 +16,23 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303301
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303301
-fetched_at: '2026-10-15T15:54:36+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-11-24T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303301_261014_134332.jpg
-content_hash: sha256:0af89808300c5c3a7eba1c2e0a4b660f0d095bf21b8778ee3bd9b65cbcf341e7
+description: '장르: 한국음악(국악) · 공연장: 부산문화회관 · 공연시간 안내: 화요일(19:30) · 관람연령: 만 7세 이상 · 런타임:
+  2시간 · 티켓가격: 전석 5,000원 · 출연진: 정현지, 이은경, 김새벽, 정윤석, 고은수, 최승은, 여승헌 등 · 예매처: 부산문화/시민회관((재)부산문화회관)
+  · 주최·주관: (재)부산문화회관'
+age: 만 7세 이상
+price_text: 전석 5,000원
+price: 5000
+duration_text: 2시간
+duration: PT2H
+organizer: (재)부산문화회관
+offers:
+  url: http://www.bscc.or.kr/01_perfor/?mcode=0401010200&mode=2&no=26566
+content_hash: sha256:70b86a682e5c35dd6ee5f3a258c80e42dc2d486adbcbc38d8795be18e333ef9d
 ---
 
 # 제51회 부산시립국악관현악단 특별연주회, 청소년 협연의 밤: 꿈과 감성이 있는 젊은 음악회 [부산]
 
 > 출처: kopis · 수집 2026-10-15T15:54:36+09:00
-

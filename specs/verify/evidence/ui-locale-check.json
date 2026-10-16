@@ -47,10 +47,10 @@
   "source_hashes": {
     "spec.md": "af94b2ef61dd559388e8ff4ac83108ee6e1c3a13e8fa3d88f8523befe99d7729",
     "seed.yaml": "468e7ab87d600aa9b0a0166b9b1b86294f451ed7ce47d5cf8e610253bce20f01",
-    "index.html": "98d43cc50c4d7cec8ad3e8d4bec96da849ad1a180e20f97db3f242b664a0b29c",
-    "app.js": "cdf3e151006ef81a4816ae03a126c53bccce3cb3cc9fb5399799e7a53ce25319",
-    "styles.css": "6984f7fee52ba0f2dbae77e8088555c1b6c2aec76d334a21ab355cbce62da4d7",
-    "locales.json": "3199e7c9a8d4bac3aec6aa7172ffce5a0c9fe54971df53da2161e0b533e0c033",
+    "index.html": "1bef6267d3eb4ec978aca079f61525d61ebe6e4d0247b293aa6f7d0492e71c0c",
+    "app.js": "28ebe46a385ec4b0372850ed2a0bf5a9b2adda0b5c7da7d36e47dbf7f39bd39a",
+    "styles.css": "f11c8b7bf502c57f3a76bfd3a6ef862b513a4aacdffabfca18f405009383b000",
+    "locales.json": "62a8cc23a3ef227281a74c993a0c254829dc55e226658ff6364f5fbd5ce9f033",
     "i18n.js": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
   },
   "checks": [
@@ -225,7 +225,7 @@
     {
       "check": "1440x900 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "1440x900 cream surface alpha·양쪽 배경 대비",
@@ -1268,7 +1268,7 @@
         {
           "id": "resultsToggle",
           "width": 44,
-          "height": 44.000003814697266,
+          "height": 43.99999237060547,
           "layoutWidth": 44,
           "layoutHeight": 44
         },
@@ -1628,7 +1628,7 @@
     {
       "check": "740x360 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "740x360 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
@@ -1645,9 +1645,9 @@
         "tools": {
           "left": 72,
           "top": 80,
-          "right": 174,
+          "right": 228,
           "bottom": 124,
-          "width": 102,
+          "width": 156,
           "height": 44
         },
         "search": {
@@ -1861,7 +1861,7 @@
         {
           "id": "resultsToggle",
           "width": 44,
-          "height": 44.000003814697266,
+          "height": 44,
           "layoutWidth": 44,
           "layoutHeight": 44
         },
@@ -2221,7 +2221,7 @@
     {
       "check": "667x375 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "667x375 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
@@ -2238,9 +2238,9 @@
         "tools": {
           "left": 72,
           "top": 80,
-          "right": 174,
+          "right": 228,
           "bottom": 124,
-          "width": 102,
+          "width": 156,
           "height": 44
         },
         "search": {
@@ -2454,7 +2454,7 @@
         {
           "id": "resultsToggle",
           "width": 44,
-          "height": 44,
+          "height": 44.00000762939453,
           "layoutWidth": 44,
           "layoutHeight": 44
         },
@@ -2814,7 +2814,7 @@
     {
       "check": "640x360 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "640x360 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
@@ -2831,9 +2831,9 @@
         "tools": {
           "left": 72,
           "top": 80,
-          "right": 166,
+          "right": 216,
           "bottom": 124,
-          "width": 94,
+          "width": 144,
           "height": 44
         },
         "search": {
@@ -2884,9 +2884,9 @@
         "tools": {
           "left": 72,
           "top": 80,
-          "right": 166,
+          "right": 216,
           "bottom": 124,
-          "width": 94,
+          "width": 144,
           "height": 44
         },
         "results": {
@@ -2924,9 +2924,9 @@
         "tools": {
           "left": 72,
           "top": 80,
-          "right": 166,
+          "right": 216,
           "bottom": 124,
-          "width": 94,
+          "width": 144,
           "height": 44
         },
         "results": {
@@ -3453,7 +3453,7 @@
     {
       "check": "568x320 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "568x320 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
@@ -3470,9 +3470,9 @@
         "tools": {
           "left": 72,
           "top": 80,
-          "right": 166,
+          "right": 216,
           "bottom": 124,
-          "width": 94,
+          "width": 144,
           "height": 44
         },
         "search": {
@@ -3523,9 +3523,9 @@
         "tools": {
           "left": 72,
           "top": 80,
-          "right": 166,
+          "right": 216,
           "bottom": 124,
-          "width": 94,
+          "width": 144,
           "height": 44
         },
         "results": {
@@ -3563,9 +3563,9 @@
         "tools": {
           "left": 72,
           "top": 80,
-          "right": 166,
+          "right": 216,
           "bottom": 124,
-          "width": 94,
+          "width": 144,
           "height": 44
         },
         "results": {
@@ -4692,7 +4692,7 @@
     {
       "check": "390x844 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "390x844 cream surface alpha·양쪽 배경 대비",
@@ -5584,7 +5584,7 @@
       "check": "EN 토글 뒤 q 필터 변경이 URL·semantic 페이지·canonical 행 identity/count/range에 반영",
       "ok": true,
       "detail": {
-        "url": "http://127.0.0.1:49412/?lang=en&q=%EC%84%9C%EC%9A%B8&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C",
+        "url": "http://127.0.0.1:52382/?lang=en&q=%EC%84%9C%EC%9A%B8&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C",
         "state": {
           "text": "Page 1 of 4 (1–5 of 17)",
           "current": 1,
@@ -5766,7 +5766,7 @@
             "type": "zoomstart",
             "zoom": 7,
             "center": {
-              "lat": 36.2265501474709,
+              "lat": 36.4477991295848,
               "lng": 128.07861328125003
             }
           },
@@ -5774,7 +5774,7 @@
             "type": "zoomend",
             "zoom": 8,
             "center": {
-              "lat": 36.2265501474709,
+              "lat": 36.4477991295848,
               "lng": 128.07861328125003
             }
           },
@@ -5782,7 +5782,7 @@
             "type": "moveend",
             "zoom": 8,
             "center": {
-              "lat": 36.2265501474709,
+              "lat": 36.4477991295848,
               "lng": 128.07861328125003
             }
           },
@@ -5790,7 +5790,7 @@
             "type": "dragstart",
             "zoom": 8,
             "center": {
-              "lat": 36.2265501474709,
+              "lat": 36.4477991295848,
               "lng": 128.07861328125003
             }
           },
@@ -5950,7 +5950,7 @@
             "type": "moveend",
             "zoom": 13,
             "center": {
-              "lat": 37.57805206944101,
+              "lat": 37.578460205250245,
               "lng": 126.95491790771486
             }
           },
@@ -5958,7 +5958,7 @@
             "type": "moveend",
             "zoom": 13,
             "center": {
-              "lat": 37.59369567458082,
+              "lat": 37.600496216554355,
               "lng": 126.95543289184572
             }
           }
@@ -5968,15 +5968,15 @@
             "label": "beforeCenter",
             "zoom": 7,
             "center": {
-              "lat": 36.2265501474709,
+              "lat": 36.4477991295848,
               "lng": 128.07861328125003
             },
             "maxZoom": 18,
             "rect": {
               "left": 71,
-              "top": 225,
+              "top": 250,
               "right": 115,
-              "bottom": 273
+              "bottom": 298
             },
             "mapRect": {
               "left": 0,
@@ -5985,7 +5985,7 @@
               "bottom": 844
             },
             "x": 93,
-            "y": 249,
+            "y": 274,
             "hitTitle": "서울 카탈로그 행사 1",
             "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
           },
@@ -5993,15 +5993,15 @@
             "label": "afterCenter",
             "zoom": 7,
             "center": {
-              "lat": 36.2265501474709,
+              "lat": 36.4477991295848,
               "lng": 128.07861328125003
             },
             "maxZoom": 18,
             "rect": {
               "left": 71,
-              "top": 225,
+              "top": 250,
               "right": 115,
-              "bottom": 273
+              "bottom": 298
             },
             "mapRect": {
               "left": 0,
@@ -6010,7 +6010,7 @@
               "bottom": 844
             },
             "x": 93,
-            "y": 249,
+            "y": 274,
             "hitTitle": "서울 카탈로그 행사 1",
             "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
           },
@@ -6018,15 +6018,15 @@
             "label": "beforeZoom",
             "zoom": 7,
             "center": {
-              "lat": 36.2265501474709,
+              "lat": 36.4477991295848,
               "lng": 128.07861328125003
             },
             "maxZoom": 18,
             "rect": {
               "left": 71,
-              "top": 225,
+              "top": 250,
               "right": 115,
-              "bottom": 273
+              "bottom": 298
             },
             "mapRect": {
               "left": 0,
@@ -6035,7 +6035,7 @@
               "bottom": 844
             },
             "x": 93,
-            "y": 249,
+            "y": 274,
             "hitTitle": "서울 카탈로그 행사 1",
             "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
           },
@@ -6043,15 +6043,15 @@
             "label": "afterZoom",
             "zoom": 8,
             "center": {
-              "lat": 36.2265501474709,
+              "lat": 36.4477991295848,
               "lng": 128.07861328125003
             },
             "maxZoom": 18,
             "rect": {
               "left": -32,
-              "top": 71,
+              "top": 121,
               "right": 12,
-              "bottom": 119
+              "bottom": 169
             },
             "mapRect": {
               "left": 0,
@@ -6060,7 +6060,7 @@
               "bottom": 844
             },
             "x": -10,
-            "y": 95,
+            "y": 145,
             "hitTitle": "",
             "hitClass": ""
           },

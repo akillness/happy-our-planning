@@ -17,10 +17,20 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303443
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303443
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-10-24T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303443_261015_132844.jpg
-content_hash: sha256:799734606a6066c21621585d0d72d0cc8dd64a453540e87fc982a3b93e0a0fce
+description: '장르: 무용(서양/한국무용) · 공연장: 군산어린이공연장 · 공연시간 안내: 토요일(11:00,14:00) · 관람연령:
+  만 4세 이상 · 런타임: 1시간 · 티켓가격: 전석무료 · 예매처: NHN티켓링크 · 주최·주관: 군산시청, 군산어린이공연장'
+age: 만 4세 이상
+price_text: 전석무료
+price: free
+duration_text: 1시간
+duration: PT1H
+organizer: 군산시청, 군산어린이공연장
+offers:
+  url: http://www.ticketlink.co.kr/product/66258
+content_hash: sha256:7b4206595f7b780c29fd68c8cc4015cad3b26029794e407d6a50f4e8a779557d
 ---
 
 # coloring 비빔 발레 [군산]

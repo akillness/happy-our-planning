@@ -17,10 +17,31 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303428
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303428
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-12-05T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303428_261015_125021.gif
-content_hash: sha256:1da4cc85e9cdffe151e62d5b7a2e0714d62e654620d0b3c30492f09f9b558208
+description: '[PROGRAM]
+
+  D. Scarlatti Sonata in D Minor, K.213
+
+  D. Scarlatti Sonata in G Minor, K.427
+
+  L,v. Beethoven Andante Favori in F Major, WoO.57
+
+  L,v. Beethoven Sonata No.21 in C Major, Op.53
+
+  A. Scriabin Sonata No.2 in G# Minor, Op.19
+
+  R. Schumann Carnaval, Op.9'
+age: 만 7세 이상
+price_text: 전석 30,000원
+price: 30000
+duration_text: 1시간 30분
+duration: PT1H30M
+organizer: 네오아르케아티스트그룹
+offers:
+  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014726
+content_hash: sha256:69c59c5e080ff11c5949cace819cd5789e7a5f70a36e93d367489ea0bfdeb814
 ---
 
 # 이관욱 피아노 리사이틀

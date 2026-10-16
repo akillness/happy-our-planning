@@ -17,10 +17,19 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303454
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303454
-fetched_at: '2026-10-15T17:33:55+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-12-06T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303454_261015_134758.jpg
-content_hash: sha256:63aaefb55c798cd64bef25707deba2767a7e407864cc850e4a46c6aa21dd6bd1
+description: '장르: 뮤지컬 · 공연장: 안산올림픽기념관 · 공연시간 안내: 일요일(11:00,14:00,16:00) · 관람연령: 전체
+  관람가 · 런타임: 55분 · 티켓가격: 전석 30,000원 · 예매처: 네이버N예약'
+age: 전체 관람가
+price_text: 전석 30,000원
+price: 30000
+duration_text: 55분
+duration: PT55M
+offers:
+  url: https://booking.naver.com/booking/12/bizes/1753113
+content_hash: sha256:98a0d35bee44e99eb4544b5727fb3fea8f57c7dfe8ef966d91db69e4039b0807
 ---
 
 # 겨울왕국: 겨울이야기 [안산]

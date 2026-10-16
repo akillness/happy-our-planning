@@ -19,7 +19,7 @@
         "successfulEvents": 1,
         "failures": [
           {
-            "url": "http://127.0.0.1:50215/data/events.json",
+            "url": "http://127.0.0.1:53054/data/events.json",
             "status": 503
           }
         ],
@@ -31,7 +31,7 @@
       "check": "1440x900 OSM 타일 결정적 fixture stub 사용",
       "ok": true,
       "detail": {
-        "count": 292
+        "count": 297
       }
     },
     {
@@ -183,7 +183,7 @@
           "drag": 6,
           "dragend": 1,
           "movestart": 1,
-          "move": 28,
+          "move": 35,
           "moveend": 1
         },
         "before": {
@@ -194,13 +194,13 @@
           "y": 12900
         },
         "after": {
-          "lat": 35.97800618085566,
-          "lng": 126.13403320312501,
+          "lat": 36.00467348670187,
+          "lng": 125.96923828125001,
           "zoom": 7,
-          "x": 27865,
-          "y": 12870
+          "x": 27850,
+          "y": 12867
         },
-        "projectedCenterDelta": 154.9322432549145,
+        "projectedCenterDelta": 170.2292571798397,
         "menuOpenAfterDrag": false,
         "startTarget": {
           "x": 432,
@@ -616,9 +616,9 @@
               "left": 72,
               "top": 136,
               "right": 312,
-              "bottom": 282.21875,
+              "bottom": 332.21875,
               "width": 240,
-              "height": 146.21875
+              "height": 196.21875
             }
           },
           {
@@ -829,9 +829,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -1000,9 +1000,9 @@
               "left": 72,
               "top": 136,
               "right": 312,
-              "bottom": 282.21875,
+              "bottom": 332.21875,
               "width": 240,
-              "height": 146.21875
+              "height": 196.21875
             }
           },
           {
@@ -1175,9 +1175,9 @@
               "left": 72,
               "top": 136,
               "right": 312,
-              "bottom": 282.21875,
+              "bottom": 332.21875,
               "width": 240,
-              "height": 146.21875
+              "height": 196.21875
             }
           },
           {
@@ -1388,9 +1388,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -1602,9 +1602,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -1816,9 +1816,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -2030,9 +2030,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -2244,9 +2244,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -2607,7 +2607,7 @@
           "drag": 6,
           "dragend": 1,
           "movestart": 1,
-          "move": 63,
+          "move": 49,
           "moveend": 1
         },
         "before": {
@@ -2618,13 +2618,13 @@
           "y": 6460
         },
         "after": {
-          "lat": 36.36822190085111,
-          "lng": 123.48632812500001,
+          "lat": 36.19109202182454,
+          "lng": 124.51904296875001,
           "zoom": 6,
-          "x": 13812,
-          "y": 6413
+          "x": 13859,
+          "y": 6423
         },
-        "projectedCenterDelta": 238.6734170367534,
+        "projectedCenterDelta": 190.62528688503002,
         "menuOpenAfterDrag": false,
         "startTarget": {
           "x": 384,
@@ -3040,9 +3040,9 @@
               "left": 72,
               "top": 136,
               "right": 312,
-              "bottom": 282.21875,
+              "bottom": 332.21875,
               "width": 240,
-              "height": 146.21875
+              "height": 196.21875
             }
           },
           {
@@ -3253,9 +3253,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -3424,9 +3424,9 @@
               "left": 72,
               "top": 136,
               "right": 312,
-              "bottom": 282.21875,
+              "bottom": 332.21875,
               "width": 240,
-              "height": 146.21875
+              "height": 196.21875
             }
           },
           {
@@ -3599,9 +3599,9 @@
               "left": 72,
               "top": 136,
               "right": 312,
-              "bottom": 282.21875,
+              "bottom": 332.21875,
               "width": 240,
-              "height": 146.21875
+              "height": 196.21875
             }
           },
           {
@@ -3812,9 +3812,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -4026,9 +4026,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -4240,9 +4240,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -4454,9 +4454,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -4668,9 +4668,9 @@
                 "left": 72,
                 "top": 136,
                 "right": 312,
-                "bottom": 282.21875,
+                "bottom": 332.21875,
                 "width": 240,
-                "height": 146.21875
+                "height": 196.21875
               }
             },
             {
@@ -4879,7 +4879,7 @@
       "check": "360x800 OSM 타일 결정적 fixture stub 사용",
       "ok": true,
       "detail": {
-        "count": 186
+        "count": 182
       }
     },
     {
@@ -5014,7 +5014,7 @@
       "detail": {
         "before": {
           "center": [
-            39.926588421909436,
+            40.763901280945866,
             127.04589843750001
           ],
           "titles": [
@@ -5037,7 +5037,7 @@
         },
         "after": {
           "center": [
-            39.926588421909436,
+            40.763901280945866,
             127.04589843750001
           ],
           "titles": [
@@ -5067,7 +5067,7 @@
       "detail": {
         "before": {
           "center": [
-            39.926588421909436,
+            40.763901280945866,
             127.04589843750001
           ],
           "titles": [
@@ -5091,7 +5091,7 @@
         },
         "after": {
           "center": [
-            39.926588421909436,
+            40.763901280945866,
             127.04589843750001
           ],
           "titles": [
@@ -5131,27 +5131,27 @@
         },
         "icon": {
           "left": 155,
-          "top": 494,
+          "top": 544,
           "width": 44,
           "height": 48
         },
         "renderedSvg": {
           "left": 161,
-          "top": 498,
+          "top": 548,
           "width": 32,
           "height": 40
         },
         "geo": {
           "x": 177,
-          "y": 538
+          "y": 588
         },
         "tip": {
           "x": 177,
-          "y": 538
+          "y": 588
         },
         "head": {
           "x": 177,
-          "y": 498
+          "y": 548
         },
         "tipError": 0,
         "mapRoot": {
@@ -5168,27 +5168,27 @@
       "detail": {
         "popup": {
           "left": 68,
-          "top": 131.96875,
+          "top": 181.96875,
           "right": 285,
-          "bottom": 486,
+          "bottom": 536,
           "width": 217,
           "height": 354.03125
         },
         "tip": {
           "left": 164.5,
-          "top": 486,
+          "top": 536,
           "right": 188.5,
-          "bottom": 498,
+          "bottom": 548,
           "width": 24,
           "height": 12
         },
         "pointer": {
           "x": 176.5,
-          "y": 498
+          "y": 548
         },
         "head": {
           "x": 177,
-          "y": 498
+          "y": 548
         },
         "pointerError": 0.5,
         "inViewport": true,
@@ -5248,9 +5248,9 @@
               "left": 254,
               "top": 80,
               "right": 348,
-              "bottom": 124,
+              "bottom": 174,
               "width": 94,
-              "height": 44
+              "height": 94
             }
           },
           {
@@ -5280,18 +5280,18 @@
         ],
         "renderedSvg": {
           "left": 161,
-          "top": 498,
+          "top": 548,
           "right": 193,
-          "bottom": 538,
+          "bottom": 588,
           "width": 32,
           "height": 40
         },
         "renderedSvgOverlaps": [],
         "connector": {
           "left": 175.5,
-          "top": 497,
+          "top": 547,
           "right": 178,
-          "bottom": 499,
+          "bottom": 549,
           "width": null,
           "height": null
         },
@@ -5301,17 +5301,17 @@
         "overlaps": [],
         "content": {
           "left": 83,
-          "top": 146.96875,
+          "top": 196.96875,
           "right": 270,
-          "bottom": 471,
+          "bottom": 521,
           "width": 187,
           "height": 324.03125
         },
         "contentWrapper": {
           "left": 68,
-          "top": 131.96875,
+          "top": 181.96875,
           "right": 285,
-          "bottom": 486,
+          "bottom": 536,
           "width": 217,
           "height": 354.03125
         },
@@ -5348,27 +5348,27 @@
           },
           "icon": {
             "left": 155,
-            "top": 494,
+            "top": 544,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 161,
-            "top": 498,
+            "top": 548,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 177,
-            "y": 538
+            "y": 588
           },
           "tip": {
             "x": 177,
-            "y": 538
+            "y": 588
           },
           "head": {
             "x": 177,
-            "y": 498
+            "y": 548
           },
           "tipError": 0,
           "mapRoot": {
@@ -5381,27 +5381,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.96875,
+            "top": 181.96875,
             "right": 285,
-            "bottom": 486,
+            "bottom": 536,
             "width": 217,
             "height": 354.03125
           },
           "tip": {
             "left": 164.5,
-            "top": 486,
+            "top": 536,
             "right": 188.5,
-            "bottom": 498,
+            "bottom": 548,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 176.5,
-            "y": 498
+            "y": 548
           },
           "head": {
             "x": 177,
-            "y": 498
+            "y": 548
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -5461,9 +5461,9 @@
                 "left": 254,
                 "top": 80,
                 "right": 348,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -5493,18 +5493,18 @@
           ],
           "renderedSvg": {
             "left": 161,
-            "top": 498,
+            "top": 548,
             "right": 193,
-            "bottom": 538,
+            "bottom": 588,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 175.5,
-            "top": 497,
+            "top": 547,
             "right": 178,
-            "bottom": 499,
+            "bottom": 549,
             "width": null,
             "height": null
           },
@@ -5514,17 +5514,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.96875,
+            "top": 196.96875,
             "right": 270,
-            "bottom": 471,
+            "bottom": 521,
             "width": 187,
             "height": 324.03125
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.96875,
+            "top": 181.96875,
             "right": 285,
-            "bottom": 486,
+            "bottom": 536,
             "width": 217,
             "height": 354.03125
           },
@@ -5552,27 +5552,27 @@
       "detail": {
         "popup": {
           "left": 68,
-          "top": 131.96875,
+          "top": 181.96875,
           "right": 285,
-          "bottom": 486,
+          "bottom": 536,
           "width": 217,
           "height": 354.03125
         },
         "tip": {
           "left": 164.5,
-          "top": 486,
+          "top": 536,
           "right": 188.5,
-          "bottom": 498,
+          "bottom": 548,
           "width": 24,
           "height": 12
         },
         "pointer": {
           "x": 176.5,
-          "y": 498
+          "y": 548
         },
         "head": {
           "x": 177,
-          "y": 498
+          "y": 548
         },
         "pointerError": 0.5,
         "inViewport": true,
@@ -5632,9 +5632,9 @@
               "left": 254,
               "top": 80,
               "right": 348,
-              "bottom": 124,
+              "bottom": 174,
               "width": 94,
-              "height": 44
+              "height": 94
             }
           },
           {
@@ -5664,18 +5664,18 @@
         ],
         "renderedSvg": {
           "left": 161,
-          "top": 498,
+          "top": 548,
           "right": 193,
-          "bottom": 538,
+          "bottom": 588,
           "width": 32,
           "height": 40
         },
         "renderedSvgOverlaps": [],
         "connector": {
           "left": 175.5,
-          "top": 497,
+          "top": 547,
           "right": 178,
-          "bottom": 499,
+          "bottom": 549,
           "width": null,
           "height": null
         },
@@ -5685,17 +5685,17 @@
         "overlaps": [],
         "content": {
           "left": 83,
-          "top": 146.96875,
+          "top": 196.96875,
           "right": 270,
-          "bottom": 471,
+          "bottom": 521,
           "width": 187,
           "height": 324.03125
         },
         "contentWrapper": {
           "left": 68,
-          "top": 131.96875,
+          "top": 181.96875,
           "right": 285,
-          "bottom": 486,
+          "bottom": 536,
           "width": 217,
           "height": 354.03125
         },
@@ -5727,27 +5727,27 @@
       "detail": {
         "popup": {
           "left": 68,
-          "top": 131.671875,
+          "top": 181.671875,
           "right": 285,
-          "bottom": 542,
+          "bottom": 592,
           "width": 217,
           "height": 410.328125
         },
         "tip": {
           "left": 164.5,
-          "top": 542,
+          "top": 592,
           "right": 188.5,
-          "bottom": 554,
+          "bottom": 604,
           "width": 24,
           "height": 12
         },
         "pointer": {
           "x": 176.5,
-          "y": 554
+          "y": 604
         },
         "head": {
           "x": 177,
-          "y": 554
+          "y": 604
         },
         "pointerError": 0.5,
         "inViewport": true,
@@ -5807,9 +5807,9 @@
               "left": 254,
               "top": 80,
               "right": 348,
-              "bottom": 124,
+              "bottom": 174,
               "width": 94,
-              "height": 44
+              "height": 94
             }
           },
           {
@@ -5839,18 +5839,18 @@
         ],
         "renderedSvg": {
           "left": 161,
-          "top": 554,
+          "top": 604,
           "right": 193,
-          "bottom": 594,
+          "bottom": 644,
           "width": 32,
           "height": 40
         },
         "renderedSvgOverlaps": [],
         "connector": {
           "left": 175.5,
-          "top": 553,
+          "top": 603,
           "right": 178,
-          "bottom": 555,
+          "bottom": 605,
           "width": null,
           "height": null
         },
@@ -5860,17 +5860,17 @@
         "overlaps": [],
         "content": {
           "left": 83,
-          "top": 146.671875,
+          "top": 196.671875,
           "right": 270,
-          "bottom": 527,
+          "bottom": 577,
           "width": 187,
           "height": 380.328125
         },
         "contentWrapper": {
           "left": 68,
-          "top": 131.671875,
+          "top": 181.671875,
           "right": 285,
-          "bottom": 542,
+          "bottom": 592,
           "width": 217,
           "height": 410.328125
         },
@@ -5907,27 +5907,27 @@
           },
           "icon": {
             "left": 155,
-            "top": 514,
+            "top": 564,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 161,
-            "top": 518,
+            "top": 568,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 177,
-            "y": 558
+            "y": 608
           },
           "tip": {
             "x": 177,
-            "y": 558
+            "y": 608
           },
           "head": {
             "x": 177,
-            "y": 518
+            "y": 568
           },
           "tipError": 0,
           "mapRoot": {
@@ -5940,27 +5940,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 132.453125,
+            "top": 182.453125,
             "right": 285,
-            "bottom": 506,
+            "bottom": 556,
             "width": 217,
             "height": 373.546875
           },
           "tip": {
             "left": 164.5,
-            "top": 506,
+            "top": 556,
             "right": 188.5,
-            "bottom": 518,
+            "bottom": 568,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 176.5,
-            "y": 518
+            "y": 568
           },
           "head": {
             "x": 177,
-            "y": 518
+            "y": 568
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -6020,9 +6020,9 @@
                 "left": 254,
                 "top": 80,
                 "right": 348,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -6052,18 +6052,18 @@
           ],
           "renderedSvg": {
             "left": 161,
-            "top": 518,
+            "top": 568,
             "right": 193,
-            "bottom": 558,
+            "bottom": 608,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 175.5,
-            "top": 517,
+            "top": 567,
             "right": 178,
-            "bottom": 519,
+            "bottom": 569,
             "width": null,
             "height": null
           },
@@ -6073,17 +6073,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 147.453125,
+            "top": 197.453125,
             "right": 270,
-            "bottom": 491,
+            "bottom": 541,
             "width": 187,
             "height": 343.546875
           },
           "contentWrapper": {
             "left": 68,
-            "top": 132.453125,
+            "top": 182.453125,
             "right": 285,
-            "bottom": 506,
+            "bottom": 556,
             "width": 217,
             "height": 373.546875
           },
@@ -6121,27 +6121,27 @@
           },
           "icon": {
             "left": 155,
-            "top": 516,
+            "top": 566,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 177,
-            "y": 560
+            "y": 610
           },
           "tip": {
             "x": 177,
-            "y": 560
+            "y": 610
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "tipError": 0,
           "mapRoot": {
@@ -6154,27 +6154,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
           "tip": {
             "left": 164.5,
-            "top": 508,
+            "top": 558,
             "right": 188.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 176.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -6234,9 +6234,9 @@
                 "left": 254,
                 "top": 80,
                 "right": 348,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -6266,18 +6266,18 @@
           ],
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "right": 193,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 175.5,
-            "top": 519,
+            "top": 569,
             "right": 178,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -6287,17 +6287,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 270,
-            "bottom": 493,
+            "bottom": 543,
             "width": 187,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
@@ -6335,27 +6335,27 @@
           },
           "icon": {
             "left": 155,
-            "top": 516,
+            "top": 566,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 177,
-            "y": 560
+            "y": 610
           },
           "tip": {
             "x": 177,
-            "y": 560
+            "y": 610
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "tipError": 0,
           "mapRoot": {
@@ -6368,27 +6368,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
           "tip": {
             "left": 164.5,
-            "top": 508,
+            "top": 558,
             "right": 188.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 176.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -6448,9 +6448,9 @@
                 "left": 254,
                 "top": 80,
                 "right": 348,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -6480,18 +6480,18 @@
           ],
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "right": 193,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 175.5,
-            "top": 519,
+            "top": 569,
             "right": 178,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -6501,17 +6501,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 270,
-            "bottom": 493,
+            "bottom": 543,
             "width": 187,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
@@ -6549,27 +6549,27 @@
           },
           "icon": {
             "left": 155,
-            "top": 516,
+            "top": 566,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 177,
-            "y": 560
+            "y": 610
           },
           "tip": {
             "x": 177,
-            "y": 560
+            "y": 610
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "tipError": 0,
           "mapRoot": {
@@ -6582,27 +6582,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
           "tip": {
             "left": 164.5,
-            "top": 508,
+            "top": 558,
             "right": 188.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 176.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -6662,9 +6662,9 @@
                 "left": 254,
                 "top": 80,
                 "right": 348,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -6694,18 +6694,18 @@
           ],
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "right": 193,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 175.5,
-            "top": 519,
+            "top": 569,
             "right": 178,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -6715,17 +6715,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 270,
-            "bottom": 493,
+            "bottom": 543,
             "width": 187,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
@@ -6763,27 +6763,27 @@
           },
           "icon": {
             "left": 155,
-            "top": 516,
+            "top": 566,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 177,
-            "y": 560
+            "y": 610
           },
           "tip": {
             "x": 177,
-            "y": 560
+            "y": 610
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "tipError": 0,
           "mapRoot": {
@@ -6796,27 +6796,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
           "tip": {
             "left": 164.5,
-            "top": 508,
+            "top": 558,
             "right": 188.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 176.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -6876,9 +6876,9 @@
                 "left": 254,
                 "top": 80,
                 "right": 348,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -6908,18 +6908,18 @@
           ],
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "right": 193,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 175.5,
-            "top": 519,
+            "top": 569,
             "right": 178,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -6929,17 +6929,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 270,
-            "bottom": 493,
+            "bottom": 543,
             "width": 187,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
@@ -7050,27 +7050,27 @@
         "open": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
           "tip": {
             "left": 164.5,
-            "top": 508,
+            "top": 558,
             "right": 188.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 176.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 177,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -7130,9 +7130,9 @@
                 "left": 254,
                 "top": 80,
                 "right": 348,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -7162,18 +7162,18 @@
           ],
           "renderedSvg": {
             "left": 161,
-            "top": 520,
+            "top": 570,
             "right": 193,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 175.5,
-            "top": 519,
+            "top": 569,
             "right": 178,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -7183,17 +7183,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 270,
-            "bottom": 493,
+            "bottom": 543,
             "width": 187,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 285,
-            "bottom": 508,
+            "bottom": 558,
             "width": 217,
             "height": 376.25
           },
@@ -7229,11 +7229,11 @@
             "popupOpen": false,
             "activePopupMatches": true,
             "availableWidth": -12,
-            "availableHeight": 538,
+            "availableHeight": 488,
             "nativeMinWidth": 50,
             "rawNoSpace": true,
             "contentWidth": -42,
-            "contentHeight": 474,
+            "contentHeight": 424,
             "hasSpace": false,
             "map": {
               "left": 0,
@@ -7243,7 +7243,7 @@
             },
             "reserved": {
               "left": 68,
-              "top": 132,
+              "top": 182,
               "right": 304,
               "bottom": 130
             },
@@ -7339,9 +7339,9 @@
                   "left": 254,
                   "top": 80,
                   "right": 348,
-                  "bottom": 124,
+                  "bottom": 174,
                   "width": 94,
-                  "height": 44
+                  "height": 94
                 }
               },
               {
@@ -7623,7 +7623,7 @@
       "check": "390x844 OSM 타일 결정적 fixture stub 사용",
       "ok": true,
       "detail": {
-        "count": 196
+        "count": 182
       }
     },
     {
@@ -7758,7 +7758,7 @@
       "detail": {
         "before": {
           "center": [
-            39.554883059924016,
+            40.396764305572056,
             127.04589843750001
           ],
           "titles": [
@@ -7781,7 +7781,7 @@
         },
         "after": {
           "center": [
-            39.554883059924016,
+            40.396764305572056,
             127.04589843750001
           ],
           "titles": [
@@ -7811,7 +7811,7 @@
       "detail": {
         "before": {
           "center": [
-            39.554883059924016,
+            40.396764305572056,
             127.04589843750001
           ],
           "titles": [
@@ -7835,7 +7835,7 @@
         },
         "after": {
           "center": [
-            39.554883059924016,
+            40.396764305572056,
             127.04589843750001
           ],
           "titles": [
@@ -7875,27 +7875,27 @@
         },
         "icon": {
           "left": 170,
-          "top": 494,
+          "top": 544,
           "width": 44,
           "height": 48
         },
         "renderedSvg": {
           "left": 176,
-          "top": 498,
+          "top": 548,
           "width": 32,
           "height": 40
         },
         "geo": {
           "x": 192,
-          "y": 538
+          "y": 588
         },
         "tip": {
           "x": 192,
-          "y": 538
+          "y": 588
         },
         "head": {
           "x": 192,
-          "y": 498
+          "y": 548
         },
         "tipError": 0,
         "mapRoot": {
@@ -7912,27 +7912,27 @@
       "detail": {
         "popup": {
           "left": 68,
-          "top": 131.96875,
+          "top": 181.96875,
           "right": 315,
-          "bottom": 486,
+          "bottom": 536,
           "width": 247,
           "height": 354.03125
         },
         "tip": {
           "left": 179.5,
-          "top": 486,
+          "top": 536,
           "right": 203.5,
-          "bottom": 498,
+          "bottom": 548,
           "width": 24,
           "height": 12
         },
         "pointer": {
           "x": 191.5,
-          "y": 498
+          "y": 548
         },
         "head": {
           "x": 192,
-          "y": 498
+          "y": 548
         },
         "pointerError": 0.5,
         "inViewport": true,
@@ -7992,9 +7992,9 @@
               "left": 284,
               "top": 80,
               "right": 378,
-              "bottom": 124,
+              "bottom": 174,
               "width": 94,
-              "height": 44
+              "height": 94
             }
           },
           {
@@ -8024,18 +8024,18 @@
         ],
         "renderedSvg": {
           "left": 176,
-          "top": 498,
+          "top": 548,
           "right": 208,
-          "bottom": 538,
+          "bottom": 588,
           "width": 32,
           "height": 40
         },
         "renderedSvgOverlaps": [],
         "connector": {
           "left": 190.5,
-          "top": 497,
+          "top": 547,
           "right": 193,
-          "bottom": 499,
+          "bottom": 549,
           "width": null,
           "height": null
         },
@@ -8045,17 +8045,17 @@
         "overlaps": [],
         "content": {
           "left": 83,
-          "top": 146.96875,
+          "top": 196.96875,
           "right": 300,
-          "bottom": 471,
+          "bottom": 521,
           "width": 217,
           "height": 324.03125
         },
         "contentWrapper": {
           "left": 68,
-          "top": 131.96875,
+          "top": 181.96875,
           "right": 315,
-          "bottom": 486,
+          "bottom": 536,
           "width": 247,
           "height": 354.03125
         },
@@ -8092,27 +8092,27 @@
           },
           "icon": {
             "left": 170,
-            "top": 494,
+            "top": 544,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 176,
-            "top": 498,
+            "top": 548,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 192,
-            "y": 538
+            "y": 588
           },
           "tip": {
             "x": 192,
-            "y": 538
+            "y": 588
           },
           "head": {
             "x": 192,
-            "y": 498
+            "y": 548
           },
           "tipError": 0,
           "mapRoot": {
@@ -8125,27 +8125,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.96875,
+            "top": 181.96875,
             "right": 315,
-            "bottom": 486,
+            "bottom": 536,
             "width": 247,
             "height": 354.03125
           },
           "tip": {
             "left": 179.5,
-            "top": 486,
+            "top": 536,
             "right": 203.5,
-            "bottom": 498,
+            "bottom": 548,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 191.5,
-            "y": 498
+            "y": 548
           },
           "head": {
             "x": 192,
-            "y": 498
+            "y": 548
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -8205,9 +8205,9 @@
                 "left": 284,
                 "top": 80,
                 "right": 378,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -8237,18 +8237,18 @@
           ],
           "renderedSvg": {
             "left": 176,
-            "top": 498,
+            "top": 548,
             "right": 208,
-            "bottom": 538,
+            "bottom": 588,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 190.5,
-            "top": 497,
+            "top": 547,
             "right": 193,
-            "bottom": 499,
+            "bottom": 549,
             "width": null,
             "height": null
           },
@@ -8258,17 +8258,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.96875,
+            "top": 196.96875,
             "right": 300,
-            "bottom": 471,
+            "bottom": 521,
             "width": 217,
             "height": 324.03125
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.96875,
+            "top": 181.96875,
             "right": 315,
-            "bottom": 486,
+            "bottom": 536,
             "width": 247,
             "height": 354.03125
           },
@@ -8296,27 +8296,27 @@
       "detail": {
         "popup": {
           "left": 68,
-          "top": 131.96875,
+          "top": 181.96875,
           "right": 315,
-          "bottom": 486,
+          "bottom": 536,
           "width": 247,
           "height": 354.03125
         },
         "tip": {
           "left": 179.5,
-          "top": 486,
+          "top": 536,
           "right": 203.5,
-          "bottom": 498,
+          "bottom": 548,
           "width": 24,
           "height": 12
         },
         "pointer": {
           "x": 191.5,
-          "y": 498
+          "y": 548
         },
         "head": {
           "x": 192,
-          "y": 498
+          "y": 548
         },
         "pointerError": 0.5,
         "inViewport": true,
@@ -8376,9 +8376,9 @@
               "left": 284,
               "top": 80,
               "right": 378,
-              "bottom": 124,
+              "bottom": 174,
               "width": 94,
-              "height": 44
+              "height": 94
             }
           },
           {
@@ -8408,18 +8408,18 @@
         ],
         "renderedSvg": {
           "left": 176,
-          "top": 498,
+          "top": 548,
           "right": 208,
-          "bottom": 538,
+          "bottom": 588,
           "width": 32,
           "height": 40
         },
         "renderedSvgOverlaps": [],
         "connector": {
           "left": 190.5,
-          "top": 497,
+          "top": 547,
           "right": 193,
-          "bottom": 499,
+          "bottom": 549,
           "width": null,
           "height": null
         },
@@ -8429,17 +8429,17 @@
         "overlaps": [],
         "content": {
           "left": 83,
-          "top": 146.96875,
+          "top": 196.96875,
           "right": 300,
-          "bottom": 471,
+          "bottom": 521,
           "width": 217,
           "height": 324.03125
         },
         "contentWrapper": {
           "left": 68,
-          "top": 131.96875,
+          "top": 181.96875,
           "right": 315,
-          "bottom": 486,
+          "bottom": 536,
           "width": 247,
           "height": 354.03125
         },
@@ -8471,27 +8471,27 @@
       "detail": {
         "popup": {
           "left": 68,
-          "top": 131.671875,
+          "top": 181.671875,
           "right": 315,
-          "bottom": 542,
+          "bottom": 592,
           "width": 247,
           "height": 410.328125
         },
         "tip": {
           "left": 179.5,
-          "top": 542,
+          "top": 592,
           "right": 203.5,
-          "bottom": 554,
+          "bottom": 604,
           "width": 24,
           "height": 12
         },
         "pointer": {
           "x": 191.5,
-          "y": 554
+          "y": 604
         },
         "head": {
           "x": 192,
-          "y": 554
+          "y": 604
         },
         "pointerError": 0.5,
         "inViewport": true,
@@ -8551,9 +8551,9 @@
               "left": 284,
               "top": 80,
               "right": 378,
-              "bottom": 124,
+              "bottom": 174,
               "width": 94,
-              "height": 44
+              "height": 94
             }
           },
           {
@@ -8583,18 +8583,18 @@
         ],
         "renderedSvg": {
           "left": 176,
-          "top": 554,
+          "top": 604,
           "right": 208,
-          "bottom": 594,
+          "bottom": 644,
           "width": 32,
           "height": 40
         },
         "renderedSvgOverlaps": [],
         "connector": {
           "left": 190.5,
-          "top": 553,
+          "top": 603,
           "right": 193,
-          "bottom": 555,
+          "bottom": 605,
           "width": null,
           "height": null
         },
@@ -8604,17 +8604,17 @@
         "overlaps": [],
         "content": {
           "left": 83,
-          "top": 146.671875,
+          "top": 196.671875,
           "right": 300,
-          "bottom": 527,
+          "bottom": 577,
           "width": 217,
           "height": 380.328125
         },
         "contentWrapper": {
           "left": 68,
-          "top": 131.671875,
+          "top": 181.671875,
           "right": 315,
-          "bottom": 542,
+          "bottom": 592,
           "width": 247,
           "height": 410.328125
         },
@@ -8651,27 +8651,27 @@
           },
           "icon": {
             "left": 170,
-            "top": 514,
+            "top": 564,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 176,
-            "top": 518,
+            "top": 568,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 192,
-            "y": 558
+            "y": 608
           },
           "tip": {
             "x": 192,
-            "y": 558
+            "y": 608
           },
           "head": {
             "x": 192,
-            "y": 518
+            "y": 568
           },
           "tipError": 0,
           "mapRoot": {
@@ -8684,27 +8684,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 132.453125,
+            "top": 182.453125,
             "right": 315,
-            "bottom": 506,
+            "bottom": 556,
             "width": 247,
             "height": 373.546875
           },
           "tip": {
             "left": 179.5,
-            "top": 506,
+            "top": 556,
             "right": 203.5,
-            "bottom": 518,
+            "bottom": 568,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 191.5,
-            "y": 518
+            "y": 568
           },
           "head": {
             "x": 192,
-            "y": 518
+            "y": 568
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -8764,9 +8764,9 @@
                 "left": 284,
                 "top": 80,
                 "right": 378,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -8796,18 +8796,18 @@
           ],
           "renderedSvg": {
             "left": 176,
-            "top": 518,
+            "top": 568,
             "right": 208,
-            "bottom": 558,
+            "bottom": 608,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 190.5,
-            "top": 517,
+            "top": 567,
             "right": 193,
-            "bottom": 519,
+            "bottom": 569,
             "width": null,
             "height": null
           },
@@ -8817,17 +8817,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 147.453125,
+            "top": 197.453125,
             "right": 300,
-            "bottom": 491,
+            "bottom": 541,
             "width": 217,
             "height": 343.546875
           },
           "contentWrapper": {
             "left": 68,
-            "top": 132.453125,
+            "top": 182.453125,
             "right": 315,
-            "bottom": 506,
+            "bottom": 556,
             "width": 247,
             "height": 373.546875
           },
@@ -8865,27 +8865,27 @@
           },
           "icon": {
             "left": 170,
-            "top": 516,
+            "top": 566,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 192,
-            "y": 560
+            "y": 610
           },
           "tip": {
             "x": 192,
-            "y": 560
+            "y": 610
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "tipError": 0,
           "mapRoot": {
@@ -8898,27 +8898,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
           "tip": {
             "left": 179.5,
-            "top": 508,
+            "top": 558,
             "right": 203.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 191.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -8978,9 +8978,9 @@
                 "left": 284,
                 "top": 80,
                 "right": 378,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -9010,18 +9010,18 @@
           ],
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "right": 208,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 190.5,
-            "top": 519,
+            "top": 569,
             "right": 193,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -9031,17 +9031,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 300,
-            "bottom": 493,
+            "bottom": 543,
             "width": 217,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
@@ -9079,27 +9079,27 @@
           },
           "icon": {
             "left": 170,
-            "top": 516,
+            "top": 566,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 192,
-            "y": 560
+            "y": 610
           },
           "tip": {
             "x": 192,
-            "y": 560
+            "y": 610
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "tipError": 0,
           "mapRoot": {
@@ -9112,27 +9112,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
           "tip": {
             "left": 179.5,
-            "top": 508,
+            "top": 558,
             "right": 203.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 191.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -9192,9 +9192,9 @@
                 "left": 284,
                 "top": 80,
                 "right": 378,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -9224,18 +9224,18 @@
           ],
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "right": 208,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 190.5,
-            "top": 519,
+            "top": 569,
             "right": 193,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -9245,17 +9245,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 300,
-            "bottom": 493,
+            "bottom": 543,
             "width": 217,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
@@ -9293,27 +9293,27 @@
           },
           "icon": {
             "left": 170,
-            "top": 516,
+            "top": 566,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 192,
-            "y": 560
+            "y": 610
           },
           "tip": {
             "x": 192,
-            "y": 560
+            "y": 610
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "tipError": 0,
           "mapRoot": {
@@ -9326,27 +9326,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
           "tip": {
             "left": 179.5,
-            "top": 508,
+            "top": 558,
             "right": 203.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 191.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -9406,9 +9406,9 @@
                 "left": 284,
                 "top": 80,
                 "right": 378,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -9438,18 +9438,18 @@
           ],
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "right": 208,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 190.5,
-            "top": 519,
+            "top": 569,
             "right": 193,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -9459,17 +9459,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 300,
-            "bottom": 493,
+            "bottom": 543,
             "width": 217,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
@@ -9507,27 +9507,27 @@
           },
           "icon": {
             "left": 170,
-            "top": 516,
+            "top": 566,
             "width": 44,
             "height": 48
           },
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "width": 32,
             "height": 40
           },
           "geo": {
             "x": 192,
-            "y": 560
+            "y": 610
           },
           "tip": {
             "x": 192,
-            "y": 560
+            "y": 610
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "tipError": 0,
           "mapRoot": {
@@ -9540,27 +9540,27 @@
         "popup": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
           "tip": {
             "left": 179.5,
-            "top": 508,
+            "top": 558,
             "right": 203.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 191.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -9620,9 +9620,9 @@
                 "left": 284,
                 "top": 80,
                 "right": 378,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -9652,18 +9652,18 @@
           ],
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "right": 208,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 190.5,
-            "top": 519,
+            "top": 569,
             "right": 193,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -9673,17 +9673,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 300,
-            "bottom": 493,
+            "bottom": 543,
             "width": 217,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
@@ -9794,27 +9794,27 @@
         "open": {
           "popup": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
           "tip": {
             "left": 179.5,
-            "top": 508,
+            "top": 558,
             "right": 203.5,
-            "bottom": 520,
+            "bottom": 570,
             "width": 24,
             "height": 12
           },
           "pointer": {
             "x": 191.5,
-            "y": 520
+            "y": 570
           },
           "head": {
             "x": 192,
-            "y": 520
+            "y": 570
           },
           "pointerError": 0.5,
           "inViewport": true,
@@ -9874,9 +9874,9 @@
                 "left": 284,
                 "top": 80,
                 "right": 378,
-                "bottom": 124,
+                "bottom": 174,
                 "width": 94,
-                "height": 44
+                "height": 94
               }
             },
             {
@@ -9906,18 +9906,18 @@
           ],
           "renderedSvg": {
             "left": 176,
-            "top": 520,
+            "top": 570,
             "right": 208,
-            "bottom": 560,
+            "bottom": 610,
             "width": 32,
             "height": 40
           },
           "renderedSvgOverlaps": [],
           "connector": {
             "left": 190.5,
-            "top": 519,
+            "top": 569,
             "right": 193,
-            "bottom": 521,
+            "bottom": 571,
             "width": null,
             "height": null
           },
@@ -9927,17 +9927,17 @@
           "overlaps": [],
           "content": {
             "left": 83,
-            "top": 146.75,
+            "top": 196.75,
             "right": 300,
-            "bottom": 493,
+            "bottom": 543,
             "width": 217,
             "height": 346.25
           },
           "contentWrapper": {
             "left": 68,
-            "top": 131.75,
+            "top": 181.75,
             "right": 315,
-            "bottom": 508,
+            "bottom": 558,
             "width": 247,
             "height": 376.25
           },
@@ -9973,11 +9973,11 @@
             "popupOpen": false,
             "activePopupMatches": true,
             "availableWidth": 18,
-            "availableHeight": 582,
+            "availableHeight": 532,
             "nativeMinWidth": 50,
             "rawNoSpace": true,
             "contentWidth": -12,
-            "contentHeight": 518,
+            "contentHeight": 468,
             "hasSpace": false,
             "map": {
               "left": 0,
@@ -9987,7 +9987,7 @@
             },
             "reserved": {
               "left": 68,
-              "top": 132,
+              "top": 182,
               "right": 304,
               "bottom": 130
             },
@@ -10083,9 +10083,9 @@
                   "left": 284,
                   "top": 80,
                   "right": 378,
-                  "bottom": 124,
+                  "bottom": 174,
                   "width": 94,
-                  "height": 44
+                  "height": 94
                 }
               },
               {
@@ -10368,13 +10368,13 @@
       "ok": true,
       "detail": {
         "sourceInputSHA256": {
-          "app.js": "cdf3e151006ef81a4816ae03a126c53bccce3cb3cc9fb5399799e7a53ce25319",
-          "styles.css": "6984f7fee52ba0f2dbae77e8088555c1b6c2aec76d334a21ab355cbce62da4d7"
+          "app.js": "28ebe46a385ec4b0372850ed2a0bf5a9b2adda0b5c7da7d36e47dbf7f39bd39a",
+          "styles.css": "f11c8b7bf502c57f3a76bfd3a6ef862b513a4aacdffabfca18f405009383b000"
         },
-        "instrumentedServedAppSHA256": "05932ef065b958ec1d5a5569ddcd6d62ca8d6b72f7a2c42d1650d65a34ae08fc",
+        "instrumentedServedAppSHA256": "25c75ca621284f6542b064a8e2bc9b212a0e8851c7dc857c7bfc977e4aa80c81",
         "servedResponseSHA256": {
-          "styles.css": "6984f7fee52ba0f2dbae77e8088555c1b6c2aec76d334a21ab355cbce62da4d7",
-          "app.js": "05932ef065b958ec1d5a5569ddcd6d62ca8d6b72f7a2c42d1650d65a34ae08fc"
+          "styles.css": "f11c8b7bf502c57f3a76bfd3a6ef862b513a4aacdffabfca18f405009383b000",
+          "app.js": "25c75ca621284f6542b064a8e2bc9b212a0e8851c7dc857c7bfc977e4aa80c81"
         }
       }
     },
@@ -10596,7 +10596,7 @@
           "zoom": 1,
           "zoomend": 1,
           "movestart": 2,
-          "move": 5,
+          "move": 6,
           "moveend": 1
         },
         "zoomed": true,
@@ -10796,13 +10796,13 @@
         "healthyTilesAfter": 28,
         "healthyTilesRequested": true,
         "recoveryBefore": {
-          "lat": 35.15584570226544,
-          "lng": 127.74902343750001,
+          "lat": 35.18132959522858,
+          "lng": 127.61511499181451,
           "zoom": 7
         },
         "recoveryAfter": {
-          "lat": 35.27253175660238,
-          "lng": 127.91931152343751,
+          "lat": 35.35321610123823,
+          "lng": 128.17199707031253,
           "zoom": 8,
           "idle": true,
           "fallbackHidden": true,
@@ -10824,7 +10824,7 @@
           "zoom": 2,
           "zoomend": 2,
           "movestart": 3,
-          "move": 10,
+          "move": 11,
           "moveend": 3
         },
         "nativeEventsAfter": {
@@ -10836,8 +10836,8 @@
           "zoom": 2,
           "zoomend": 2,
           "movestart": 4,
-          "move": 14,
-          "moveend": 3
+          "move": 64,
+          "moveend": 4
         },
         "stable": true,
         "controlsStable": true,
@@ -10874,10 +10874,10 @@
   "source_hashes": {
     "spec.md": "af94b2ef61dd559388e8ff4ac83108ee6e1c3a13e8fa3d88f8523befe99d7729",
     "seed.yaml": "468e7ab87d600aa9b0a0166b9b1b86294f451ed7ce47d5cf8e610253bce20f01",
-    "index.html": "98d43cc50c4d7cec8ad3e8d4bec96da849ad1a180e20f97db3f242b664a0b29c",
-    "app.js": "cdf3e151006ef81a4816ae03a126c53bccce3cb3cc9fb5399799e7a53ce25319",
-    "styles.css": "6984f7fee52ba0f2dbae77e8088555c1b6c2aec76d334a21ab355cbce62da4d7",
-    "locales.json": "3199e7c9a8d4bac3aec6aa7172ffce5a0c9fe54971df53da2161e0b533e0c033",
+    "index.html": "1bef6267d3eb4ec978aca079f61525d61ebe6e4d0247b293aa6f7d0492e71c0c",
+    "app.js": "28ebe46a385ec4b0372850ed2a0bf5a9b2adda0b5c7da7d36e47dbf7f39bd39a",
+    "styles.css": "f11c8b7bf502c57f3a76bfd3a6ef862b513a4aacdffabfca18f405009383b000",
+    "locales.json": "62a8cc23a3ef227281a74c993a0c254829dc55e226658ff6364f5fbd5ce9f033",
     "i18n.js": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
   },
   "source_files_present": {
@@ -10889,11 +10889,11 @@
     "locales.json": true,
     "i18n.js": true
   },
-  "verifier_hash": "e167e0f7743170af1f57e813a50f453605eacf94ca7f5f624ba06cc3cd157bb5",
+  "verifier_hash": "b63b64ebd1572e1f12ba411bec41c8341148113fd607bdb3bc2b12898a899cb0",
   "command": [
     "/opt/homebrew/opt/python@3.14/bin/python3.14",
     "specs/verify/map_viewport_check.py"
   ],
   "cwd": "/Users/jangyoung/orca/happy-our-planning",
-  "generated_at": "2026-10-16T06:04:24.155249Z"
+  "generated_at": "2026-10-16T07:24:39.498725Z"
 }

@@ -17,13 +17,22 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303601
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303601
-fetched_at: '2026-10-16T15:06:28+09:00'
+fetched_at: '2026-10-16T15:26:28+09:00'
 end_date: '2026-11-07T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303601_261016_140001.jpg
-content_hash: sha256:c2c2724ab699e3215271b92a67a51dd0365119129fd44596ff2f1f94a68acebd
+description: '장르: 대중음악 · 공연장: 롤링홀 · 공연시간 안내: 토요일(17:00) · 관람연령: 전체 관람가 · 런타임: 1시간
+  40분 · 티켓가격: 전석 77,000원 · 예매처: 멜론티켓 · 주최·주관: 페이버엔터테인먼트'
+age: 전체 관람가
+price_text: 전석 77,000원
+price: 77000
+duration_text: 1시간 40분
+duration: PT1H40M
+organizer: 페이버엔터테인먼트
+offers:
+  url: https://ticket.melon.com/performance/index.htm?prodId=214091
+content_hash: sha256:5926bad3b9edf7a378d3dfe05b28b9a807fcff37cc99489218ec4d3511d4d4e9
 ---
 
 # W24 단독 공연: NEXT CHAPTER: BEST CHAPTER / Section 11. 롤링홀
 
 > 출처: kopis · 수집 2026-10-16T15:06:28+09:00
-

@@ -39,6 +39,101 @@
   const LINK_MAX_AGE_MS = 7 * 24 * 60 * 60 * 1000;
   const isExperience = (event) => event && event.is_experience === true;
   const experienceCategories = (event) => Array.isArray(event && event.experience_categories) ? event.experience_categories.filter(Boolean) : [];
+
+  const SOUND_STORAGE_KEY = "notchima:sound_enabled";
+  const soundManager = {
+    enabled: false,
+    bgm: null,
+    sfx: {},
+    init() {
+      try {
+        const stored = window.localStorage ? window.localStorage.getItem(SOUND_STORAGE_KEY) : null;
+        this.enabled = stored === "true";
+      } catch (_) {
+        this.enabled = false;
+      }
+      this.updateUI();
+    },
+    ensureAudio() {
+      if (typeof Audio === "undefined") return;
+      if (!this.bgm) {
+        this.bgm = new Audio("./assets/audio/bgm-picnic.mp3");
+        this.bgm.loop = true;
+        this.bgm.volume = 0.22;
+      }
+      if (!this.sfx.search) {
+        this.sfx.search = new Audio("./assets/audio/sfx-search.mp3");
+        this.sfx.search.volume = 0.35;
+      }
+      if (!this.sfx.confirm) {
+        this.sfx.confirm = new Audio("./assets/audio/sfx-confirm.mp3");
+        this.sfx.confirm.volume = 0.35;
+      }
+      if (!this.sfx.close) {
+        this.sfx.close = new Audio("./assets/audio/sfx-close.mp3");
+        this.sfx.close.volume = 0.3;
+      }
+    },
+    toggle() {
+      this.ensureAudio();
+      this.enabled = !this.enabled;
+      try {
+        if (window.localStorage) {
+          window.localStorage.setItem(SOUND_STORAGE_KEY, String(this.enabled));
+        }
+      } catch (_) {}
+      if (this.enabled) {
+        if (this.bgm) {
+          const p = this.bgm.play();
+          if (p && p.catch) p.catch(() => {});
+        }
+        this.play("confirm");
+      } else {
+        if (this.bgm) {
+          this.bgm.pause();
+        }
+      }
+      this.updateUI();
+    },
+    play(name) {
+      if (!this.enabled || typeof Audio === "undefined") return;
+      try {
+        this.ensureAudio();
+        const sound = this.sfx[name];
+        if (sound) {
+          const clone = sound.cloneNode();
+          clone.volume = sound.volume;
+          const p = clone.play();
+          if (p && p.catch) p.catch(() => {});
+        }
+      } catch (_) {}
+    },
+    updateUI() {
+      const btn = $("soundToggle");
+      const icon = $("soundIcon");
+      const label = $("soundLabel");
+      if (!btn || !icon || !label) return;
+      if (this.enabled) {
+        icon.src = "./assets/icons/menu-sound-on.webp";
+        label.textContent = t("tool.soundToggle.on");
+        label.setAttribute("data-i18n", "tool.soundToggle.on");
+        btn.setAttribute("aria-label", t("tool.soundToggle.titleOn"));
+        btn.setAttribute("title", t("tool.soundToggle.titleOn"));
+        btn.setAttribute("data-i18n-aria-label", "tool.soundToggle.titleOn");
+        btn.setAttribute("data-i18n-title", "tool.soundToggle.titleOn");
+        btn.setAttribute("aria-pressed", "true");
+      } else {
+        icon.src = "./assets/icons/menu-sound-off.webp";
+        label.textContent = t("tool.soundToggle.off");
+        label.setAttribute("data-i18n", "tool.soundToggle.off");
+        btn.setAttribute("aria-label", t("tool.soundToggle.titleOff"));
+        btn.setAttribute("title", t("tool.soundToggle.titleOff"));
+        btn.setAttribute("data-i18n-aria-label", "tool.soundToggle.titleOff");
+        btn.setAttribute("data-i18n-title", "tool.soundToggle.titleOff");
+        btn.setAttribute("aria-pressed", "false");
+      }
+    }
+  };
   function isPrivateLookingHost(hostname) {
     const host = String(hostname || "").toLowerCase().replace(/^\[|\]$/g, "").replace(/\.$/, "");
     if (!host || host === "localhost" || host.endsWith(".localhost") || host.endsWith(".local") || host.endsWith(".internal") || host.endsWith(".test") || host.endsWith(".invalid") || host === "example.org" || host.endsWith(".example.org")) return true;
@@ -1037,6 +1132,7 @@
       button.appendChild(make("span", null, vocab(region.sido, "sido")));
       button.appendChild(make("strong", null, countLabel(counts.get(region.sido))));
       button.addEventListener("click", () => {
+        soundManager.play("search");
         $("sido").value = $("sido").value === region.sido ? "" : region.sido;
         applyFilters();
       });
@@ -1085,6 +1181,7 @@
       copy.appendChild(make("strong", null, countLabel(counts.get(category))));
       button.appendChild(copy);
       button.addEventListener("click", () => {
+        soundManager.play("search");
         $("activity").value = $("activity").value === category ? "" : category;
         applyFilters();
       });
@@ -1267,6 +1364,7 @@
             }
             control.value = value;
           }
+          soundManager.play("search");
           applyFilters();
         });
         box.appendChild(chip);
@@ -1310,9 +1408,11 @@
     const target = returnTarget || document.activeElement;
     dialog.__skipFocusRestore = false;
     dialog.showModal();
+    soundManager.play("confirm");
     const close = dialog.querySelector(".close");
     if (close) close.focus();
     dialog.onclose = () => {
+      soundManager.play("close");
       const anotherDialogOpen = document.querySelector && document.querySelector("dialog[open]");
       const skip = dialog.__skipFocusRestore || anotherDialogOpen;
       dialog.__skipFocusRestore = false;
@@ -1325,7 +1425,10 @@
     const close = make("button", "close", t("detail.closeButton"));
     close.type = "button";
     close.setAttribute("aria-label", t("detail.closeAria"));
-    close.addEventListener("click", () => dialog.close());
+    close.addEventListener("click", () => {
+      soundManager.play("close");
+      dialog.close();
+    });
     dialog.appendChild(close);
   }
 
@@ -1546,6 +1649,7 @@
     if (filters) filters.addEventListener("submit", (event) => {
       event.preventDefault();
       cancelSearchTimer();
+      soundManager.play("search");
       applyFilters();
     });
     $("q").addEventListener("input", () => {
@@ -1565,6 +1669,7 @@
     }));
     $("reset").addEventListener("click", () => {
       cancelSearchTimer();
+      soundManager.play("close");
       ["q", "sido", "theme", "age", "activity", "from", "to"].forEach((id) => { $(id).value = ""; });
       $("applyable").checked = false;
       $("kids").checked = true;
@@ -1572,6 +1677,8 @@
       applyFilters();
     });
     $("aiBtn").addEventListener("click", showAI);
+    const soundToggle = $("soundToggle");
+    if (soundToggle) soundToggle.addEventListener("click", () => soundManager.toggle());
     const sortBind = [["sortRel", "relevance"], ["sortNew", "upcoming"], ["sortDist", "distance"]];
     for (const [id, mode] of sortBind) {
       const btn = $(id);
@@ -1773,6 +1880,7 @@
       filterToggle.title = label;
     }
     updateSortUI();
+    soundManager.updateUI();
   }
 
   // Fires on #languageToggle clicks (bound once, inside i18n.js) and on
@@ -1815,6 +1923,7 @@
         return;
       }
     }
+    soundManager.init();
     localizeStaticChrome();
     window.addEventListener("notchima:languagechange", onLanguageChange);
     initMap();
