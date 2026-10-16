@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-10-16T16:25:01+09:00",
+  "generated_at": "2026-10-17T05:46:12+09:00",
   "total_active": 427,
   "archived": 0,
   "publication": {
     "retained": 427,
-    "excluded": 11,
+    "excluded": 13,
     "retention_days": 90
   },
   "freshness": {
@@ -13,25 +13,17 @@
   },
   "sources": {
     "kopis": {
-      "mode": "live",
-      "attempted_at": "2026-10-16T16:24:46+09:00",
+      "mode": "fixture",
+      "attempted_at": "2026-10-17T05:45:44+09:00",
       "last_success_at": "2026-10-16T16:25:00+09:00",
       "error": null,
-      "collected": 300,
+      "collected": 3,
       "complete": false,
-      "truncated": true,
-      "detail": {
-        "candidates": 300,
-        "cached": 123,
-        "fetched": 11,
-        "failed": 166,
-        "capped": 0,
-        "stale": 0
-      }
+      "truncated": false
     },
     "tourapi": {
       "mode": "fixture",
-      "attempted_at": "2026-10-16T16:25:00+09:00",
+      "attempted_at": "2026-10-17T05:45:44+09:00",
       "last_success_at": null,
       "error": null,
       "collected": 3,
@@ -39,18 +31,18 @@
       "truncated": false
     },
     "websearch": {
-      "mode": "live",
-      "attempted_at": "2026-10-16T16:25:00+09:00",
+      "mode": "fixture",
+      "attempted_at": "2026-10-17T05:45:44+09:00",
       "last_success_at": "2026-10-16T16:25:01+09:00",
       "error": null,
-      "collected": 6,
+      "collected": 3,
       "complete": false,
       "truncated": false
     }
   },
-  "source_mode": "mixed",
+  "source_mode": "offline",
   "last_success_at": "2026-10-16T16:25:01+09:00",
-  "collection_started_at": "2026-10-16T16:25:01+09:00",
+  "collection_started_at": "2026-10-17T05:45:44+09:00",
   "collection_error_count": 0,
   "collection_errors": []
 }
