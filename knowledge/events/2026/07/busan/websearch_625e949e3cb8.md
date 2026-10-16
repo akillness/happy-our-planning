@@ -170,12 +170,12 @@ location:
 url: https://www.mcst.go.kr/kor/s_culture/festival/festivalList.jsp
 source: websearch
 source_url: https://www.mcst.go.kr/kor/s_culture/festival/festivalList.jsp
-fetched_at: '2026-10-16T16:25:00+09:00'
+fetched_at: '2026-10-16T17:10:42+09:00'
 x_provider: exa
-x_query: 전국 2026 무료 행사 신청
+x_query: 전국  축제 2026
 x_confidence: 0.6
 x_verification: web-discovered
-content_hash: sha256:350c47617f46285d426aa15316fb2edfdba9535a38f2997a037d1ee76303c16f
+content_hash: sha256:2098bab4574e50550e253237ad2e29f78bbbdcd09e0df386179f44b39e736a60
 ---
 
 # 지역축제 - 목록보기 - 문화체육관광부
