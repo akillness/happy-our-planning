@@ -17,17 +17,10 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303480
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303480
-fetched_at: '2026-10-16T00:08:16+09:00'
+fetched_at: '2026-10-16T14:28:06+09:00'
 end_date: '2026-11-15T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303480_261015_144013.jpg
-age: 만 7세 이상
-price_text: R석 70,000원, S석 50,000원, A석 30,000원
-duration_text: 1시간 10분
-duration: PT1H10M
-organizer: (사) 대한무용협회
-offers:
-  url: http://theater.arko.or.kr/Pages/Perf/Detail/Detail.aspx?IdPerf=259581
-content_hash: sha256:2563c58f1cc0483ebcddbcb03cc2349884068d3ba69d2d7a613974592d779bdb
+content_hash: sha256:1975ff8141bde5b5658a696c59f70395e629fcc5b21d303f12f5ab59056fc31a
 ---
 
 # 제47회 서울무용제, 무념무상2

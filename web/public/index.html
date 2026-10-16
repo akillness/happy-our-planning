@@ -26,10 +26,11 @@
         <img src="./icon.png" alt="" width="36" height="36" />
         <span>놓치마 <small>Notchima</small></span>
       </a>
+      <span class="kids-badge" data-i18n="brand.kidsBadge">아이와 함께</span>
       <span class="hero-stat"><strong id="heroCount">0</strong><span data-i18n="common.countUnit">건</span></span>
     </div>
     <h1 id="heroTitle" class="sr-only" data-i18n="brand.heroTitle">아이와 어디서, 무엇을 해볼까요?</h1>
-    <p class="brand-note" data-i18n="brand.tagline">아이와 해볼 일을, 근거와 함께</p>
+    <p class="brand-note" data-i18n="brand.tagline">아이와 함께 놀고 체험하는 주말 행사 발견</p>
     <p id="freshness" class="freshness" role="status" aria-live="polite">행사를 불러오는 중입니다</p>
   </header>
 
@@ -38,11 +39,11 @@
       <div id="map" aria-label="행사 위치 지도" data-i18n-aria-label="map.ariaLabel"></div>
       <div class="map-tools">
         <button id="locateBtn" type="button" class="button button-quiet icon-btn">
-          <svg class="control-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+          <img class="control-icon" src="./assets/icons/menu-locate.webp" alt="" width="20" height="20" decoding="async" />
           <span class="control-label" data-i18n="map.locate">내 위치에서 찾기</span>
         </button>
         <button id="languageToggle" type="button" class="button button-quiet icon-btn">
-          <svg class="control-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.4 2.4 3.6 5.6 3.6 9s-1.2 6.6-3.6 9c-2.4-2.4-3.6-5.6-3.6-9S9.6 5.4 12 3Z"/></svg>
+          <img class="control-icon" src="./assets/icons/menu-language.webp" alt="" width="20" height="20" decoding="async" />
           <span class="control-label">English</span>
         </button>
         <p id="locateHint" class="map-hint" role="status" aria-live="polite" data-i18n="map.locateHint.default">내 위치를 사용하면 가까운 순으로 정렬합니다. 위치는 저장되지 않습니다.</p>
@@ -54,12 +55,12 @@
       <div class="search-row">
         <label class="search-label" for="q">
           <span class="sr-only" data-i18n="search.inputSrLabel">무엇을 찾나요?</span>
-          <input id="q" type="search" autocomplete="off" placeholder="축제, 체험, 공연을 찾아보세요" data-i18n-placeholder="search.placeholder" />
+          <input id="q" type="search" autocomplete="off" placeholder="아이와 갈 축제, 체험, 공연을 찾아보세요" data-i18n-placeholder="search.placeholder" />
         </label>
       </div>
       <details id="filterMenu" class="filter-menu">
-        <summary id="filterToggle" class="icon-btn">
-          <svg class="control-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18"><path d="M4 6h16M8 12h12M11 18h9"/><circle cx="6" cy="12" r="1.6"/><circle cx="9" cy="18" r="1.6"/></svg>
+        <summary id="filterToggle" class="icon-btn" aria-label="필터 열기" title="필터 열기" data-i18n-aria-label="filter.openLabel" data-i18n-title="filter.openLabel">
+          <img class="control-icon" src="./assets/icons/menu-filter.webp" alt="" width="20" height="20" decoding="async" />
           <span class="filter-label-open control-label" data-i18n="filter.openLabel">필터 열기</span>
           <span class="filter-label-close control-label" data-i18n="filter.closeLabel">필터 닫기</span>
           <span class="filter-toggle-hint" data-i18n="filter.toggleHint">지역 · 테마 · 나이 · 활동</span>
@@ -89,7 +90,10 @@
             <label class="check-pill" for="kids"><input id="kids" type="checkbox" checked /> <span data-i18n="filter.kids">아이와 함께</span></label>
             <label class="check-pill" for="freeOnly"><input id="freeOnly" name="free_only" type="checkbox" /> <span data-i18n="filter.freeOnly">무료만</span></label>
             <label class="check-pill" for="applyable"><input id="applyable" type="checkbox" /> <span data-i18n="filter.applyable">지금 신청 가능</span></label>
-            <button id="reset" type="button" class="button button-quiet" data-i18n="filter.reset">필터 초기화</button>
+            <button id="reset" type="button" class="button button-quiet icon-btn" aria-label="필터 초기화" title="필터 초기화" data-i18n="filter.reset" data-i18n-aria-label="filter.reset" data-i18n-title="filter.reset">
+              <img class="control-icon" src="./assets/icons/menu-reset.webp" alt="" width="20" height="20" decoding="async" />
+              <span class="control-label">필터 초기화</span>
+            </button>
           </div>
           <section class="quick-experiences" aria-labelledby="activityTitle">
             <div class="section-kicker"><h2 id="activityTitle" data-i18n="activity.sectionTitle">아이와 해볼 수 있는 것</h2><span data-i18n="activity.sectionHint">현재 조건에 맞는 체험</span></div>
@@ -105,7 +109,7 @@
           </section>
           <div class="source-notes">
             <p class="date-hint" data-i18n="filter.dateHint">지정한 기간과 겹치는 행사를 보여드려요.</p>
-            <p class="data-note" data-i18n="filter.dataNote">샘플 기록이 포함된 정적 목록입니다. 날짜·비용은 출처에서 확인하세요.</p>
+            <p class="data-note" data-i18n="filter.dataNote">공공 API·웹검색 실데이터 기반 목록입니다. 일정·비용은 출처에서 확인하세요.</p>
             <p id="sourceStatus" class="source-freshness" role="status" aria-live="polite"></p>
           </div>
         </div>
@@ -114,11 +118,14 @@
 
     <section id="resultsPanel" class="results" data-collapsed="true" aria-labelledby="resultsTitle">
       <div class="results-head">
-        <div class="results-summary"><h2 id="resultsTitle" data-i18n="results.title">찾은 행사</h2><p class="result-count"><strong id="count">0</strong><span data-i18n="common.countUnit">건</span></p></div>
+        <div class="results-summary"><h2 id="resultsTitle" data-i18n="results.title">아이와 갈 행사</h2><p class="result-count"><strong id="count">0</strong><span data-i18n="common.countUnit">건</span></p></div>
         <div class="results-head-actions">
-          <button id="aiBtn" type="button" class="button button-primary" data-i18n="results.aiButton">조건 맞춤 추천</button>
+          <button id="aiBtn" type="button" class="button button-primary icon-btn" aria-label="아이 맞춤 추천" title="아이 맞춤 추천" data-i18n="results.aiButton" data-i18n-aria-label="results.aiButton" data-i18n-title="results.aiButton">
+            <img class="control-icon" src="./assets/icons/menu-ai.webp" alt="" width="20" height="20" decoding="async" />
+            <span class="control-label" data-i18n="results.aiButton">아이 맞춤 추천</span>
+          </button>
           <button id="resultsToggle" type="button" class="button button-quiet results-toggle icon-btn" aria-controls="resultsScroll" aria-expanded="false">
-            <svg class="control-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="20" height="20"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            <img class="control-icon" src="./assets/icons/menu-results.webp" alt="" width="20" height="20" decoding="async" />
             <span class="control-label" data-i18n="results.toggleExpand">결과 펼치기</span>
           </button>
         </div>

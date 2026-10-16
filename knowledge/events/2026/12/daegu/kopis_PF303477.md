@@ -17,18 +17,10 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303477
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303477
-fetched_at: '2026-10-16T00:08:16+09:00'
+fetched_at: '2026-10-16T14:28:06+09:00'
 end_date: '2026-12-27T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303477_261015_143525.png
-age: 만 12세 이상
-price_text: 전석 55,000원
-price: 55000
-duration_text: 2시간
-duration: PT2H
-organizer: (주)소프트네이션(캔디드뮤직)
-offers:
-  url: https://ticket.melon.com/performance/index.htm?prodId=214061
-content_hash: sha256:df56f4f3327c1f77bea1b19d8bae6a89462d1ddf965d7ae68736d4d0bab877e9
+content_hash: sha256:a01197a25eaded181eee6ccc6f35acb8947bb4562a9123989591442852d28c13
 ---
 
 # 도비비 전국투어: 광광 [대구]

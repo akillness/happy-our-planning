@@ -9,9 +9,16 @@
     mapPoints: [], mapFitPending: false, lastAutoFitCenter: null, lastAutoFitZoom: null, markerGroups: [],
     filteredRows: [], wired: false, retryWired: false, dataReady: false,
     page: 0, lastPageSize: 0, sortMode: "relevance", userPos: null, lastQuery: "",
-    activePopup: null, viewportFrame: 0,
+    activePopup: null, viewportFrame: 0, searchTimer: 0,
     _search: null, lastUpdated: null,
   };
+
+  function cancelSearchTimer() {
+    if (state.searchTimer) {
+      window.clearTimeout(state.searchTimer);
+      state.searchTimer = 0;
+    }
+  }
 
   const MAP_ICON_SIZE = [44, 48];
   const MAP_ICON_ANCHOR = [22, 44];
@@ -760,6 +767,12 @@
 
   function renderBadges(event) {
     const wrap = make("span", "card-badges");
+    if (hasFamilySignal(event)) wrap.appendChild(badge(t("badge.family"), "family"));
+    for (const band of event.age_bands || []) {
+      if (band === "영유아" || band === "어린이") {
+        wrap.appendChild(badge(vocab(band, "age"), "age-band"));
+      }
+    }
     if (isFree(event.price)) wrap.appendChild(badge(t("badge.free"), "free"));
     const status = statusInfo(event);
     if (status) wrap.appendChild(badge(status.label, status.className));
@@ -901,6 +914,7 @@
     if (event.address) wrap.appendChild(make("div", "map-popup-addr", event.address));
     const status = statusInfo(event);
     if (status) wrap.appendChild(badge(status.label, status.className));
+    if (hasFamilySignal(event)) wrap.appendChild(badge(t("badge.family"), "family"));
     if (isFree(event.price)) wrap.appendChild(badge(t("badge.free"), "free"));
     const dist = eventDist(event);
     if (dist != null) wrap.appendChild(make("div", "map-popup-dist", fmtDist(dist)));
@@ -1267,6 +1281,7 @@
   }
 
   function applyFilters(options) {
+    cancelSearchTimer();
     if (!state.dataReady) return;
     const filters = currentFilters();
     state._search = null;
@@ -1527,19 +1542,29 @@
   function wire() {
     if (state.wired) return;
     state.wired = true;
-    let searchTimer;
     const filters = $("searchDock");
     if (filters) filters.addEventListener("submit", (event) => {
       event.preventDefault();
+      cancelSearchTimer();
       applyFilters();
     });
     $("q").addEventListener("input", () => {
-      window.clearTimeout(searchTimer);
-      searchTimer = window.setTimeout(applyFilters, 120);
+      cancelSearchTimer();
+      state.searchTimer = window.setTimeout(() => {
+        state.searchTimer = 0;
+        applyFilters();
+      }, 120);
     });
-    ["sido", "theme", "age", "activity", "from", "to"].forEach((id) => $(id).addEventListener("input", applyFilters));
-    ["applyable", "kids", "freeOnly"].forEach((id) => $(id).addEventListener("change", applyFilters));
+    ["sido", "theme", "age", "activity", "from", "to"].forEach((id) => $(id).addEventListener("input", () => {
+      cancelSearchTimer();
+      applyFilters();
+    }));
+    ["applyable", "kids", "freeOnly"].forEach((id) => $(id).addEventListener("change", () => {
+      cancelSearchTimer();
+      applyFilters();
+    }));
     $("reset").addEventListener("click", () => {
+      cancelSearchTimer();
       ["q", "sido", "theme", "age", "activity", "from", "to"].forEach((id) => { $(id).value = ""; });
       $("applyable").checked = false;
       $("kids").checked = true;
@@ -1566,6 +1591,11 @@
     };
     if (filterMenu) {
       filterMenu.addEventListener("toggle", () => {
+        if (filterToggle && (!i18n() || !i18n().isLoaded || i18n().isLoaded())) {
+          const label = filterMenu.open ? t("filter.closeLabel") : t("filter.openLabel");
+          filterToggle.setAttribute("aria-label", label);
+          filterToggle.title = label;
+        }
         if (filterMenu.open && isMobileViewport()) {
           const resultsPanel = $("resultsPanel");
           if (resultsPanel && resultsPanel.dataset.collapsed !== "true") {
@@ -1726,7 +1756,10 @@
     localizeDocumentTitle();
     localizeNativeMapControls();
     setControlLabel("locateBtn", t("map.locate"));
+    setControlLabel("aiBtn", t("results.aiButton"));
+    setControlLabel("reset", t("filter.reset"));
     syncResultsDisclosure();
+    const filterMenu = $("filterMenu");
     const filterToggle = $("filterToggle");
     if (filterToggle) {
       const openSpan = filterToggle.querySelector(".filter-label-open");
@@ -1735,6 +1768,9 @@
       if (openSpan) openSpan.textContent = t("filter.openLabel");
       if (closeSpan) closeSpan.textContent = t("filter.closeLabel");
       if (hintSpan) hintSpan.textContent = t("filter.toggleHint");
+      const label = filterMenu && filterMenu.open ? t("filter.closeLabel") : t("filter.openLabel");
+      filterToggle.setAttribute("aria-label", label);
+      filterToggle.title = label;
     }
     updateSortUI();
   }

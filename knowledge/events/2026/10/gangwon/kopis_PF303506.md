@@ -16,9 +16,12 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303506
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303506
-fetched_at: '2026-10-16T00:08:16+09:00'
+fetched_at: '2026-10-16T14:28:06+09:00'
 end_date: '2026-10-24T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303506_261015_154949.jpg
+description: '장르: 복합 · 공연장: 양구문화복지센터 · 공연시간 안내: 토요일(17:00) · 관람연령: 전체 관람가 · 런타임: 1시간
+  30분 · 티켓가격: 전석무료 · 출연진: 이윤하, 심영국, 김면수, 이정우 · 예매처: 양구문화예술회관(양구문화재단) · 주최·주관: 극단 무소의
+  뿔'
 age: 전체 관람가
 price_text: 전석무료
 price: free
@@ -27,7 +30,7 @@ duration: PT1H30M
 organizer: 극단 무소의 뿔
 offers:
   url: https://ygcf.or.kr/Home/H10000/H10200/concertDetail?conct_no=2880
-content_hash: sha256:31fb1f923efc26b7927eb8c2b258e76b6aa42268d6d764d257d404dc8f71714a
+content_hash: sha256:82e4fcfb9a5aecaa0c1c04715271d1edd66e5df2482660590cd70fc95045e641
 ---
 
 # 백자한상 (10.24) [강원 양구]

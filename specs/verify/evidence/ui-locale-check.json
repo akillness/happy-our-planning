@@ -1,0 +1,6657 @@
+{
+  "status": "passed",
+  "spec_version": "1.6.0",
+  "total_checks": 158,
+  "passed": 158,
+  "viewports": [
+    "1440x900",
+    "1280x800",
+    "1024x540",
+    "740x360",
+    "667x375",
+    "640x360",
+    "568x320",
+    "360x800",
+    "390x844"
+  ],
+  "data_context": "single deterministic routed catalog; Leaflet tile fixture; not public-data QA",
+  "pre_ui_edit_red": {
+    "command": "python3 /tmp/notchima_ui_red_probe.py",
+    "launcher": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "viewport": "1440x900",
+    "observed": {
+      "selector": "filters",
+      "rect": {
+        "left": 440,
+        "top": 16,
+        "right": 1000,
+        "bottom": 126,
+        "width": 560,
+        "height": 110
+      },
+      "centerError": 0,
+      "bottomGap": 774,
+      "languageToggle": false
+    },
+    "exit_code": 1
+  },
+  "source_files_present": {
+    "spec.md": true,
+    "seed.yaml": true,
+    "index.html": true,
+    "app.js": true,
+    "styles.css": true,
+    "locales.json": true,
+    "i18n.js": true
+  },
+  "source_hashes": {
+    "spec.md": "af94b2ef61dd559388e8ff4ac83108ee6e1c3a13e8fa3d88f8523befe99d7729",
+    "seed.yaml": "468e7ab87d600aa9b0a0166b9b1b86294f451ed7ce47d5cf8e610253bce20f01",
+    "index.html": "98d43cc50c4d7cec8ad3e8d4bec96da849ad1a180e20f97db3f242b664a0b29c",
+    "app.js": "cdf3e151006ef81a4816ae03a126c53bccce3cb3cc9fb5399799e7a53ce25319",
+    "styles.css": "6984f7fee52ba0f2dbae77e8088555c1b6c2aec76d334a21ab355cbce62da4d7",
+    "locales.json": "3199e7c9a8d4bac3aec6aa7172ffce5a0c9fe54971df53da2161e0b533e0c033",
+    "i18n.js": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
+  },
+  "checks": [
+    {
+      "check": "1440x900 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "width": 1440,
+          "height": 900
+        },
+        "search": {
+          "left": 440,
+          "top": 774,
+          "right": 1000,
+          "bottom": 884,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 1044,
+          "top": 16,
+          "right": 1424,
+          "bottom": 760,
+          "width": 380,
+          "height": 744
+        },
+        "doc": {
+          "width": 1440,
+          "clientWidth": 1440,
+          "height": 900,
+          "clientHeight": 900
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1440x900 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "width": 1440,
+          "height": 900
+        },
+        "search": {
+          "left": 440,
+          "top": 774,
+          "right": 1000,
+          "bottom": 884,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 1044,
+          "top": 16,
+          "right": 1424,
+          "bottom": 760,
+          "width": 380,
+          "height": 744
+        },
+        "doc": {
+          "width": 1440,
+          "clientWidth": 1440,
+          "height": 900,
+          "clientHeight": 900
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1440x900 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1440,
+          "bottom": 900,
+          "width": 1440,
+          "height": 900
+        },
+        "search": {
+          "left": 440,
+          "top": 774,
+          "right": 1000,
+          "bottom": 884,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 1044,
+          "top": 16,
+          "right": 1424,
+          "bottom": 760,
+          "width": 380,
+          "height": 744
+        },
+        "doc": {
+          "width": 1440,
+          "clientWidth": 1440,
+          "height": 900,
+          "clientHeight": 900
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1440x900 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 1440,
+        "clientWidth": 1440,
+        "height": 900,
+        "clientHeight": 900
+      }
+    },
+    {
+      "check": "1440x900 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "1440x900 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 440,
+          "top": 162,
+          "right": 1000,
+          "bottom": 820,
+          "width": 560,
+          "height": 658
+        },
+        "filterContent": {
+          "left": 441,
+          "top": 207,
+          "right": 999,
+          "bottom": 819,
+          "width": 558,
+          "height": 612
+        },
+        "results": {
+          "left": 1044,
+          "top": 16,
+          "right": 1424,
+          "bottom": 760,
+          "width": 380,
+          "height": 744
+        },
+        "fullResultsPanel": true,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "coexist"
+      }
+    },
+    {
+      "check": "1440x900 검색 Enter 문서·언어·q 보존",
+      "ok": true,
+      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+    },
+    {
+      "check": "1440x900 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "1440x900 주요 조작 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 159.265625,
+          "height": 44,
+          "layoutWidth": 159,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 173.75,
+          "height": 44,
+          "layoutWidth": 174,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 558,
+          "height": 44,
+          "layoutWidth": 558,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 127.890625,
+          "height": 44,
+          "layoutWidth": 128,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pagePrev",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pageNext",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "1440x900 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "1440x900 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "1280x800 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "search": {
+          "left": 360,
+          "top": 674,
+          "right": 920,
+          "bottom": 784,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 884,
+          "top": 16,
+          "right": 1264,
+          "bottom": 660,
+          "width": 380,
+          "height": 644
+        },
+        "doc": {
+          "width": 1280,
+          "clientWidth": 1280,
+          "height": 800,
+          "clientHeight": 800
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1280x800 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "search": {
+          "left": 360,
+          "top": 674,
+          "right": 920,
+          "bottom": 784,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 884,
+          "top": 16,
+          "right": 1264,
+          "bottom": 660,
+          "width": 380,
+          "height": 644
+        },
+        "doc": {
+          "width": 1280,
+          "clientWidth": 1280,
+          "height": 800,
+          "clientHeight": 800
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1280x800 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1280,
+          "bottom": 800,
+          "width": 1280,
+          "height": 800
+        },
+        "search": {
+          "left": 360,
+          "top": 674,
+          "right": 920,
+          "bottom": 784,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 884,
+          "top": 16,
+          "right": 1264,
+          "bottom": 660,
+          "width": 380,
+          "height": 644
+        },
+        "doc": {
+          "width": 1280,
+          "clientWidth": 1280,
+          "height": 800,
+          "clientHeight": 800
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1280x800 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 1280,
+        "clientWidth": 1280,
+        "height": 800,
+        "clientHeight": 800
+      }
+    },
+    {
+      "check": "1280x800 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "1280x800 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 360,
+          "top": 130,
+          "right": 868,
+          "bottom": 720,
+          "width": 508,
+          "height": 590
+        },
+        "filterContent": {
+          "left": 361,
+          "top": 175,
+          "right": 867,
+          "bottom": 719,
+          "width": 506,
+          "height": 544
+        },
+        "results": {
+          "left": 884,
+          "top": 16,
+          "right": 1264,
+          "bottom": 660,
+          "width": 380,
+          "height": 644
+        },
+        "fullResultsPanel": true,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "coexist"
+      }
+    },
+    {
+      "check": "1280x800 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "1280x800 주요 조작 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 159.265625,
+          "height": 44,
+          "layoutWidth": 159,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 173.75,
+          "height": 44,
+          "layoutWidth": 174,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 506,
+          "height": 44,
+          "layoutWidth": 506,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 127.890625,
+          "height": 44,
+          "layoutWidth": 128,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pagePrev",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pageNext",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "1280x800 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "1280x800 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "1024x540 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1024,
+          "bottom": 540,
+          "width": 1024,
+          "height": 540
+        },
+        "search": {
+          "left": 232,
+          "top": 414,
+          "right": 792,
+          "bottom": 524,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 956,
+          "top": 16,
+          "right": 1008,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 1024,
+          "clientWidth": 1024,
+          "height": 540,
+          "clientHeight": 540
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1024x540 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1024,
+          "bottom": 540,
+          "width": 1024,
+          "height": 540
+        },
+        "search": {
+          "left": 232,
+          "top": 414,
+          "right": 792,
+          "bottom": 524,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 956,
+          "top": 16,
+          "right": 1008,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 1024,
+          "clientWidth": 1024,
+          "height": 540,
+          "clientHeight": 540
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1024x540 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 1024,
+          "bottom": 540,
+          "width": 1024,
+          "height": 540
+        },
+        "search": {
+          "left": 232,
+          "top": 414,
+          "right": 792,
+          "bottom": 524,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 956,
+          "top": 16,
+          "right": 1008,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 1024,
+          "clientWidth": 1024,
+          "height": 540,
+          "clientHeight": 540
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "1024x540 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 1024,
+        "clientWidth": 1024,
+        "height": 540,
+        "clientHeight": 540
+      }
+    },
+    {
+      "check": "1024x540 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "1024x540 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 232,
+          "top": 88,
+          "right": 792,
+          "bottom": 460,
+          "width": 560,
+          "height": 372
+        },
+        "filterContent": {
+          "left": 233,
+          "top": 133,
+          "right": 791,
+          "bottom": 459,
+          "width": 558,
+          "height": 326
+        },
+        "results": {
+          "left": 956,
+          "top": 16,
+          "right": 1008,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "fullResultsPanel": false,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "exclusive"
+      }
+    },
+    {
+      "check": "1024x540 compact disclosure pager 물리적 open·44px target",
+      "ok": true,
+      "detail": {
+        "pager": [
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 338.9375,
+            "bottom": 382.9375
+          },
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 338.9375,
+            "bottom": 382.9375
+          }
+        ],
+        "count": 2,
+        "resultsCollapsed": "false"
+      }
+    },
+    {
+      "check": "1024x540 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "1024x540 주요 조작 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 558,
+          "height": 44,
+          "layoutWidth": 558,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "resultsToggle",
+          "width": 44,
+          "height": 44.000003814697266,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pagePrev",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pageNext",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "1024x540 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "1024x540 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "740x360 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 740,
+          "bottom": 360,
+          "width": 740,
+          "height": 360
+        },
+        "search": {
+          "left": 90,
+          "top": 234,
+          "right": 650,
+          "bottom": 344,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 672,
+          "top": 16,
+          "right": 724,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 740,
+          "clientWidth": 740,
+          "height": 360,
+          "clientHeight": 360
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "740x360 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 740,
+          "bottom": 360,
+          "width": 740,
+          "height": 360
+        },
+        "search": {
+          "left": 90,
+          "top": 234,
+          "right": 650,
+          "bottom": 344,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 672,
+          "top": 16,
+          "right": 724,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 740,
+          "clientWidth": 740,
+          "height": 360,
+          "clientHeight": 360
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "740x360 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 740,
+          "bottom": 360,
+          "width": 740,
+          "height": 360
+        },
+        "search": {
+          "left": 90,
+          "top": 234,
+          "right": 650,
+          "bottom": 344,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 672,
+          "top": 16,
+          "right": 724,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 740,
+          "clientWidth": 740,
+          "height": 360,
+          "clientHeight": 360
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "740x360 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 740,
+        "clientWidth": 740,
+        "height": 360,
+        "clientHeight": 360
+      }
+    },
+    {
+      "check": "740x360 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "740x360 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 90,
+          "top": 88,
+          "right": 650,
+          "bottom": 280,
+          "width": 560,
+          "height": 192
+        },
+        "filterContent": {
+          "left": 91,
+          "top": 133,
+          "right": 649,
+          "bottom": 279,
+          "width": 558,
+          "height": 146
+        },
+        "results": {
+          "left": 672,
+          "top": 16,
+          "right": 724,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "fullResultsPanel": false,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "exclusive"
+      }
+    },
+    {
+      "check": "740x360 검색 Enter 문서·언어·q 보존",
+      "ok": true,
+      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+    },
+    {
+      "check": "740x360 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
+      "ok": true,
+      "detail": {
+        "brand": {
+          "left": 12,
+          "top": 8,
+          "right": 250,
+          "bottom": 66,
+          "width": 238,
+          "height": 58
+        },
+        "tools": {
+          "left": 72,
+          "top": 80,
+          "right": 174,
+          "bottom": 124,
+          "width": 102,
+          "height": 44
+        },
+        "search": {
+          "left": 90,
+          "top": 234,
+          "right": 650,
+          "bottom": 344,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 672,
+          "top": 16,
+          "right": 724,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 740,
+          "bottom": 360,
+          "width": 740,
+          "height": 360
+        },
+        "attribution": {
+          "left": 16,
+          "top": 213.203125,
+          "right": 265.828125,
+          "bottom": 230,
+          "width": 249.828125,
+          "height": 16.796875
+        },
+        "overlaps": {
+          "toolsBrand": false,
+          "toolsSearch": false,
+          "toolsResultsCollapsed": false,
+          "brandSearch": false
+        },
+        "corridor": 110
+      }
+    },
+    {
+      "check": "740x360 결과 접힘 44px 토글·자연 스크롤 도달",
+      "ok": true,
+      "detail": {
+        "collapsed": true,
+        "toggle": {
+          "left": 676,
+          "top": 20,
+          "right": 720,
+          "bottom": 64,
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        }
+      }
+    },
+    {
+      "check": "740x360 필터·결과 상호배타·pager·결과 action 완전가시·실클릭",
+      "ok": true,
+      "detail": {
+        "filterWhileResultsCollapsed": true,
+        "resultsExpandedFilterClosed": true,
+        "pager": [
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 158.9375,
+            "bottom": 202.9375
+          },
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 158.9375,
+            "bottom": 202.9375
+          }
+        ],
+        "pagerTargetsOk": true,
+        "resultsScroll": {
+          "left": 345,
+          "top": 78,
+          "right": 723,
+          "bottom": 219,
+          "width": 378,
+          "height": 141
+        },
+        "action": {
+          "left": 370,
+          "top": 126.9375,
+          "right": 438.28125,
+          "bottom": 170.9375,
+          "width": 68.28125,
+          "height": 44,
+          "layoutWidth": 68,
+          "layoutHeight": 44
+        },
+        "scrollTop": 1829,
+        "clickable": true,
+        "detailOpen": true
+      }
+    },
+    {
+      "check": "740x360 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "740x360 주요 조작 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 558,
+          "height": 44,
+          "layoutWidth": 558,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "resultsToggle",
+          "width": 44,
+          "height": 44.000003814697266,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pagePrev",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pageNext",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "740x360 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "740x360 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "667x375 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 667,
+          "bottom": 375,
+          "width": 667,
+          "height": 375
+        },
+        "search": {
+          "left": 53.5,
+          "top": 249,
+          "right": 613.5,
+          "bottom": 359,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 599,
+          "top": 16,
+          "right": 651,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 667,
+          "clientWidth": 667,
+          "height": 375,
+          "clientHeight": 375
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "667x375 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 667,
+          "bottom": 375,
+          "width": 667,
+          "height": 375
+        },
+        "search": {
+          "left": 53.5,
+          "top": 249,
+          "right": 613.5,
+          "bottom": 359,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 599,
+          "top": 16,
+          "right": 651,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 667,
+          "clientWidth": 667,
+          "height": 375,
+          "clientHeight": 375
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "667x375 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 667,
+          "bottom": 375,
+          "width": 667,
+          "height": 375
+        },
+        "search": {
+          "left": 53.5,
+          "top": 249,
+          "right": 613.5,
+          "bottom": 359,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 599,
+          "top": 16,
+          "right": 651,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 667,
+          "clientWidth": 667,
+          "height": 375,
+          "clientHeight": 375
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "667x375 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 667,
+        "clientWidth": 667,
+        "height": 375,
+        "clientHeight": 375
+      }
+    },
+    {
+      "check": "667x375 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "667x375 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 53.5,
+          "top": 88,
+          "right": 583.0,
+          "bottom": 295,
+          "width": 529.5,
+          "height": 207
+        },
+        "filterContent": {
+          "left": 54.5,
+          "top": 133,
+          "right": 582.0,
+          "bottom": 294,
+          "width": 527.5,
+          "height": 161
+        },
+        "results": {
+          "left": 599,
+          "top": 16,
+          "right": 651,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "fullResultsPanel": false,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "exclusive"
+      }
+    },
+    {
+      "check": "667x375 검색 Enter 문서·언어·q 보존",
+      "ok": true,
+      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+    },
+    {
+      "check": "667x375 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
+      "ok": true,
+      "detail": {
+        "brand": {
+          "left": 12,
+          "top": 8,
+          "right": 250,
+          "bottom": 66,
+          "width": 238,
+          "height": 58
+        },
+        "tools": {
+          "left": 72,
+          "top": 80,
+          "right": 174,
+          "bottom": 124,
+          "width": 102,
+          "height": 44
+        },
+        "search": {
+          "left": 53.5,
+          "top": 249,
+          "right": 613.5,
+          "bottom": 359,
+          "width": 560,
+          "height": 110
+        },
+        "results": {
+          "left": 599,
+          "top": 16,
+          "right": 651,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 667,
+          "bottom": 375,
+          "width": 667,
+          "height": 375
+        },
+        "attribution": {
+          "left": 16,
+          "top": 228.203125,
+          "right": 265.828125,
+          "bottom": 245,
+          "width": 249.828125,
+          "height": 16.796875
+        },
+        "overlaps": {
+          "toolsBrand": false,
+          "toolsSearch": false,
+          "toolsResultsCollapsed": false,
+          "brandSearch": false
+        },
+        "corridor": 125
+      }
+    },
+    {
+      "check": "667x375 결과 접힘 44px 토글·자연 스크롤 도달",
+      "ok": true,
+      "detail": {
+        "collapsed": true,
+        "toggle": {
+          "left": 603,
+          "top": 20,
+          "right": 647,
+          "bottom": 64,
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        }
+      }
+    },
+    {
+      "check": "667x375 필터·결과 상호배타·pager·결과 action 완전가시·실클릭",
+      "ok": true,
+      "detail": {
+        "filterWhileResultsCollapsed": true,
+        "resultsExpandedFilterClosed": true,
+        "pager": [
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 173.53125,
+            "bottom": 217.53125
+          },
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 173.53125,
+            "bottom": 217.53125
+          }
+        ],
+        "pagerTargetsOk": true,
+        "resultsScroll": {
+          "left": 329,
+          "top": 78,
+          "right": 650,
+          "bottom": 234,
+          "width": 321,
+          "height": 156
+        },
+        "action": {
+          "left": 354,
+          "top": 133.53125,
+          "right": 422.28125,
+          "bottom": 177.53125,
+          "width": 68.28125,
+          "height": 44,
+          "layoutWidth": 68,
+          "layoutHeight": 44
+        },
+        "scrollTop": 2198,
+        "clickable": true,
+        "detailOpen": true
+      }
+    },
+    {
+      "check": "667x375 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "667x375 주요 조작 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 527.5,
+          "height": 44,
+          "layoutWidth": 528,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 48,
+          "height": 44,
+          "layoutWidth": 48,
+          "layoutHeight": 44
+        },
+        {
+          "id": "resultsToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pagePrev",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pageNext",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "667x375 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "667x375 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "640x360 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "search": {
+          "left": 12,
+          "top": 238,
+          "right": 628,
+          "bottom": 344,
+          "width": 616,
+          "height": 106
+        },
+        "results": {
+          "left": 572,
+          "top": 16,
+          "right": 624,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 640,
+          "clientWidth": 640,
+          "height": 360,
+          "clientHeight": 360
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "640x360 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "search": {
+          "left": 12,
+          "top": 238,
+          "right": 628,
+          "bottom": 344,
+          "width": 616,
+          "height": 106
+        },
+        "results": {
+          "left": 572,
+          "top": 16,
+          "right": 624,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 640,
+          "clientWidth": 640,
+          "height": 360,
+          "clientHeight": 360
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "640x360 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "search": {
+          "left": 12,
+          "top": 238,
+          "right": 628,
+          "bottom": 344,
+          "width": 616,
+          "height": 106
+        },
+        "results": {
+          "left": 572,
+          "top": 16,
+          "right": 624,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 640,
+          "clientWidth": 640,
+          "height": 360,
+          "clientHeight": 360
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "640x360 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 640,
+        "clientWidth": 640,
+        "height": 360,
+        "clientHeight": 360
+      }
+    },
+    {
+      "check": "640x360 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "640x360 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 12,
+          "top": 92,
+          "right": 628,
+          "bottom": 284,
+          "width": 616,
+          "height": 192
+        },
+        "filterContent": {
+          "left": 13,
+          "top": 137,
+          "right": 627,
+          "bottom": 283,
+          "width": 614,
+          "height": 146
+        },
+        "results": {
+          "left": 572,
+          "top": 16,
+          "right": 624,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "fullResultsPanel": false,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "exclusive"
+      }
+    },
+    {
+      "check": "640x360 검색 Enter 문서·언어·q 보존",
+      "ok": true,
+      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+    },
+    {
+      "check": "640x360 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
+      "ok": true,
+      "detail": {
+        "brand": {
+          "left": 12,
+          "top": 8,
+          "right": 250,
+          "bottom": 66,
+          "width": 238,
+          "height": 58
+        },
+        "tools": {
+          "left": 72,
+          "top": 80,
+          "right": 166,
+          "bottom": 124,
+          "width": 94,
+          "height": 44
+        },
+        "search": {
+          "left": 12,
+          "top": 238,
+          "right": 628,
+          "bottom": 344,
+          "width": 616,
+          "height": 106
+        },
+        "results": {
+          "left": 572,
+          "top": 16,
+          "right": 624,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 640,
+          "bottom": 360,
+          "width": 640,
+          "height": 360
+        },
+        "attribution": {
+          "left": 16,
+          "top": 213.203125,
+          "right": 265.828125,
+          "bottom": 230,
+          "width": 249.828125,
+          "height": 16.796875
+        },
+        "overlaps": {
+          "toolsBrand": false,
+          "toolsSearch": false,
+          "toolsResultsCollapsed": false,
+          "brandSearch": false
+        },
+        "corridor": 114
+      }
+    },
+    {
+      "check": "640x360 결과 접힘 도구·결과 패널 실제 rect 비겹침",
+      "ok": true,
+      "detail": {
+        "tools": {
+          "left": 72,
+          "top": 80,
+          "right": 166,
+          "bottom": 124,
+          "width": 94,
+          "height": 44
+        },
+        "results": {
+          "left": 572,
+          "top": 16,
+          "right": 624,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "overlap": false
+      }
+    },
+    {
+      "check": "640x360 결과 접힘 44px 토글·자연 스크롤 도달",
+      "ok": true,
+      "detail": {
+        "collapsed": true,
+        "toggle": {
+          "left": 576,
+          "top": 20,
+          "right": 620,
+          "bottom": 64,
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        }
+      }
+    },
+    {
+      "check": "640x360 결과 펼침 도구·결과 패널 비겹침",
+      "ok": true,
+      "detail": {
+        "tools": {
+          "left": 72,
+          "top": 80,
+          "right": 166,
+          "bottom": 124,
+          "width": 94,
+          "height": 44
+        },
+        "results": {
+          "left": 328,
+          "top": 16,
+          "right": 624,
+          "bottom": 220,
+          "width": 296,
+          "height": 204
+        },
+        "overlap": false
+      }
+    },
+    {
+      "check": "640x360 필터·결과 상호배타·pager·결과 action 완전가시·실클릭",
+      "ok": true,
+      "detail": {
+        "filterWhileResultsCollapsed": true,
+        "resultsExpandedFilterClosed": true,
+        "pager": [
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 158.6875,
+            "bottom": 202.6875
+          },
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 158.6875,
+            "bottom": 202.6875
+          }
+        ],
+        "pagerTargetsOk": true,
+        "resultsScroll": {
+          "left": 329,
+          "top": 78,
+          "right": 623,
+          "bottom": 219,
+          "width": 294,
+          "height": 141
+        },
+        "action": {
+          "left": 352,
+          "top": 126.21875,
+          "right": 420.28125,
+          "bottom": 170.21875,
+          "width": 68.28125,
+          "height": 44,
+          "layoutWidth": 68,
+          "layoutHeight": 44
+        },
+        "scrollTop": 2192,
+        "clickable": true,
+        "detailOpen": true
+      }
+    },
+    {
+      "check": "640x360 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "640x360 주요 조작 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 614,
+          "height": 44,
+          "layoutWidth": 614,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "resultsToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pagePrev",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pageNext",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "640x360 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "640x360 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "568x320 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 568,
+          "bottom": 320,
+          "width": 568,
+          "height": 320
+        },
+        "search": {
+          "left": 12,
+          "top": 198,
+          "right": 556,
+          "bottom": 304,
+          "width": 544,
+          "height": 106
+        },
+        "results": {
+          "left": 500,
+          "top": 16,
+          "right": 552,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 568,
+          "clientWidth": 568,
+          "height": 320,
+          "clientHeight": 320
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "568x320 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 568,
+          "bottom": 320,
+          "width": 568,
+          "height": 320
+        },
+        "search": {
+          "left": 12,
+          "top": 198,
+          "right": 556,
+          "bottom": 304,
+          "width": 544,
+          "height": 106
+        },
+        "results": {
+          "left": 500,
+          "top": 16,
+          "right": 552,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 568,
+          "clientWidth": 568,
+          "height": 320,
+          "clientHeight": 320
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "568x320 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 568,
+          "bottom": 320,
+          "width": 568,
+          "height": 320
+        },
+        "search": {
+          "left": 12,
+          "top": 198,
+          "right": 556,
+          "bottom": 304,
+          "width": 544,
+          "height": 106
+        },
+        "results": {
+          "left": 500,
+          "top": 16,
+          "right": 552,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 568,
+          "clientWidth": 568,
+          "height": 320,
+          "clientHeight": 320
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "568x320 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 568,
+        "clientWidth": 568,
+        "height": 320,
+        "clientHeight": 320
+      }
+    },
+    {
+      "check": "568x320 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "568x320 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 12,
+          "top": 92,
+          "right": 556,
+          "bottom": 244,
+          "width": 544,
+          "height": 152
+        },
+        "filterContent": {
+          "left": 13,
+          "top": 137,
+          "right": 555,
+          "bottom": 243,
+          "width": 542,
+          "height": 106
+        },
+        "results": {
+          "left": 500,
+          "top": 16,
+          "right": 552,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "fullResultsPanel": false,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "exclusive"
+      }
+    },
+    {
+      "check": "568x320 검색 Enter 문서·언어·q 보존",
+      "ok": true,
+      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+    },
+    {
+      "check": "568x320 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
+      "ok": true,
+      "detail": {
+        "brand": {
+          "left": 12,
+          "top": 8,
+          "right": 250,
+          "bottom": 66,
+          "width": 238,
+          "height": 58
+        },
+        "tools": {
+          "left": 72,
+          "top": 80,
+          "right": 166,
+          "bottom": 124,
+          "width": 94,
+          "height": 44
+        },
+        "search": {
+          "left": 12,
+          "top": 198,
+          "right": 556,
+          "bottom": 304,
+          "width": 544,
+          "height": 106
+        },
+        "results": {
+          "left": 500,
+          "top": 16,
+          "right": 552,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 568,
+          "bottom": 320,
+          "width": 568,
+          "height": 320
+        },
+        "attribution": {
+          "left": 16,
+          "top": 173.203125,
+          "right": 265.828125,
+          "bottom": 190,
+          "width": 249.828125,
+          "height": 16.796875
+        },
+        "overlaps": {
+          "toolsBrand": false,
+          "toolsSearch": false,
+          "toolsResultsCollapsed": false,
+          "brandSearch": false
+        },
+        "corridor": 74
+      }
+    },
+    {
+      "check": "568x320 결과 접힘 도구·결과 패널 실제 rect 비겹침",
+      "ok": true,
+      "detail": {
+        "tools": {
+          "left": 72,
+          "top": 80,
+          "right": 166,
+          "bottom": 124,
+          "width": 94,
+          "height": 44
+        },
+        "results": {
+          "left": 500,
+          "top": 16,
+          "right": 552,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "overlap": false
+      }
+    },
+    {
+      "check": "568x320 결과 접힘 44px 토글·자연 스크롤 도달",
+      "ok": true,
+      "detail": {
+        "collapsed": true,
+        "toggle": {
+          "left": 504,
+          "top": 20,
+          "right": 548,
+          "bottom": 64,
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        }
+      }
+    },
+    {
+      "check": "568x320 결과 펼침 도구·결과 패널 비겹침",
+      "ok": true,
+      "detail": {
+        "tools": {
+          "left": 72,
+          "top": 80,
+          "right": 166,
+          "bottom": 124,
+          "width": 94,
+          "height": 44
+        },
+        "results": {
+          "left": 328,
+          "top": 16,
+          "right": 552,
+          "bottom": 180,
+          "width": 224,
+          "height": 164
+        },
+        "overlap": false
+      }
+    },
+    {
+      "check": "568x320 필터·결과 상호배타·pager·결과 action 완전가시·실클릭",
+      "ok": true,
+      "detail": {
+        "filterWhileResultsCollapsed": true,
+        "resultsExpandedFilterClosed": true,
+        "pager": [
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 106.96875,
+            "bottom": 150.96875
+          },
+          {
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44,
+            "top": 106.96875,
+            "bottom": 150.96875
+          }
+        ],
+        "pagerTargetsOk": true,
+        "resultsScroll": {
+          "left": 329,
+          "top": 78,
+          "right": 551,
+          "bottom": 179,
+          "width": 222,
+          "height": 101
+        },
+        "action": {
+          "left": 352,
+          "top": 106.75,
+          "right": 420.28125,
+          "bottom": 150.75,
+          "width": 68.28125,
+          "height": 44,
+          "layoutWidth": 68,
+          "layoutHeight": 44
+        },
+        "scrollTop": 2530,
+        "clickable": true,
+        "detailOpen": true
+      }
+    },
+    {
+      "check": "568x320 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "568x320 주요 조작 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 542,
+          "height": 44,
+          "layoutWidth": 542,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "resultsToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pagePrev",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        },
+        {
+          "id": "pageNext",
+          "width": 80,
+          "height": 44,
+          "layoutWidth": 80,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "568x320 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "568x320 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "360x800 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "width": 360,
+          "height": 800
+        },
+        "search": {
+          "left": 12,
+          "top": 678,
+          "right": 348,
+          "bottom": 784,
+          "width": 336,
+          "height": 106
+        },
+        "results": {
+          "left": 292,
+          "top": 16,
+          "right": 344,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 360,
+          "clientWidth": 360,
+          "height": 800,
+          "clientHeight": 800
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "360x800 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "width": 360,
+          "height": 800
+        },
+        "search": {
+          "left": 12,
+          "top": 678,
+          "right": 348,
+          "bottom": 784,
+          "width": 336,
+          "height": 106
+        },
+        "results": {
+          "left": 292,
+          "top": 16,
+          "right": 344,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 360,
+          "clientWidth": 360,
+          "height": 800,
+          "clientHeight": 800
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "360x800 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "width": 360,
+          "height": 800
+        },
+        "search": {
+          "left": 12,
+          "top": 678,
+          "right": 348,
+          "bottom": 784,
+          "width": 336,
+          "height": 106
+        },
+        "results": {
+          "left": 292,
+          "top": 16,
+          "right": 344,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 360,
+          "clientWidth": 360,
+          "height": 800,
+          "clientHeight": 800
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "360x800 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 360,
+        "clientWidth": 360,
+        "height": 800,
+        "clientHeight": 800
+      }
+    },
+    {
+      "check": "360x800 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "360x800 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 12,
+          "top": 134,
+          "right": 348,
+          "bottom": 724,
+          "width": 336,
+          "height": 590
+        },
+        "filterContent": {
+          "left": 13,
+          "top": 179,
+          "right": 347,
+          "bottom": 723,
+          "width": 334,
+          "height": 544
+        },
+        "results": {
+          "left": 292,
+          "top": 16,
+          "right": 344,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "fullResultsPanel": false,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "exclusive"
+      }
+    },
+    {
+      "check": "360x800 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "360x800 필터 open·Reset 포함 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 334,
+          "height": 44,
+          "layoutWidth": 334,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "resultsToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "360x800 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "360x800 필드 라벨·오류 안내·Leaflet 저작권 보존",
+      "ok": true,
+      "detail": {
+        "labels": true,
+        "errors": true,
+        "attribution": true,
+        "locateStatus": true
+      }
+    },
+    {
+      "check": "360x800 결과 기본 접힘·우측 drawer·지도 56px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 360,
+          "bottom": 800,
+          "width": 360,
+          "height": 800
+        },
+        "search": {
+          "left": 12,
+          "top": 678,
+          "right": 348,
+          "bottom": 784,
+          "width": 336,
+          "height": 106
+        },
+        "results": {
+          "left": 292,
+          "top": 16,
+          "right": 344,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 360,
+          "clientWidth": 360,
+          "height": 800,
+          "clientHeight": 800
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "360x800 필터 요약 키보드 초점 표시",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "360x800 조건 팝업 키보드 open/close·초점 복원",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "360x800 drawer·필터 배타·다중 페이지·pager 44px 타깃",
+      "ok": true,
+      "detail": {
+        "drawerOpen": true,
+        "filterClosed": true,
+        "multiplePages": true,
+        "filterTargets": [
+          {
+            "id": "locateBtn",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "languageToggle",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "filterToggle",
+            "width": 334,
+            "height": 44,
+            "layoutWidth": 334,
+            "layoutHeight": 44
+          },
+          {
+            "id": "reset",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "resultsToggle",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          }
+        ],
+        "resultTargets": [
+          {
+            "id": "locateBtn",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "languageToggle",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "resultsToggle",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "pagePrev",
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44
+          },
+          {
+            "id": "pageNext",
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44
+          }
+        ]
+      }
+    },
+    {
+      "check": "360x800 확장 결과 drawer 지도 chrome 비가림",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "360x800 모바일 조건·결과 상호배타 확장",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "360x800 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "390x844 지도 전체 뷰포트",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "search": {
+          "left": 12,
+          "top": 722,
+          "right": 378,
+          "bottom": 828,
+          "width": 366,
+          "height": 106
+        },
+        "results": {
+          "left": 322,
+          "top": 16,
+          "right": 374,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 390,
+          "clientWidth": 390,
+          "height": 844,
+          "clientHeight": 844
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "390x844 하단 중앙 검색 dock 12–24px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "search": {
+          "left": 12,
+          "top": 722,
+          "right": 378,
+          "bottom": 828,
+          "width": 366,
+          "height": 106
+        },
+        "results": {
+          "left": 322,
+          "top": 16,
+          "right": 374,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 390,
+          "clientWidth": 390,
+          "height": 844,
+          "clientHeight": 844
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "390x844 우측 결과·내부 스크롤",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "search": {
+          "left": 12,
+          "top": 722,
+          "right": 378,
+          "bottom": 828,
+          "width": 366,
+          "height": 106
+        },
+        "results": {
+          "left": 322,
+          "top": 16,
+          "right": 374,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 390,
+          "clientWidth": 390,
+          "height": 844,
+          "clientHeight": 844
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "390x844 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": {
+        "width": 390,
+        "clientWidth": 390,
+        "height": 844,
+        "clientHeight": 844
+      }
+    },
+    {
+      "check": "390x844 명시적 UI DOM hooks",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "390x844 필터·결과 실제 패널 비겹침/모바일 상호배타",
+      "ok": true,
+      "detail": {
+        "filter": {
+          "left": 12,
+          "top": 148.09375,
+          "right": 378,
+          "bottom": 768.0,
+          "width": 366,
+          "height": 619.90625
+        },
+        "filterContent": {
+          "left": 13,
+          "top": 193.09375,
+          "right": 377,
+          "bottom": 767.0,
+          "width": 364,
+          "height": 573.90625
+        },
+        "results": {
+          "left": 322,
+          "top": 16,
+          "right": 374,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "fullResultsPanel": false,
+        "resultsCollapsed": "true",
+        "resultsAriaExpanded": "false",
+        "overlap": false,
+        "contentOverlap": false,
+        "mode": "exclusive"
+      }
+    },
+    {
+      "check": "390x844 검색 Enter 문서·언어·q 보존",
+      "ok": true,
+      "detail": "http://127.0.0.1:49412/?q=%EA%B0%80%EC%A1%B1"
+    },
+    {
+      "check": "390x844 cream surface alpha·양쪽 배경 대비",
+      "ok": true,
+      "detail": [
+        {
+          "selector": "#searchDock .search-label input",
+          "background": "rgba(255, 253, 248, 0.98)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.98,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#filterMenu",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": "#resultsPanel",
+          "background": "rgba(255, 253, 248, 0.97)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.97,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        },
+        {
+          "selector": ".leaflet-control-attribution",
+          "background": "rgba(255, 253, 248, 0.92)",
+          "bg": [
+            255,
+            253,
+            248
+          ],
+          "alpha": 0.92,
+          "opacity": "1",
+          "text": [
+            25,
+            60,
+            53
+          ]
+        }
+      ]
+    },
+    {
+      "check": "390x844 필터 open·Reset 포함 44px 타깃",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "filterToggle",
+          "width": 364,
+          "height": 44,
+          "layoutWidth": 364,
+          "layoutHeight": 44
+        },
+        {
+          "id": "reset",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "resultsToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        }
+      ]
+    },
+    {
+      "check": "390x844 visible Leaflet marker 44px pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "390x844 필드 라벨·오류 안내·Leaflet 저작권 보존",
+      "ok": true,
+      "detail": {
+        "labels": true,
+        "errors": true,
+        "attribution": true,
+        "locateStatus": true
+      }
+    },
+    {
+      "check": "390x844 결과 기본 접힘·우측 drawer·지도 56px",
+      "ok": true,
+      "detail": {
+        "map": {
+          "left": 0,
+          "top": 0,
+          "right": 390,
+          "bottom": 844,
+          "width": 390,
+          "height": 844
+        },
+        "search": {
+          "left": 12,
+          "top": 722,
+          "right": 378,
+          "bottom": 828,
+          "width": 366,
+          "height": 106
+        },
+        "results": {
+          "left": 322,
+          "top": 16,
+          "right": 374,
+          "bottom": 68,
+          "width": 52,
+          "height": 52
+        },
+        "doc": {
+          "width": 390,
+          "clientWidth": 390,
+          "height": 844,
+          "clientHeight": 844
+        },
+        "collapsed": "true",
+        "expanded": "false",
+        "resultsOverflow": "auto"
+      }
+    },
+    {
+      "check": "390x844 필터 요약 키보드 초점 표시",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "390x844 조건 팝업 키보드 open/close·초점 복원",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "390x844 drawer·필터 배타·다중 페이지·pager 44px 타깃",
+      "ok": true,
+      "detail": {
+        "drawerOpen": true,
+        "filterClosed": true,
+        "multiplePages": true,
+        "filterTargets": [
+          {
+            "id": "locateBtn",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "languageToggle",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "filterToggle",
+            "width": 364,
+            "height": 44,
+            "layoutWidth": 364,
+            "layoutHeight": 44
+          },
+          {
+            "id": "reset",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "resultsToggle",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          }
+        ],
+        "resultTargets": [
+          {
+            "id": "locateBtn",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "languageToggle",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "resultsToggle",
+            "width": 44,
+            "height": 44,
+            "layoutWidth": 44,
+            "layoutHeight": 44
+          },
+          {
+            "id": "pagePrev",
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44
+          },
+          {
+            "id": "pageNext",
+            "width": 80,
+            "height": 44,
+            "layoutWidth": 80,
+            "layoutHeight": 44
+          }
+        ]
+      }
+    },
+    {
+      "check": "390x844 확장 결과 drawer 지도 chrome 비가림",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "390x844 모바일 조건·결과 상호배타 확장",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "390x844 reduced-transparency 불투명·blur 해제",
+      "ok": true,
+      "detail": {
+        "mediaMatches": true,
+        "surfaces": [
+          {
+            "selector": "#searchDock .search-label input",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#filterMenu",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": "#resultsPanel",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          },
+          {
+            "selector": ".leaflet-control-attribution",
+            "background": "rgb(255, 253, 248)",
+            "alpha": 1,
+            "blur": "none",
+            "opacity": "1"
+          }
+        ]
+      }
+    },
+    {
+      "check": "locales.json 503 lang=en도 KO baked UI·명확한 한영 오류·키 누출 없음",
+      "ok": true,
+      "detail": {
+        "lang": "en",
+        "loadedFalse": true,
+        "errorRole": "alert",
+        "errorText": "행사 정보를 불러오지 못했어요.\n\n잠시 후 다시 시도해 주세요. Could not load language data. Please reload.\n\n다시 불러오기",
+        "freshness": "번역 설정을 불러오지 못했어요.",
+        "resultHint": "잠시 후 다시 시도해 주세요.",
+        "resultsTitle": "아이와 갈 행사",
+        "searchLabel": "\n          무엇을 찾나요?\n          \n        ",
+        "dynamicKeys": [],
+        "filterOpen": false,
+        "bodyHasKorean": true,
+        "errorReachable": true,
+        "retryReachable": true,
+        "errorBox": {
+          "left": 339,
+          "top": 90,
+          "right": 613,
+          "bottom": 227.875,
+          "width": 274,
+          "height": 137.875
+        },
+        "retryBox": {
+          "left": 352,
+          "top": 170.875,
+          "right": 453.015625,
+          "bottom": 214.875,
+          "width": 101.015625,
+          "height": 44
+        },
+        "filterBox": {
+          "left": 13,
+          "top": 239,
+          "right": 627,
+          "bottom": 283,
+          "width": 614,
+          "height": 44
+        }
+      }
+    },
+    {
+      "check": "정적 상세 locales.json 503도 원문·KO baked 라벨 보존",
+      "ok": true,
+      "detail": {
+        "lang": "en",
+        "loadedFalse": true,
+        "heading": "서울 어린이 여름 음악축제",
+        "schedule": "일정: ",
+        "bodyHasKorean": true,
+        "dynamicKeys": []
+      }
+    },
+    {
+      "check": "정적 상세 부분 locales 누락을 KO·EN에서 원문·baked 라벨·상태와 유효 번역으로 보존",
+      "ok": true,
+      "detail": {
+        "ko": {
+          "lang": "ko",
+          "loaded": true,
+          "title": "서울 어린이 여름 음악축제",
+          "region": "지역: 서울특별시",
+          "venue": "장소: 정보 없음",
+          "address": "주소: 정보 없음",
+          "status": "오픈",
+          "statusKey": "status.open",
+          "back": "← 전체 행사 보기",
+          "dynamicKeys": [],
+          "bodyHasKorean": true
+        },
+        "en": {
+          "lang": "en",
+          "loaded": true,
+          "title": "서울 어린이 여름 음악축제",
+          "region": "지역: 서울특별시",
+          "venue": "장소: 정보 없음",
+          "address": "Address: 정보 없음",
+          "status": "오픈",
+          "statusKey": "status.open",
+          "back": "← Back to all events",
+          "dynamicKeys": [],
+          "bodyHasKorean": true
+        }
+      }
+    },
+    {
+      "check": "KO 초기 html/API·동일 fixture 원문 행사값",
+      "ok": true,
+      "detail": {
+        "rendered": {
+          "lang": "ko",
+          "api": true,
+          "title": "아이와 갈 행사",
+          "name": "부산 가족 만들기 체험",
+          "location": "부산광역시 해운대구",
+          "originalHref": ""
+        },
+        "expected": {
+          "name": "부산 가족 만들기 체험",
+          "location": "부산광역시 해운대구",
+          "originalHref": ""
+        }
+      }
+    },
+    {
+      "check": "KO visible Leaflet marker pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "2쪽 결과 접힘→펼침이 같은 semantic page·range·canonical title/href를 보존",
+      "ok": true,
+      "detail": {
+        "before": {
+          "text": "2 / 4 페이지 (전체 17건 중 6–10번째)",
+          "current": 2,
+          "total": 4,
+          "from": 6,
+          "to": 10,
+          "resultCount": 17,
+          "rowCount": 5,
+          "titles": [
+            "서울 카탈로그 행사 3",
+            "서울 카탈로그 행사 4",
+            "서울 카탈로그 행사 5",
+            "서울 카탈로그 행사 6",
+            "서울 카탈로그 행사 7"
+          ],
+          "hrefs": [
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active"
+          ]
+        },
+        "after": {
+          "text": "2 / 4 페이지 (전체 17건 중 6–10번째)",
+          "current": 2,
+          "total": 4,
+          "from": 6,
+          "to": 10,
+          "resultCount": 17,
+          "rowCount": 5,
+          "titles": [
+            "서울 카탈로그 행사 3",
+            "서울 카탈로그 행사 4",
+            "서울 카탈로그 행사 5",
+            "서울 카탈로그 행사 6",
+            "서울 카탈로그 행사 7"
+          ],
+          "hrefs": [
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active"
+          ]
+        },
+        "canonicalHrefs": {
+          "서울 어린이 여름 음악축제": "https://www.busan.go.kr/active",
+          "서울 유료 어린이 축제": "",
+          "서울 지난 가족 음악축제": "https://www.busan.go.kr/ended",
+          "서울 시작일 지난 가족 음악축제": "https://www.busan.go.kr/start-only-ended",
+          "서울 미래 가족 음악축제": "https://www.busan.go.kr/future-closed",
+          "서울 카탈로그 행사 1": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 2": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 3": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 4": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 5": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 6": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 7": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 8": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 9": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 10": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 11": "https://www.busan.go.kr/active",
+          "서울 카탈로그 행사 12": "https://www.busan.go.kr/active"
+        }
+      }
+    },
+    {
+      "check": "페이지네이션은 semantic 현재·전체 쪽과 canonical 행 identity/count/range를 보존",
+      "ok": true,
+      "detail": {
+        "before": {
+          "text": "1 / 4 페이지 (전체 17건 중 1–5번째)",
+          "current": 1,
+          "total": 4,
+          "from": 1,
+          "to": 5,
+          "resultCount": 17,
+          "rowCount": 5,
+          "titles": [
+            "서울 유료 어린이 축제",
+            "서울 미래 가족 음악축제",
+            "서울 어린이 여름 음악축제",
+            "서울 카탈로그 행사 1",
+            "서울 카탈로그 행사 2"
+          ],
+          "hrefs": [
+            "https://www.busan.go.kr/booking-paid",
+            "https://www.busan.go.kr/future-closed",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active"
+          ]
+        },
+        "after": {
+          "text": "2 / 4 페이지 (전체 17건 중 6–10번째)",
+          "current": 2,
+          "total": 4,
+          "from": 6,
+          "to": 10,
+          "resultCount": 17,
+          "rowCount": 5,
+          "titles": [
+            "서울 카탈로그 행사 3",
+            "서울 카탈로그 행사 4",
+            "서울 카탈로그 행사 5",
+            "서울 카탈로그 행사 6",
+            "서울 카탈로그 행사 7"
+          ],
+          "hrefs": [
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active"
+          ]
+        }
+      }
+    },
+    {
+      "check": "페이지네이션을 실제로 2쪽으로 이동",
+      "ok": true,
+      "detail": {
+        "drawerOpen": true,
+        "before": {
+          "text": "1 / 4 페이지 (전체 17건 중 1–5번째)",
+          "current": 1,
+          "total": 4,
+          "from": 1,
+          "to": 5,
+          "resultCount": 17,
+          "rowCount": 5,
+          "titles": [
+            "서울 유료 어린이 축제",
+            "서울 미래 가족 음악축제",
+            "서울 어린이 여름 음악축제",
+            "서울 카탈로그 행사 1",
+            "서울 카탈로그 행사 2"
+          ],
+          "hrefs": [
+            "https://www.busan.go.kr/booking-paid",
+            "https://www.busan.go.kr/future-closed",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active"
+          ]
+        },
+        "after": {
+          "text": "2 / 4 페이지 (전체 17건 중 6–10번째)",
+          "current": 2,
+          "total": 4,
+          "from": 6,
+          "to": 10,
+          "resultCount": 17,
+          "rowCount": 5,
+          "titles": [
+            "서울 카탈로그 행사 3",
+            "서울 카탈로그 행사 4",
+            "서울 카탈로그 행사 5",
+            "서울 카탈로그 행사 6",
+            "서울 카탈로그 행사 7"
+          ],
+          "hrefs": [
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active"
+          ]
+        }
+      }
+    },
+    {
+      "check": "KO→EN 토글이 semantic 페이지·행 identity/count·필터·지도·원문·href 보존",
+      "ok": true,
+      "detail": {
+        "before": {
+          "query": "?lang=ko&q=%EA%B0%80%EC%A1%B1&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C",
+          "center": {
+            "lat": 37.55,
+            "lng": 126.95
+          },
+          "zoom": 9,
+          "name": "서울 카탈로그 행사 3",
+          "locationText": "서울특별시 종로구",
+          "href": "https://www.busan.go.kr/active",
+          "pager": {
+            "text": "2 / 4 페이지 (전체 17건 중 6–10번째)",
+            "current": 2,
+            "total": 4,
+            "from": 6,
+            "to": 10,
+            "resultCount": 17,
+            "rowCount": 5,
+            "titles": [
+              "서울 카탈로그 행사 3",
+              "서울 카탈로그 행사 4",
+              "서울 카탈로그 행사 5",
+              "서울 카탈로그 행사 6",
+              "서울 카탈로그 행사 7"
+            ],
+            "hrefs": [
+              "https://www.busan.go.kr/active",
+              "https://www.busan.go.kr/active",
+              "https://www.busan.go.kr/active",
+              "https://www.busan.go.kr/active",
+              "https://www.busan.go.kr/active"
+            ]
+          }
+        },
+        "after": {
+          "lang": "en",
+          "query": "?lang=en&q=%EA%B0%80%EC%A1%B1&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C",
+          "center": {
+            "lat": 37.55,
+            "lng": 126.95
+          },
+          "zoom": 9,
+          "title": "Family events",
+          "name": "서울 카탈로그 행사 3",
+          "locationText": "Seoul 종로구",
+          "href": "https://www.busan.go.kr/active",
+          "pager": {
+            "text": "Page 2 of 4 (6–10 of 17)",
+            "current": 2,
+            "total": 4,
+            "from": 6,
+            "to": 10,
+            "resultCount": 17,
+            "rowCount": 5,
+            "titles": [
+              "서울 카탈로그 행사 3",
+              "서울 카탈로그 행사 4",
+              "서울 카탈로그 행사 5",
+              "서울 카탈로그 행사 6",
+              "서울 카탈로그 행사 7"
+            ],
+            "hrefs": [
+              "https://www.busan.go.kr/active",
+              "https://www.busan.go.kr/active",
+              "https://www.busan.go.kr/active",
+              "https://www.busan.go.kr/active",
+              "https://www.busan.go.kr/active"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "check": "EN 토글 뒤 q 필터 변경이 URL·semantic 페이지·canonical 행 identity/count/range에 반영",
+      "ok": true,
+      "detail": {
+        "url": "http://127.0.0.1:49412/?lang=en&q=%EC%84%9C%EC%9A%B8&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C",
+        "state": {
+          "text": "Page 1 of 4 (1–5 of 17)",
+          "current": 1,
+          "total": 4,
+          "from": 1,
+          "to": 5,
+          "resultCount": 17,
+          "rowCount": 5,
+          "titles": [
+            "서울 어린이 여름 음악축제",
+            "서울 유료 어린이 축제",
+            "서울 미래 가족 음악축제",
+            "서울 카탈로그 행사 1",
+            "서울 카탈로그 행사 2"
+          ],
+          "hrefs": [
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/booking-paid",
+            "https://www.busan.go.kr/future-closed",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active"
+          ]
+        }
+      }
+    },
+    {
+      "check": "EN 상세는 현재 렌더 카드의 canonical 원문 이름·언어 고지를 보존",
+      "ok": true,
+      "detail": {
+        "notice": "Event information is shown in its source language.",
+        "renderedCard": {
+          "name": "서울 어린이 여름 음악축제",
+          "href": "https://www.busan.go.kr/active"
+        },
+        "canonical": "서울 어린이 여름 음악축제",
+        "title": "서울 어린이 여름 음악축제"
+      }
+    },
+    {
+      "check": "EN visible Leaflet marker pointer target",
+      "ok": true,
+      "detail": [
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        },
+        {
+          "width": 44,
+          "height": 48,
+          "pointer": "auto"
+        }
+      ]
+    },
+    {
+      "check": "EN URL·저장 언어 reload 복원",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "저장 언어가 lang 없는 clean URL에서도 EN·번역 UI 복원",
+      "ok": true,
+      "detail": {
+        "lang": "en",
+        "saved": "en",
+        "title": "Family events",
+        "hasLangParam": false
+      }
+    },
+    {
+      "check": "EN→KO pointer 토글",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "종료 카드 날짜 취소선·붉은 종료 텍스트",
+      "ok": true,
+      "detail": {
+        "text": "서울 지난 가족 음악축제\n서울특별시 종로구\n2026년 10월 1일 ~ 2026년 10월 14일\n대상 7-13\n무료\n아이와 함께어린이무료종료행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기",
+        "decoration": "line-through",
+        "color": [
+          180,
+          35,
+          50
+        ],
+        "badges": [
+          "종료"
+        ]
+      }
+    },
+    {
+      "check": "종료 지도 native popup 날짜·붉은 종료 텍스트",
+      "ok": true,
+      "detail": {
+        "text": "서울 지난 가족 음악축제\n서울특별시 · 2026년 10월 1일 ~ 2026년 10월 14일\n서울특별시 종로구 가족로 1\n종료\n아이와 함께\n무료\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n×",
+        "decoration": "line-through",
+        "color": [
+          180,
+          35,
+          50
+        ],
+        "nativeTrace": [
+          {
+            "type": "zoomstart",
+            "zoom": 7,
+            "center": {
+              "lat": 36.2265501474709,
+              "lng": 128.07861328125003
+            }
+          },
+          {
+            "type": "zoomend",
+            "zoom": 8,
+            "center": {
+              "lat": 36.2265501474709,
+              "lng": 128.07861328125003
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 8,
+            "center": {
+              "lat": 36.2265501474709,
+              "lng": 128.07861328125003
+            }
+          },
+          {
+            "type": "dragstart",
+            "zoom": 8,
+            "center": {
+              "lat": 36.2265501474709,
+              "lng": 128.07861328125003
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 8,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomstart",
+            "zoom": 8,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomend",
+            "zoom": 9,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 9,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomstart",
+            "zoom": 9,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomend",
+            "zoom": 10,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 10,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomstart",
+            "zoom": 10,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomend",
+            "zoom": 11,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 11,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomstart",
+            "zoom": 11,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomend",
+            "zoom": 12,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 12,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomstart",
+            "zoom": 12,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "zoomend",
+            "zoom": 13,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 13,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "dragstart",
+            "zoom": 13,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 13,
+            "center": {
+              "lat": 37.57777997765864,
+              "lng": 126.95491790771486
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 13,
+            "center": {
+              "lat": 37.57791602367412,
+              "lng": 126.95491790771486
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 13,
+            "center": {
+              "lat": 37.57805206944101,
+              "lng": 126.95491790771486
+            }
+          },
+          {
+            "type": "moveend",
+            "zoom": 13,
+            "center": {
+              "lat": 37.59369567458082,
+              "lng": 126.95543289184572
+            }
+          }
+        ],
+        "markerIterations": [
+          {
+            "label": "beforeCenter",
+            "zoom": 7,
+            "center": {
+              "lat": 36.2265501474709,
+              "lng": 128.07861328125003
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 71,
+              "top": 225,
+              "right": 115,
+              "bottom": 273
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 93,
+            "y": 249,
+            "hitTitle": "서울 카탈로그 행사 1",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterCenter",
+            "zoom": 7,
+            "center": {
+              "lat": 36.2265501474709,
+              "lng": 128.07861328125003
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 71,
+              "top": 225,
+              "right": 115,
+              "bottom": 273
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 93,
+            "y": 249,
+            "hitTitle": "서울 카탈로그 행사 1",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "beforeZoom",
+            "zoom": 7,
+            "center": {
+              "lat": 36.2265501474709,
+              "lng": 128.07861328125003
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 71,
+              "top": 225,
+              "right": 115,
+              "bottom": 273
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 93,
+            "y": 249,
+            "hitTitle": "서울 카탈로그 행사 1",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterZoom",
+            "zoom": 8,
+            "center": {
+              "lat": 36.2265501474709,
+              "lng": 128.07861328125003
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": -32,
+              "top": 71,
+              "right": 12,
+              "bottom": 119
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": -10,
+            "y": 95,
+            "hitTitle": "",
+            "hitClass": ""
+          },
+          {
+            "label": "afterCenter",
+            "zoom": 8,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 173,
+              "top": 398,
+              "right": 217,
+              "bottom": 446
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 195,
+            "y": 422,
+            "hitTitle": "서울 카탈로그 행사 1",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "beforeZoom",
+            "zoom": 8,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 173,
+              "top": 398,
+              "right": 217,
+              "bottom": 446
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 195,
+            "y": 422,
+            "hitTitle": "서울 카탈로그 행사 1",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterZoom",
+            "zoom": 9,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 174,
+              "top": 418,
+              "right": 218,
+              "bottom": 466
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 196,
+            "y": 442,
+            "hitTitle": "서울 카탈로그 행사 4",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterCenter",
+            "zoom": 9,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 174,
+              "top": 418,
+              "right": 218,
+              "bottom": 466
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 196,
+            "y": 442,
+            "hitTitle": "서울 카탈로그 행사 4",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "beforeZoom",
+            "zoom": 9,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 174,
+              "top": 418,
+              "right": 218,
+              "bottom": 466
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 196,
+            "y": 442,
+            "hitTitle": "서울 카탈로그 행사 4",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterZoom",
+            "zoom": 10,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 175,
+              "top": 458,
+              "right": 219,
+              "bottom": 506
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 197,
+            "y": 482,
+            "hitTitle": "서울 카탈로그 행사 6",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterCenter",
+            "zoom": 10,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 175,
+              "top": 458,
+              "right": 219,
+              "bottom": 506
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 197,
+            "y": 482,
+            "hitTitle": "서울 카탈로그 행사 6",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "beforeZoom",
+            "zoom": 10,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 175,
+              "top": 458,
+              "right": 219,
+              "bottom": 506
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 197,
+            "y": 482,
+            "hitTitle": "서울 카탈로그 행사 6",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterZoom",
+            "zoom": 11,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 177,
+              "top": 538,
+              "right": 221,
+              "bottom": 586
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 199,
+            "y": 562,
+            "hitTitle": "서울 카탈로그 행사 8",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterCenter",
+            "zoom": 11,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 177,
+              "top": 538,
+              "right": 221,
+              "bottom": 586
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 199,
+            "y": 562,
+            "hitTitle": "서울 카탈로그 행사 8",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "beforeZoom",
+            "zoom": 11,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 177,
+              "top": 538,
+              "right": 221,
+              "bottom": 586
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 199,
+            "y": 562,
+            "hitTitle": "서울 카탈로그 행사 8",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          },
+          {
+            "label": "afterZoom",
+            "zoom": 12,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 180,
+              "top": 698,
+              "right": 224,
+              "bottom": 746
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 202,
+            "y": 722,
+            "hitTitle": "",
+            "hitClass": ""
+          },
+          {
+            "label": "afterCenter",
+            "zoom": 12,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 180,
+              "top": 698,
+              "right": 224,
+              "bottom": 746
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 202,
+            "y": 722,
+            "hitTitle": "",
+            "hitClass": ""
+          },
+          {
+            "label": "beforeZoom",
+            "zoom": 12,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 180,
+              "top": 698,
+              "right": 224,
+              "bottom": 746
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 202,
+            "y": 722,
+            "hitTitle": "",
+            "hitClass": ""
+          },
+          {
+            "label": "afterZoom",
+            "zoom": 13,
+            "center": {
+              "lat": 37.66208079655377,
+              "lng": 126.95251464843751
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 187,
+              "top": 1018,
+              "right": 231,
+              "bottom": 1066
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 209,
+            "y": 1042,
+            "hitTitle": "",
+            "hitClass": ""
+          },
+          {
+            "label": "afterCenter",
+            "zoom": 13,
+            "center": {
+              "lat": 37.57777997765864,
+              "lng": 126.95491790771486
+            },
+            "maxZoom": 18,
+            "rect": {
+              "left": 173,
+              "top": 398,
+              "right": 217,
+              "bottom": 446
+            },
+            "mapRect": {
+              "left": 0,
+              "top": 0,
+              "right": 390,
+              "bottom": 844
+            },
+            "x": 195,
+            "y": 422,
+            "hitTitle": "서울 지난 가족 음악축제",
+            "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
+          }
+        ]
+      }
+    },
+    {
+      "check": "종료 native 상세 날짜·붉은 종료 텍스트",
+      "ok": true,
+      "detail": {
+        "text": "닫기\n서울 지난 가족 음악축제\n\n원문 행사 설명을 보존하는 종료 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 서울특별시 종로구 가족로 1\n일정: 2026년 10월 1일 ~ 2026년 10월 14일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n신청 마감: 2026년 12월 31일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n공유용 상세",
+        "decoration": "line-through",
+        "color": [
+          180,
+          35,
+          50
+        ]
+      }
+    },
+    {
+      "check": "종료일 없는 과거 시작일 카드도 종료 취소선·붉은 텍스트",
+      "ok": true,
+      "detail": {
+        "text": "서울 시작일 지난 가족 음악축제\n서울특별시 종로구\n2026년 10월 1일\n대상 7-13\n무료\n아이와 함께어린이무료종료행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기",
+        "decoration": "line-through",
+        "color": [
+          180,
+          35,
+          50
+        ]
+      }
+    },
+    {
+      "check": "종료일 없는 과거 시작일 native popup도 종료",
+      "ok": true,
+      "detail": {
+        "text": "서울 시작일 지난 가족 음악축제\n서울특별시 · 2026년 10월 1일\n종료\n아이와 함께\n무료\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n×",
+        "decoration": "line-through"
+      }
+    },
+    {
+      "check": "종료일 없는 과거 시작일 native 상세도 종료",
+      "ok": true,
+      "detail": {
+        "text": "닫기\n서울 시작일 지난 가족 음악축제\n\n종료일 없는 과거 시작일 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 정보 없음\n일정: 2026년 10월 1일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n신청 마감: 2026년 12월 31일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n공유용 상세",
+        "decoration": "line-through"
+      }
+    },
+    {
+      "check": "신청마감 미래 행사 카드는 신청마감 배지·종료 취소선 금지",
+      "ok": true,
+      "detail": {
+        "text": "서울 미래 가족 음악축제\n서울특별시 종로구\n2026년 11월 1일 ~ 2026년 11월 30일\n대상 7-13\n무료\n아이와 함께어린이무료마감행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기",
+        "decoration": "none",
+        "badges": [
+          "아이와 함께",
+          "어린이",
+          "무료",
+          "마감",
+          "행사",
+          "축제"
+        ]
+      }
+    },
+    {
+      "check": "신청마감 미래 지도 popup은 신청마감 배지·종료 취소선 금지",
+      "ok": true,
+      "detail": {
+        "text": "서울 미래 가족 음악축제\n서울특별시 · 2026년 11월 1일 ~ 2026년 11월 30일\n마감\n아이와 함께\n무료\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기\n×",
+        "decoration": "none"
+      }
+    },
+    {
+      "check": "신청마감 미래 native 상세는 종료 아님",
+      "ok": true,
+      "detail": {
+        "text": "닫기\n서울 미래 가족 음악축제\n\n미래 행사지만 신청만 마감된 원문 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 정보 없음\n일정: 2026년 11월 1일 ~ 2026년 11월 30일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 마감\n주최: 정보 없음\n신청 마감: 2026년 10월 14일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기\n공유용 상세",
+        "decoration": "none",
+        "closed": 1,
+        "ended": 0
+      }
+    },
+    {
+      "check": "종료일 없는 과거 시작일 정적 상세도 종료 안내",
+      "ok": true,
+      "detail": {
+        "text": "View in English\n서울 시작일 지난 가족 음악축제\n\n🗓 일정: 2026-10-01 종료\n\n상태: 종료\n\n지역: 서울특별시\n\n장소: 정보 없음\n\n주소: 정보 없음\n\n대상 연령: 7-13\n\n비용: 무료\n\n소요시간: 정보 없음\n\n주최: 정보 없음\n\n신청 마감: 2026-12-31\n\n종료일 없는 과거 시작일 행사\n\n행사 정보는 출처에서 제공한 원문으로 표시합니다.\n\n출처: https://fixture/start-only-ended\n\n연결 차단 신뢰 도메인 아님\n\n예매처에서 확인 연결 차단 원본 URL 없음\n\n← 전체 행사 보기",
+        "decoration": "line-through",
+        "color": [
+          180,
+          35,
+          24
+        ]
+      }
+    },
+    {
+      "check": "종료 정적 상세 날짜·붉은 종료 안내",
+      "ok": true,
+      "detail": {
+        "text": "View in English\n서울 지난 가족 음악축제\n\n🗓 일정: 2026-10-01 ~ 2026-10-14 종료\n\n상태: 종료\n\n지역: 서울특별시\n\n장소: 정보 없음\n\n주소: 서울특별시 종로구 가족로 1\n\n대상 연령: 7-13\n\n비용: 무료\n\n소요시간: 정보 없음\n\n주최: 정보 없음\n\n신청 마감: 2026-12-31\n\n원문 행사 설명을 보존하는 종료 행사\n\n행사 정보는 출처에서 제공한 원문으로 표시합니다.\n\n출처: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303302\n\n공식 정보 보기 연결 확인\n\n예매처에서 확인 예매 사이트 바로가기 연결 확인\n\n← 전체 행사 보기",
+        "decoration": "line-through",
+        "color": [
+          180,
+          35,
+          24
+        ]
+      }
+    },
+    {
+      "check": "360x800 정적 상세 마지막 액션 스크롤·44px 레이아웃·포인터 가능",
+      "ok": true,
+      "detail": {
+        "box": {
+          "left": 124.890625,
+          "top": 713.96875,
+          "right": 281.828125,
+          "bottom": 757.96875,
+          "width": 156.9375,
+          "height": 44,
+          "layoutWidth": 157,
+          "layoutHeight": 44
+        },
+        "clickable": true,
+        "touch": true
+      }
+    },
+    {
+      "check": "360x800 정적 상세 EN 공식 정보·예매 라벨·원문 링크·44px 언어 토글",
+      "ok": true,
+      "detail": {
+        "toggle": {
+          "left": 20,
+          "top": 52,
+          "right": 144.28125,
+          "bottom": 96,
+          "width": 124.28125,
+          "height": 44,
+          "layoutWidth": 124,
+          "layoutHeight": 44
+        },
+        "text": "Source: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303302\n\nOfficial info Link verified\n\nConfirm with the ticketing site Go to booking site Link verified",
+        "source": "Source: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303302",
+        "infoHref": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303302",
+        "bookingHref": "https://www.ticketlink.co.kr/product/66233"
+      }
+    },
+    {
+      "check": "360x800 정적 상세 EN 원문 주소·일정·언어 고지 보존",
+      "ok": true,
+      "detail": {
+        "address": "Address: 서울특별시 종로구 가족로 1",
+        "schedule": "Schedule: ",
+        "notice": "Event information is shown in its source language."
+      }
+    },
+    {
+      "check": "360x800 정적 상세 긴 KOPIS 원문 URL 요소 줄바꿈·민감도·가로 overflow 없음",
+      "ok": true,
+      "detail": {
+        "source": "Source: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303302",
+        "overflow": {
+          "bodyScrollWidth": 360,
+          "bodyClientWidth": 360,
+          "viewport": 360,
+          "before": {
+            "scrollWidth": 320,
+            "clientWidth": 320,
+            "right": 340
+          },
+          "unwrapped": {
+            "scrollWidth": 389,
+            "clientWidth": 320,
+            "right": 340
+          },
+          "sensitivity": true,
+          "restored": {
+            "scrollWidth": 320,
+            "clientWidth": 320,
+            "right": 340
+          }
+        }
+      }
+    },
+    {
+      "check": "신청마감 미래 정적 상세는 종료 아님",
+      "ok": true,
+      "detail": {
+        "text": "한국어로 보기\n서울 미래 가족 음악축제\n\n🗓 Schedule: 2026-11-01 ~ 2026-11-30\n\nStatus: Application closed\n\nRegion: 서울특별시\n\nVenue: 정보 없음\n\nAddress: 정보 없음\n\nAge: 7-13\n\nCost: 무료\n\nDuration: 정보 없음\n\nOrganizer: 정보 없음\n\nApplication deadline: 2026-10-14\n\n미래 행사지만 신청만 마감된 원문 행사\n\nEvent information is shown in its source language.\n\nSource: https://fixture/music\n\nLink blocked 신뢰 도메인 아님\n\nConfirm with the ticketing site Link blocked 원본 URL 없음\n\n← Back to all events",
+        "status": "Application closed",
+        "decoration": "none"
+      }
+    }
+  ]
+}

@@ -17,17 +17,10 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303465
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303465
-fetched_at: '2026-10-16T00:08:16+09:00'
+fetched_at: '2026-10-16T14:28:06+09:00'
 end_date: '2027-01-09T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303465_261015_141019.gif
-age: 만 4세 이상
-price_text: R석 100,000원, S석 80,000원, A석 60,000원
-duration_text: 2시간
-duration: PT2H
-organizer: 필뮤직 컴퍼니
-offers:
-  url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014638
-content_hash: sha256:452c4bc146cbfb19961a3075924fb92b058fa7c3a1f770135d758eb98cac356b
+content_hash: sha256:1e0f2bfe7b60afaf0af55616d10a507d64ce56a2e797ce776321afb72437ecec
 ---
 
 # 지브리 & 디즈니 영화음악 FESTA [대전]

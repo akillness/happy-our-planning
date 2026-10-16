@@ -2,6 +2,7 @@
 .venv/
 __pycache__/
 *.pyc
+.mypy_cache/
 
 # 원본 응답은 용량 큼 → 샘플 fixture(sample-*)만 커밋, 나머지 무시
 raw/**/*
@@ -25,3 +26,4 @@ web/public/data/*.db
 
 # UI 검증 스냅샷(재생성 가능, 바이너리) — JSON 증거만 커밋
 specs/verify/evidence/*.png
+.vercel

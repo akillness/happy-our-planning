@@ -1,0 +1,22 @@
+# 놓치마 주기별 갱신 계층 (단일 일일 cron 안에서 동작, C11 준수)
+# - daily: 증분 upsert + 링크 큐(40건/120초) + facets/regions 빌드
+# - weekly(월요일 KST): 전체 파생 재빌드 + stale 경고 점검 + 중복 URL 교차검증 리포트
+# - monthly(1일 KST): 지오코딩 보강 재실행 + 90일 보존 제외 집계 감사 + 캐시 prune
+# - yearly(1월 1일 KST): 통제어휘(yaml) 정합 + 아카이브 정책 점검 + 연도 경계 full refresh
+# 스케줄은 .github/workflows/ingest.yml의 03:00 KST 단일 cron 하나만 사용한다.
+tiers:
+  daily:
+    description: "증분 수집→검증→인덱스→wiki (매일)"
+    tasks: ["collect", "validate", "build_index", "link_queue", "wiki"]
+  weekly:
+    description: "주간 전체 재빌드 + 교차검증 리포트"
+    weekday_kst: "MON"
+    tasks: ["full_rebuild", "link_crosscheck", "stale_audit"]
+  monthly:
+    description: "월간 보강 + 보존/캐시 감사"
+    day_kst: 1
+    tasks: ["geocode_refresh", "retention_audit", "cache_prune"]
+  yearly:
+    description: "연간 어휘/아카이브 정합 + 연도 경계 refresh"
+    month_day_kst: "01-01"
+    tasks: ["vocab_audit", "archive_audit", "year_rollover"]

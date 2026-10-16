@@ -17,9 +17,12 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303487
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303487
-fetched_at: '2026-10-16T00:08:16+09:00'
+fetched_at: '2026-10-16T14:28:06+09:00'
 end_date: '2026-11-21T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303487_261015_145406.gif
+description: '장르: 대중음악 · 공연장: 성북미디어문화마루 꿈빛극장 · 공연시간 안내: 금요일 ~ 토요일(11:11) · 관람연령: 만
+  7세 이상 · 런타임: 1시간 30분 · 티켓가격: 전석 15,000원 · 출연진: 정우철, 배가영, 이승하, 이규재, 옥재윤 등 · 예매처:
+  놀유니버스 · 주최·주관: (재)성북문화재단'
 age: 만 7세 이상
 price_text: 전석 15,000원
 price: 15000
@@ -28,7 +31,7 @@ duration: PT1H30M
 organizer: (재)성북문화재단
 offers:
   url: http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014648
-content_hash: sha256:7e15ac2f9c2a53007c8444b53a4f9f137e51d3ff3620bfe32c12816f9063e34e
+content_hash: sha256:ac4e1067d1eab1313606e5cd72742f4a6c7c48ceb97614a2ce001c7adfb87d97
 ---
 
 # 브런치콘서트 11시11분, 비바 바르셀로나: 안토니 가우디

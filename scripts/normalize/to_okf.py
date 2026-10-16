@@ -81,9 +81,25 @@ def _mode(adapter: object) -> str:
     return "fixture" if getattr(adapter, "offline", False) else "live"
 
 
+_SAMPLE_FIXTURE_IDS = frozenset({
+    "example:demo-application",
+    "kopis:PF200001", "kopis:PF200002", "kopis:PF200003",
+    "tourapi:3001001", "tourapi:3001002", "tourapi:3001003",
+    "websearch:625e949e3cb8", "websearch:27ce5dd1aab3",
+    "websearch:b254ade704ec", "websearch:bb38c44890b9",
+})
+
+
 def _source_has_active_events(key: str) -> bool:
     return any(
         fm.get("source") == key and fm.get("status") != "archived"
+        for _path, fm, _body in iter_events()
+    )
+
+
+def _has_real_active_events() -> bool:
+    return any(
+        fm.get("status") != "archived" and fm.get("id") not in _SAMPLE_FIXTURE_IDS
         for _path, fm, _body in iter_events()
     )
 
@@ -198,7 +214,14 @@ def run(only: list[str] | None = None, *, use_network: bool = False) -> dict:
                 continue
 
             events = geocode.enrich(events, use_network=use_network)
-            stats = upsert(events, processed_sources={key} if snapshot_complete else None)
+            is_sample_batch = bool(events) and all(
+                isinstance(ev, dict) and ev.get("id") in _SAMPLE_FIXTURE_IDS
+                for ev in events
+            )
+            if adapter_mode == "fixture" and is_sample_batch and _has_real_active_events():
+                stats = {"created": 0, "updated": 0, "skipped": len(events), "archived": 0}
+            else:
+                stats = upsert(events, processed_sources={key} if snapshot_complete else None)
             # 상세 조회 실패/상한은 목록 레코드를 전혀 막지 않는다(부분 실패와
             # 전체 소스 실패를 구분) — 있으면 정수 카운터만 run log/상태에 반영.
             detail_metrics = _detail_metrics(adapter)

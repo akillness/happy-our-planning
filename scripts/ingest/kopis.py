@@ -243,9 +243,49 @@ def _parse_remote_xml(text: str) -> list[dict]:
 # 키와 1:1 대응(원문 그대로 보존 — 가공/추론 없음).
 _DETAIL_MERGE_FIELDS = (
     "sty", "prfage", "pcseguidance", "prfruntime",
+    "dtguidance", "prfcast", "prfcrew",
     "entrpsnm", "entrpsnmh", "entrpsnmp", "entrpsnma", "entrpsnms",
     "relatenm", "relateurl",
 )
+
+
+def _compose_detail_description(n: dict) -> str | None:
+    """sty(줄거리)가 비어 있는 상세 응답에서 원문 상세 필드만을 조합한 사실 요약.
+
+    목록 전용 행(상세 필드가 전혀 없는 행)에서는 None을 반환해 목록 필드를 상세처럼
+    위장하지 않는다(AC-F2.12). 또한 체험/가족 분류 어휘를 오염시키지 않는 중립
+    필드 라벨만 사용한다.
+    """
+    detail_keys = (
+        "dtguidance", "prfcast", "prfage", "prfruntime", "pcseguidance",
+        "relatenm", "entrpsnm", "entrpsnmh", "entrpsnmp", "entrpsnms",
+    )
+    if not any(str(n.get(k) or "").strip() for k in detail_keys):
+        return None
+    parts: list[str] = []
+    if n.get("genrenm"):
+        parts.append(f"장르: {str(n['genrenm']).strip()}")
+    if n.get("fcltynm"):
+        parts.append(f"공연장: {str(n['fcltynm']).strip()}")
+    if n.get("dtguidance"):
+        parts.append(f"공연시간 안내: {str(n['dtguidance']).strip()}")
+    if n.get("prfage"):
+        parts.append(f"관람연령: {str(n['prfage']).strip()}")
+    if n.get("prfruntime"):
+        parts.append(f"런타임: {str(n['prfruntime']).strip()}")
+    if n.get("pcseguidance"):
+        parts.append(f"티켓가격: {str(n['pcseguidance']).strip()}")
+    cast = str(n.get("prfcast") or "").strip()
+    if cast and cast not in {"해당없음", "-"}:
+        parts.append(f"출연진: {cast}")
+    if n.get("relatenm"):
+        parts.append(f"예매처: {str(n['relatenm']).strip()}")
+    organizer = (
+        n.get("entrpsnmh") or n.get("entrpsnm") or n.get("entrpsnmp") or n.get("entrpsnms")
+    )
+    if organizer and str(organizer).strip() not in {"해당없음", "-"}:
+        parts.append(f"주최·주관: {str(organizer).strip()}")
+    return " · ".join(parts) if parts else None
 
 
 def _flatten_detail_item(item: ET.Element) -> dict:
@@ -735,6 +775,10 @@ class KopisAdapter(SourceAdapter):
         # 상세(/pblprfr/{id}) 병합 필드 — 원문 그대로 보존, 발명 없음(AC-F2.11/.12).
         if n.get("sty"):
             event["description"] = n["sty"]
+        else:
+            detail_desc = _compose_detail_description(n)
+            if detail_desc:
+                event["description"] = detail_desc
         if n.get("prfage"):
             event["age"] = n["prfage"]
         if n.get("pcseguidance"):

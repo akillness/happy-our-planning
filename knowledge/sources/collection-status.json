@@ -1,18 +1,26 @@
 {
-  "generated_at": "2026-10-16T06:10:35+09:00",
+  "generated_at": "2026-10-16T15:10:49+09:00",
   "sources": {
     "kopis": {
-      "mode": "fixture",
-      "attempted_at": "2026-10-16T06:10:35+09:00",
-      "last_success_at": "2026-10-16T00:08:16+09:00",
+      "mode": "live",
+      "attempted_at": "2026-10-16T15:10:25+09:00",
+      "last_success_at": "2026-10-16T15:10:48+09:00",
       "error": null,
-      "collected": 3,
+      "collected": 300,
       "complete": false,
-      "truncated": false
+      "truncated": true,
+      "detail": {
+        "candidates": 300,
+        "cached": 32,
+        "fetched": 9,
+        "failed": 259,
+        "capped": 0,
+        "stale": 0
+      }
     },
     "tourapi": {
       "mode": "fixture",
-      "attempted_at": "2026-10-16T06:09:08+09:00",
+      "attempted_at": "2026-10-16T15:10:48+09:00",
       "last_success_at": null,
       "error": null,
       "collected": 3,
@@ -20,11 +28,11 @@
       "truncated": false
     },
     "websearch": {
-      "mode": "fixture",
-      "attempted_at": "2026-10-16T06:09:09+09:00",
-      "last_success_at": "2026-10-15T17:34:33+09:00",
+      "mode": "live",
+      "attempted_at": "2026-10-16T15:10:48+09:00",
+      "last_success_at": "2026-10-16T15:10:49+09:00",
       "error": null,
-      "collected": 3,
+      "collected": 6,
       "complete": false,
       "truncated": false
     }

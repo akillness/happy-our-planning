@@ -411,6 +411,15 @@ def _load_collection_status() -> dict:
     return payload if isinstance(payload, dict) else {}
 
 
+_SAMPLE_FIXTURE_IDS = frozenset({
+    "example:demo-application",
+    "kopis:PF200001", "kopis:PF200002", "kopis:PF200003",
+    "tourapi:3001001", "tourapi:3001002", "tourapi:3001003",
+    "websearch:625e949e3cb8", "websearch:27ce5dd1aab3",
+    "websearch:b254ade704ec", "websearch:bb38c44890b9",
+})
+
+
 def build() -> dict:
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -426,9 +435,18 @@ def build() -> dict:
     by_source_count: Counter = Counter()
     oldest_fetch: dict[str, str] = {}
 
-    for _path, fm, _body in iter_events():
+    raw_records = list(iter_events())
+    has_real_events = any(
+        isinstance(fm, dict) and fm.get("status") != "archived" and fm.get("id") not in _SAMPLE_FIXTURE_IDS
+        for _path, fm, _body in raw_records
+    )
+
+    for _path, fm, _body in raw_records:
         if fm.get("status") == "archived":
             archived += 1
+            continue
+        if has_real_events and fm.get("id") in _SAMPLE_FIXTURE_IDS:
+            excluded += 1
             continue
         if not _is_publishable(fm, today=today, days=configured_retention_days):
             excluded += 1

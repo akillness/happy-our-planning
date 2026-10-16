@@ -17,9 +17,12 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303488
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303488
-fetched_at: '2026-10-16T00:08:16+09:00'
+fetched_at: '2026-10-16T14:28:06+09:00'
 end_date: '2026-11-21T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303488_261015_145916.jpg
+description: '장르: 대중음악 · 공연장: 세종문화회관 · 공연시간 안내: 토요일(19:00) · 관람연령: 만 6세 이상 · 런타임:
+  1시간 20분 · 티켓가격: VIP석 154,000원, R석 132,000원, S석 121,000원, A석 110,000원, B석 99,000원
+  · 출연진: 백예린, 윤석철 · 예매처: 멜론티켓 · 주최·주관: (주)프라이빗커브, SBS'
 age: 만 6세 이상
 price_text: VIP석 154,000원, R석 132,000원, S석 121,000원, A석 110,000원, B석 99,000원
 duration_text: 1시간 20분
@@ -27,7 +30,7 @@ duration: PT1H20M
 organizer: (주)프라이빗커브, SBS
 offers:
   url: https://ticket.melon.com/performance/index.htm?prodId=214035
-content_hash: sha256:869a05610ffe0f3988ec70d39a65f5ee3cb8ad2eff4ad63029ab9f424f49ce00
+content_hash: sha256:a43dba227527e9afaff1c6e33c51e71a8777512980863df1a9c90afad0c1e138
 ---
 
 # SJF at the Theater, 백예린 X 윤석철

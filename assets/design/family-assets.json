@@ -8,7 +8,13 @@
   "concept_analysis": {
     "audience": "아이와 함께 지역 행사를 찾는 부모",
     "direction": "밝은 수채화와 구아슈 질감의 가족 나들이 일러스트, 크림색 바탕, 진한 초록 글자",
-    "palette": {"cream": "#fffaf0", "ink": "#193c35", "green": "#24755c", "apricot": "#f3a849", "sky": "#cdebf3"},
+    "palette": {
+      "cream": "#fffaf0",
+      "ink": "#193c35",
+      "green": "#24755c",
+      "apricot": "#f3a849",
+      "sky": "#cdebf3"
+    },
     "layout": "HTML 제목과 읽기 쉬운 필터를 삽화와 분리하고, 실제 행사 지도와 목록을 중심에 배치",
     "not_imported": "컨셉 이미지의 예시 행사명·날짜·로그인·통계는 실제 데이터나 기능이 아니므로 미반영",
     "use": "장식용 생성 삽화이며 특정 행사장 사진이나 시설 증거가 아님"
@@ -22,12 +28,38 @@
     "prompt_summary": "Original Korean family of four walking toward festival tents through yellow wildflowers; watercolor/gouache paper grain, evergreen/cream/sky/apricot palette; no text, UI, logos, signage or factual event claims"
   },
   "superseded_runtime_assets": [
-    {"path": "web/public/assets/family-outing.webp", "width": 1200, "height": 675, "bytes": 244526, "quality": 81},
-    {"path": "web/public/assets/family-outing-mobile.webp", "width": 720, "height": 480, "bytes": 110626, "quality": 78}
+    {
+      "path": "web/public/assets/family-outing.webp",
+      "width": 1200,
+      "height": 675,
+      "bytes": 244526,
+      "quality": 81
+    },
+    {
+      "path": "web/public/assets/family-outing-mobile.webp",
+      "width": 720,
+      "height": 480,
+      "bytes": 110626,
+      "quality": 78
+    }
   ],
   "runtime_assets": [
-    {"path": "web/public/assets/family-outing.webp", "width": 1200, "height": 675, "bytes": 161798, "quality": 82, "asset_id": "family-nature-hero"},
-    {"path": "web/public/assets/family-outing-mobile.webp", "width": 720, "height": 480, "bytes": 73390, "quality": 80, "asset_id": "family-nature-hero"}
+    {
+      "path": "web/public/assets/family-outing.webp",
+      "width": 1200,
+      "height": 675,
+      "bytes": 161798,
+      "quality": 82,
+      "asset_id": "family-nature-hero"
+    },
+    {
+      "path": "web/public/assets/family-outing-mobile.webp",
+      "width": 720,
+      "height": 480,
+      "bytes": 73390,
+      "quality": 80,
+      "asset_id": "family-nature-hero"
+    }
   ],
   "original_art_note": "Three new assets are original decorative category illustrations generated with gti through the private Codex backend. They use hand-painted watercolor/gouache nature and family warmth; they are not real event-venue evidence. Existing mascot/icon and prior provenance records remain unchanged.",
   "new_assets": [
@@ -146,6 +178,234 @@
           "quality": 82,
           "crop": "full square source resized without crop",
           "sha256": "d2834219d14e6900790b50fe1d171fea2ff4843cfba9171dc420c2f5b448e938"
+        }
+      ]
+    },
+    {
+      "id": "menu-locate",
+      "role": "GPS location target pin icon for #locateBtn",
+      "source": {
+        "path": "assets/design/menu-locate.png",
+        "origin_sheet": "assets/design/codex-menu-icons-sheet.png",
+        "format": "PNG",
+        "width": 256,
+        "height": 256,
+        "bytes": 36786,
+        "sha256": "0a676f0a3c2c65586347ec263147dacea5422a1fdc0b577b2ab694c41b5e2a77"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "image_model": "gpt-image-2.5-flare",
+        "response_id": "resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca",
+        "generation_observed": "provider=private-codex; httpStatus=200; responseId=resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/icons/menu-locate.webp",
+          "format": "WEBP",
+          "width": 128,
+          "height": 128,
+          "bytes": 4162,
+          "quality": 92,
+          "sha256": "167ae22da0594d3fa14a397f90c2cf803bc35219858cc7d27f21902153d235c4"
+        },
+        {
+          "path": "web/public/assets/icons/menu-locate.png",
+          "format": "PNG",
+          "width": 128,
+          "height": 128,
+          "bytes": 13174,
+          "sha256": "aa88de32bd86da51d34556ce1670c8531a68f1fdb1ba38fe4a1caf0c9a996656"
+        }
+      ]
+    },
+    {
+      "id": "menu-language",
+      "role": "World globe translation icon for #languageToggle",
+      "source": {
+        "path": "assets/design/menu-language.png",
+        "origin_sheet": "assets/design/codex-menu-language.png",
+        "format": "PNG",
+        "width": 256,
+        "height": 256,
+        "bytes": 63332,
+        "sha256": "0d99f2a8de86bb81605a8176a127de9cc95edacbeb2ec33bc90946290a4ad709"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "image_model": "gpt-image-2.5-flare",
+        "response_id": "resp_01f94e583c116e7d016ad1aefc657c87d0bccc4ce9c824c5c3",
+        "generation_observed": "provider=private-codex; httpStatus=200; responseId=resp_01f94e583c116e7d016ad1aefc657c87d0bccc4ce9c824c5c3"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/icons/menu-language.webp",
+          "format": "WEBP",
+          "width": 128,
+          "height": 128,
+          "bytes": 6462,
+          "quality": 92,
+          "sha256": "d4486ad9ad4a71fb5b7472ed86ccb0f371aa89141db366367d3fda08401cadfd"
+        },
+        {
+          "path": "web/public/assets/icons/menu-language.png",
+          "format": "PNG",
+          "width": 128,
+          "height": 128,
+          "bytes": 21199,
+          "sha256": "938a9f8e2e1b97d0b3186dcc5d63c5d0f8724073b0675ccce38c1d0c5683bf27"
+        }
+      ]
+    },
+    {
+      "id": "menu-filter",
+      "role": "Filter sliders icon for #filterToggle",
+      "source": {
+        "path": "assets/design/menu-filter.png",
+        "origin_sheet": "assets/design/codex-menu-icons-sheet.png",
+        "format": "PNG",
+        "width": 256,
+        "height": 256,
+        "bytes": 28077,
+        "sha256": "7777f06c3c2a1f6ba2fe374ffcba5ef543ec025351acf2e10509efbf5cdd9d62"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "image_model": "gpt-image-2.5-flare",
+        "response_id": "resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca",
+        "generation_observed": "provider=private-codex; httpStatus=200; responseId=resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/icons/menu-filter.webp",
+          "format": "WEBP",
+          "width": 128,
+          "height": 128,
+          "bytes": 2682,
+          "quality": 92,
+          "sha256": "92cb32f45556b35dc36eca3bfc13394b177b5c53d8223d17d307049f79a28cce"
+        },
+        {
+          "path": "web/public/assets/icons/menu-filter.png",
+          "format": "PNG",
+          "width": 128,
+          "height": 128,
+          "bytes": 9112,
+          "sha256": "4916463e8bfe431bdb7749307683dd8f44fdfbb7b83573cd5c7c7057923e3526"
+        }
+      ]
+    },
+    {
+      "id": "menu-results",
+      "role": "Stacked event cards list icon for #resultsToggle",
+      "source": {
+        "path": "assets/design/menu-results.png",
+        "origin_sheet": "assets/design/codex-menu-icons-sheet.png",
+        "format": "PNG",
+        "width": 256,
+        "height": 256,
+        "bytes": 33057,
+        "sha256": "659aebeb406c5520c9027d5d51a87de6749031fdc4ef4a73248d6c352816d0e8"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "image_model": "gpt-image-2.5-flare",
+        "response_id": "resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca",
+        "generation_observed": "provider=private-codex; httpStatus=200; responseId=resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/icons/menu-results.webp",
+          "format": "WEBP",
+          "width": 128,
+          "height": 128,
+          "bytes": 2980,
+          "quality": 92,
+          "sha256": "d0bffe74943dcb73d33267feaecc082cbe934cbbd5b4281531dbdb6f57dd7ac7"
+        },
+        {
+          "path": "web/public/assets/icons/menu-results.png",
+          "format": "PNG",
+          "width": 128,
+          "height": 128,
+          "bytes": 11006,
+          "sha256": "fc141c21cfdea4ee27d85a5849e69549530392e872d74293820ffa1b82ff3be0"
+        }
+      ]
+    },
+    {
+      "id": "menu-ai",
+      "role": "Sparkle AI recommendation icon for #aiBtn",
+      "source": {
+        "path": "assets/design/menu-ai.png",
+        "origin_sheet": "assets/design/codex-menu-icons-sheet.png",
+        "format": "PNG",
+        "width": 256,
+        "height": 256,
+        "bytes": 28292,
+        "sha256": "122a6f833c8eaeba1fc7661569e15ef896f47eb0884ce10f6d4fcb3de1ba2010"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "image_model": "gpt-image-2.5-flare",
+        "response_id": "resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca",
+        "generation_observed": "provider=private-codex; httpStatus=200; responseId=resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/icons/menu-ai.webp",
+          "format": "WEBP",
+          "width": 128,
+          "height": 128,
+          "bytes": 3100,
+          "quality": 92,
+          "sha256": "e30403164d28cc60b125fe90caafd5cd46f09581d12d20a9c4d429b495ac46a5"
+        },
+        {
+          "path": "web/public/assets/icons/menu-ai.png",
+          "format": "PNG",
+          "width": 128,
+          "height": 128,
+          "bytes": 9835,
+          "sha256": "4c6ac0be3cc6da8b05e3986d83361dd51a9692ee3bdad2384173f1aa2ae375e9"
+        }
+      ]
+    },
+    {
+      "id": "menu-reset",
+      "role": "Counter-clockwise reset arrow icon for #reset",
+      "source": {
+        "path": "assets/design/menu-reset.png",
+        "origin_sheet": "assets/design/codex-menu-icons-sheet.png",
+        "format": "PNG",
+        "width": 256,
+        "height": 256,
+        "bytes": 30428,
+        "sha256": "1df5ba33697f55528245c7c2654fc473091e8e8e9bdb431cb6155dda42ede657"
+      },
+      "generation": {
+        "provider": "private-codex",
+        "image_model": "gpt-image-2.5-flare",
+        "response_id": "resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca",
+        "generation_observed": "provider=private-codex; httpStatus=200; responseId=resp_02791d88ac95ec05016ad1aeaaa05887d09507957cade683ca"
+      },
+      "runtime_variants": [
+        {
+          "path": "web/public/assets/icons/menu-reset.webp",
+          "format": "WEBP",
+          "width": 128,
+          "height": 128,
+          "bytes": 2926,
+          "quality": 92,
+          "sha256": "2a42bcb70e114a9a5e96fbffe202ffab51493dc545f9338ee9ef7f1c06ea3dcb"
+        },
+        {
+          "path": "web/public/assets/icons/menu-reset.png",
+          "format": "PNG",
+          "width": 128,
+          "height": 128,
+          "bytes": 10735,
+          "sha256": "44956fbe2512ada25a1668925299479fbd5b6e19063f6636db8ebb1eee995429"
         }
       ]
     }

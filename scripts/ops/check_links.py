@@ -344,12 +344,23 @@ def run(
     return cache
 
 
+def _env_int(name: str) -> int | None:
+    import os
+    raw = os.environ.get(name, "").strip()
+    if not raw:
+        return None
+    try:
+        return int(raw)
+    except ValueError:
+        return None
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Notchima bounded HTTPS link checker")
     parser.add_argument("--events", type=Path, default=EVENTS_PATH)
     parser.add_argument("--cache", type=Path, default=CACHE_PATH)
-    parser.add_argument("--max-urls", type=int, default=None)
-    parser.add_argument("--max-seconds", type=int, default=None)
+    parser.add_argument("--max-urls", type=int, default=_env_int("NOTCHIMA_LINK_MAX_URLS"))
+    parser.add_argument("--max-seconds", type=int, default=_env_int("NOTCHIMA_LINK_MAX_SECONDS"))
     args = parser.parse_args(argv)
     try:
         cache = run(

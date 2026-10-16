@@ -1,7 +1,33 @@
 {
-  "total_checks": 58,
-  "passed": 58,
+  "status": "passed",
+  "total_checks": 68,
+  "passed": 68,
   "data_context": "deterministic routed fixture (fixed KST 2026-10-15), not production events.json",
+  "viewports": [
+    "1440x900",
+    "1280x800",
+    "360x800",
+    "390x844"
+  ],
+  "spec_version": "1.6.0",
+  "source_files_present": {
+    "spec.md": true,
+    "seed.yaml": true,
+    "index.html": true,
+    "app.js": true,
+    "styles.css": true,
+    "locales.json": true,
+    "i18n.js": true
+  },
+  "source_hashes": {
+    "spec.md": "af94b2ef61dd559388e8ff4ac83108ee6e1c3a13e8fa3d88f8523befe99d7729",
+    "seed.yaml": "468e7ab87d600aa9b0a0166b9b1b86294f451ed7ce47d5cf8e610253bce20f01",
+    "index.html": "98d43cc50c4d7cec8ad3e8d4bec96da849ad1a180e20f97db3f242b664a0b29c",
+    "app.js": "cdf3e151006ef81a4816ae03a126c53bccce3cb3cc9fb5399799e7a53ce25319",
+    "styles.css": "6984f7fee52ba0f2dbae77e8088555c1b6c2aec76d334a21ab355cbce62da4d7",
+    "locales.json": "3199e7c9a8d4bac3aec6aa7172ffce5a0c9fe54971df53da2161e0b533e0c033",
+    "i18n.js": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
+  },
   "checks": [
     {
       "check": "초기 로드 + 가족 기본 카운트",
@@ -9,29 +35,34 @@
       "detail": "활성 가족 행사 3건"
     },
     {
+      "check": "일반 지도 페이지가 실제 OSM 타일 fixture를 사용함",
+      "ok": true,
+      "detail": "{\"count\": 54}"
+    },
+    {
       "check": "데스크톱 가족 기본 스냅샷",
       "ok": true,
       "detail": "specs/verify/evidence/ui-desktop-family.png"
     },
     {
-      "check": "1440px 히어로 canonical 경로·렌더링·높이",
+      "check": "1440px 지도 우선 셸이 뷰포트를 채움",
       "ok": true,
-      "detail": "{\"src\": \"http://127.0.0.1:52293/assets/family-outing.webp\", \"box\": {\"x\": 910.21875, \"y\": 104.828125, \"width\": 497.78125, \"height\": 160}}"
+      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 1440, \"bottom\": 900, \"width\": 1440, \"height\": 900}, \"panel\": {\"left\": 0, \"top\": 0, \"right\": 1440, \"bottom\": 900, \"width\": 1440, \"height\": 900}, \"search\": {\"left\": 440, \"top\": 828, \"right\": 1000, \"bottom\": 884, \"width\": 560, \"height\": 56}, \"transform\": \"none\"}"
     },
     {
-      "check": "히어로 아트 DOM UI 텍스트 없음",
+      "check": "1440px 검색 입력이 뷰포트 가로 중앙",
       "ok": true,
-      "detail": ""
+      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 1440, \"bottom\": 900, \"width\": 1440, \"height\": 900}, \"panel\": {\"left\": 0, \"top\": 0, \"right\": 1440, \"bottom\": 900, \"width\": 1440, \"height\": 900}, \"search\": {\"left\": 440, \"top\": 828, \"right\": 1000, \"bottom\": 884, \"width\": 560, \"height\": 56}, \"transform\": \"none\"}"
     },
     {
-      "check": "필터가 활동 바로가기보다 먼저",
+      "check": "Leaflet 루트 transform 덮어쓰기 없음",
       "ok": true,
-      "detail": "{\"filters\": {\"x\": 32, \"y\": 301.671875, \"width\": 1376, \"height\": 291.5}, \"activity\": {\"x\": 32, \"y\": 593.171875, \"width\": 1376, \"height\": 138.1875}}"
+      "detail": "none"
     },
     {
-      "check": "출처 링크는 검증 증거 없이는 외부 앵커 금지",
+      "check": "출처·미승인 외부 앵커 없이 신선한 booking href만 보존",
       "ok": true,
-      "detail": "[]"
+      "detail": "[\"https://www.busan.go.kr/booking-active\"]"
     },
     {
       "check": "정적 fixture 응답·의미 있는 제목",
@@ -39,9 +70,14 @@
       "detail": "통제된 출처 없는 정적 행사"
     },
     {
-      "check": "정적 상세도 fresh proof 없는 외부 앵커 금지",
+      "check": "정적 상세 blocked info·booking은 앵커 없이 blocked 상태 표시",
       "ok": true,
-      "detail": "{\"status\": \"blocked\", \"external\": []}"
+      "detail": "{\"infoKey\": \"link.status.blocked\", \"bookingKey\": \"link.status.blocked\", \"infoStatus\": \"연결 차단\", \"bookingStatus\": \"연결 차단\", \"infoExternal\": 0, \"bookingExternal\": 0}"
+    },
+    {
+      "check": "네이티브 필터 disclosure 열기",
+      "ok": true,
+      "detail": "#filterMenu/#filterToggle"
     },
     {
       "check": "5축 필터 → URL 동기화",
@@ -49,9 +85,9 @@
       "detail": "q=%EC%B6%95%EC%A0%9C&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&theme=%EC%B6%95%EC%A0%9C&age=%EC%96%B4%EB%A6%B0%EC%9D%B4&from=2026-01-01&to=2026-12-31&applyable=1"
     },
     {
-      "check": "필터 적용 결과 카운트",
+      "check": "필터 적용 결과 카운트·fixture 식별자",
       "ok": true,
-      "detail": "2/3"
+      "detail": "{\"count\": 2, \"expectedCount\": 2, \"names\": [\"서울 어린이 여름 음악축제\", \"서울 유료 어린이 축제\"], \"expectedNames\": [\"서울 어린이 여름 음악축제\", \"서울 유료 어린이 축제\"]}"
     },
     {
       "check": "URL 복원(새 세션 입력값)",
@@ -84,29 +120,34 @@
       "detail": ""
     },
     {
+      "check": "가족·서울 → 정확한 fixture 범위",
+      "ok": true,
+      "detail": "count=2 expected=2"
+    },
+    {
       "check": "무료만 토글 → 실제 필터링",
       "ok": true,
-      "detail": "2/3"
+      "detail": "1/2"
     },
     {
       "check": "무료만 → URL 동기화",
       "ok": true,
-      "detail": "free_only=1"
+      "detail": "sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&free_only=1"
     },
     {
-      "check": "가족·서울·무료 → 카드/카운트 일치",
+      "check": "가족·서울·무료 → 정확한 fixture 카드/카운트",
       "ok": true,
-      "detail": "1 cards=1"
+      "detail": "1 cards=1 names=['서울 어린이 여름 음악축제'] expected=['서울 어린이 여름 음악축제']"
     },
     {
-      "check": "가족·서울·무료 → 지도 일치",
+      "check": "가족·서울·무료 → 정확한 fixture 지도",
       "ok": true,
-      "detail": "markers=1 cards=1"
+      "detail": "containers=1 markers=1 expected=1"
     },
     {
       "check": "가족·서울·무료 → 추천 범위 일치",
       "ok": true,
-      "detail": "닫기\n조건 맞춤 추천\n\n현재 필터 결과 안에서 가족 근거, 무료 여부, 신청 가능 여부를 기준으로 정리했습니다.\n\n서울 어린이 여름 음악축제 · 서울특별시\n가족 근거 확인 · 무료 · 신청가능 · 테마 축제"
+      "detail": "닫기\n아이와 갈 맞춤 행사 추천\n\n아이와 함께 할 수 있는 체험, 가족 확인 정보, 무료 여부를 우선으로 추천합니다.\n\n서울 어린이 여름 음악축제 · 서울특별시\n가족 근거 확인 · 무료 · 신청기간·예매링크확인 · 테마 축제"
     },
     {
       "check": "무결과 상태 표시",
@@ -129,9 +170,29 @@
       "detail": ""
     },
     {
+      "check": "초기 events 실패 시 q·데이터 의존 입력/액션 잠금·URL 보존·지도 유지·대기 중 필터 닫힘",
+      "ok": true,
+      "detail": "{\"disabled\": {\"q\": true, \"sido\": true, \"theme\": true, \"age\": true, \"activity\": true, \"from\": true, \"to\": true, \"kids\": true, \"freeOnly\": true, \"applyable\": true, \"reset\": true, \"aiBtn\": true, \"sortRel\": true, \"sortNew\": true, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"query\": \"?sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&free_only=1\", \"map\": 1, \"errorVisible\": true, \"retryVisible\": true, \"filterClosed\": true, \"errorReachable\": true, \"retryReachable\": true, \"errorBox\": {\"x\": 105, \"y\": 354, \"width\": 258, \"height\": 137.875}, \"retryBox\": {\"x\": 118, \"y\": 434.875, \"width\": 101.015625, \"height\": 44}}"
+    },
+    {
+      "check": "초기 오류 모바일 결과 drawer 자동 확장·오류 재시도 도달성·접기·재펼치기",
+      "ok": true,
+      "detail": "{\"opened\": {\"collapsed\": \"false\", \"expanded\": \"true\", \"errorVisible\": true, \"retryVisible\": true, \"errorText\": \"행사 정보를 불러오지 못했어요.\\n\\n잠시 후 다시 시도하거나, 출처 사이트를 직접 확인해 주세요.\\n\\n다시 불러오기\"}, \"errorBox\": {\"x\": 105, \"y\": 354, \"width\": 258, \"height\": 137.875}, \"retryBox\": {\"x\": 118, \"y\": 434.875, \"width\": 101.015625, \"height\": 44}, \"errorReachable\": true, \"retryReachable\": true, \"collapsed\": {\"collapsed\": \"true\", \"expanded\": \"false\"}, \"expanded\": {\"collapsed\": \"false\", \"expanded\": \"true\"}}"
+    },
+    {
+      "check": "Retry 성공 시 필터·액션 복구·카운트·URL 보존·브라우저 오류 없음",
+      "ok": true,
+      "detail": "{\"attempts\": {\"events.json\": 2}, \"after\": {\"disabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"count\": \"1\", \"errorHidden\": true, \"query\": \"?sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&free_only=1\"}, \"expectedDisabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"browserErrors\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:49683/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"expectedInitial503\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:49683/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"unexpectedErrors\": []}"
+    },
+    {
+      "check": "지도 초기화 실패 시 Locate가 위치를 가장하지 않음",
+      "ok": true,
+      "detail": "{\"fallback\": true, \"hint\": \"지도를 사용할 수 없어 현재 위치를 표시할 수 없습니다.\"}"
+    },
+    {
       "check": "라우트 fixture age count 중복·facet 오염 방지",
       "ok": true,
-      "detail": "어린이 (4)"
+      "detail": "{\"label\": \"어린이 (4)\", \"ageOptions\": [\"전체 나이대\", \"어린이 (4)\"], \"fixtureEventCount\": 5, \"facetAge\": {\"어린이\": 99}}"
     },
     {
       "check": "만료된 시작일-only 행사 추천 제외",
@@ -146,7 +207,7 @@
     {
       "check": "결정적 가족 결과 지도 2건",
       "ok": true,
-      "detail": "markers=2"
+      "detail": "containers=1 markers=2"
     },
     {
       "check": "결정적 활성 행사만 추천",
@@ -154,19 +215,29 @@
       "detail": "[\"서울 10월 가족 체험\"]"
     },
     {
-      "check": "신선한 verified 출처만 외부 clickout",
+      "check": "신선한 verified info·booking만 각각 외부 clickout",
       "ok": true,
-      "detail": "https://www.busan.go.kr/active"
+      "detail": "{\"info\": 1, \"booking\": 1}"
     },
     {
       "check": "만료·미검증 출처는 카드/상세 외부 앵커 금지",
       "ok": true,
-      "detail": "닫기\n서울 10월 지난 과학 체험\n\n지난 날짜의 시작일-only 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 과학·탐구\n\n지난 날짜의 체험\n\n가족 근거: 명시 문구: 가족\n\n지역: 서울특별시 강서구\n일정: 2026-10-14\n비용: 무료\n상태: 종료\n\n출처: 정보 없음\n\n연결 미확인 · 확인 2026. 10. 01. 오전 09:00 · 검증 만료\n공유용 상세"
+      "detail": "닫기\n서울 10월 지난 과학 체험\n\n지난 날짜의 시작일-only 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 과학·탐구\n\n지난 날짜의 체험\n\n아이 동반 안내: 명시 문구: 가족\n\n지역: 서울특별시 강서구\n장소: 정보 없음\n일정: 2026년 10월 14일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n\n출처: 정보 없음\n\n연결 미확인 · 확인 2026. 10. 01. 오전 09:00 · 검증 만료\n공유용 상세"
+    },
+    {
+      "check": "기본 결과 경험 우선·비경험/종료 행사 보존",
+      "ok": true,
+      "detail": "{\"order\": [\"서울 10월 가족 체험\", \"서울 유료 가족 체험\", \"부산 무료 가족 체험\", \"서울 10월 지난 과학 체험\"]}"
+    },
+    {
+      "check": "신선도 만료 booking은 활성 행사에서도 외부 앵커 금지",
+      "ok": true,
+      "detail": "닫기\n부산 무료 가족 체험\n\n부산 가족 체험\n\n아이 동반 안내: 명시 문구: 가족\n\n지역: 부산광역시 해운대구\n장소: 정보 없음\n일정: 2026년 10월 15일 ~ 2026년 10월 16일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 정보 없음\n주최: 정보 없음\n\n출처: 정보 없음\n\n연결 미확인 · 확인 시각 없음\n예매처에서 확인 · 확인 2026. 10. 01. 오전 09:00 · 확인 만료\n공유용 상세"
     },
     {
       "check": "매핑된 사설 IPv4는 카드·상세 외부 앵커 금지",
       "ok": true,
-      "detail": "닫기\n서울 유료 가족 체험\n\n유료 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 만들기·예술 · 신체·놀이\n\n직접 만들고 놀며 참여하는 공예 체험\n\n가족 근거: 명시 문구: 가족\n\n지역: 서울특별시 마포구\n일정: 2026-10-15 ~ 2026-10-16\n비용: 1,000원\n상태: 신청가능\n\n출처: 정보 없음\n\n연결 차단 · 확인 2026. 10. 15. 오전 12:00\n공유용 상세"
+      "detail": "닫기\n서울 유료 가족 체험\n\n유료 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 만들기·예술 · 신체·놀이\n\n직접 만들고 놀며 참여하는 공예 체험\n\n아이 동반 안내: 명시 문구: 가족\n\n지역: 서울특별시 마포구\n장소: 정보 없음\n일정: 2026년 10월 15일 ~ 2026년 10월 16일\n대상 연령: 7-13\n비용: 1,000원\n소요시간: 정보 없음\n상태: 정보 없음\n주최: 정보 없음\n\n출처: 정보 없음\n\n연결 차단 · 확인 2026. 10. 15. 오전 12:00\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n공유용 상세"
     },
     {
       "check": "NAT64 사설 목적지는 카드·상세 외부 앵커 금지",
@@ -181,12 +252,17 @@
     {
       "check": "activity → 카드·지도·공유 URL 동기화",
       "ok": true,
-      "detail": "{\"names\": [\"서울 10월 가족 체험\", \"서울 10월 지난 과학 체험\"], \"query\": {\"activity\": [\"과학·탐구\"]}}"
+      "detail": "{\"names\": [\"서울 10월 가족 체험\", \"서울 10월 지난 과학 체험\"], \"query\": {\"activity\": [\"과학·탐구\"]}, \"containers\": 1, \"markers\": 2}"
     },
     {
       "check": "activity → 추천 범위 동기화",
       "ok": true,
       "detail": "[\"서울 10월 가족 체험\"]"
+    },
+    {
+      "check": "AI 버튼→추천→상세 키보드 경로·Escape aiBtn 초점 복귀",
+      "ok": true,
+      "detail": "{\"detail\": {\"detailOpen\": true, \"aiOpen\": false, \"activeInsideHiddenAI\": false}, \"return\": {\"detailOpen\": false, \"aiOpen\": false, \"activeId\": \"aiBtn\", \"activeInsideHiddenAI\": false}}"
     },
     {
       "check": "activity → reset 복귀",
@@ -209,14 +285,24 @@
       "detail": "신체·놀이\n1건"
     },
     {
+      "check": "과학·탐구 칩 키보드 Enter 활성화·초점 유지",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "check": "과학·탐구 칩 → select·URL·결과 동기화",
       "ok": true,
-      "detail": "{\"before\": [\"서울 10월 가족 체험\", \"서울 유료 가족 체험\", \"부산 무료 가족 체험\", \"서울 10월 지난 과학 체험\"], \"after\": [\"서울 10월 가족 체험\", \"서울 10월 지난 과학 체험\"], \"query\": {\"activity\": [\"과학·탐구\"]}}"
+      "detail": "{\"before\": [\"서울 10월 가족 체험\", \"서울 유료 가족 체험\", \"부산 무료 가족 체험\", \"서울 10월 지난 과학 체험\"], \"after\": [\"서울 10월 가족 체험\", \"서울 10월 지난 과학 체험\"], \"query\": {\"activity\": [\"과학·탐구\"]}, \"label\": \"과학·탐구\\n2건\", \"countLabel\": \"2건\", \"contrast\": 5.139695954697557}"
+    },
+    {
+      "check": "만들기·예술 칩 키보드 Enter 활성화·초점 유지",
+      "ok": true,
+      "detail": ""
     },
     {
       "check": "만들기·예술 칩 → select·URL·결과 동기화",
       "ok": true,
-      "detail": "{\"before\": [\"서울 10월 가족 체험\", \"서울 유료 가족 체험\", \"부산 무료 가족 체험\", \"서울 10월 지난 과학 체험\"], \"after\": [\"서울 유료 가족 체험\"], \"query\": {\"activity\": [\"만들기·예술\"]}}"
+      "detail": "{\"before\": [\"서울 10월 가족 체험\", \"서울 유료 가족 체험\", \"부산 무료 가족 체험\", \"서울 10월 지난 과학 체험\"], \"after\": [\"서울 유료 가족 체험\"], \"query\": {\"activity\": [\"만들기·예술\"]}, \"label\": \"만들기·예술\\n1건\", \"countLabel\": \"1건\", \"contrast\": 5.139695954697557}"
     },
     {
       "check": "수집 mode/failure 상태 노출",
@@ -226,7 +312,7 @@
     {
       "check": "종료·마감 배지 렌더 대비 4.5 이상",
       "ok": true,
-      "detail": "[{\"text\": \"종료\", \"color\": \"rgb(69, 102, 93)\", \"background\": \"rgb(237, 240, 238)\", \"ratio\": 5.525805319709427}]"
+      "detail": "[{\"text\": \"종료\", \"color\": \"rgb(255, 255, 255)\", \"background\": \"rgb(180, 35, 50)\", \"ratio\": 6.507329548273491}]"
     },
     {
       "check": "KST 날짜 경계 → 10월 15일 행사만 카드",
@@ -236,12 +322,12 @@
     {
       "check": "KST 날짜 경계 → 지도 1건",
       "ok": true,
-      "detail": "markers=1"
+      "detail": "containers=1 markers=1"
     },
     {
       "check": "라우트 fixture facets 누락 age count",
       "ok": true,
-      "detail": "어린이 (4)"
+      "detail": "{\"label\": \"어린이 (4)\", \"expected\": 4, \"fixtureEvents\": 5}"
     },
     {
       "check": "키보드 상세 열기 → 닫기 포커스",
@@ -249,9 +335,19 @@
       "detail": ""
     },
     {
-      "check": "360px 리사이즈 후 지도 마커 가시영역",
+      "check": "360px 지도 배경이 뷰포트를 채움",
       "ok": true,
-      "detail": "{\"map\": {\"left\": 13, \"top\": 2508, \"right\": 347, \"bottom\": 2808}, \"markers\": [{\"left\": 209, \"top\": 2704, \"right\": 253, \"bottom\": 2748}, {\"left\": 110, \"top\": 2590, \"right\": 154, \"bottom\": 2634}, {\"left\": 107, \"top\": 2613, \"right\": 151, \"bottom\": 2657}]}"
+      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 134, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 650}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
+    },
+    {
+      "check": "360px 우측 결과 drawer 기본 접힘·지도 56px",
+      "ok": true,
+      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 134, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 650}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
+    },
+    {
+      "check": "360px 문서 스크롤·가로 넘침 없음",
+      "ok": true,
+      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 134, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 650}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
     },
     {
       "check": "360px 가족 기본 스냅샷",
@@ -259,34 +355,14 @@
       "detail": "specs/verify/evidence/ui-mobile-family.png"
     },
     {
-      "check": "360px 가로 오버플로 없음",
-      "ok": true,
-      "detail": "360/360"
-    },
-    {
-      "check": "360px 결과가 지도보다 먼저 표시",
-      "ok": true,
-      "detail": "{\"results\": {\"x\": 12, \"y\": 1284.703125, \"width\": 336, \"height\": 1135.390625}, \"map\": {\"x\": 12, \"y\": 2432.09375, \"width\": 336, \"height\": 376.90625}}"
-    },
-    {
       "check": "360px 주요 터치 타깃 44px",
       "ok": true,
-      "detail": "[{\"selector\": \"check-pill\", \"width\": 163.578125, \"height\": 44}, {\"selector\": \"check-pill\", \"width\": 136.421875, \"height\": 44}, {\"selector\": \"check-pill\", \"width\": 166.125, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 133.875, \"height\": 44}, {\"selector\": \"region-chip activity-chip\", \"width\": 336, \"height\": 84}, {\"selector\": \"region-chip\", \"width\": 164, \"height\": 44}, {\"selector\": \"region-chip\", \"width\": 164, \"height\": 44}, {\"selector\": \"button button-primary\", \"width\": 336, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 75.796875, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 75.796875, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 75.796875, \"height\": 44}]"
+      "detail": "{\"filterTargets\": [{\"selector\": \"icon-btn\", \"width\": 334, \"height\": 44}, {\"selector\": \"button button-quiet icon-btn\", \"width\": 44, \"height\": 44}, {\"selector\": \"region-chip activity-chip\", \"width\": 150, \"height\": 76}, {\"selector\": \"region-chip\", \"width\": 101.25, \"height\": 44}, {\"selector\": \"region-chip\", \"width\": 99.71875, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 67.65625, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 66.203125, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 97.546875, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 96.09375, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 77.9375, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 100.234375, \"height\": 44}, {\"selector\": \"button button-quiet results-toggle icon-btn\", \"width\": 44, \"height\": 44}], \"resultActions\": [{\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-primary\", \"width\": 125.328125, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-primary\", \"width\": 125.328125, \"height\": 44}], \"filterTargetsOk\": true, \"resultActionsOk\": true}"
     },
     {
       "check": "360px 활동 칩 터치 타깃 44px",
       "ok": true,
-      "detail": "[{\"width\": 336, \"height\": 84}, {\"width\": 336, \"height\": 84}, {\"width\": 336, \"height\": 84}]"
-    },
-    {
-      "check": "지도 마커 실용적 터치 크기",
-      "ok": true,
-      "detail": "[{\"width\": 44, \"height\": 44}, {\"width\": 44, \"height\": 44}, {\"width\": 44, \"height\": 44}]"
-    },
-    {
-      "check": "모바일 WebP 이미지 로드",
-      "ok": true,
-      "detail": "http://127.0.0.1:52293/assets/family-outing-mobile.webp"
+      "detail": "[{\"width\": 150, \"height\": 76}, {\"width\": 150, \"height\": 76}, {\"width\": 150, \"height\": 76}]"
     },
     {
       "check": "데스크톱 필터 스냅샷",

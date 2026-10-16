@@ -17,18 +17,10 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303474
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303474
-fetched_at: '2026-10-16T00:08:16+09:00'
+fetched_at: '2026-10-16T14:28:06+09:00'
 end_date: '2026-10-27T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303474_261015_142931.jpg
-age: 만 7세 이상
-price_text: 전석 15,000원
-price: 15000
-duration_text: 1시간 30분
-duration: PT1H30M
-organizer: 람파스콰이어
-offers:
-  url: http://www.ticketlink.co.kr/product/66137
-content_hash: sha256:ddc68c806b05563217d9ea30880a72fb577627b0a9f9cf777bf089fdfa391d0a
+content_hash: sha256:754061a189b46a7dc5bfe96585d0c845dc5bb416a28aebccab140f5fe3a3aacb
 ---
 
 # 제24회 람파스콰이어 정기연주회

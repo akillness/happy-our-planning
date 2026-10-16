@@ -97,6 +97,20 @@ def main(argv: list[str]) -> int:
     log.info("== 3e. sitemap.xml 빌드 ==")
     build_sitemap.build(events=public_events)
 
+    log.info("== 3f. 주기 계층 기록 + 오프라인 보강 리포트 (비차단) ==")
+    try:
+        from scripts.ops import cross_check_links, refresh_cadence
+        from scripts.ingest import enrich_details
+
+        tiers = refresh_cadence.due_tiers()
+        refresh_cadence.write_status(tiers)
+        log.info("주기 계층: %s (단일 일일 cron 안에서 동작)", ",".join(tiers))
+        log.info("상세 보충 리포트: %s", enrich_details.build_report())
+        cross_path = cross_check_links.write_report()
+        log.info("링크 교차검증 기록: %s", cross_path)
+    except Exception as exc:  # 리포트는 빌드를 막지 않는다
+        log.warning("주기/보강 리포트 생략 (%s)", type(exc).__name__)
+
     log.info("== 4. 지식 wiki 갱신 ==")
     wiki_index.build()
     log.info("완료. 정적 사이트: web/public/ (data/*.json, events.db 갱신됨)")

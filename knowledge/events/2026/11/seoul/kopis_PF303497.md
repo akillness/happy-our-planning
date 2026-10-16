@@ -16,9 +16,11 @@ location:
 url: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303497
 source: kopis
 source_url: https://www.kopis.or.kr/openApi/restful/pblprfr/PF303497
-fetched_at: '2026-10-16T00:08:16+09:00'
+fetched_at: '2026-10-16T14:28:06+09:00'
 end_date: '2026-11-08T23:59:59+09:00'
 image: http://www.kopis.or.kr/upload/pfmPoster/PF_PF303497_261015_152323.png
+description: '장르: 대중음악 · 공연장: 우무지 · 공연시간 안내: 토요일 ~ 일요일(18:00) · 관람연령: 만 12세 이상 · 런타임:
+  2시간 · 티켓가격: 전석 66,000원 · 예매처: 멜론티켓 · 주최·주관: (주)소프트네이션(캔디드뮤직)'
 age: 만 12세 이상
 price_text: 전석 66,000원
 price: 66000
@@ -27,7 +29,7 @@ duration: PT2H
 organizer: (주)소프트네이션(캔디드뮤직)
 offers:
   url: https://ticket.melon.com/performance/index.htm?prodId=214058
-content_hash: sha256:d1af43c768fd03808895e3627a8145826c30e4032051ab4025c09d1308dab3ed
+content_hash: sha256:f978473aa59964f2e6982a037253c94124512168ec4f274981e7f7df1623dde6
 ---
 
 # 도비비 전국투어: 광광 [서울]

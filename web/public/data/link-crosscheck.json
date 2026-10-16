@@ -1,0 +1,13 @@
+{
+  "api_detail_separated_pairs": 426,
+  "cache_entries": 362,
+  "duplicate_groups": 0,
+  "duplicates": [],
+  "events_scanned": 438,
+  "non_https": [],
+  "non_https_count": 0,
+  "orphan_cache_entries": 27,
+  "plaintext_url_in_cache": true,
+  "source_url_non_https_count": 0,
+  "unique_urls": 438
+}

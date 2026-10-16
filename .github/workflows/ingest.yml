@@ -3,7 +3,16 @@ name: ingest
 on:
   schedule:
     - cron: "0 18 * * *"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      cadence:
+        description: "수동 실행 계층 (daily/weekly/monthly/yearly 리포트용, 스케줄은 단일 cron 유지)"
+        default: "daily"
+        required: false
+      enrich_apply:
+        description: "검색 보충을 flat-file에 기록 (true/false, 기본 false=dry-run)"
+        default: "false"
+        required: false
 
 concurrency:
   group: ingest
@@ -37,7 +46,16 @@ jobs:
           GOOGLE_AI_STUDIO_KEY: ${{ secrets.GOOGLE_AI_STUDIO_KEY }}
           GEMINI_MODEL: ${{ secrets.GEMINI_MODEL }}
           NOTCHIMA_CHECK_LINKS: ${{ github.event_name == 'schedule' && '1' || '0' }}
-        run: python -m scripts.run_pipeline
+        run: |
+          python -m scripts.run_pipeline
+          python -m scripts.ops.refresh_cadence --date "$(date +%F)"
+          if [ "${{ inputs.enrich_apply }}" = "true" ]; then
+            python -m scripts.ingest.enrich_details --apply
+          else
+            python -m scripts.ingest.enrich_details
+          fi
+          python -m scripts.ops.cross_check_links
+          python -m scripts.ops.prune_caches
 
       - name: Unit tests
         run: python -m unittest discover -s tests
