@@ -1,0 +1,461 @@
+{
+  "status": "passed",
+  "verified_on": "2026-10-17",
+  "spec_version": "1.8.0",
+  "production_url": "https://happy-our-planning.vercel.app/",
+  "project": "happy-our-planning",
+  "scope": "akillness-projects",
+  "deployment": {
+    "id": "dpl_5MiVL2WmXuuLTqKtCebvtMeneuCj",
+    "url": "https://happy-our-planning-oy78zx9tq-akillness-projects.vercel.app",
+    "target": "production",
+    "observed_status": "Ready",
+    "mode": "prebuilt build, protected-candidate check, promote",
+    "source_commit": "698a1e668ca29a947cc02c0318300bdb1e637992",
+    "commands": [
+      "vercel pull --yes --environment=production --scope akillness-projects",
+      "vercel build --prod --yes --scope akillness-projects",
+      "vercel deploy --prebuilt --prod --skip-domain --yes --scope akillness-projects --meta sourceCommit=698a1e668ca29a947cc02c0318300bdb1e637992",
+      "vercel promote https://happy-our-planning-oy78zx9tq-akillness-projects.vercel.app --yes --scope akillness-projects",
+      "vercel inspect https://happy-our-planning.vercel.app --scope akillness-projects"
+    ]
+  },
+  "git": {
+    "feature_commit": "52c0651",
+    "merge_commit": "698a1e668ca29a947cc02c0318300bdb1e637992",
+    "preserved_local_commits": [
+      "c7e2dbd",
+      "a583e7c"
+    ],
+    "merged_remote_ingest_commit": "a284b35",
+    "push_command": "git push origin main",
+    "push_observed": "a284b35..698a1e6 main -> main",
+    "force_push": false
+  },
+  "merged_pipeline": {
+    "command": "python3 -m scripts.run_pipeline",
+    "environment": {
+      "OFFLINE": "1",
+      "external_api_keys": "explicitly blank"
+    },
+    "returncode": 0,
+    "schema_valid": 440,
+    "schema_total": 440,
+    "public_events": 427,
+    "static_detail_pages": 427,
+    "sqlite_events": 427
+  },
+  "build_boundary": {
+    "static_files": 473,
+    "functions": 0,
+    "derived_database": "Removed only .vercel/output/static/data/events.db from this generated build before upload; web/public/data/events.db preserved",
+    "forbidden_build_files": [],
+    "all_runtime_bytes_match_source": true
+  },
+  "candidate_auth_boundary": {
+    "anonymous_result": "redirected to Vercel login, not treated as successful app response",
+    "redirect_statuses": [
+      302,
+      307
+    ],
+    "verified_method": "vercel curl with automatic deployment-protection bypass; bypass secrets not recorded"
+  },
+  "candidate_checks": [
+    {
+      "path": "/index.html",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "933b54a83c91ad216bc02949628c6d66a30f1ce5cf7ea7e786c1c72723378ff2",
+      "expected_sha256": "933b54a83c91ad216bc02949628c6d66a30f1ce5cf7ea7e786c1c72723378ff2"
+    },
+    {
+      "path": "/app.js",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "ad5b8a7e8603d9b8193e89652991a95f73ab0a38271cc87520168c9b303a1f68",
+      "expected_sha256": "ad5b8a7e8603d9b8193e89652991a95f73ab0a38271cc87520168c9b303a1f68"
+    },
+    {
+      "path": "/styles.css",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "c8b3ce1264a7253ed9ee0b226ea299310334e61b55cd4a581f8b361de451ba35",
+      "expected_sha256": "c8b3ce1264a7253ed9ee0b226ea299310334e61b55cd4a581f8b361de451ba35"
+    },
+    {
+      "path": "/i18n.js",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3",
+      "expected_sha256": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
+    },
+    {
+      "path": "/locales.json",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "697eccd9018388be44e955efdffa3a588aae86e6237bb75577e46816372cb044",
+      "expected_sha256": "697eccd9018388be44e955efdffa3a588aae86e6237bb75577e46816372cb044"
+    },
+    {
+      "path": "/timeline.js",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "46bc9aa3740b59203a5c250e2f33a42f6241773fa881447b6849279ddc76d5e0",
+      "expected_sha256": "46bc9aa3740b59203a5c250e2f33a42f6241773fa881447b6849279ddc76d5e0"
+    },
+    {
+      "path": "/timeline-import.js",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "7a6768a81d84b6e0ff92ac645680ceb63194dcda741db1ff1d6b8d91220adf0a",
+      "expected_sha256": "7a6768a81d84b6e0ff92ac645680ceb63194dcda741db1ff1d6b8d91220adf0a"
+    },
+    {
+      "path": "/directions.js",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "62b7180e32839d75eac56ddecc0fbb42758c281179868302780c6ba4dad3d3e0",
+      "expected_sha256": "62b7180e32839d75eac56ddecc0fbb42758c281179868302780c6ba4dad3d3e0"
+    },
+    {
+      "path": "/data/events.json",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "09beed1b90b6566ca8e006d57d43586fe5c3ba9d8ba013c121c8e436ec6f21d7",
+      "expected_sha256": "09beed1b90b6566ca8e006d57d43586fe5c3ba9d8ba013c121c8e436ec6f21d7"
+    },
+    {
+      "path": "/data/updated.json",
+      "status": 200,
+      "returncode": 0,
+      "ok": true,
+      "sha256": "11a4b068d26b9b538bb03747d66ed0f0a1e8ad11ef9a3d899976b2725c76439d",
+      "expected_sha256": "11a4b068d26b9b538bb03747d66ed0f0a1e8ad11ef9a3d899976b2725c76439d"
+    },
+    {
+      "path": "/data/events.db",
+      "status": 404,
+      "returncode": 0,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/.env",
+      "status": 404,
+      "returncode": 0,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/.env.local",
+      "status": 404,
+      "returncode": 0,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/.vercel/project.json",
+      "status": 404,
+      "returncode": 0,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/worker/ai-proxy.js",
+      "status": 404,
+      "returncode": 0,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/knowledge/index.md",
+      "status": 404,
+      "returncode": 0,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/specs/spec.md",
+      "status": 404,
+      "returncode": 0,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    }
+  ],
+  "public_http_method": "Unauthenticated httpx GET after promotion; exact SHA-256 match for runtime files, HTTP 404 required for excluded paths",
+  "public_http_checks": [
+    {
+      "path": "/index.html",
+      "status": 200,
+      "ok": true,
+      "sha256": "933b54a83c91ad216bc02949628c6d66a30f1ce5cf7ea7e786c1c72723378ff2",
+      "expected_sha256": "933b54a83c91ad216bc02949628c6d66a30f1ce5cf7ea7e786c1c72723378ff2"
+    },
+    {
+      "path": "/app.js",
+      "status": 200,
+      "ok": true,
+      "sha256": "ad5b8a7e8603d9b8193e89652991a95f73ab0a38271cc87520168c9b303a1f68",
+      "expected_sha256": "ad5b8a7e8603d9b8193e89652991a95f73ab0a38271cc87520168c9b303a1f68"
+    },
+    {
+      "path": "/styles.css",
+      "status": 200,
+      "ok": true,
+      "sha256": "c8b3ce1264a7253ed9ee0b226ea299310334e61b55cd4a581f8b361de451ba35",
+      "expected_sha256": "c8b3ce1264a7253ed9ee0b226ea299310334e61b55cd4a581f8b361de451ba35"
+    },
+    {
+      "path": "/i18n.js",
+      "status": 200,
+      "ok": true,
+      "sha256": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3",
+      "expected_sha256": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
+    },
+    {
+      "path": "/locales.json",
+      "status": 200,
+      "ok": true,
+      "sha256": "697eccd9018388be44e955efdffa3a588aae86e6237bb75577e46816372cb044",
+      "expected_sha256": "697eccd9018388be44e955efdffa3a588aae86e6237bb75577e46816372cb044"
+    },
+    {
+      "path": "/timeline.js",
+      "status": 200,
+      "ok": true,
+      "sha256": "46bc9aa3740b59203a5c250e2f33a42f6241773fa881447b6849279ddc76d5e0",
+      "expected_sha256": "46bc9aa3740b59203a5c250e2f33a42f6241773fa881447b6849279ddc76d5e0"
+    },
+    {
+      "path": "/timeline-import.js",
+      "status": 200,
+      "ok": true,
+      "sha256": "7a6768a81d84b6e0ff92ac645680ceb63194dcda741db1ff1d6b8d91220adf0a",
+      "expected_sha256": "7a6768a81d84b6e0ff92ac645680ceb63194dcda741db1ff1d6b8d91220adf0a"
+    },
+    {
+      "path": "/directions.js",
+      "status": 200,
+      "ok": true,
+      "sha256": "62b7180e32839d75eac56ddecc0fbb42758c281179868302780c6ba4dad3d3e0",
+      "expected_sha256": "62b7180e32839d75eac56ddecc0fbb42758c281179868302780c6ba4dad3d3e0"
+    },
+    {
+      "path": "/data/events.json",
+      "status": 200,
+      "ok": true,
+      "sha256": "09beed1b90b6566ca8e006d57d43586fe5c3ba9d8ba013c121c8e436ec6f21d7",
+      "expected_sha256": "09beed1b90b6566ca8e006d57d43586fe5c3ba9d8ba013c121c8e436ec6f21d7"
+    },
+    {
+      "path": "/data/updated.json",
+      "status": 200,
+      "ok": true,
+      "sha256": "11a4b068d26b9b538bb03747d66ed0f0a1e8ad11ef9a3d899976b2725c76439d",
+      "expected_sha256": "11a4b068d26b9b538bb03747d66ed0f0a1e8ad11ef9a3d899976b2725c76439d"
+    },
+    {
+      "path": "/data/events.db",
+      "status": 404,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/.env",
+      "status": 404,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/.env.local",
+      "status": 404,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/.vercel/project.json",
+      "status": 404,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/worker/ai-proxy.js",
+      "status": 404,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/knowledge/index.md",
+      "status": 404,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    },
+    {
+      "path": "/specs/spec.md",
+      "status": 404,
+      "ok": true,
+      "sha256": null,
+      "expected_sha256": null
+    }
+  ],
+  "app_sha256": "ad5b8a7e8603d9b8193e89652991a95f73ab0a38271cc87520168c9b303a1f68",
+  "matches_prior_f7_f8_validated_app": true,
+  "ci": {
+    "run_id": 39000122449,
+    "url": "https://github.com/akillness/happy-our-planning/actions/runs/39000122449",
+    "head_sha": "698a1e668ca29a947cc02c0318300bdb1e637992",
+    "conclusion": "success",
+    "typecheck": "success",
+    "unit_tests": "success",
+    "okf_schema": "success"
+  },
+  "production_browser": {
+    "tool": "functions.browser fresh named session notchima-production-check",
+    "no_mocked_network_or_catalog": true,
+    "scenarios": [
+      {
+        "check": "Mobile real event add and independent timeline menu",
+        "ok": true,
+        "viewport": [
+          390,
+          844
+        ]
+      },
+      {
+        "check": "Visit time 11:30 persisted; Google transit destination and Naver/Kakao links generated",
+        "ok": true,
+        "origin_omitted_without_geolocation_permission": true
+      },
+      {
+        "check": "Future visit completion rejected without state mutation",
+        "ok": true
+      },
+      {
+        "check": "Date outside event range rejected without changing saved date",
+        "ok": true
+      },
+      {
+        "check": "Valid past event marked visited and visited-only filter shows one event",
+        "ok": true
+      },
+      {
+        "check": "Reload retains planned time and completed visit",
+        "ok": true,
+        "entries": 2
+      },
+      {
+        "check": "Synthetic Google export preview shows one unchecked candidate and disabled confirm; storage unchanged",
+        "ok": true
+      },
+      {
+        "check": "Confirmed synthetic visit saved as google-export with only entry_id/event_id/date/time/visited/source; file input cleared; no network write",
+        "ok": true,
+        "entries": 3,
+        "visited": 2,
+        "imported": 1,
+        "network_writes_during_import": 0
+      },
+      {
+        "check": "Timeline remains inside viewport without horizontal overflow",
+        "ok": true,
+        "viewports": [
+          [
+            320,
+            740
+          ],
+          [
+            568,
+            320
+          ],
+          [
+            844,
+            390
+          ],
+          [
+            1440,
+            900
+          ]
+        ]
+      },
+      {
+        "check": "KO/EN menu controls switch accessible language and render without overflow",
+        "ok": true
+      },
+      {
+        "check": "Final desktop render",
+        "ok": true,
+        "viewport": [
+          1440,
+          900
+        ],
+        "horizontal_overflow": false,
+        "filtered_events": 12,
+        "cards_on_page": 5,
+        "markers": 8
+      },
+      {
+        "check": "Final mobile timeline persistence and containment",
+        "ok": true,
+        "viewport": [
+          390,
+          844
+        ],
+        "horizontal_overflow": false,
+        "entries": 3,
+        "visited": 2,
+        "imported": 1,
+        "panel": {
+          "left": 12,
+          "right": 378,
+          "top": 136,
+          "bottom": 664
+        }
+      }
+    ],
+    "final_smoke_logs": {
+      "page_errors": [],
+      "failed_requests": [],
+      "http_errors": []
+    },
+    "local_screenshots": [
+      "specs/verify/evidence/vercel-f7-f8-desktop.png",
+      "specs/verify/evidence/vercel-f7-f8-mobile.png"
+    ],
+    "probe_notes": [
+      "Live production does not export the map telemetry used by the local harness; no numerical map-center-preservation claim is made for this smoke run.",
+      "An empty-string browser fill did not fire application filtering; final smoke used a fresh navigation to the canonical URL. A browser execution timeout reset automation globals; final error logs cover the subsequent fresh-load smoke."
+    ]
+  },
+  "production_logs": {
+    "command": "vercel logs --environment production --level error --since 15m --limit 10 --no-follow --scope akillness-projects",
+    "observed_result": "No logs found; static site, not evidence of server-function execution"
+  },
+  "limitations": {
+    "google_account_oauth_sync": false,
+    "real_device_native_app_handoff_verified": false,
+    "only_synthetic_google_export_used_in_this_release_smoke": true
+  },
+  "prior_feature_validation": "specs/verify/evidence/f7-f8-final-check.json"
+}

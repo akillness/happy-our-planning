@@ -24,6 +24,7 @@
 
 📍 **https://happy-our-planning.vercel.app/**  
 Git 기반 Vercel Hobby 배포. `web/public` 정적 산출물만 업로드되며 서버 함수, 파생 DB, 별도 Worker는 포함하지 않습니다.
+로컬 `vercel build --prod`의 prebuilt 산출물에는 파생 DB가 포함될 수 있으므로, 업로드 전 `.vercel/output/static/data/events.db`를 제외합니다. 원본 `web/public/data/events.db`는 보존합니다.
 
 ## 아키텍처 한 줄
 
@@ -452,9 +453,10 @@ age: "5-10"
 
 ## 최종 업데이트
 
-이 README는 **2026-10-17** v1.8.0 타임라인·길찾기·방문 기록의 로컬 검증 결과를 반영했습니다.
+이 README는 **2026-10-17** v1.8.0 타임라인·길찾기·방문 기록의 로컬 검증과 프로덕션 배포 결과를 반영했습니다.
 
-- **로컬 공개 후보 데이터** — 427건 (이번 파이프라인은 무키·오프라인 픽스처로 실행했으며, 기존 지식 DB를 보존했습니다)
-- **기존 배포 주소** — https://happy-our-planning.vercel.app/ (Vercel Hobby). 이번 변경은 공개 배포하지 않았습니다.
+- **공개 후보 데이터** — 427건 (이번 파이프라인은 무키·오프라인 픽스처로 실행했으며, 기존 지식 DB와 원격 수집 이력을 보존했습니다)
+- **운영 주소** — https://happy-our-planning.vercel.app/ (Vercel Hobby). v1.8.0 prebuilt 빌드·배포·공개 도메인 승격을 완료했습니다.
 - **일일 갱신** — GitHub Actions 03:00 KST cron
-- **최신 검증** — unittest 263/263 PASS, OKF 440/440 PASS, 브라우저 5개 게이트 모두 PASS
+- **검증** — 로컬 unittest 263/263 PASS, OKF 440/440 PASS, 브라우저 5개 게이트 PASS. 게시 커밋 `698a1e6`의 GitHub CI와 공개 주소 HTTP 17/17 검증도 통과했습니다.
+- **배포 증거** — [프로덕션 배포 영수증](specs/verify/evidence/vercel-f7-f8-release.json): 공개 파일 해시 일치, DB·환경 파일 비공개, 모바일·데스크톱 타임라인·방문 파일 가져오기 실측 결과를 기록했습니다.
