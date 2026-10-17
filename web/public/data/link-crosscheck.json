@@ -1,12 +1,12 @@
 {
   "api_detail_separated_pairs": 426,
-  "cache_entries": 362,
+  "cache_entries": 561,
   "duplicate_groups": 0,
   "duplicates": [],
   "events_scanned": 440,
   "non_https": [],
   "non_https_count": 0,
-  "orphan_cache_entries": 27,
+  "orphan_cache_entries": 134,
   "plaintext_url_in_cache": true,
   "source_url_non_https_count": 0,
   "unique_urls": 440
