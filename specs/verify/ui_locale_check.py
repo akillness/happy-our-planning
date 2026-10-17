@@ -1,4 +1,4 @@
-"""Spec 1.6 map-shell, localization, ended-state, and accessibility verifier.
+"""Spec 1.7 map-shell, localization, ended-state, and accessibility verifier.
 
 This is a browser gate authoring surface.  It serves ``web/public`` read-only,
 routes one deterministic catalog through the established tile/data helpers, and
@@ -37,6 +37,7 @@ from run_ui_check import (
 EVIDENCE = EVID / "ui-locale-check.json"
 VIEWPORTS = [(1440, 900), (1280, 800), (1024, 540), (740, 360), (667, 375), (640, 360), (568, 320), (360, 800), (390, 844)]
 CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+CURRENT_PAGE = None
 PRE_UI_RED = {
     "command": "python3 /tmp/notchima_ui_red_probe.py",
     "launcher": CHROME,
@@ -248,6 +249,172 @@ def _open_results_drawer(page) -> bool:
     """, timeout=5000)
     _wait_for_stable_pager(page)
     return panel.get_attribute("data-collapsed") == "false"
+def _shortwide_header_results_probe(page, width: int, height: int, checks: list[dict]) -> None:
+    viewport = f"{width}x{height}"
+    panel = page.locator("#resultsPanel")
+    toggle = page.locator("#resultsToggle")
+
+    def wait_collapsed() -> None:
+        page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'true'")
+
+    def wait_expanded() -> None:
+        page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'false'")
+        _wait_for_stable_pager(page)
+
+    def record_geometry(label: str) -> None:
+        state = page.evaluate("""
+        () => {
+          const header = document.querySelector('.brand-tile');
+          const head = document.querySelector('#resultsPanel .results-head');
+          if (!header || !head) return {missing: true};
+          const rect = el => { const r = el.getBoundingClientRect(); return {left:r.left, top:r.top, right:r.right, bottom:r.bottom, width:r.width, height:r.height}; };
+          const overlaps = (a, b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
+          const hit = (x, y) => {
+            const node = document.elementFromPoint(x, y);
+            return {x, y, tag: node?.tagName || '', id: node?.id || '', className: typeof node?.className === 'string' ? node.className : '', inside: Boolean(node && (node === head || head.contains(node)))};
+          };
+          const headerRect = header.getBoundingClientRect();
+          const headRect = head.getBoundingClientRect();
+          return {
+            header: rect(header),
+            resultsHead: rect(head),
+            overlap: overlaps(headerRect, headRect),
+            centerHit: hit(headRect.left + headRect.width / 2, headRect.top + headRect.height / 2),
+            leftHit: hit(headRect.left + Math.min(8, headRect.width / 2), headRect.top + headRect.height / 2),
+            inViewport: headRect.left >= 0 && headRect.top >= 0 && headRect.right <= innerWidth && headRect.bottom <= innerHeight,
+          };
+        }
+        """)
+        ok = bool(state.get("resultsHead")) and not state.get("overlap", True) and state.get("inViewport", False) and state.get("centerHit", {}).get("inside", False) and state.get("leftHit", {}).get("inside", False)
+        _record(checks, f"{viewport} {label} header·results-head 비겹침·center/left 실제 head hit", ok, state)
+
+    if panel.get_attribute("data-collapsed") != "true":
+        toggle.click()
+        wait_collapsed()
+    record_geometry("결과 접힘")
+    toggle.click()
+    wait_expanded()
+    record_geometry("결과 펼침")
+
+    card = page.locator("#resultsScroll .card-open").first
+    probe = {"count": card.count()}
+    detail_open = False
+    if card.count() == 1:
+        card.scroll_into_view_if_needed()
+        probe = card.evaluate("""
+        el => {
+          const r = el.getBoundingClientRect();
+          const x = r.left + r.width / 2;
+          const y = r.top + r.height / 2;
+          const hit = document.elementFromPoint(x, y);
+          return {rect: {left:r.left, top:r.top, right:r.right, bottom:r.bottom, width:r.width, height:r.height}, center: {x, y}, inViewport: r.left >= 0 && r.top >= 0 && r.right <= innerWidth && r.bottom <= innerHeight, centerHit: Boolean(hit && (hit === el || el.contains(hit))), hitTag: hit?.tagName || '', hitClass: typeof hit?.className === 'string' ? hit.className : ''};
+        }
+        """)
+        ready = probe.get("inViewport", False) and probe.get("centerHit", False) and probe.get("rect", {}).get("width", 0) >= 44 and probe.get("rect", {}).get("height", 0) >= 44
+        if ready:
+            card.click()
+            page.wait_for_function("document.querySelector('#detail')?.open === true")
+            detail_open = page.locator("#detail[open]").count() == 1
+    card_ok = bool(probe.get("inViewport", False) and probe.get("centerHit", False) and detail_open)
+    _record(checks, f"{viewport} 첫 .card-open scrollIntoView·정확한 center hit·실클릭 detail open", card_ok, {"card": probe, "detailOpen": detail_open})
+    if detail_open:
+        page.keyboard.press("Escape")
+        page.wait_for_function("document.querySelector('#detail')?.open === false")
+    if panel.get_attribute("data-collapsed") != "true":
+        toggle.click()
+        wait_collapsed()
+def _tools_failure_metrics(page) -> dict:
+    return page.evaluate("""
+    () => {
+      const rect = selector => {
+        const el = document.querySelector(selector);
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return {left: r.left, top: r.top, right: r.right, bottom: r.bottom, width: r.width, height: r.height};
+      };
+      const describe = el => el ? {tag: el.tagName, id: el.id || '', cls: el.className || '', open: Boolean(el.open), hidden: Boolean(el.hidden), inert: Boolean(el.inert)} : null;
+      const toggle = document.querySelector('#toolsToggle');
+      const r = toggle?.getBoundingClientRect();
+      const x = r ? r.left + r.width / 2 : -1;
+      const y = r ? r.top + r.height / 2 : -1;
+      return {
+        viewport: {width: innerWidth, height: innerHeight},
+        toolsToggle: rect('#toolsToggle'),
+        controls: ['#locateBtn', '#languageToggle', '#soundToggle', '#aiBtn'].map(selector => ({selector, box: rect(selector), el: describe(document.querySelector(selector))})),
+        centerHit: document.elementFromPoint(x, y) ? describe(document.elementFromPoint(x, y)) : null,
+        hitInsideToggle: Boolean(toggle && document.elementFromPoint(x, y) && (document.elementFromPoint(x, y) === toggle || toggle.contains(document.elementFromPoint(x, y)))),
+        hitStack: document.elementsFromPoint(x, y).slice(0, 10).map(describe),
+        brandBottom: document.querySelector('.brand-tile')?.getBoundingClientRect().bottom ?? null,
+        filterOpen: Boolean(document.querySelector('#filterMenu')?.open),
+        timelineHidden: Boolean(document.querySelector('#timelinePanel')?.hidden),
+        resultsCollapsed: document.querySelector('#resultsPanel')?.dataset.collapsed ?? null,
+        resultsInert: Boolean(document.querySelector('#resultsPanel')?.inert),
+      };
+    }
+    """)
+
+def _close_active_panels(page) -> None:
+    timeline = page.locator("#timelinePanel")
+    if timeline.count() == 1 and not timeline.is_hidden():
+        page.locator("#mapTab").click()
+        page.wait_for_function("document.querySelector('#timelinePanel')?.hidden === true")
+    filter_menu = page.locator("#filterMenu")
+    if filter_menu.count() == 1 and filter_menu.evaluate("el => el.open"):
+        page.keyboard.press("Escape")
+        page.wait_for_function("document.querySelector('#filterMenu')?.open === false")
+    results_panel = page.locator("#resultsPanel")
+    if (results_panel.count() == 1
+            and page.evaluate("() => window.matchMedia('(max-width: 640px), (max-height: 560px) and (min-width: 641px)').matches")
+            and results_panel.get_attribute("data-collapsed") != "true"):
+        page.locator("#resultsToggle").click()
+        try:
+            page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'true'", timeout=1500)
+        except PlaywrightTimeoutError as exc:
+            raise AssertionError(f"results panel did not close before tools click: {json.dumps(_tools_failure_metrics(page), ensure_ascii=False)}") from exc
+    menu = page.locator("#toolsMenu")
+    if menu.count() == 1 and menu.evaluate("el => el.open"):
+        page.locator("#toolsToggle").click()
+        page.wait_for_function("document.querySelector('#toolsMenu')?.open === false")
+
+def _open_tools(page) -> bool:
+    menu = page.locator("#toolsMenu")
+    if menu.count() != 1:
+        return False
+    _close_active_panels(page)
+    toggle = page.locator("#toolsToggle")
+    try:
+        toggle.scroll_into_view_if_needed(timeout=5000)
+        page.wait_for_function("""
+        () => {
+          const el = document.querySelector('#toolsToggle');
+          if (!el) return false;
+          const rect = el.getBoundingClientRect();
+          return rect.width >= 44 && rect.height >= 44
+            && rect.left >= 0 && rect.top >= 0
+            && rect.right <= window.innerWidth && rect.bottom <= window.innerHeight;
+        }
+        """, timeout=5000)
+    except PlaywrightTimeoutError as exc:
+        raise AssertionError(f"toolsToggle geometry did not settle: {json.dumps(_tools_failure_metrics(page), ensure_ascii=False)}") from exc
+    if not menu.evaluate("el => el.open"):
+        probe = _tools_failure_metrics(page)
+        if not probe.get("hitInsideToggle"):
+            raise AssertionError(f"toolsToggle occluded: {json.dumps(probe, ensure_ascii=False)}")
+        toggle.click()
+        try:
+            page.wait_for_function("document.querySelector('#toolsMenu')?.open === true", timeout=1500)
+        except PlaywrightTimeoutError as exc:
+            raise AssertionError(f"toolsToggle click did not open: {json.dumps(_tools_failure_metrics(page), ensure_ascii=False)}") from exc
+    return True
+
+def _close_tools(page) -> bool:
+    menu = page.locator("#toolsMenu")
+    if menu.count() != 1:
+        return False
+    if menu.evaluate("el => el.open"):
+        page.locator("#toolsToggle").click()
+        page.wait_for_function("document.querySelector('#toolsMenu')?.open === false")
+    return True
 
 
 def _filter_snapshot(page) -> dict:
@@ -273,6 +440,115 @@ def _filter_snapshot(page) -> dict:
     """))
     return state
 
+def _run_pending_preserve_regression(page, checks: list[dict]) -> None:
+    check_name = "명시적 filter fit pending과 locale preserve 동시 상태를 첫 refresh에서 함께 해소"
+    results_panel = page.locator("#resultsPanel")
+    results_toggle = page.locator("#resultsToggle")
+    results_was_expanded = results_panel.get_attribute("data-collapsed") == "false"
+    if results_was_expanded:
+        results_toggle.click()
+        page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'true'")
+    try:
+        result = page.evaluate("""
+        () => {
+          const seam = window.__notchimaLocaleTest;
+          const menu = document.querySelector('#filterMenu');
+          if (!seam || !seam.state?.map || !menu) return {error: 'test seam, map, or filter menu missing'};
+          const map = seam.state.map;
+          const newPoints = [[35.1000, 128.1000], [35.1500, 128.2000]];
+          const fitOptionsBefore = seam.mapFitOptions();
+          const closeFrame = () => seam.cancelViewportFrame();
+          const copyView = () => {
+            const center = map.getCenter();
+            return {center: {lat: center.lat, lng: center.lng}, zoom: map.getZoom()};
+          };
+          const installFitProbe = seam.installFitProbe();
+          seam.clearFitCalls();
+          menu.open = true;
+          seam.state.mapPoints = newPoints;
+          const deferred = seam.fitCurrentMap();
+          const pendingBeforeLocale = seam.state.mapFitPending;
+          seam.onLanguageChange();
+          closeFrame();
+          const preserveBefore = seam.state.viewportPreserve ? {...seam.state.viewportPreserve} : null;
+          const fitCallsBeforeClose = seam.fitCalls.length;
+          menu.open = false;
+          seam.refreshMapViewport();
+          const afterFit = copyView();
+          const fitCallsAfterClose = seam.fitCalls.length;
+          const lastFit = seam.fitCalls[seam.fitCalls.length - 1] || null;
+          const bounds = map.getBounds();
+          const boundsContainNewPoints = newPoints.every(point => bounds.contains(point));
+          const pendingAfter = seam.state.mapFitPending;
+          const preserveAfter = seam.state.viewportPreserve;
+
+          map.setView([37.5500, 126.9500], 12, {animate: false});
+          closeFrame();
+          seam.state.mapFitPending = false;
+          seam.state.viewportPreserve = null;
+          seam.clearFitCalls();
+          const manualBefore = copyView();
+          seam.onLanguageChange();
+          closeFrame();
+          const manualPreserveSet = Boolean(seam.state.viewportPreserve);
+          seam.refreshMapViewport();
+          const manualAfter = copyView();
+          return {
+            installFitProbe,
+            deferred,
+            pendingBeforeLocale,
+            preserveBefore,
+            fitCallsBeforeClose,
+            fitCallsAfterClose,
+            lastFitPoints: lastFit?.points || null,
+            newPoints,
+            boundsContainNewPoints,
+            pendingAfter,
+            preserveAfter,
+            afterFit,
+            manualBefore,
+            manualPreserveSet,
+            manualFitCalls: seam.fitCalls.length,
+            fitOptionsBefore,
+            manualAfter,
+            manualPendingAfter: seam.state.mapFitPending,
+            manualPreserveAfter: seam.state.viewportPreserve,
+          };
+        }
+        """)
+        manual_view_ok = (
+            abs(result.get("manualAfter", {}).get("center", {}).get("lat", 0) - 37.55) < 1e-6
+            and abs(result.get("manualAfter", {}).get("center", {}).get("lng", 0) - 126.95) < 1e-6
+            and abs(result.get("manualAfter", {}).get("zoom", 0) - 12) < 1e-6
+        )
+        ok = (
+            result.get("installFitProbe") is True
+            and result.get("deferred") is False
+            and result.get("pendingBeforeLocale") is True
+            and isinstance(result.get("preserveBefore"), dict)
+            and isinstance(result.get("fitOptionsBefore"), dict)
+            and result.get("fitCallsBeforeClose") == 0
+            and result.get("fitCallsAfterClose") == 1
+            and result.get("lastFitPoints") == result.get("newPoints")
+            and result.get("boundsContainNewPoints") is True
+            and result.get("pendingAfter") is False
+            and result.get("preserveAfter") is None
+            and result.get("manualPreserveSet") is True
+            and result.get("manualFitCalls") == 0
+            and manual_view_ok
+            and result.get("manualPendingAfter") is False
+            and result.get("manualPreserveAfter") is None
+        )
+        _record(checks, check_name, ok, result)
+    except Exception as exc:
+        _record(checks, check_name, False, {"error": repr(exc)})
+    finally:
+        if results_was_expanded:
+            results_toggle.click()
+            page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'false'")
+            _wait_for_stable_pager(page)
+
+
 MAP_ANCHOR = 'state.map = window.L.map("map"'
 
 
@@ -281,6 +557,41 @@ def _install_map_observer(page) -> None:
     if app_source.count(MAP_ANCHOR) != 1:
         raise AssertionError(f"map instrumentation anchor count != 1: {app_source.count(MAP_ANCHOR)}")
     instrumented = app_source.replace(MAP_ANCHOR, f'window.__notchimaMap = {MAP_ANCHOR}', 1)
+    seam_anchor = '  document.addEventListener("DOMContentLoaded", main);'
+    if app_source.count(seam_anchor) != 1:
+        raise AssertionError(f"locale instrumentation anchor count != 1: {app_source.count(seam_anchor)}")
+    seam = """
+  window.__notchimaLocaleTest = (() => {
+    const fitCalls = [];
+    let originalFitBounds = null;
+    const cancelViewportFrame = () => {
+      if (!state.viewportFrame) return;
+      if (typeof window.cancelAnimationFrame === "function") window.cancelAnimationFrame(state.viewportFrame);
+      if (typeof window.clearTimeout === "function") window.clearTimeout(state.viewportFrame);
+      state.viewportFrame = 0;
+    };
+    return {
+      state,
+      fitCurrentMap,
+      refreshMapViewport,
+      mapFitOptions,
+      onLanguageChange,
+      fitCalls,
+      cancelViewportFrame,
+      clearFitCalls: () => { fitCalls.length = 0; },
+      installFitProbe: () => {
+        if (!state.map || typeof state.map.fitBounds !== "function" || originalFitBounds) return Boolean(originalFitBounds);
+        originalFitBounds = state.map.fitBounds;
+        state.map.fitBounds = function (points, options) {
+          fitCalls.push({points: Array.isArray(points) ? points.map(point => Array.isArray(point) ? point.slice() : point) : [], options: options || null});
+          return originalFitBounds.call(this, points, options);
+        };
+        return true;
+      },
+    };
+  })();
+"""
+    instrumented = instrumented.replace(seam_anchor, seam + seam_anchor, 1)
     page.route("**/app.js", lambda route: route.fulfill(status=200, content_type="application/javascript", body=instrumented))
 
 
@@ -302,6 +613,8 @@ def _run(checks: list[dict]) -> int:
         try:
             for width, height in VIEWPORTS:
                 page = _new_page(context, width, height)
+                global CURRENT_PAGE
+                CURRENT_PAGE = page
                 pages.append(page)
                 _install_map_observer(page)
                 _install_data_fixture(page, catalog)
@@ -341,7 +654,7 @@ def _run(checks: list[dict]) -> int:
                 _record(checks, f"{viewport} 우측 결과·내부 스크롤", results_ok, shell)
                 _record(checks, f"{viewport} 문서 스크롤·가로 넘침 없음",
                         shell["doc"]["width"] <= width + 1 and shell["doc"]["height"] <= height + 1, shell["doc"])
-                hooks = page.evaluate("""() => ["searchDock", "filterMenu", "filterToggle", "resultsPanel", "resultsToggle", "resultsScroll", "languageToggle"].every(id => Boolean(document.getElementById(id)))""")
+                hooks = page.evaluate("""() => ["searchDock", "filterMenu", "filterToggle", "toolsMenu", "toolsToggle", "resultsPanel", "resultsToggle", "resultsScroll", "languageToggle"].every(id => Boolean(document.getElementById(id)))""")
                 _record(checks, f"{viewport} 명시적 UI DOM hooks", hooks)
                 filter_toggle = page.locator("#filterToggle")
                 results_toggle = page.locator("#resultsToggle")
@@ -380,7 +693,25 @@ def _run(checks: list[dict]) -> int:
                 filter_geometry_ok = bool(filter_box and filter_content_box and ((full_results_panel and not compact_filter and not overlap and not content_overlap) if not compact_filter else results_panel.get_attribute("data-collapsed") == "true"))
                 _record(checks, f"{viewport} 필터·결과 실제 패널 비겹침/모바일 상호배타", filter_geometry_ok, {"filter": filter_box, "filterContent": filter_content_box, "results": results_box, "fullResultsPanel": full_results_panel, "resultsCollapsed": results_panel.get_attribute("data-collapsed"), "resultsAriaExpanded": results_toggle.get_attribute("aria-expanded"), "overlap": overlap, "contentOverlap": content_overlap, "mode": "exclusive" if compact_filter else "coexist"})
                 filter_toggle.press("Escape")
-                page.wait_for_function("document.querySelector('#filterMenu')?.open === false")
+                try:
+                    page.wait_for_function("document.querySelector('#filterMenu')?.open === false", timeout=1500)
+                except PlaywrightTimeoutError as exc:
+                    metrics = page.evaluate("""
+                    () => {
+                      const describe = el => el ? {tag: el.tagName, id: el.id || '', cls: el.className || '', open: Boolean(el.open), rect: (() => { const r = el.getBoundingClientRect(); return {left:r.left, top:r.top, right:r.right, bottom:r.bottom, width:r.width, height:r.height}; })()} : null;
+                      const menu = document.querySelector('#filterMenu');
+                      const toggle = document.querySelector('#filterToggle');
+                      return {
+                        viewport: {width: window.innerWidth, height: window.innerHeight},
+                        filterOpen: Boolean(menu?.open),
+                        filter: describe(menu),
+                        toggle: describe(toggle),
+                        hit: (() => { const r = toggle?.getBoundingClientRect(); if (!r) return null; const x = r.left + r.width / 2; const y = r.top + r.height / 2; return {element: describe(document.elementFromPoint(x, y)), stack: document.elementsFromPoint(x, y).slice(0, 8).map(describe)}; })(),
+                        detailsOpen: Array.from(document.querySelectorAll('details[open]')).map(describe),
+                      };
+                    }
+                    """)
+                    raise AssertionError(f"filterToggle Escape did not close: {json.dumps(metrics, ensure_ascii=False)}") from exc
                 if width in (1440, 390) or height <= 375:
                     page.evaluate("() => { window.__typedSearchMarker = 'preserved'; }")
                     before_lang = page.evaluate("() => document.documentElement.lang")
@@ -428,19 +759,72 @@ def _run(checks: list[dict]) -> int:
                     if width in (568, 640):
                         _record(checks, f"{viewport} 결과 접힘 도구·결과 패널 실제 rect 비겹침", compact["overlaps"]["toolsResultsCollapsed"] is False, {"tools": compact["tools"], "results": compact["results"], "overlap": compact["overlaps"]["toolsResultsCollapsed"]})
                     toggle = page.locator("#resultsToggle")
-                    toggle.scroll_into_view_if_needed()
+                    try:
+                        toggle.scroll_into_view_if_needed(timeout=1500)
+                    except PlaywrightTimeoutError as exc:
+                        raise AssertionError(f"resultsToggle setup timed out: {json.dumps(_tools_failure_metrics(page), ensure_ascii=False)}") from exc
                     toggle_box = _bbox(page.locator("#resultsToggle"), include_layout=True)
                     toggle_ready = bool(toggle_box and toggle_box["layoutWidth"] >= 44 and toggle_box["layoutHeight"] >= 44 and toggle_box["width"] >= 43.999 and toggle_box["height"] >= 43.999 and 0 <= toggle_box["top"] <= height and toggle_box["bottom"] <= height)
                     initial_collapsed = shell["collapsed"] == "true" and shell["expanded"] == "false"
                     _record(checks, f"{viewport} 결과 접힘 44px 토글·자연 스크롤 도달", initial_collapsed and toggle_ready, {"collapsed": initial_collapsed, "toggle": toggle_box})
-                    page.locator("#filterToggle").click()
-                    page.wait_for_function("document.querySelector('#filterMenu')?.open === true")
+                    try:
+                        page.locator("#filterToggle").click(timeout=1500)
+                    except PlaywrightTimeoutError as exc:
+                        raise AssertionError(f"filterToggle physical click timed out: {json.dumps(_tools_failure_metrics(page), ensure_ascii=False)}") from exc
+                    try:
+                        page.wait_for_function("document.querySelector('#filterMenu')?.open === true", timeout=1500)
+                    except PlaywrightTimeoutError as exc:
+                        metrics = page.evaluate("""
+                        () => {
+                          const rectOf = selector => { const el = document.querySelector(selector); const r = el?.getBoundingClientRect(); return r ? {left:r.left, top:r.top, right:r.right, bottom:r.bottom, width:r.width, height:r.height} : null; };
+                          const toggle = document.querySelector('#toolsToggle');
+                          const r = toggle?.getBoundingClientRect();
+                          const x = r ? r.left + r.width / 2 : -1;
+                          const y = r ? r.top + r.height / 2 : -1;
+                          const describe = el => el ? {tag: el.tagName, id: el.id, cls: el.className, open: Boolean(el.open)} : null;
+                          return {
+                            viewport: {width: innerWidth, height: innerHeight},
+                            toolsToggle: rectOf('#toolsToggle'),
+                            toolsToggleHit: document.elementFromPoint(x, y) ? describe(document.elementFromPoint(x, y)) : null,
+                            toolsToggleStack: document.elementsFromPoint(x, y).slice(0, 8).map(describe),
+                            brandBottom: document.querySelector('.brand-tile')?.getBoundingClientRect().bottom ?? null,
+                            filterOpen: Boolean(document.querySelector('#filterMenu')?.open),
+                            filterToggle: rectOf('#filterToggle'),
+                            timelineHidden: Boolean(document.querySelector('#timelinePanel')?.hidden),
+                            resultsCollapsed: document.querySelector('#resultsPanel')?.dataset.collapsed ?? null,
+                            toolsOpen: Boolean(document.querySelector('#toolsMenu')?.open),
+                            detailsOpen: Array.from(document.querySelectorAll('details[open]')).map(describe),
+                          };
+                        }
+                        """)
+                        raise AssertionError(f"filterToggle click did not open: {json.dumps(metrics, ensure_ascii=False)}") from exc
                     filter_results_exclusive = page.evaluate("() => document.querySelector('#resultsPanel')?.dataset.collapsed === 'true'")
                     page.locator("#filterToggle").press("Escape")
-                    page.wait_for_function("document.querySelector('#filterMenu')?.open === false")
+                    try:
+                        page.wait_for_function("document.querySelector('#filterMenu')?.open === false", timeout=1500)
+                    except PlaywrightTimeoutError as exc:
+                        metrics = page.evaluate("""
+                        () => {
+                          const describe = el => el ? {tag: el.tagName, id: el.id || '', cls: el.className || '', open: Boolean(el.open), rect: (() => { const r = el.getBoundingClientRect(); return {left:r.left, top:r.top, right:r.right, bottom:r.bottom, width:r.width, height:r.height}; })()} : null;
+                          const menu = document.querySelector('#filterMenu');
+                          const toggle = document.querySelector('#filterToggle');
+                          return {
+                            viewport: {width: window.innerWidth, height: window.innerHeight},
+                            filterOpen: Boolean(menu?.open),
+                            filter: describe(menu),
+                            toggle: describe(toggle),
+                            hit: (() => { const r = toggle?.getBoundingClientRect(); if (!r) return null; const x = r.left + r.width / 2; const y = r.top + r.height / 2; return {element: describe(document.elementFromPoint(x, y)), stack: document.elementsFromPoint(x, y).slice(0, 8).map(describe)}; })(),
+                            detailsOpen: Array.from(document.querySelectorAll('details[open]')).map(describe),
+                          };
+                        }
+                        """)
+                        raise AssertionError(f"filterToggle Escape did not close: {json.dumps(metrics, ensure_ascii=False)}") from exc
                     if toggle_ready:
                         toggle.click()
-                        page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'false'")
+                        try:
+                            page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'false'", timeout=1500)
+                        except PlaywrightTimeoutError as exc:
+                            raise AssertionError(f"results panel did not open after filter close: {json.dumps(_tools_failure_metrics(page), ensure_ascii=False)}") from exc
                     results_filter_exclusive = page.evaluate("() => document.querySelector('#resultsPanel')?.dataset.collapsed === 'false' && document.querySelector('#filterMenu')?.open === false")
                     if width in (568, 640):
                         tools_results_expanded = page.evaluate("""
@@ -458,7 +842,8 @@ def _run(checks: list[dict]) -> int:
                         pager_controls.first.scroll_into_view_if_needed()
                     pager_boxes = pager_controls.evaluate_all("els => els.filter(el => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return !el.hidden && s.display !== 'none' && r.width > 0 && r.height > 0; }).map(el => { const r = el.getBoundingClientRect(); return {width:r.width, height:r.height, layoutWidth:el.offsetWidth, layoutHeight:el.offsetHeight, top:r.top, bottom:r.bottom}; })")
                     pager_targets_ok = pager_controls.count() == 2 and len(pager_boxes) == 2 and all(item["layoutWidth"] >= 44 and item["layoutHeight"] >= 44 and item["width"] >= 43.999 and item["height"] >= 43.999 and item["top"] >= -2 and item["bottom"] <= height + 2 for item in pager_boxes)
-                    result_action = page.locator("#resultsScroll .card-actions .button-quiet").last
+                    result_action_selector = "#resultsScroll .card-open"
+                    result_action = page.locator(result_action_selector).last
                     result_action.scroll_into_view_if_needed()
                     results_scroll_box = _bbox(page.locator("#resultsScroll"))
                     result_action_box = _bbox(result_action, include_layout=True)
@@ -470,15 +855,37 @@ def _run(checks: list[dict]) -> int:
                     scroll_right = results_scroll_box["right"] if results_scroll_box else None
                     scroll_bottom = results_scroll_box["bottom"] if results_scroll_box else None
                     result_action_clickable = page.evaluate("el => { const r = el.getBoundingClientRect(); const hit = document.elementFromPoint(r.left + Math.min(8, r.width / 2), r.top + Math.min(8, r.height / 2)); return Boolean(hit && (hit === el || el.contains(hit)) && getComputedStyle(el).pointerEvents !== 'none'); }", result_action.element_handle()) if result_action_box else False
+                    result_action_probe = page.evaluate("""selector => {
+                      const el = document.querySelector(selector);
+                      if (!el) return {selector, missing: true};
+                      const r = el.getBoundingClientRect();
+                      const x = r.left + r.width / 2;
+                      const y = r.top + r.height / 2;
+                      const hit = document.elementFromPoint(x, y);
+                      const describe = node => node ? {tag: node.tagName, id: node.id || '', cls: node.className || '', text: node.textContent?.trim() || '', open: Boolean(node.open), hidden: Boolean(node.hidden), inert: Boolean(node.inert)} : null;
+                      return {
+                        selector,
+                        outerHTML: el.outerHTML,
+                        text: el.textContent?.trim() || '',
+                        data: Object.fromEntries(Array.from(el.attributes).filter(attr => attr.name.startsWith('data-')).map(attr => [attr.name, attr.value])),
+                        center: {x, y},
+                        centerHit: describe(hit),
+                        hitInside: Boolean(hit && (hit === el || el.contains(hit))),
+                        activePanels: Array.from(document.querySelectorAll('#filterMenu, #toolsMenu, #timelinePanel, #resultsPanel, #detail')).map(describe),
+                      };
+                    }""", result_action_selector)
                     result_action_ok = bool(results_scroll_box and result_action_box and results_scroll_box["height"] >= 72 and result_action_box["layoutWidth"] >= 44 and result_action_box["layoutHeight"] >= 44 and result_action_box["width"] >= 43.999 and result_action_box["height"] >= 43.999 and result_left >= results_scroll_box["left"] - 2 and result_right <= scroll_right + 2 and result_top >= results_scroll_box["top"] - 2 and result_bottom <= scroll_bottom + 2 and result_left >= -2 and result_right <= width + 2 and result_top >= -2 and result_bottom <= height + 2 and result_scroll_top > 0 and result_action_clickable)
                     if result_action_ok:
                         result_action.click()
-                        page.wait_for_function("document.querySelector('#detail[open]') !== null")
+                        try:
+                            page.wait_for_function("document.querySelector('#detail[open]') !== null", timeout=1500)
+                        except PlaywrightTimeoutError as exc:
+                            raise AssertionError(f"result action detail did not open: {json.dumps({'probe': result_action_probe, 'failure': _tools_failure_metrics(page)}, ensure_ascii=False)}") from exc
                     physical_detail_open = page.locator("#detail[open]").count() == 1
                     if physical_detail_open:
                         page.keyboard.press("Escape")
                         page.wait_for_function("document.querySelector('#detail[open]') === null")
-                    _record(checks, f"{viewport} 필터·결과 상호배타·pager·결과 action 완전가시·실클릭", filter_results_exclusive and results_filter_exclusive and pager_targets_ok and result_action_ok and physical_detail_open, {"filterWhileResultsCollapsed": filter_results_exclusive, "resultsExpandedFilterClosed": results_filter_exclusive, "pager": pager_boxes, "pagerTargetsOk": pager_targets_ok, "resultsScroll": results_scroll_box, "action": result_action_box, "scrollTop": result_scroll_top, "clickable": result_action_clickable, "detailOpen": physical_detail_open})
+                    _record(checks, f"{viewport} 필터·결과 상호배타·pager·결과 action 완전가시·실클릭", filter_results_exclusive and results_filter_exclusive and pager_targets_ok and result_action_ok and physical_detail_open, {"filterWhileResultsCollapsed": filter_results_exclusive, "resultsExpandedFilterClosed": results_filter_exclusive, "pager": pager_boxes, "pagerTargetsOk": pager_targets_ok, "resultsScroll": results_scroll_box, "action": result_action_box, "scrollTop": result_scroll_top, "clickable": result_action_clickable, "detailOpen": physical_detail_open, "actionProbe": result_action_probe})
                 visual = page.evaluate("""
                 () => {
                   const selectors = ['#searchDock .search-label input', '#filterMenu', '#resultsPanel', '.leaflet-control-attribution'];
@@ -509,13 +916,72 @@ def _run(checks: list[dict]) -> int:
                         page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'true'")
                     page.locator("#filterToggle").click()
                     page.wait_for_function("document.querySelector('#filterMenu')?.open === true")
-                    filter_targets = page.locator("#filterToggle, #resultsToggle, #languageToggle, #reset, #locateBtn").evaluate_all(
+                    tools_menu = page.locator("#toolsMenu")
+                    tools_initially_closed = tools_menu.count() == 1 and not tools_menu.evaluate("el => el.open")
+                    tools_opened = _open_tools(page)
+                    filter_targets = page.locator("#filterToggle, #resultsToggle, #toolsToggle, #languageToggle, #soundToggle, #aiBtn, #reset, #locateBtn").evaluate_all(
                         "els => els.filter(el => !el.hidden && getComputedStyle(el).display !== 'none').map(el => { const r = el.getBoundingClientRect(); return {id: el.id, width:r.width, height:r.height, layoutWidth:el.offsetWidth, layoutHeight:el.offsetHeight}; })"
                     )
                     filter_target_ids = {item["id"] for item in filter_targets}
-                    required_filter_target_ids = {"filterToggle", "resultsToggle", "languageToggle", "reset", "locateBtn"}
+                    required_filter_target_ids = {"filterToggle", "resultsToggle", "toolsToggle", "languageToggle", "soundToggle", "aiBtn", "reset", "locateBtn"}
                     filter_targets_ok = required_filter_target_ids.issubset(filter_target_ids) and all(item["layoutWidth"] >= 44 and item["layoutHeight"] >= 44 and item["width"] >= 43.999 and item["height"] >= 43.999 for item in filter_targets)
-                    _record(checks, f"{viewport} 필터 open·Reset 포함 44px 타깃", filter_targets_ok, filter_targets)
+                    tools_closed = _close_tools(page)
+                    tools_flow_ok = tools_initially_closed and tools_opened and tools_closed
+                    _record(checks, f"{viewport} 필터 open·도구 조작 포함 44px 타깃", filter_targets_ok, filter_targets)
+                    _record(checks, f"{viewport} 도구 메뉴 초기 접힘·열기·닫힘", tools_flow_ok, {"initiallyClosed": tools_initially_closed, "opened": tools_opened, "closed": tools_closed, "targetIds": sorted(filter_target_ids)})
+                    if width == 390 and height == 844:
+                        menu_reopened = _open_tools(page)
+                        drawer = page.locator("#toolsMenu .tools-drawer")
+                        drawer.hover()
+                        page.mouse.wheel(0, 600)
+                        page.wait_for_function("document.querySelector('#toolsMenu .tools-drawer')?.scrollTop >= 0")
+                        menu_clicks = []
+                        for selector in ("#languageToggle", "#soundToggle", "#aiBtn"):
+                            button = page.locator(selector)
+                            button.scroll_into_view_if_needed()
+                            target = page.evaluate("""
+                            selector => {
+                              const el = document.querySelector(selector);
+                              if (!el) return null;
+                              const r = el.getBoundingClientRect();
+                              const x = r.left + r.width / 2;
+                              const y = r.top + r.height / 2;
+                              const hit = document.elementFromPoint(x, y);
+                              return {id: el.id, left: r.left, top: r.top, right: r.right, bottom: r.bottom,
+                                      width: r.width, height: r.height, centerHit: Boolean(hit && (hit === el || el.contains(hit))),
+                                      inViewport: r.left >= 0 && r.top >= 0 && r.right <= window.innerWidth && r.bottom <= window.innerHeight};
+                            }
+                            """, selector)
+                            if not target or not target["centerHit"] or not target["inViewport"] or target["width"] < 43.999 or target["height"] < 43.999:
+                                menu_clicks.append({"selector": selector, "target": target, "clicked": False})
+                                continue
+                            if selector == "#languageToggle":
+                                before = page.locator("html").get_attribute("lang")
+                                button.click()
+                                page.wait_for_function("before => document.documentElement.lang !== before", arg=before)
+                                changed = page.locator("html").get_attribute("lang") != before
+                                button.click()
+                                page.wait_for_function("before => document.documentElement.lang === before", arg=before)
+                                restored = page.locator("html").get_attribute("lang") == before
+                            elif selector == "#soundToggle":
+                                before = button.get_attribute("aria-pressed")
+                                button.click()
+                                page.wait_for_function("before => document.querySelector('#soundToggle')?.getAttribute('aria-pressed') !== before", arg=before)
+                                changed = button.get_attribute("aria-pressed") != before
+                                button.click()
+                                page.wait_for_function("before => document.querySelector('#soundToggle')?.getAttribute('aria-pressed') === before", arg=before)
+                                restored = button.get_attribute("aria-pressed") == before
+                            else:
+                                button.click()
+                                page.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
+                                changed = page.locator("#aiDialog[open]").count() == 1
+                                page.keyboard.press("Escape")
+                                page.wait_for_function("document.querySelector('#aiDialog[open]') === null")
+                                restored = page.locator("#aiDialog[open]").count() == 0
+                            menu_clicks.append({"selector": selector, "target": target, "clicked": changed and restored})
+                        menu_clicks_ok = menu_reopened and len(menu_clicks) == 3 and all(item["clicked"] for item in menu_clicks)
+                        _record(checks, "390x844 열린 도구 메뉴 내부 스크롤·language/sound/AI 실제 중심 클릭", menu_clicks_ok, {"reopened": menu_reopened, "clicks": menu_clicks})
+                        _close_tools(page)
                     page.locator("#filterToggle").press("Escape")
                     page.wait_for_function("document.querySelector('#filterMenu')?.open === false")
                     if page.locator("#resultsPanel").evaluate("el => el.dataset.collapsed !== 'true'"):
@@ -523,10 +989,17 @@ def _run(checks: list[dict]) -> int:
                         page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'true'")
                     targets = filter_targets
                 else:
-                    targets = page.locator("#filterToggle, #resultsToggle, #languageToggle, #reset, #pagePrev, #pageNext, #locateBtn").evaluate_all(
-                        "els => els.filter(el => !el.hidden && getComputedStyle(el).display !== 'none').map(el => { const r = el.getBoundingClientRect(); return {id:el.id, width:r.width, height:r.height, layoutWidth:el.offsetWidth, layoutHeight:el.offsetHeight}; })"
+                    tools_menu = page.locator("#toolsMenu")
+                    tools_initially_closed = tools_menu.count() == 1 and not tools_menu.evaluate("el => el.open")
+                    tools_opened = _open_tools(page)
+                    targets = page.locator("#filterToggle, #resultsToggle, #toolsToggle, #languageToggle, #soundToggle, #aiBtn, #reset, #pagePrev, #pageNext, #locateBtn").evaluate_all(
+                        "els => els.filter(el => { const r = el.getBoundingClientRect(); return !el.hidden && getComputedStyle(el).display !== 'none' && r.width > 0 && r.height > 0; }).map(el => { const r = el.getBoundingClientRect(); return {id:el.id, width:r.width, height:r.height, layoutWidth:el.offsetWidth, layoutHeight:el.offsetHeight}; })"
                     )
+                    target_ids = {item["id"] for item in targets}
+                    required_target_ids = {"toolsToggle", "languageToggle", "soundToggle", "aiBtn", "locateBtn"}
+                    tools_closed = _close_tools(page)
                     _record(checks, f"{viewport} 주요 조작 44px 타깃", bool(targets) and all(item["layoutWidth"] >= 44 and item["layoutHeight"] >= 44 and item["width"] >= 43.999 and item["height"] >= 43.999 for item in targets), targets)
+                    _record(checks, f"{viewport} 도구 메뉴 초기 접힘·열기·닫힘", tools_initially_closed and tools_opened and tools_closed and required_target_ids.issubset(target_ids), {"initiallyClosed": tools_initially_closed, "opened": tools_opened, "closed": tools_closed, "targetIds": sorted(target_ids)})
                 marker_targets = page.locator(".leaflet-marker-icon").evaluate_all(
                     "els => els.filter(el => { const r = el.getBoundingClientRect(); const s = getComputedStyle(el); return !el.hidden && s.display !== 'none' && r.width > 0 && r.height > 0; }).map(el => { const r = el.getBoundingClientRect(); return {width:r.width, height:r.height, layoutWidth:el.offsetWidth, layoutHeight:el.offsetHeight, pointer:getComputedStyle(el).pointerEvents}; })"
                 )
@@ -571,14 +1044,21 @@ def _run(checks: list[dict]) -> int:
                         mobile_multiple_pages = mobile_page_next.count() == 1 and not mobile_page_next.is_disabled()
                         if mobile_page_next.count():
                             mobile_page_next.scroll_into_view_if_needed()
-                        result_targets = page.locator("#resultsToggle, #languageToggle, #pagePrev, #pageNext, #locateBtn").evaluate_all(
-                            "els => els.filter(el => !el.hidden && getComputedStyle(el).display !== 'none').map(el => { const r = el.getBoundingClientRect(); return {id: el.id, width:r.width, height:r.height, layoutWidth:el.offsetWidth, layoutHeight:el.offsetHeight}; })"
+                        result_tools_menu = page.locator("#toolsMenu")
+                        result_tools_initially_closed = result_tools_menu.count() == 1 and not result_tools_menu.evaluate("el => el.open")
+                        result_tools_opened = _open_tools(page)
+                        result_targets = page.locator("#resultsToggle, #toolsToggle, #languageToggle, #soundToggle, #aiBtn, #pagePrev, #pageNext, #locateBtn").evaluate_all(
+                            "els => els.filter(el => { const r = el.getBoundingClientRect(); return !el.hidden && getComputedStyle(el).display !== 'none' && r.width > 0 && r.height > 0; }).map(el => { const r = el.getBoundingClientRect(); return {id: el.id, width:r.width, height:r.height, layoutWidth:el.offsetWidth, layoutHeight:el.offsetHeight}; })"
                         )
+
                         result_target_ids = {item["id"] for item in result_targets}
-                        required_result_target_ids = {"resultsToggle", "languageToggle", "pagePrev", "pageNext", "locateBtn"}
+                        required_result_target_ids = {"resultsToggle", "toolsToggle", "languageToggle", "soundToggle", "aiBtn", "locateBtn"}
                         result_targets_ok = required_result_target_ids.issubset(result_target_ids) and all(item["layoutWidth"] >= 44 and item["layoutHeight"] >= 44 and item["width"] >= 43.999 and item["height"] >= 43.999 for item in result_targets)
+                        result_tools_closed = _close_tools(page)
+                        result_tools_flow_ok = result_tools_initially_closed and result_tools_opened and result_tools_closed
                         targets = result_targets
-                        _record(checks, f"{viewport} drawer·필터 배타·다중 페이지·pager 44px 타깃", drawer_open and mobile_filter_closed and mobile_multiple_pages and filter_targets_ok and result_targets_ok, {"drawerOpen": drawer_open, "filterClosed": mobile_filter_closed, "multiplePages": mobile_multiple_pages, "filterTargets": filter_targets, "resultTargets": result_targets})
+                        _record(checks, f"{viewport} drawer·필터 배타·다중 페이지·pager·도구 44px 타깃", drawer_open and mobile_filter_closed and mobile_multiple_pages and filter_targets_ok and result_targets_ok, {"drawerOpen": drawer_open, "filterClosed": mobile_filter_closed, "multiplePages": mobile_multiple_pages, "filterTargets": filter_targets, "resultTargets": result_targets})
+                        _record(checks, f"{viewport} 결과 도구 메뉴 초기 접힘·열기·닫힘", result_tools_flow_ok and result_targets_ok, {"initiallyClosed": result_tools_initially_closed, "opened": result_tools_opened, "closed": result_tools_closed, "targetIds": sorted(result_target_ids)})
                     drawer_occlusion_ok = page.evaluate("""() => {
                       const drawer = document.querySelector('#resultsPanel');
                       if (!drawer) return false;
@@ -859,9 +1339,12 @@ def _run(checks: list[dict]) -> int:
                     name: document.querySelector('#list .card-title')?.textContent || '', locationText: document.querySelector('#list .card-location')?.textContent || '', href: document.querySelector("#list .card:first-child a[href^='https://']")?.href || ''})
             """)
             before["pager"] = _pager_state(locale)
+            _open_tools(locale)
             locale.locator("#languageToggle").focus()
             locale.locator("#languageToggle").press("Enter")
             locale.wait_for_function("document.documentElement.lang === 'en'")
+            _close_tools(locale)
+            _open_results_drawer(locale)
             _wait_for_stable_pager(locale)
             after = locale.evaluate("""
             () => ({lang: document.documentElement.lang, query: location.search, center: window.__notchimaMap.getCenter(), zoom: window.__notchimaMap.getZoom(),
@@ -884,6 +1367,22 @@ def _run(checks: list[dict]) -> int:
                          and before["name"] == after["name"] and before["locationText"].endswith(raw_sigungu) and after["locationText"] == expected_en_location
                          and before["href"] == after["href"] and after["title"] != ko["title"])
             _record(checks, "KO→EN 토글이 semantic 페이지·행 identity/count·필터·지도·원문·href 보존", preserved, {"before": before, "after": after})
+            _run_pending_preserve_regression(locale, checks)
+            _open_tools(locale)
+            locale.locator("#aiBtn").click()
+            locale.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
+            locale.keyboard.press("Escape")
+            locale.wait_for_function("document.querySelector('#aiDialog[open]') === null")
+            locale.evaluate("""
+            () => Object.defineProperty(navigator, 'geolocation', {configurable:true, value: {
+              getCurrentPosition(success) { success({coords: {latitude: 37.5665, longitude: 126.9780, accuracy: 5}}); }
+            }})
+            """)
+            _open_tools(locale)
+            locale.locator("#locateBtn").click()
+            locale.wait_for_function("document.querySelector('#locateHint')?.textContent.trim() !== ''")
+            _record(checks, "EN 도구 메뉴에서 AI·Locate 실제 조작", bool(locale.locator("#locateHint").inner_text().strip()) and not locale.locator("#aiDialog[open]").count())
+            _close_tools(locale)
             _open_results_drawer(locale)
             locale.locator("#q").fill("서울")
             try:
@@ -925,9 +1424,11 @@ def _run(checks: list[dict]) -> int:
             _record(checks, "저장 언어가 lang 없는 clean URL에서도 EN·번역 UI 복원", stored_language["lang"] == "en" and stored_language["saved"] == "en" and stored_language["title"] == english_title and not stored_language["hasLangParam"], stored_language)
             locale.goto(base + "?lang=en", wait_until="networkidle")
             _wait_ready(locale)
+            _open_tools(locale)
             locale.locator("#languageToggle").click()
             locale.wait_for_function("document.documentElement.lang === 'ko'")
             _record(checks, "EN→KO pointer 토글", locale.evaluate("() => document.documentElement.lang === 'ko' && new URL(location.href).searchParams.get('lang') === 'ko'"))
+            _close_tools(locale)
             def locate_query_card(query: str, target: str):
                 if not _open_results_drawer(locale):
                     raise AssertionError(f"{query!r} ended/start/future query cannot open results drawer: {_filter_snapshot(locale)}")
@@ -1419,7 +1920,7 @@ def _run(checks: list[dict]) -> int:
 def main() -> int:
     checks: list[dict] = []
     metadata = _run_metadata()
-    running = {"status": "running", "spec_version": "1.6.0", "viewports": [f"{w}x{h}" for w, h in VIEWPORTS],
+    running = {"status": "running", "spec_version": "1.8.0", "viewports": [f"{w}x{h}" for w, h in VIEWPORTS],
                "data_context": "single deterministic routed catalog; Leaflet tile fixture; not public-data QA",
                "pre_ui_edit_red": PRE_UI_RED, **metadata, "checks": []}
     EVIDENCE.parent.mkdir(parents=True, exist_ok=True)
@@ -1428,15 +1929,16 @@ def main() -> int:
     try:
         status = _run(checks)
     except BaseException as error:
-        summary = {"status": "error", "spec_version": "1.6.0", "error": f"{type(error).__name__}: {error}",
+        summary = {"status": "error", "spec_version": "1.8.0", "error": f"{type(error).__name__}: {error}",
                    "partial_results": {"total_checks": len(checks), "passed": sum(item["ok"] for item in checks)},
                    "viewports": [f"{w}x{h}" for w, h in VIEWPORTS],
                    "data_context": "single deterministic routed catalog; Leaflet tile fixture; not public-data QA",
-                   "pre_ui_edit_red": PRE_UI_RED, **metadata, "checks": checks}
+                   "pre_ui_edit_red": PRE_UI_RED, **metadata, "checks": checks,
+                   "failure_metrics": _tools_failure_metrics(CURRENT_PAGE) if CURRENT_PAGE is not None else None}
         EVIDENCE.write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
         print(json.dumps(summary, ensure_ascii=False, indent=2))
         return 1
-    summary = {"status": "passed" if status == 0 else "failed", "spec_version": "1.6.0",
+    summary = {"status": "passed" if status == 0 else "failed", "spec_version": "1.8.0",
                "total_checks": len(checks), "passed": sum(item["ok"] for item in checks),
                "viewports": [f"{w}x{h}" for w, h in VIEWPORTS],
                "data_context": "single deterministic routed catalog; Leaflet tile fixture; not public-data QA",

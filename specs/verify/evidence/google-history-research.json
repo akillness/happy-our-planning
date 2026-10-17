@@ -1,0 +1,35 @@
+{
+  "research_date": "2026-10-17",
+  "question": "Google Timeline history and navigation capabilities that fit a free static Korean event app",
+  "sources": [
+    {"type": "official", "url": "https://support.google.com/maps/answer/6258979?hl=en&co=GENIE.Platform%3DDesktop", "observed": "Timeline comes directly from devices and is not available in Maps on a computer; use the mobile app."},
+    {"type": "official", "url": "https://support.google.com/maps/answer/6258979?hl=en&co=GENIE.Platform%3DAndroid", "observed": "Android Settings > Location > Location services > Timeline > Export Timeline data. Date-based visits, time editing, individual removal, and opt-in encrypted backups are documented."},
+    {"type": "official", "url": "https://support.google.com/maps/answer/6258979?hl=en&co=GENIE.Platform%3DiOS", "observed": "Google Maps Settings > Location & Privacy > Export Timeline data > Save to Files; the exported file is named location-history.json."},
+    {"type": "official", "url": "https://support.google.com/maps/answer/10077010?hl=en", "observed": "Timeline is off by default and opt-in. It saves precise locations on devices; particularly personal places have special deletion handling. Other Maps activity is separate."},
+    {"type": "official", "url": "https://developers.google.com/maps/documentation/urls/get-started", "observed": "Maps URLs require api=1 but no API key. origin can be omitted; device location or a start-point form is used. Navigation may be a preview and is not supported for every destination/product. Waypoints are platform-limited and may be ignored."},
+    {"type": "official", "url": "https://developers.google.com/data-portability/user-guide/scopes", "observed": "Published Maps and myactivity.maps scopes do not list Timeline location history. Several Maps activity scopes are restricted; Maps search/activity is not evidence of an actual visit."},
+    {"type": "community-format-evidence", "url": "https://github.com/CarlosBergillos/LocationHistoryFormat/issues/13", "observed": "Device export differs from old Takeout. Community examples show semanticSegments startTime/endTime and visit.topCandidate.placeLocation.latLng, with rawSignals and activities separately represented. This is not an official stable API schema."},
+    {"type": "community-parser-evidence", "url": "https://github.com/prasann/google-timeline-parser", "observed": "Android device-export parser documents semanticSegments and explicitly distinguishes it from Takeout. No upstream code or personal export was copied."}
+  ],
+  "decisions": [
+    "Keep Google account access, automatic synchronization, background location tracking, native Navigation SDK, and billed APIs outside this change.",
+    "Provide date-based plans and user-confirmed visit history, with repeated visits, per-visit editing and deletion, and browser-only minimal persistence.",
+    "Offer optional local JSON import of legacy placeVisit, Android semanticSegments visits, and iPhone visit-array structures. Unsupported variants fail explicitly; no promise of official stable file-schema coverage.",
+    "Match only exact venue coordinates within 150 metres and the event period. Reject centroid coordinates. Nearness does not prove attendance: every candidate starts unchecked and must be confirmed.",
+    "Never store or send imported raw coordinates, traces, filenames, or unmatched private places. Save only selected catalog event IDs, visit date/time, state, source, and local entry IDs.",
+    "Use one Google public-transit URL per itinerary leg, not a multi-waypoint transit request. Keep Naver's optional navigation-app action with a web-search fallback, and coordinate-aware Kakao directions."
+  ],
+  "live_browser_evidence": {
+    "source": "Local app at http://127.0.0.1:8890, actual published-catalog event detail",
+    "event": "coloring 비빔 발레 [군산]",
+    "constructed_google_url": "https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=35.9645869%2C126.693096",
+    "observed": "Click opened a real Google Maps tab; the loaded destination page displayed transit route choices. No login, purchase, or location permission was submitted. The automatically selected starting point and route text are intentionally not retained.",
+    "native_apps": "Naver/Kakao native-app launching is not claimed verified on a physical device. Link shape and destination are covered separately by synthetic focused tests."
+  },
+  "limits": [
+    "The app does not calculate a road route, live ETA, turn-by-turn guidance, or historical GPS path.",
+    "Real personal exports and Google account data were not used for testing; import compatibility is checked with synthetic files.",
+    "Old visits can have no candidate because the current event catalog has a retention window.",
+    "Maximum input 20 MiB and 100000 records; preview fails explicitly above 1000 matched candidates."
+  ]
+}

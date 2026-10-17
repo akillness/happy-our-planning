@@ -3,8 +3,8 @@ title: 놓치마 — 작업 분해 (team 실행 계획)
 status: active
 okf_type: TechnicalDocument
 layer: spec-stack/tasks · team
-spec_ref: specs/spec.md@1.0.0 · specs/seed.yaml
-updated: 2026-06-21
+spec_ref: specs/spec.md@1.8.0 · specs/seed.yaml
+updated: 2026-10-17
 ---
 
 # 작업 분해 (Run 레이어 / team executor 큐)
@@ -69,6 +69,23 @@ updated: 2026-06-21
 ### T6 — 클린업: 죽은 코드 (drift_guards) `DONE`
 - `scripts/run_pipeline.py` `main()` 말미 **중복 `return 0`**(도달불가) 제거.
 - **DoD**: `python -m scripts.run_pipeline` rc==0 유지 + 라인 제거.
+
+### F7 — 타임라인 · 길찾기 · 통합 메뉴 `DONE`
+- **신규:** `web/public/timeline.js` · `web/public/directions.js`.
+- **수정:** `web/public/app.js` · `index.html` · `styles.css` · `locales.json`, `scripts/build/build_pages.py`의 정적 상세 길찾기 연결.
+- **완료:** 독립 지도/타임라인 메뉴, 날짜·시간·계획/방문 기록 관리, 날짜별 직전 일정 출발지, Google 대중교통 길찾기와 선택 네이버·카카오 연결, 보조 도구 통합.
+- **검증:** `python3 specs/verify/timeline_check.py` **60/60 PASS**. 기존 UI **72/72**, 지도 **139/139**, 지역화·지도 상태 보존 **172/172 PASS**.
+- **DoD:** 전체 `python3 -m unittest discover -s tests` **263/263 PASS**에 `tests.test_timeline_directions` 포함. 320px 모바일·짧은 가로 화면, 44px 타깃, 결과 헤더/첫 카드 물리 클릭, 수동 지도 위치 보존, 명시적 필터 맞춤과 언어 전환 경합을 검증했습니다.
+- **상태:** 로컬 구현·검증 완료 (2026-10-17). 사용법은 [README](../README.md#타임라인--길찾기--방문-기록-f7-f8), 명령과 증거는 [하니스 계약](cli-harness.md)을 따릅니다.
+
+### F8 — 방문 기록 로컬 가져오기 `DONE`
+- **신규:** `web/public/timeline-import.js`의 Google 지도 내보내기 JSON 파서·매처·선택 미리보기.
+- **완료:** legacy/Android/iOS 방문 레코드, 20MiB/100,000건 제한, KST 날짜·시간, 실제 좌표와 150m 근접 후보, 최대 1,000건 미리보기와 사용자 확인 후 저장.
+- **저장 안전성:** 안정적인 방문 식별자, v1→v2 이전, 중복 방지, 기존 계획 보존, 손상·저장 실패 시 원본 보존을 검증했습니다. 원본 JSON/GPS/경로/파일명은 업로드하거나 영구 저장하지 않습니다.
+- **검증:** `python3 specs/verify/history_import_check.py` **21/21 PASS**. 전체 unittest **263/263 PASS**에 `tests.test_timeline_import` 포함.
+- **상태:** 합성 내보내기 파일로 로컬 구현·검증 완료 (2026-10-17). 실제 개인 파일이나 Google 계정은 사용하지 않았습니다.
+
+**범위:** Google 계정/OAuth 자동 동기화, 위치 추적, 유료 SDK, 앱 내부 음성 내비게이션은 제공하지 않습니다. 실제 휴대폰의 네이버·카카오 앱 전환은 검증하지 않았습니다. 이번 변경은 공개 배포하지 않았으며, 배포 대상은 정적 HTML/CSS/JS/JSON뿐입니다.
 
 ## 스프린트 S1–S4 (wiki/sprint-plan-2026 미러 · 2026-06-26)
 

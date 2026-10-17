@@ -1,8 +1,8 @@
 {
   "status": "passed",
-  "spec_version": "1.6.0",
-  "total_checks": 158,
-  "passed": 158,
+  "spec_version": "1.8.0",
+  "total_checks": 172,
+  "passed": 172,
   "viewports": [
     "1440x900",
     "1280x800",
@@ -45,12 +45,12 @@
     "i18n.js": true
   },
   "source_hashes": {
-    "spec.md": "af94b2ef61dd559388e8ff4ac83108ee6e1c3a13e8fa3d88f8523befe99d7729",
-    "seed.yaml": "468e7ab87d600aa9b0a0166b9b1b86294f451ed7ce47d5cf8e610253bce20f01",
-    "index.html": "1bef6267d3eb4ec978aca079f61525d61ebe6e4d0247b293aa6f7d0492e71c0c",
-    "app.js": "28ebe46a385ec4b0372850ed2a0bf5a9b2adda0b5c7da7d36e47dbf7f39bd39a",
-    "styles.css": "f11c8b7bf502c57f3a76bfd3a6ef862b513a4aacdffabfca18f405009383b000",
-    "locales.json": "62a8cc23a3ef227281a74c993a0c254829dc55e226658ff6364f5fbd5ce9f033",
+    "spec.md": "306f80bcfa66a884f6eeac4d0a9e4c8b956ef92482b37b53cf72975ad588f97a",
+    "seed.yaml": "f78c44c5a25301853f5d644435fadd14ba79f40d50dcb2af3677eb5d19a015b8",
+    "index.html": "933b54a83c91ad216bc02949628c6d66a30f1ce5cf7ea7e786c1c72723378ff2",
+    "app.js": "ad5b8a7e8603d9b8193e89652991a95f73ab0a38271cc87520168c9b303a1f68",
+    "styles.css": "c8b3ce1264a7253ed9ee0b226ea299310334e61b55cd4a581f8b361de451ba35",
+    "locales.json": "697eccd9018388be44e955efdffa3a588aae86e6237bb75577e46816372cb044",
     "i18n.js": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
   },
   "checks": [
@@ -192,17 +192,17 @@
       "detail": {
         "filter": {
           "left": 440,
-          "top": 162,
+          "top": 324,
           "right": 1000,
           "bottom": 820,
           "width": 560,
-          "height": 658
+          "height": 496
         },
         "filterContent": {
           "left": 441,
-          "top": 207,
+          "top": 369,
           "right": 999,
-          "bottom": 819,
+          "bottom": 981,
           "width": 558,
           "height": 612
         },
@@ -225,7 +225,7 @@
     {
       "check": "1440x900 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:49355/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "1440x900 cream surface alpha·양쪽 배경 대비",
@@ -281,13 +281,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -302,17 +302,38 @@
       "ok": true,
       "detail": [
         {
-          "id": "locateBtn",
-          "width": 159.265625,
+          "id": "toolsToggle",
+          "width": 72.59375,
           "height": 44,
-          "layoutWidth": 159,
+          "layoutWidth": 73,
+          "layoutHeight": 44
+        },
+        {
+          "id": "locateBtn",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
           "layoutHeight": 44
         },
         {
           "id": "languageToggle",
-          "width": 173.75,
+          "width": 242,
           "height": 44,
-          "layoutWidth": 174,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
           "layoutHeight": 44
         },
         {
@@ -344,6 +365,26 @@
           "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "1440x900 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "pageNext",
+          "pagePrev",
+          "reset",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
     },
     {
       "check": "1440x900 visible Leaflet marker 44px pointer target",
@@ -527,9 +568,9 @@
           "height": 800
         },
         "search": {
-          "left": 360,
+          "left": 162,
           "top": 674,
-          "right": 920,
+          "right": 722,
           "bottom": 784,
           "width": 560,
           "height": 110
@@ -566,9 +607,9 @@
           "height": 800
         },
         "search": {
-          "left": 360,
+          "left": 162,
           "top": 674,
-          "right": 920,
+          "right": 722,
           "bottom": 784,
           "width": 560,
           "height": 110
@@ -605,9 +646,9 @@
           "height": 800
         },
         "search": {
-          "left": 360,
+          "left": 162,
           "top": 674,
-          "right": 920,
+          "right": 722,
           "bottom": 784,
           "width": 560,
           "height": 110
@@ -651,19 +692,19 @@
       "ok": true,
       "detail": {
         "filter": {
-          "left": 360,
-          "top": 130,
-          "right": 868,
+          "left": 162,
+          "top": 324,
+          "right": 722,
           "bottom": 720,
-          "width": 508,
-          "height": 590
+          "width": 560,
+          "height": 396
         },
         "filterContent": {
-          "left": 361,
-          "top": 175,
-          "right": 867,
-          "bottom": 719,
-          "width": 506,
+          "left": 163,
+          "top": 369,
+          "right": 721,
+          "bottom": 913,
+          "width": 558,
           "height": 544
         },
         "results": {
@@ -736,13 +777,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -757,24 +798,45 @@
       "ok": true,
       "detail": [
         {
-          "id": "locateBtn",
-          "width": 159.265625,
+          "id": "toolsToggle",
+          "width": 72.59375,
           "height": 44,
-          "layoutWidth": 159,
+          "layoutWidth": 73,
+          "layoutHeight": 44
+        },
+        {
+          "id": "locateBtn",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
           "layoutHeight": 44
         },
         {
           "id": "languageToggle",
-          "width": 173.75,
+          "width": 242,
           "height": 44,
-          "layoutWidth": 174,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
           "layoutHeight": 44
         },
         {
           "id": "filterToggle",
-          "width": 506,
+          "width": 558,
           "height": 44,
-          "layoutWidth": 506,
+          "layoutWidth": 558,
           "layoutHeight": 44
         },
         {
@@ -799,6 +861,26 @@
           "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "1280x800 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "pageNext",
+          "pagePrev",
+          "reset",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
     },
     {
       "check": "1280x800 visible Leaflet marker 44px pointer target",
@@ -1107,17 +1189,17 @@
       "detail": {
         "filter": {
           "left": 232,
-          "top": 88,
+          "top": 324,
           "right": 792,
           "bottom": 460,
           "width": 560,
-          "height": 372
+          "height": 136
         },
         "filterContent": {
           "left": 233,
-          "top": 133,
+          "top": 369,
           "right": 791,
-          "bottom": 459,
+          "bottom": 695,
           "width": 558,
           "height": 326
         },
@@ -1217,13 +1299,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -1238,17 +1320,38 @@
       "ok": true,
       "detail": [
         {
-          "id": "locateBtn",
-          "width": 48,
+          "id": "toolsToggle",
+          "width": 44,
           "height": 44,
-          "layoutWidth": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
           "layoutHeight": 44
         },
         {
           "id": "languageToggle",
-          "width": 48,
+          "width": 44,
           "height": 44,
-          "layoutWidth": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
           "layoutHeight": 44
         },
         {
@@ -1268,25 +1371,30 @@
         {
           "id": "resultsToggle",
           "width": 44,
-          "height": 43.99999237060547,
+          "height": 44,
           "layoutWidth": 44,
-          "layoutHeight": 44
-        },
-        {
-          "id": "pagePrev",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
-          "layoutHeight": 44
-        },
-        {
-          "id": "pageNext",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
           "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "1024x540 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "reset",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
     },
     {
       "check": "1024x540 visible Leaflet marker 44px pointer target",
@@ -1595,17 +1703,17 @@
       "detail": {
         "filter": {
           "left": 90,
-          "top": 88,
+          "top": 164,
           "right": 650,
           "bottom": 280,
           "width": 560,
-          "height": 192
+          "height": 116
         },
         "filterContent": {
           "left": 91,
-          "top": 133,
+          "top": 209,
           "right": 649,
-          "bottom": 279,
+          "bottom": 355,
           "width": 558,
           "height": 146
         },
@@ -1628,7 +1736,7 @@
     {
       "check": "740x360 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:49355/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "740x360 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
@@ -1637,17 +1745,17 @@
         "brand": {
           "left": 12,
           "top": 8,
-          "right": 250,
+          "right": 572,
           "bottom": 66,
-          "width": 238,
+          "width": 560,
           "height": 58
         },
         "tools": {
           "left": 72,
-          "top": 80,
-          "right": 228,
-          "bottom": 124,
-          "width": 156,
+          "top": 74,
+          "right": 116,
+          "bottom": 118,
+          "width": 44,
           "height": 44
         },
         "search": {
@@ -1688,7 +1796,7 @@
           "toolsResultsCollapsed": false,
           "brandSearch": false
         },
-        "corridor": 110
+        "corridor": 116
       }
     },
     {
@@ -1743,17 +1851,76 @@
         },
         "action": {
           "left": 370,
-          "top": 126.9375,
-          "right": 438.28125,
-          "bottom": 170.9375,
-          "width": 68.28125,
+          "top": 126.78125,
+          "right": 698,
+          "bottom": 170.78125,
+          "width": 328,
           "height": 44,
-          "layoutWidth": 68,
+          "layoutWidth": 328,
           "layoutHeight": 44
         },
-        "scrollTop": 1829,
+        "scrollTop": 1855,
         "clickable": true,
-        "detailOpen": true
+        "detailOpen": true,
+        "actionProbe": {
+          "selector": "#resultsScroll .card-open",
+          "outerHTML": "<button class=\"card-open\" type=\"button\" aria-label=\"부산 가족 만들기 체험 상세 보기\">부산 <mark>가족</mark> 만들기 체험</button>",
+          "text": "부산 가족 만들기 체험",
+          "data": {},
+          "center": {
+            "x": 534,
+            "y": -1645.28125
+          },
+          "centerHit": null,
+          "hitInside": false,
+          "activePanels": [
+            {
+              "tag": "DETAILS",
+              "id": "toolsMenu",
+              "cls": "tools-menu",
+              "text": "•••\n            도구\n          \n          \n            \n              \n              내 위치에서 찾기\n            \n            \n              \n              View in English\n            \n            \n              \n              소리 끔\n            \n            \n              \n              아이 맞춤 추천\n            \n            위치는 저장하지 않아요.",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "DETAILS",
+              "id": "filterMenu",
+              "cls": "filter-menu",
+              "text": "필터 열기\n          필터 닫기\n          지역 · 테마 · 나이 · 활동\n        \n        \n          \n            지역전체 지역서울특별시 (18)\n            테마전체 테마축제 (18)\n            나이대전체 나이대어린이 (18)\n            아이와 해볼 활동전체 활동만들기·예술 (1)\n            기간 시작\n            기간 종료\n          \n          \n             아이와 함께\n             무료만\n             지금 신청 가능\n            \n              \n              필터 초기화\n            \n          \n          \n            아이와 해볼 수 있는 것현재 조건에 맞는 체험\n            만들기·예술1건\n          \n          \n            지역별로 빠르게 보기현재 필터 기준\n            서울특별시17건\n          \n          \n            조건에 맞는 세부 항목고르면 필터에 바로 반영됩니다\n            테마 좁히기축제17건체험1건지역 좁히기서울특별시17건부산광역시1건나이대 좁히기어린이18건활동 좁히기만들기·예술1건\n          \n          \n            지정한 기간과 겹치는 행사를 보여드려요.\n            공공 API·웹검색 실데이터 기반 목록입니다. 일정·비용은 출처에서 확인하세요.\n            수집 모드: 확인 필요 · 예약 설정: 매일 03:00 KST · 최근 실시간 성공 기록 없음",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "SECTION",
+              "id": "timelinePanel",
+              "cls": "timeline-panel",
+              "text": "나의 방문 타임라인\n          0건\n        \n        지도로 돌아가기\n      \n      \n        가고 싶은 행사와 다녀온 기록을 날짜별로 모아보세요. 길찾기는 지도 앱에서 열리며, 여기서는 위치를 추적하지 않아요.\n        \n          \n            방문 날짜\n            \n          \n          \n            보기\n            \n              전체 방문\n              방문 계획\n              방문 기록\n            \n          \n          전체 날짜\n        \n        \n          Google 타임라인 파일 가져오기\n          \n            직접 내보낸 JSON 파일을 선택해 주세요. 이 브라우저에서만 읽고 업로드하지 않아요. 직접 확인한 행사 방문만 저장하며 원본 좌표와 이동 경로는 저장하지 않습니다.\n            근처에 있었다고 행사에 참석한 것은 아니에요. 후보를 하나씩 확인해 주세요. 과거 기록은 현재 행사 목록과 매칭되지 않을 수 있습니다. JSON 20MiB·100,000개 기록, 미리보기 1,000개 후보까지 지원하며 Google의 고정된 공식 파일 스키마는 아닙니다.\n            \n              타임라인 JSON 파일\n              \n            \n            \n            \n            \n              선택한 방문 저장\n              미리보기 취소\n            \n            \n              Google 타임라인 내보내는 방법\n              Android 내보내기 도움말\n              iPhone 내보내기 도움말\n            \n          \n        \n        \n        \n          다음 나들이를 담아보세요\n          지도나 행사 상세에서 타임라인에 추가한 뒤 방문 날짜와 시간을 정해보세요.\n          \n            행사 찾아보기",
+              "open": false,
+              "hidden": true,
+              "inert": false
+            },
+            {
+              "tag": "SECTION",
+              "id": "resultsPanel",
+              "cls": "results",
+              "text": "아이와 갈 행사18건\n        \n          \n            \n            결과 접기\n          \n        \n      \n      \n        행사 정보를 준비하고 있습니다…\n        \n          행사 정보를 불러오지 못했어요.\n          잠시 후 다시 시도하거나, 출처 사이트를 직접 확인해 주세요.\n          다시 불러오기\n        \n        \n          관련도순\n          다가오는 순\n          거리순\n        \n        18건. 종료된 행사 2건은 날짜에 '종료'로 표시했습니다.\n        \n          조건에 맞는 행사가 없어요.\n          지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.\n        \n        부산 가족 만들기 체험부산광역시 해운대구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사체험만들기·예술체험아이와 해볼 수 있는 일: 부산 가족 만들기 체험 가족 공예 체험 체험아이 동반 안내: 명시 문구: 가족상세 보기타임라인에 추가연결 차단 · 확인 시각 없음 · 신뢰 도메인 아님예매처에서 확인 · 원본 URL 없음서울 유료 어린이 축제서울특별시 마포구2026년 10월 15일 ~ 2026년 10월 16일대상 7-131,000원아이와 함께어린이정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 차단 · 확인 시각 없음 · 신뢰 도메인 아님예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 미래 가족 음악축제서울특별시 종로구2026년 11월 1일 ~ 2026년 11월 30일대상 7-13무료아이와 함께어린이무료마감행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 어린이 여름 음악축제서울특별시 종로구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 카탈로그 행사 1서울특별시 종로구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기\n        \n          이전\n          1 / 4 페이지 (전체 18건 중 1–5번째)\n          다음",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "DIALOG",
+              "id": "detail",
+              "cls": "",
+              "text": "",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            }
+          ]
+        }
       }
     },
     {
@@ -1810,13 +1977,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -1831,17 +1998,38 @@
       "ok": true,
       "detail": [
         {
-          "id": "locateBtn",
-          "width": 48,
+          "id": "toolsToggle",
+          "width": 44,
           "height": 44,
-          "layoutWidth": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
           "layoutHeight": 44
         },
         {
           "id": "languageToggle",
-          "width": 48,
+          "width": 44,
           "height": 44,
-          "layoutWidth": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
           "layoutHeight": 44
         },
         {
@@ -1864,22 +2052,27 @@
           "height": 44,
           "layoutWidth": 44,
           "layoutHeight": 44
-        },
-        {
-          "id": "pagePrev",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
-          "layoutHeight": 44
-        },
-        {
-          "id": "pageNext",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
-          "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "740x360 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "reset",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
     },
     {
       "check": "740x360 visible Leaflet marker 44px pointer target",
@@ -2188,17 +2381,17 @@
       "detail": {
         "filter": {
           "left": 53.5,
-          "top": 88,
+          "top": 179,
           "right": 583.0,
           "bottom": 295,
           "width": 529.5,
-          "height": 207
+          "height": 116
         },
         "filterContent": {
           "left": 54.5,
-          "top": 133,
+          "top": 224,
           "right": 582.0,
-          "bottom": 294,
+          "bottom": 385,
           "width": 527.5,
           "height": 161
         },
@@ -2221,7 +2414,7 @@
     {
       "check": "667x375 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:49355/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "667x375 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
@@ -2230,17 +2423,17 @@
         "brand": {
           "left": 12,
           "top": 8,
-          "right": 250,
+          "right": 572,
           "bottom": 66,
-          "width": 238,
+          "width": 560,
           "height": 58
         },
         "tools": {
           "left": 72,
-          "top": 80,
-          "right": 228,
-          "bottom": 124,
-          "width": 156,
+          "top": 74,
+          "right": 116,
+          "bottom": 118,
+          "width": 44,
           "height": 44
         },
         "search": {
@@ -2281,7 +2474,7 @@
           "toolsResultsCollapsed": false,
           "brandSearch": false
         },
-        "corridor": 125
+        "corridor": 131
       }
     },
     {
@@ -2336,17 +2529,76 @@
         },
         "action": {
           "left": 354,
-          "top": 133.53125,
-          "right": 422.28125,
-          "bottom": 177.53125,
-          "width": 68.28125,
+          "top": 133.65625,
+          "right": 625,
+          "bottom": 177.65625,
+          "width": 271,
           "height": 44,
-          "layoutWidth": 68,
+          "layoutWidth": 271,
           "layoutHeight": 44
         },
-        "scrollTop": 2198,
+        "scrollTop": 1971,
         "clickable": true,
-        "detailOpen": true
+        "detailOpen": true,
+        "actionProbe": {
+          "selector": "#resultsScroll .card-open",
+          "outerHTML": "<button class=\"card-open\" type=\"button\" aria-label=\"부산 가족 만들기 체험 상세 보기\">부산 <mark>가족</mark> 만들기 체험</button>",
+          "text": "부산 가족 만들기 체험",
+          "data": {},
+          "center": {
+            "x": 489.5,
+            "y": -1761.28125
+          },
+          "centerHit": null,
+          "hitInside": false,
+          "activePanels": [
+            {
+              "tag": "DETAILS",
+              "id": "toolsMenu",
+              "cls": "tools-menu",
+              "text": "•••\n            도구\n          \n          \n            \n              \n              내 위치에서 찾기\n            \n            \n              \n              View in English\n            \n            \n              \n              소리 끔\n            \n            \n              \n              아이 맞춤 추천\n            \n            위치는 저장하지 않아요.",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "DETAILS",
+              "id": "filterMenu",
+              "cls": "filter-menu",
+              "text": "필터 열기\n          필터 닫기\n          지역 · 테마 · 나이 · 활동\n        \n        \n          \n            지역전체 지역서울특별시 (18)\n            테마전체 테마축제 (18)\n            나이대전체 나이대어린이 (18)\n            아이와 해볼 활동전체 활동만들기·예술 (1)\n            기간 시작\n            기간 종료\n          \n          \n             아이와 함께\n             무료만\n             지금 신청 가능\n            \n              \n              필터 초기화\n            \n          \n          \n            아이와 해볼 수 있는 것현재 조건에 맞는 체험\n            만들기·예술1건\n          \n          \n            지역별로 빠르게 보기현재 필터 기준\n            서울특별시17건\n          \n          \n            조건에 맞는 세부 항목고르면 필터에 바로 반영됩니다\n            테마 좁히기축제17건체험1건지역 좁히기서울특별시17건부산광역시1건나이대 좁히기어린이18건활동 좁히기만들기·예술1건\n          \n          \n            지정한 기간과 겹치는 행사를 보여드려요.\n            공공 API·웹검색 실데이터 기반 목록입니다. 일정·비용은 출처에서 확인하세요.\n            수집 모드: 확인 필요 · 예약 설정: 매일 03:00 KST · 최근 실시간 성공 기록 없음",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "SECTION",
+              "id": "timelinePanel",
+              "cls": "timeline-panel",
+              "text": "나의 방문 타임라인\n          0건\n        \n        지도로 돌아가기\n      \n      \n        가고 싶은 행사와 다녀온 기록을 날짜별로 모아보세요. 길찾기는 지도 앱에서 열리며, 여기서는 위치를 추적하지 않아요.\n        \n          \n            방문 날짜\n            \n          \n          \n            보기\n            \n              전체 방문\n              방문 계획\n              방문 기록\n            \n          \n          전체 날짜\n        \n        \n          Google 타임라인 파일 가져오기\n          \n            직접 내보낸 JSON 파일을 선택해 주세요. 이 브라우저에서만 읽고 업로드하지 않아요. 직접 확인한 행사 방문만 저장하며 원본 좌표와 이동 경로는 저장하지 않습니다.\n            근처에 있었다고 행사에 참석한 것은 아니에요. 후보를 하나씩 확인해 주세요. 과거 기록은 현재 행사 목록과 매칭되지 않을 수 있습니다. JSON 20MiB·100,000개 기록, 미리보기 1,000개 후보까지 지원하며 Google의 고정된 공식 파일 스키마는 아닙니다.\n            \n              타임라인 JSON 파일\n              \n            \n            \n            \n            \n              선택한 방문 저장\n              미리보기 취소\n            \n            \n              Google 타임라인 내보내는 방법\n              Android 내보내기 도움말\n              iPhone 내보내기 도움말\n            \n          \n        \n        \n        \n          다음 나들이를 담아보세요\n          지도나 행사 상세에서 타임라인에 추가한 뒤 방문 날짜와 시간을 정해보세요.\n          \n            행사 찾아보기",
+              "open": false,
+              "hidden": true,
+              "inert": false
+            },
+            {
+              "tag": "SECTION",
+              "id": "resultsPanel",
+              "cls": "results",
+              "text": "아이와 갈 행사18건\n        \n          \n            \n            결과 접기\n          \n        \n      \n      \n        행사 정보를 준비하고 있습니다…\n        \n          행사 정보를 불러오지 못했어요.\n          잠시 후 다시 시도하거나, 출처 사이트를 직접 확인해 주세요.\n          다시 불러오기\n        \n        \n          관련도순\n          다가오는 순\n          거리순\n        \n        18건. 종료된 행사 2건은 날짜에 '종료'로 표시했습니다.\n        \n          조건에 맞는 행사가 없어요.\n          지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.\n        \n        부산 가족 만들기 체험부산광역시 해운대구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사체험만들기·예술체험아이와 해볼 수 있는 일: 부산 가족 만들기 체험 가족 공예 체험 체험아이 동반 안내: 명시 문구: 가족상세 보기타임라인에 추가연결 차단 · 확인 시각 없음 · 신뢰 도메인 아님예매처에서 확인 · 원본 URL 없음서울 유료 어린이 축제서울특별시 마포구2026년 10월 15일 ~ 2026년 10월 16일대상 7-131,000원아이와 함께어린이정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 차단 · 확인 시각 없음 · 신뢰 도메인 아님예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 미래 가족 음악축제서울특별시 종로구2026년 11월 1일 ~ 2026년 11월 30일대상 7-13무료아이와 함께어린이무료마감행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 어린이 여름 음악축제서울특별시 종로구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 카탈로그 행사 1서울특별시 종로구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기\n        \n          이전\n          1 / 4 페이지 (전체 18건 중 1–5번째)\n          다음",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "DIALOG",
+              "id": "detail",
+              "cls": "",
+              "text": "",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            }
+          ]
+        }
       }
     },
     {
@@ -2403,13 +2655,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -2424,17 +2676,38 @@
       "ok": true,
       "detail": [
         {
-          "id": "locateBtn",
-          "width": 48,
+          "id": "toolsToggle",
+          "width": 44,
           "height": 44,
-          "layoutWidth": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
           "layoutHeight": 44
         },
         {
           "id": "languageToggle",
-          "width": 48,
+          "width": 44,
           "height": 44,
-          "layoutWidth": 48,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
           "layoutHeight": 44
         },
         {
@@ -2454,25 +2727,30 @@
         {
           "id": "resultsToggle",
           "width": 44,
-          "height": 44.00000762939453,
+          "height": 44,
           "layoutWidth": 44,
-          "layoutHeight": 44
-        },
-        {
-          "id": "pagePrev",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
-          "layoutHeight": 44
-        },
-        {
-          "id": "pageNext",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
           "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "667x375 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "reset",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
     },
     {
       "check": "667x375 visible Leaflet marker 44px pointer target",
@@ -2781,17 +3059,17 @@
       "detail": {
         "filter": {
           "left": 12,
-          "top": 92,
+          "top": 164,
           "right": 628,
           "bottom": 284,
           "width": 616,
-          "height": 192
+          "height": 120
         },
         "filterContent": {
           "left": 13,
-          "top": 137,
+          "top": 209,
           "right": 627,
-          "bottom": 283,
+          "bottom": 355,
           "width": 614,
           "height": 146
         },
@@ -2814,7 +3092,7 @@
     {
       "check": "640x360 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:49355/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "640x360 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
@@ -2823,17 +3101,17 @@
         "brand": {
           "left": 12,
           "top": 8,
-          "right": 250,
+          "right": 556,
           "bottom": 66,
-          "width": 238,
+          "width": 544,
           "height": 58
         },
         "tools": {
           "left": 72,
-          "top": 80,
-          "right": 216,
-          "bottom": 124,
-          "width": 144,
+          "top": 74,
+          "right": 116,
+          "bottom": 118,
+          "width": 44,
           "height": 44
         },
         "search": {
@@ -2874,7 +3152,7 @@
           "toolsResultsCollapsed": false,
           "brandSearch": false
         },
-        "corridor": 114
+        "corridor": 120
       }
     },
     {
@@ -2883,10 +3161,10 @@
       "detail": {
         "tools": {
           "left": 72,
-          "top": 80,
-          "right": 216,
-          "bottom": 124,
-          "width": 144,
+          "top": 74,
+          "right": 116,
+          "bottom": 118,
+          "width": 44,
           "height": 44
         },
         "results": {
@@ -2923,10 +3201,10 @@
       "detail": {
         "tools": {
           "left": 72,
-          "top": 80,
-          "right": 216,
-          "bottom": 124,
-          "width": 144,
+          "top": 74,
+          "right": 116,
+          "bottom": 118,
+          "width": 44,
           "height": 44
         },
         "results": {
@@ -2975,17 +3253,76 @@
         },
         "action": {
           "left": 352,
-          "top": 126.21875,
-          "right": 420.28125,
-          "bottom": 170.21875,
-          "width": 68.28125,
+          "top": 126.34375,
+          "right": 600,
+          "bottom": 170.34375,
+          "width": 248,
           "height": 44,
-          "layoutWidth": 68,
+          "layoutWidth": 248,
           "layoutHeight": 44
         },
-        "scrollTop": 2192,
+        "scrollTop": 1965,
         "clickable": true,
-        "detailOpen": true
+        "detailOpen": true,
+        "actionProbe": {
+          "selector": "#resultsScroll .card-open",
+          "outerHTML": "<button class=\"card-open\" type=\"button\" aria-label=\"부산 가족 만들기 체험 상세 보기\">부산 <mark>가족</mark> 만들기 체험</button>",
+          "text": "부산 가족 만들기 체험",
+          "data": {},
+          "center": {
+            "x": 476,
+            "y": -1796
+          },
+          "centerHit": null,
+          "hitInside": false,
+          "activePanels": [
+            {
+              "tag": "DETAILS",
+              "id": "toolsMenu",
+              "cls": "tools-menu",
+              "text": "•••\n            도구\n          \n          \n            \n              \n              내 위치에서 찾기\n            \n            \n              \n              View in English\n            \n            \n              \n              소리 끔\n            \n            \n              \n              아이 맞춤 추천\n            \n            위치는 저장하지 않아요.",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "DETAILS",
+              "id": "filterMenu",
+              "cls": "filter-menu",
+              "text": "필터 열기\n          필터 닫기\n          지역 · 테마 · 나이 · 활동\n        \n        \n          \n            지역전체 지역서울특별시 (18)\n            테마전체 테마축제 (18)\n            나이대전체 나이대어린이 (18)\n            아이와 해볼 활동전체 활동만들기·예술 (1)\n            기간 시작\n            기간 종료\n          \n          \n             아이와 함께\n             무료만\n             지금 신청 가능\n            \n              \n              필터 초기화\n            \n          \n          \n            아이와 해볼 수 있는 것현재 조건에 맞는 체험\n            만들기·예술1건\n          \n          \n            지역별로 빠르게 보기현재 필터 기준\n            서울특별시17건\n          \n          \n            조건에 맞는 세부 항목고르면 필터에 바로 반영됩니다\n            테마 좁히기축제17건체험1건지역 좁히기서울특별시17건부산광역시1건나이대 좁히기어린이18건활동 좁히기만들기·예술1건\n          \n          \n            지정한 기간과 겹치는 행사를 보여드려요.\n            공공 API·웹검색 실데이터 기반 목록입니다. 일정·비용은 출처에서 확인하세요.\n            수집 모드: 확인 필요 · 예약 설정: 매일 03:00 KST · 최근 실시간 성공 기록 없음",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "SECTION",
+              "id": "timelinePanel",
+              "cls": "timeline-panel",
+              "text": "나의 방문 타임라인\n          0건\n        \n        지도로 돌아가기\n      \n      \n        가고 싶은 행사와 다녀온 기록을 날짜별로 모아보세요. 길찾기는 지도 앱에서 열리며, 여기서는 위치를 추적하지 않아요.\n        \n          \n            방문 날짜\n            \n          \n          \n            보기\n            \n              전체 방문\n              방문 계획\n              방문 기록\n            \n          \n          전체 날짜\n        \n        \n          Google 타임라인 파일 가져오기\n          \n            직접 내보낸 JSON 파일을 선택해 주세요. 이 브라우저에서만 읽고 업로드하지 않아요. 직접 확인한 행사 방문만 저장하며 원본 좌표와 이동 경로는 저장하지 않습니다.\n            근처에 있었다고 행사에 참석한 것은 아니에요. 후보를 하나씩 확인해 주세요. 과거 기록은 현재 행사 목록과 매칭되지 않을 수 있습니다. JSON 20MiB·100,000개 기록, 미리보기 1,000개 후보까지 지원하며 Google의 고정된 공식 파일 스키마는 아닙니다.\n            \n              타임라인 JSON 파일\n              \n            \n            \n            \n            \n              선택한 방문 저장\n              미리보기 취소\n            \n            \n              Google 타임라인 내보내는 방법\n              Android 내보내기 도움말\n              iPhone 내보내기 도움말\n            \n          \n        \n        \n        \n          다음 나들이를 담아보세요\n          지도나 행사 상세에서 타임라인에 추가한 뒤 방문 날짜와 시간을 정해보세요.\n          \n            행사 찾아보기",
+              "open": false,
+              "hidden": true,
+              "inert": false
+            },
+            {
+              "tag": "SECTION",
+              "id": "resultsPanel",
+              "cls": "results",
+              "text": "아이와 갈 행사18건\n        \n          \n            \n            결과 접기\n          \n        \n      \n      \n        행사 정보를 준비하고 있습니다…\n        \n          행사 정보를 불러오지 못했어요.\n          잠시 후 다시 시도하거나, 출처 사이트를 직접 확인해 주세요.\n          다시 불러오기\n        \n        \n          관련도순\n          다가오는 순\n          거리순\n        \n        18건. 종료된 행사 2건은 날짜에 '종료'로 표시했습니다.\n        \n          조건에 맞는 행사가 없어요.\n          지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.\n        \n        부산 가족 만들기 체험부산광역시 해운대구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사체험만들기·예술체험아이와 해볼 수 있는 일: 부산 가족 만들기 체험 가족 공예 체험 체험아이 동반 안내: 명시 문구: 가족상세 보기타임라인에 추가연결 차단 · 확인 시각 없음 · 신뢰 도메인 아님예매처에서 확인 · 원본 URL 없음서울 유료 어린이 축제서울특별시 마포구2026년 10월 15일 ~ 2026년 10월 16일대상 7-131,000원아이와 함께어린이정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 차단 · 확인 시각 없음 · 신뢰 도메인 아님예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 미래 가족 음악축제서울특별시 종로구2026년 11월 1일 ~ 2026년 11월 30일대상 7-13무료아이와 함께어린이무료마감행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 어린이 여름 음악축제서울특별시 종로구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 카탈로그 행사 1서울특별시 종로구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기\n        \n          이전\n          1 / 4 페이지 (전체 18건 중 1–5번째)\n          다음",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "DIALOG",
+              "id": "detail",
+              "cls": "",
+              "text": "",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            }
+          ]
+        }
       }
     },
     {
@@ -3042,13 +3379,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -3063,6 +3400,13 @@
       "ok": true,
       "detail": [
         {
+          "id": "toolsToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
           "id": "locateBtn",
           "width": 44,
           "height": 44,
@@ -3071,6 +3415,20 @@
         },
         {
           "id": "languageToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
           "width": 44,
           "height": 44,
           "layoutWidth": 44,
@@ -3096,22 +3454,27 @@
           "height": 44,
           "layoutWidth": 44,
           "layoutHeight": 44
-        },
-        {
-          "id": "pagePrev",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
-          "layoutHeight": 44
-        },
-        {
-          "id": "pageNext",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
-          "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "640x360 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "reset",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
     },
     {
       "check": "640x360 visible Leaflet marker 44px pointer target",
@@ -3420,17 +3783,17 @@
       "detail": {
         "filter": {
           "left": 12,
-          "top": 92,
+          "top": 124,
           "right": 556,
           "bottom": 244,
           "width": 544,
-          "height": 152
+          "height": 120
         },
         "filterContent": {
           "left": 13,
-          "top": 137,
+          "top": 169,
           "right": 555,
-          "bottom": 243,
+          "bottom": 275,
           "width": 542,
           "height": 106
         },
@@ -3453,7 +3816,7 @@
     {
       "check": "568x320 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:49355/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "568x320 단축 높이 도구·브랜드·검색·저작권 비겹침·지도 56px corridor",
@@ -3462,17 +3825,17 @@
         "brand": {
           "left": 12,
           "top": 8,
-          "right": 250,
+          "right": 484,
           "bottom": 66,
-          "width": 238,
+          "width": 472,
           "height": 58
         },
         "tools": {
           "left": 72,
-          "top": 80,
-          "right": 216,
-          "bottom": 124,
-          "width": 144,
+          "top": 74,
+          "right": 116,
+          "bottom": 118,
+          "width": 44,
           "height": 44
         },
         "search": {
@@ -3513,7 +3876,7 @@
           "toolsResultsCollapsed": false,
           "brandSearch": false
         },
-        "corridor": 74
+        "corridor": 80
       }
     },
     {
@@ -3522,10 +3885,10 @@
       "detail": {
         "tools": {
           "left": 72,
-          "top": 80,
-          "right": 216,
-          "bottom": 124,
-          "width": 144,
+          "top": 74,
+          "right": 116,
+          "bottom": 118,
+          "width": 44,
           "height": 44
         },
         "results": {
@@ -3562,10 +3925,10 @@
       "detail": {
         "tools": {
           "left": 72,
-          "top": 80,
-          "right": 216,
-          "bottom": 124,
-          "width": 144,
+          "top": 74,
+          "right": 116,
+          "bottom": 118,
+          "width": 44,
           "height": 44
         },
         "results": {
@@ -3614,17 +3977,76 @@
         },
         "action": {
           "left": 352,
-          "top": 106.75,
-          "right": 420.28125,
-          "bottom": 150.75,
-          "width": 68.28125,
+          "top": 106.4375,
+          "right": 528,
+          "bottom": 150.4375,
+          "width": 176,
           "height": 44,
-          "layoutWidth": 68,
+          "layoutWidth": 176,
           "layoutHeight": 44
         },
-        "scrollTop": 2530,
+        "scrollTop": 2266,
         "clickable": true,
-        "detailOpen": true
+        "detailOpen": true,
+        "actionProbe": {
+          "selector": "#resultsScroll .card-open",
+          "outerHTML": "<button class=\"card-open\" type=\"button\" aria-label=\"부산 가족 만들기 체험 상세 보기\">부산 <mark>가족</mark> 만들기 체험</button>",
+          "text": "부산 가족 만들기 체험",
+          "data": {},
+          "center": {
+            "x": 440,
+            "y": -2046
+          },
+          "centerHit": null,
+          "hitInside": false,
+          "activePanels": [
+            {
+              "tag": "DETAILS",
+              "id": "toolsMenu",
+              "cls": "tools-menu",
+              "text": "•••\n            도구\n          \n          \n            \n              \n              내 위치에서 찾기\n            \n            \n              \n              View in English\n            \n            \n              \n              소리 끔\n            \n            \n              \n              아이 맞춤 추천\n            \n            위치는 저장하지 않아요.",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "DETAILS",
+              "id": "filterMenu",
+              "cls": "filter-menu",
+              "text": "필터 열기\n          필터 닫기\n          지역 · 테마 · 나이 · 활동\n        \n        \n          \n            지역전체 지역서울특별시 (18)\n            테마전체 테마축제 (18)\n            나이대전체 나이대어린이 (18)\n            아이와 해볼 활동전체 활동만들기·예술 (1)\n            기간 시작\n            기간 종료\n          \n          \n             아이와 함께\n             무료만\n             지금 신청 가능\n            \n              \n              필터 초기화\n            \n          \n          \n            아이와 해볼 수 있는 것현재 조건에 맞는 체험\n            만들기·예술1건\n          \n          \n            지역별로 빠르게 보기현재 필터 기준\n            서울특별시17건\n          \n          \n            조건에 맞는 세부 항목고르면 필터에 바로 반영됩니다\n            테마 좁히기축제17건체험1건지역 좁히기서울특별시17건부산광역시1건나이대 좁히기어린이18건활동 좁히기만들기·예술1건\n          \n          \n            지정한 기간과 겹치는 행사를 보여드려요.\n            공공 API·웹검색 실데이터 기반 목록입니다. 일정·비용은 출처에서 확인하세요.\n            수집 모드: 확인 필요 · 예약 설정: 매일 03:00 KST · 최근 실시간 성공 기록 없음",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "SECTION",
+              "id": "timelinePanel",
+              "cls": "timeline-panel",
+              "text": "나의 방문 타임라인\n          0건\n        \n        지도로 돌아가기\n      \n      \n        가고 싶은 행사와 다녀온 기록을 날짜별로 모아보세요. 길찾기는 지도 앱에서 열리며, 여기서는 위치를 추적하지 않아요.\n        \n          \n            방문 날짜\n            \n          \n          \n            보기\n            \n              전체 방문\n              방문 계획\n              방문 기록\n            \n          \n          전체 날짜\n        \n        \n          Google 타임라인 파일 가져오기\n          \n            직접 내보낸 JSON 파일을 선택해 주세요. 이 브라우저에서만 읽고 업로드하지 않아요. 직접 확인한 행사 방문만 저장하며 원본 좌표와 이동 경로는 저장하지 않습니다.\n            근처에 있었다고 행사에 참석한 것은 아니에요. 후보를 하나씩 확인해 주세요. 과거 기록은 현재 행사 목록과 매칭되지 않을 수 있습니다. JSON 20MiB·100,000개 기록, 미리보기 1,000개 후보까지 지원하며 Google의 고정된 공식 파일 스키마는 아닙니다.\n            \n              타임라인 JSON 파일\n              \n            \n            \n            \n            \n              선택한 방문 저장\n              미리보기 취소\n            \n            \n              Google 타임라인 내보내는 방법\n              Android 내보내기 도움말\n              iPhone 내보내기 도움말\n            \n          \n        \n        \n        \n          다음 나들이를 담아보세요\n          지도나 행사 상세에서 타임라인에 추가한 뒤 방문 날짜와 시간을 정해보세요.\n          \n            행사 찾아보기",
+              "open": false,
+              "hidden": true,
+              "inert": false
+            },
+            {
+              "tag": "SECTION",
+              "id": "resultsPanel",
+              "cls": "results",
+              "text": "아이와 갈 행사18건\n        \n          \n            \n            결과 접기\n          \n        \n      \n      \n        행사 정보를 준비하고 있습니다…\n        \n          행사 정보를 불러오지 못했어요.\n          잠시 후 다시 시도하거나, 출처 사이트를 직접 확인해 주세요.\n          다시 불러오기\n        \n        \n          관련도순\n          다가오는 순\n          거리순\n        \n        18건. 종료된 행사 2건은 날짜에 '종료'로 표시했습니다.\n        \n          조건에 맞는 행사가 없어요.\n          지역이나 날짜를 넓히거나 ‘아이와 함께’를 잠시 끄고 전체 행사를 확인해 보세요.\n        \n        부산 가족 만들기 체험부산광역시 해운대구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사체험만들기·예술체험아이와 해볼 수 있는 일: 부산 가족 만들기 체험 가족 공예 체험 체험아이 동반 안내: 명시 문구: 가족상세 보기타임라인에 추가연결 차단 · 확인 시각 없음 · 신뢰 도메인 아님예매처에서 확인 · 원본 URL 없음서울 유료 어린이 축제서울특별시 마포구2026년 10월 15일 ~ 2026년 10월 16일대상 7-131,000원아이와 함께어린이정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 차단 · 확인 시각 없음 · 신뢰 도메인 아님예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 미래 가족 음악축제서울특별시 종로구2026년 11월 1일 ~ 2026년 11월 30일대상 7-13무료아이와 함께어린이무료마감행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 어린이 여름 음악축제서울특별시 종로구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기서울 카탈로그 행사 1서울특별시 종로구2026년 10월 15일 ~ 2026년 10월 16일대상 7-13무료아이와 함께어린이무료정보 없음행사축제아이 동반 안내: 명시 문구: 어린이상세 보기타임라인에 추가연결 확인 · 확인 2026. 10. 15. 오전 12:00공식 정보 보기예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00예매 사이트 바로가기\n        \n          이전\n          1 / 4 페이지 (전체 18건 중 1–5번째)\n          다음",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            },
+            {
+              "tag": "DIALOG",
+              "id": "detail",
+              "cls": "",
+              "text": "",
+              "open": false,
+              "hidden": false,
+              "inert": false
+            }
+          ]
+        }
       }
     },
     {
@@ -3681,13 +4103,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -3702,6 +4124,13 @@
       "ok": true,
       "detail": [
         {
+          "id": "toolsToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
           "id": "locateBtn",
           "width": 44,
           "height": 44,
@@ -3710,6 +4139,20 @@
         },
         {
           "id": "languageToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 44,
+          "height": 44,
+          "layoutWidth": 44,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
           "width": 44,
           "height": 44,
           "layoutWidth": 44,
@@ -3735,22 +4178,27 @@
           "height": 44,
           "layoutWidth": 44,
           "layoutHeight": 44
-        },
-        {
-          "id": "pagePrev",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
-          "layoutHeight": 44
-        },
-        {
-          "id": "pageNext",
-          "width": 80,
-          "height": 44,
-          "layoutWidth": 80,
-          "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "568x320 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "reset",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
     },
     {
       "check": "568x320 visible Leaflet marker 44px pointer target",
@@ -4059,17 +4507,17 @@
       "detail": {
         "filter": {
           "left": 12,
-          "top": 134,
+          "top": 324,
           "right": 348,
           "bottom": 724,
           "width": 336,
-          "height": 590
+          "height": 400
         },
         "filterContent": {
           "left": 13,
-          "top": 179,
+          "top": 369,
           "right": 347,
-          "bottom": 723,
+          "bottom": 913,
           "width": 334,
           "height": 544
         },
@@ -4143,13 +4591,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -4160,21 +4608,42 @@
       ]
     },
     {
-      "check": "360x800 필터 open·Reset 포함 44px 타깃",
+      "check": "360x800 필터 open·도구 조작 포함 44px 타깃",
       "ok": true,
       "detail": [
         {
-          "id": "locateBtn",
+          "id": "toolsToggle",
           "width": 44,
           "height": 44,
           "layoutWidth": 44,
           "layoutHeight": 44
         },
         {
-          "id": "languageToggle",
-          "width": 44,
+          "id": "locateBtn",
+          "width": 242,
           "height": 44,
-          "layoutWidth": 44,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
           "layoutHeight": 44
         },
         {
@@ -4199,6 +4668,25 @@
           "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "360x800 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "reset",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
     },
     {
       "check": "360x800 visible Leaflet marker 44px pointer target",
@@ -4392,7 +4880,7 @@
       "detail": ""
     },
     {
-      "check": "360x800 drawer·필터 배타·다중 페이지·pager 44px 타깃",
+      "check": "360x800 drawer·필터 배타·다중 페이지·pager·도구 44px 타깃",
       "ok": true,
       "detail": {
         "drawerOpen": true,
@@ -4400,17 +4888,38 @@
         "multiplePages": true,
         "filterTargets": [
           {
-            "id": "locateBtn",
+            "id": "toolsToggle",
             "width": 44,
             "height": 44,
             "layoutWidth": 44,
             "layoutHeight": 44
           },
           {
-            "id": "languageToggle",
-            "width": 44,
+            "id": "locateBtn",
+            "width": 242,
             "height": 44,
-            "layoutWidth": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "languageToggle",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "soundToggle",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "aiBtn",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
             "layoutHeight": 44
           },
           {
@@ -4437,17 +4946,38 @@
         ],
         "resultTargets": [
           {
-            "id": "locateBtn",
+            "id": "toolsToggle",
             "width": 44,
             "height": 44,
             "layoutWidth": 44,
             "layoutHeight": 44
           },
           {
-            "id": "languageToggle",
-            "width": 44,
+            "id": "locateBtn",
+            "width": 242,
             "height": 44,
-            "layoutWidth": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "languageToggle",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "soundToggle",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "aiBtn",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
             "layoutHeight": 44
           },
           {
@@ -4456,21 +4986,24 @@
             "height": 44,
             "layoutWidth": 44,
             "layoutHeight": 44
-          },
-          {
-            "id": "pagePrev",
-            "width": 80,
-            "height": 44,
-            "layoutWidth": 80,
-            "layoutHeight": 44
-          },
-          {
-            "id": "pageNext",
-            "width": 80,
-            "height": 44,
-            "layoutWidth": 80,
-            "layoutHeight": 44
           }
+        ]
+      }
+    },
+    {
+      "check": "360x800 결과 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "languageToggle",
+          "locateBtn",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
         ]
       }
     },
@@ -4659,17 +5192,17 @@
       "detail": {
         "filter": {
           "left": 12,
-          "top": 148.09375,
+          "top": 324,
           "right": 378,
-          "bottom": 768.0,
+          "bottom": 768,
           "width": 366,
-          "height": 619.90625
+          "height": 444
         },
         "filterContent": {
           "left": 13,
-          "top": 193.09375,
+          "top": 369,
           "right": 377,
-          "bottom": 767.0,
+          "bottom": 942.90625,
           "width": 364,
           "height": 573.90625
         },
@@ -4692,7 +5225,7 @@
     {
       "check": "390x844 검색 Enter 문서·언어·q 보존",
       "ok": true,
-      "detail": "http://127.0.0.1:52382/?q=%EA%B0%80%EC%A1%B1"
+      "detail": "http://127.0.0.1:49355/?q=%EA%B0%80%EC%A1%B1"
     },
     {
       "check": "390x844 cream surface alpha·양쪽 배경 대비",
@@ -4748,13 +5281,13 @@
         },
         {
           "selector": ".leaflet-control-attribution",
-          "background": "rgba(255, 253, 248, 0.92)",
+          "background": "rgba(255, 253, 248, 0.96)",
           "bg": [
             255,
             253,
             248
           ],
-          "alpha": 0.92,
+          "alpha": 0.96,
           "opacity": "1",
           "text": [
             25,
@@ -4765,21 +5298,42 @@
       ]
     },
     {
-      "check": "390x844 필터 open·Reset 포함 44px 타깃",
+      "check": "390x844 필터 open·도구 조작 포함 44px 타깃",
       "ok": true,
       "detail": [
         {
-          "id": "locateBtn",
+          "id": "toolsToggle",
           "width": 44,
           "height": 44,
           "layoutWidth": 44,
           "layoutHeight": 44
         },
         {
-          "id": "languageToggle",
-          "width": 44,
+          "id": "locateBtn",
+          "width": 242,
           "height": 44,
-          "layoutWidth": 44,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "languageToggle",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
+          "layoutHeight": 44
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "layoutWidth": 242,
           "layoutHeight": 44
         },
         {
@@ -4804,6 +5358,79 @@
           "layoutHeight": 44
         }
       ]
+    },
+    {
+      "check": "390x844 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "filterToggle",
+          "languageToggle",
+          "locateBtn",
+          "reset",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
+        ]
+      }
+    },
+    {
+      "check": "390x844 열린 도구 메뉴 내부 스크롤·language/sound/AI 실제 중심 클릭",
+      "ok": true,
+      "detail": {
+        "reopened": true,
+        "clicks": [
+          {
+            "selector": "#languageToggle",
+            "target": {
+              "id": "languageToggle",
+              "left": 125,
+              "top": 195,
+              "right": 367,
+              "bottom": 239,
+              "width": 242,
+              "height": 44,
+              "centerHit": true,
+              "inViewport": true
+            },
+            "clicked": true
+          },
+          {
+            "selector": "#soundToggle",
+            "target": {
+              "id": "soundToggle",
+              "left": 125,
+              "top": 247,
+              "right": 367,
+              "bottom": 291,
+              "width": 242,
+              "height": 44,
+              "centerHit": true,
+              "inViewport": true
+            },
+            "clicked": true
+          },
+          {
+            "selector": "#aiBtn",
+            "target": {
+              "id": "aiBtn",
+              "left": 125,
+              "top": 299,
+              "right": 367,
+              "bottom": 343,
+              "width": 242,
+              "height": 44,
+              "centerHit": true,
+              "inViewport": true
+            },
+            "clicked": true
+          }
+        ]
+      }
     },
     {
       "check": "390x844 visible Leaflet marker 44px pointer target",
@@ -4997,7 +5624,7 @@
       "detail": ""
     },
     {
-      "check": "390x844 drawer·필터 배타·다중 페이지·pager 44px 타깃",
+      "check": "390x844 drawer·필터 배타·다중 페이지·pager·도구 44px 타깃",
       "ok": true,
       "detail": {
         "drawerOpen": true,
@@ -5005,17 +5632,38 @@
         "multiplePages": true,
         "filterTargets": [
           {
-            "id": "locateBtn",
+            "id": "toolsToggle",
             "width": 44,
             "height": 44,
             "layoutWidth": 44,
             "layoutHeight": 44
           },
           {
-            "id": "languageToggle",
-            "width": 44,
+            "id": "locateBtn",
+            "width": 242,
             "height": 44,
-            "layoutWidth": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "languageToggle",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "soundToggle",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "aiBtn",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
             "layoutHeight": 44
           },
           {
@@ -5042,17 +5690,38 @@
         ],
         "resultTargets": [
           {
-            "id": "locateBtn",
+            "id": "toolsToggle",
             "width": 44,
             "height": 44,
             "layoutWidth": 44,
             "layoutHeight": 44
           },
           {
-            "id": "languageToggle",
-            "width": 44,
+            "id": "locateBtn",
+            "width": 242,
             "height": 44,
-            "layoutWidth": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "languageToggle",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "soundToggle",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
+            "layoutHeight": 44
+          },
+          {
+            "id": "aiBtn",
+            "width": 242,
+            "height": 44,
+            "layoutWidth": 242,
             "layoutHeight": 44
           },
           {
@@ -5061,21 +5730,24 @@
             "height": 44,
             "layoutWidth": 44,
             "layoutHeight": 44
-          },
-          {
-            "id": "pagePrev",
-            "width": 80,
-            "height": 44,
-            "layoutWidth": 80,
-            "layoutHeight": 44
-          },
-          {
-            "id": "pageNext",
-            "width": 80,
-            "height": 44,
-            "layoutWidth": 80,
-            "layoutHeight": 44
           }
+        ]
+      }
+    },
+    {
+      "check": "390x844 결과 도구 메뉴 초기 접힘·열기·닫힘",
+      "ok": true,
+      "detail": {
+        "initiallyClosed": true,
+        "opened": true,
+        "closed": true,
+        "targetIds": [
+          "aiBtn",
+          "languageToggle",
+          "locateBtn",
+          "resultsToggle",
+          "soundToggle",
+          "toolsToggle"
         ]
       }
     },
@@ -5581,10 +6253,95 @@
       }
     },
     {
+      "check": "명시적 filter fit pending과 locale preserve 동시 상태를 첫 refresh에서 함께 해소",
+      "ok": true,
+      "detail": {
+        "installFitProbe": true,
+        "deferred": false,
+        "pendingBeforeLocale": true,
+        "preserveBefore": {
+          "lat": 37.55,
+          "lng": 126.95,
+          "zoom": 9
+        },
+        "fitCallsBeforeClose": 0,
+        "fitCallsAfterClose": 1,
+        "lastFitPoints": [
+          [
+            35.1,
+            128.1
+          ],
+          [
+            35.15,
+            128.2
+          ]
+        ],
+        "newPoints": [
+          [
+            35.1,
+            128.1
+          ],
+          [
+            35.15,
+            128.2
+          ]
+        ],
+        "boundsContainNewPoints": true,
+        "pendingAfter": false,
+        "preserveAfter": null,
+        "afterFit": {
+          "center": {
+            "lat": 35.099727625075325,
+            "lng": 128.15274658203126
+          },
+          "zoom": 11
+        },
+        "manualBefore": {
+          "center": {
+            "lat": 37.55,
+            "lng": 126.95
+          },
+          "zoom": 12
+        },
+        "manualPreserveSet": true,
+        "manualFitCalls": 0,
+        "fitOptionsBefore": {
+          "padding": [
+            24,
+            24
+          ],
+          "paddingTopLeft": [
+            68,
+            132
+          ],
+          "paddingBottomRight": [
+            76,
+            222
+          ],
+          "maxZoom": 15,
+          "animate": false
+        },
+        "manualAfter": {
+          "center": {
+            "lat": 37.55,
+            "lng": 126.95
+          },
+          "zoom": 12
+        },
+        "manualPendingAfter": false,
+        "manualPreserveAfter": null
+      }
+    },
+    {
+      "check": "EN 도구 메뉴에서 AI·Locate 실제 조작",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "check": "EN 토글 뒤 q 필터 변경이 URL·semantic 페이지·canonical 행 identity/count/range에 반영",
       "ok": true,
       "detail": {
-        "url": "http://127.0.0.1:52382/?lang=en&q=%EC%84%9C%EC%9A%B8&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C",
+        "url": "http://127.0.0.1:49355/?lang=en&q=%EC%84%9C%EC%9A%B8&sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C",
         "state": {
           "text": "Page 1 of 4 (1–5 of 17)",
           "current": 1,
@@ -5595,15 +6352,15 @@
           "rowCount": 5,
           "titles": [
             "서울 어린이 여름 음악축제",
-            "서울 유료 어린이 축제",
-            "서울 미래 가족 음악축제",
-            "서울 카탈로그 행사 1",
-            "서울 카탈로그 행사 2"
+            "서울 카탈로그 행사 8",
+            "서울 카탈로그 행사 9",
+            "서울 카탈로그 행사 7",
+            "서울 카탈로그 행사 10"
           ],
           "hrefs": [
             "https://www.busan.go.kr/active",
-            "https://www.busan.go.kr/booking-paid",
-            "https://www.busan.go.kr/future-closed",
+            "https://www.busan.go.kr/active",
+            "https://www.busan.go.kr/active",
             "https://www.busan.go.kr/active",
             "https://www.busan.go.kr/active"
           ]
@@ -5738,7 +6495,7 @@
       "check": "종료 카드 날짜 취소선·붉은 종료 텍스트",
       "ok": true,
       "detail": {
-        "text": "서울 지난 가족 음악축제\n서울특별시 종로구\n2026년 10월 1일 ~ 2026년 10월 14일\n대상 7-13\n무료\n아이와 함께어린이무료종료행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기",
+        "text": "서울 지난 가족 음악축제\n서울특별시 종로구\n2026년 10월 1일 ~ 2026년 10월 14일\n대상 7-13\n무료\n아이와 함께어린이무료종료행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n타임라인에 추가\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기",
         "decoration": "line-through",
         "color": [
           180,
@@ -5754,7 +6511,7 @@
       "check": "종료 지도 native popup 날짜·붉은 종료 텍스트",
       "ok": true,
       "detail": {
-        "text": "서울 지난 가족 음악축제\n서울특별시 · 2026년 10월 1일 ~ 2026년 10월 14일\n서울특별시 종로구 가족로 1\n종료\n아이와 함께\n무료\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n×",
+        "text": "서울 지난 가족 음악축제\n서울특별시 · 2026년 10월 1일 ~ 2026년 10월 14일\n서울특별시 종로구 가족로 1\n종료\n아이와 함께\n무료\n상세 보기\n타임라인에 추가\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n×",
         "decoration": "line-through",
         "color": [
           180,
@@ -5766,7 +6523,7 @@
             "type": "zoomstart",
             "zoom": 7,
             "center": {
-              "lat": 36.4477991295848,
+              "lat": 35.995785386420344,
               "lng": 128.07861328125003
             }
           },
@@ -5774,7 +6531,7 @@
             "type": "zoomend",
             "zoom": 8,
             "center": {
-              "lat": 36.4477991295848,
+              "lat": 35.995785386420344,
               "lng": 128.07861328125003
             }
           },
@@ -5782,7 +6539,7 @@
             "type": "moveend",
             "zoom": 8,
             "center": {
-              "lat": 36.4477991295848,
+              "lat": 35.995785386420344,
               "lng": 128.07861328125003
             }
           },
@@ -5790,7 +6547,7 @@
             "type": "dragstart",
             "zoom": 8,
             "center": {
-              "lat": 36.4477991295848,
+              "lat": 35.995785386420344,
               "lng": 128.07861328125003
             }
           },
@@ -5950,7 +6707,7 @@
             "type": "moveend",
             "zoom": 13,
             "center": {
-              "lat": 37.578460205250245,
+              "lat": 37.57818811495933,
               "lng": 126.95491790771486
             }
           },
@@ -5958,7 +6715,7 @@
             "type": "moveend",
             "zoom": 13,
             "center": {
-              "lat": 37.600496216554355,
+              "lat": 37.59369567458082,
               "lng": 126.95543289184572
             }
           }
@@ -5968,15 +6725,15 @@
             "label": "beforeCenter",
             "zoom": 7,
             "center": {
-              "lat": 36.4477991295848,
+              "lat": 35.995785386420344,
               "lng": 128.07861328125003
             },
             "maxZoom": 18,
             "rect": {
               "left": 71,
-              "top": 250,
+              "top": 199,
               "right": 115,
-              "bottom": 298
+              "bottom": 247
             },
             "mapRect": {
               "left": 0,
@@ -5985,7 +6742,7 @@
               "bottom": 844
             },
             "x": 93,
-            "y": 274,
+            "y": 223,
             "hitTitle": "서울 카탈로그 행사 1",
             "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
           },
@@ -5993,15 +6750,15 @@
             "label": "afterCenter",
             "zoom": 7,
             "center": {
-              "lat": 36.4477991295848,
+              "lat": 35.995785386420344,
               "lng": 128.07861328125003
             },
             "maxZoom": 18,
             "rect": {
               "left": 71,
-              "top": 250,
+              "top": 199,
               "right": 115,
-              "bottom": 298
+              "bottom": 247
             },
             "mapRect": {
               "left": 0,
@@ -6010,7 +6767,7 @@
               "bottom": 844
             },
             "x": 93,
-            "y": 274,
+            "y": 223,
             "hitTitle": "서울 카탈로그 행사 1",
             "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
           },
@@ -6018,15 +6775,15 @@
             "label": "beforeZoom",
             "zoom": 7,
             "center": {
-              "lat": 36.4477991295848,
+              "lat": 35.995785386420344,
               "lng": 128.07861328125003
             },
             "maxZoom": 18,
             "rect": {
               "left": 71,
-              "top": 250,
+              "top": 199,
               "right": 115,
-              "bottom": 298
+              "bottom": 247
             },
             "mapRect": {
               "left": 0,
@@ -6035,7 +6792,7 @@
               "bottom": 844
             },
             "x": 93,
-            "y": 274,
+            "y": 223,
             "hitTitle": "서울 카탈로그 행사 1",
             "hitClass": "leaflet-marker-icon event-marker leaflet-zoom-animated leaflet-interactive"
           },
@@ -6043,15 +6800,15 @@
             "label": "afterZoom",
             "zoom": 8,
             "center": {
-              "lat": 36.4477991295848,
+              "lat": 35.995785386420344,
               "lng": 128.07861328125003
             },
             "maxZoom": 18,
             "rect": {
               "left": -32,
-              "top": 121,
+              "top": 19,
               "right": 12,
-              "bottom": 169
+              "bottom": 67
             },
             "mapRect": {
               "left": 0,
@@ -6060,7 +6817,7 @@
               "bottom": 844
             },
             "x": -10,
-            "y": 145,
+            "y": 43,
             "hitTitle": "",
             "hitClass": ""
           },
@@ -6471,7 +7228,7 @@
       "check": "종료 native 상세 날짜·붉은 종료 텍스트",
       "ok": true,
       "detail": {
-        "text": "닫기\n서울 지난 가족 음악축제\n\n원문 행사 설명을 보존하는 종료 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 서울특별시 종로구 가족로 1\n일정: 2026년 10월 1일 ~ 2026년 10월 14일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n신청 마감: 2026년 12월 31일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n공유용 상세",
+        "text": "닫기\n서울 지난 가족 음악축제\n\n원문 행사 설명을 보존하는 종료 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 서울특별시 종로구 가족로 1\n일정: 2026년 10월 1일 ~ 2026년 10월 14일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n신청 마감: 2026년 12월 31일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n타임라인에 추가\nGoogle 지도 · 대중교통\n다른 지도 앱\n공유용 상세",
         "decoration": "line-through",
         "color": [
           180,
@@ -6484,7 +7241,7 @@
       "check": "종료일 없는 과거 시작일 카드도 종료 취소선·붉은 텍스트",
       "ok": true,
       "detail": {
-        "text": "서울 시작일 지난 가족 음악축제\n서울특별시 종로구\n2026년 10월 1일\n대상 7-13\n무료\n아이와 함께어린이무료종료행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기",
+        "text": "서울 시작일 지난 가족 음악축제\n서울특별시 종로구\n2026년 10월 1일\n대상 7-13\n무료\n아이와 함께어린이무료종료행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n타임라인에 추가\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기",
         "decoration": "line-through",
         "color": [
           180,
@@ -6497,7 +7254,7 @@
       "check": "종료일 없는 과거 시작일 native popup도 종료",
       "ok": true,
       "detail": {
-        "text": "서울 시작일 지난 가족 음악축제\n서울특별시 · 2026년 10월 1일\n종료\n아이와 함께\n무료\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n×",
+        "text": "서울 시작일 지난 가족 음악축제\n서울특별시 · 2026년 10월 1일\n종료\n아이와 함께\n무료\n상세 보기\n타임라인에 추가\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n×",
         "decoration": "line-through"
       }
     },
@@ -6505,7 +7262,7 @@
       "check": "종료일 없는 과거 시작일 native 상세도 종료",
       "ok": true,
       "detail": {
-        "text": "닫기\n서울 시작일 지난 가족 음악축제\n\n종료일 없는 과거 시작일 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 정보 없음\n일정: 2026년 10월 1일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n신청 마감: 2026년 12월 31일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n공유용 상세",
+        "text": "닫기\n서울 시작일 지난 가족 음악축제\n\n종료일 없는 과거 시작일 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 정보 없음\n일정: 2026년 10월 1일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n신청 마감: 2026년 12월 31일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n타임라인에 추가\nGoogle 지도 · 대중교통\n다른 지도 앱\n공유용 상세",
         "decoration": "line-through"
       }
     },
@@ -6513,7 +7270,7 @@
       "check": "신청마감 미래 행사 카드는 신청마감 배지·종료 취소선 금지",
       "ok": true,
       "detail": {
-        "text": "서울 미래 가족 음악축제\n서울특별시 종로구\n2026년 11월 1일 ~ 2026년 11월 30일\n대상 7-13\n무료\n아이와 함께어린이무료마감행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기",
+        "text": "서울 미래 가족 음악축제\n서울특별시 종로구\n2026년 11월 1일 ~ 2026년 11월 30일\n대상 7-13\n무료\n아이와 함께어린이무료마감행사축제\n\n아이 동반 안내: 명시 문구: 어린이\n\n상세 보기\n타임라인에 추가\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기",
         "decoration": "none",
         "badges": [
           "아이와 함께",
@@ -6529,7 +7286,7 @@
       "check": "신청마감 미래 지도 popup은 신청마감 배지·종료 취소선 금지",
       "ok": true,
       "detail": {
-        "text": "서울 미래 가족 음악축제\n서울특별시 · 2026년 11월 1일 ~ 2026년 11월 30일\n마감\n아이와 함께\n무료\n상세 보기\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기\n×",
+        "text": "서울 미래 가족 음악축제\n서울특별시 · 2026년 11월 1일 ~ 2026년 11월 30일\n마감\n아이와 함께\n무료\n상세 보기\n타임라인에 추가\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기\n×",
         "decoration": "none"
       }
     },
@@ -6537,7 +7294,7 @@
       "check": "신청마감 미래 native 상세는 종료 아님",
       "ok": true,
       "detail": {
-        "text": "닫기\n서울 미래 가족 음악축제\n\n미래 행사지만 신청만 마감된 원문 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 정보 없음\n일정: 2026년 11월 1일 ~ 2026년 11월 30일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 마감\n주최: 정보 없음\n신청 마감: 2026년 10월 14일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기\n공유용 상세",
+        "text": "닫기\n서울 미래 가족 음악축제\n\n미래 행사지만 신청만 마감된 원문 행사\n\n아이 동반 안내: 명시 문구: 어린이\n\n지역: 서울특별시 종로구\n장소: 정보 없음\n일정: 2026년 11월 1일 ~ 2026년 11월 30일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 마감\n주최: 정보 없음\n신청 마감: 2026년 10월 14일\n\n출처: fixture\n\n연결 확인 · 확인 2026. 10. 15. 오전 12:00\n공식 정보 보기\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n예매 사이트 바로가기\n타임라인에 추가\nGoogle 지도 · 대중교통\n다른 지도 앱\n공유용 상세",
         "decoration": "none",
         "closed": 1,
         "ended": 0
@@ -6547,7 +7304,7 @@
       "check": "종료일 없는 과거 시작일 정적 상세도 종료 안내",
       "ok": true,
       "detail": {
-        "text": "View in English\n서울 시작일 지난 가족 음악축제\n\n🗓 일정: 2026-10-01 종료\n\n상태: 종료\n\n지역: 서울특별시\n\n장소: 정보 없음\n\n주소: 정보 없음\n\n대상 연령: 7-13\n\n비용: 무료\n\n소요시간: 정보 없음\n\n주최: 정보 없음\n\n신청 마감: 2026-12-31\n\n종료일 없는 과거 시작일 행사\n\n행사 정보는 출처에서 제공한 원문으로 표시합니다.\n\n출처: https://fixture/start-only-ended\n\n연결 차단 신뢰 도메인 아님\n\n예매처에서 확인 연결 차단 원본 URL 없음\n\n← 전체 행사 보기",
+        "text": "View in English\n서울 시작일 지난 가족 음악축제\n\n🗓 일정: 2026-10-01 종료\n\n상태: 종료\n\n지역: 서울특별시\n\n장소: 정보 없음\n\n주소: 정보 없음\n\n대상 연령: 7-13\n\n비용: 무료\n\n소요시간: 정보 없음\n\n주최: 정보 없음\n\n신청 마감: 2026-12-31\n\n종료일 없는 과거 시작일 행사\n\n행사 정보는 출처에서 제공한 원문으로 표시합니다.\n\n출처: https://fixture/start-only-ended\n\n연결 차단 신뢰 도메인 아님\n\n예매처에서 확인 연결 차단 원본 URL 없음\n\nGoogle은 대중교통 길찾기로 연결합니다. 자동차 이동은 네이버·카카오에서 경로를 확인해 주세요.\n\nGoogle 지도 · 대중교통\n다른 지도 앱\n\n← 전체 행사 보기",
         "decoration": "line-through",
         "color": [
           180,
@@ -6560,7 +7317,7 @@
       "check": "종료 정적 상세 날짜·붉은 종료 안내",
       "ok": true,
       "detail": {
-        "text": "View in English\n서울 지난 가족 음악축제\n\n🗓 일정: 2026-10-01 ~ 2026-10-14 종료\n\n상태: 종료\n\n지역: 서울특별시\n\n장소: 정보 없음\n\n주소: 서울특별시 종로구 가족로 1\n\n대상 연령: 7-13\n\n비용: 무료\n\n소요시간: 정보 없음\n\n주최: 정보 없음\n\n신청 마감: 2026-12-31\n\n원문 행사 설명을 보존하는 종료 행사\n\n행사 정보는 출처에서 제공한 원문으로 표시합니다.\n\n출처: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303302\n\n공식 정보 보기 연결 확인\n\n예매처에서 확인 예매 사이트 바로가기 연결 확인\n\n← 전체 행사 보기",
+        "text": "View in English\n서울 지난 가족 음악축제\n\n🗓 일정: 2026-10-01 ~ 2026-10-14 종료\n\n상태: 종료\n\n지역: 서울특별시\n\n장소: 정보 없음\n\n주소: 서울특별시 종로구 가족로 1\n\n대상 연령: 7-13\n\n비용: 무료\n\n소요시간: 정보 없음\n\n주최: 정보 없음\n\n신청 마감: 2026-12-31\n\n원문 행사 설명을 보존하는 종료 행사\n\n행사 정보는 출처에서 제공한 원문으로 표시합니다.\n\n출처: https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303302\n\n공식 정보 보기 연결 확인\n\n예매처에서 확인 예매 사이트 바로가기 연결 확인\n\nGoogle은 대중교통 길찾기로 연결합니다. 자동차 이동은 네이버·카카오에서 경로를 확인해 주세요.\n\nGoogle 지도 · 대중교통\n다른 지도 앱\n\n← 전체 행사 보기",
         "decoration": "line-through",
         "color": [
           180,
@@ -6648,7 +7405,7 @@
       "check": "신청마감 미래 정적 상세는 종료 아님",
       "ok": true,
       "detail": {
-        "text": "한국어로 보기\n서울 미래 가족 음악축제\n\n🗓 Schedule: 2026-11-01 ~ 2026-11-30\n\nStatus: Application closed\n\nRegion: 서울특별시\n\nVenue: 정보 없음\n\nAddress: 정보 없음\n\nAge: 7-13\n\nCost: 무료\n\nDuration: 정보 없음\n\nOrganizer: 정보 없음\n\nApplication deadline: 2026-10-14\n\n미래 행사지만 신청만 마감된 원문 행사\n\nEvent information is shown in its source language.\n\nSource: https://fixture/music\n\nLink blocked 신뢰 도메인 아님\n\nConfirm with the ticketing site Link blocked 원본 URL 없음\n\n← Back to all events",
+        "text": "한국어로 보기\n서울 미래 가족 음악축제\n\n🗓 Schedule: 2026-11-01 ~ 2026-11-30\n\nStatus: Application closed\n\nRegion: 서울특별시\n\nVenue: 정보 없음\n\nAddress: 정보 없음\n\nAge: 7-13\n\nCost: 무료\n\nDuration: 정보 없음\n\nOrganizer: 정보 없음\n\nApplication deadline: 2026-10-14\n\n미래 행사지만 신청만 마감된 원문 행사\n\nEvent information is shown in its source language.\n\nSource: https://fixture/music\n\nLink blocked 신뢰 도메인 아님\n\nConfirm with the ticketing site Link blocked 원본 URL 없음\n\nGoogle opens public transit directions. For driving, use Naver or Kakao and confirm the route there.\n\nGoogle Maps · Transit\nOther map apps\n\n← Back to all events",
         "status": "Application closed",
         "decoration": "none"
       }

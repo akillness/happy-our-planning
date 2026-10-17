@@ -32,28 +32,46 @@
     <h1 id="heroTitle" class="sr-only" data-i18n="brand.heroTitle">아이와 어디서, 무엇을 해볼까요?</h1>
     <p class="brand-note" data-i18n="brand.tagline">아이와 함께 놀고 체험하는 주말 행사 발견</p>
     <p id="freshness" class="freshness" role="status" aria-live="polite">행사를 불러오는 중입니다</p>
+    <nav id="primaryNav" class="primary-nav" aria-label="주 메뉴" data-i18n-aria-label="nav.ariaLabel">
+      <button id="mapTab" type="button" class="primary-tab" aria-controls="mapPanel" aria-pressed="true" data-i18n="nav.map">지도</button>
+      <button id="timelineTab" type="button" class="primary-tab" aria-controls="timelinePanel" aria-pressed="false" data-i18n="nav.timeline">타임라인</button>
+    </nav>
   </header>
 
   <main id="mapWorkspace" aria-label="행사 지도 탐색" data-i18n-aria-label="map.ariaLabel">
-    <section class="map-panel" aria-label="행사 위치 지도" data-i18n-aria-label="map.ariaLabel">
+    <section id="mapPanel" class="map-panel" aria-label="행사 위치 지도" data-i18n-aria-label="map.ariaLabel">
       <div id="map" aria-label="행사 위치 지도" data-i18n-aria-label="map.ariaLabel"></div>
-      <div class="map-tools">
-        <button id="locateBtn" type="button" class="button button-quiet icon-btn">
-          <img class="control-icon" src="./assets/icons/menu-locate.webp" alt="" width="20" height="20" decoding="async" />
-          <span class="control-label" data-i18n="map.locate">내 위치에서 찾기</span>
-        </button>
-        <button id="languageToggle" type="button" class="button button-quiet icon-btn">
-          <img class="control-icon" src="./assets/icons/menu-language.webp" alt="" width="20" height="20" decoding="async" />
-          <span class="control-label">English</span>
-        </button>
-        <button id="soundToggle" type="button" class="button button-quiet icon-btn" aria-label="배경음악 및 효과음 켜기" title="배경음악 및 효과음 켜기" data-i18n-aria-label="tool.soundToggle.titleOff" data-i18n-title="tool.soundToggle.titleOff">
-          <img id="soundIcon" class="control-icon" src="./assets/icons/menu-sound-off.webp" alt="" width="20" height="20" decoding="async" />
-          <span id="soundLabel" class="control-label" data-i18n="tool.soundToggle.off">소리 끔</span>
-        </button>
-        <p id="locateHint" class="map-hint" role="status" aria-live="polite" data-i18n="map.locateHint.default">내 위치를 사용하면 가까운 순으로 정렬합니다. 위치는 저장되지 않습니다.</p>
-      </div>
       <p id="mapFallback" class="map-fallback" role="status" aria-live="polite" hidden data-i18n="map.fallback">지도를 불러오지 못했어요. 목록에서 행사 위치를 확인할 수 있습니다.</p>
     </section>
+
+    <!-- Controls share the workspace overlay layer, outside the Leaflet canvas. -->
+      <div class="map-tools">
+        <details id="toolsMenu" class="tools-menu">
+          <summary id="toolsToggle" class="tools-toggle icon-btn" aria-label="도구" title="도구" data-i18n-aria-label="nav.tools" data-i18n-title="nav.tools">
+            <span class="tools-glyph" aria-hidden="true">•••</span>
+            <span class="control-label" data-i18n="nav.tools">도구</span>
+          </summary>
+          <div class="tools-drawer">
+            <button id="locateBtn" type="button" class="button button-quiet icon-btn">
+              <img class="control-icon" src="./assets/icons/menu-locate.webp" alt="" width="20" height="20" decoding="async" />
+              <span class="control-label" data-i18n="map.locate">내 위치에서 찾기</span>
+            </button>
+            <button id="languageToggle" type="button" class="button button-quiet icon-btn">
+              <img class="control-icon" src="./assets/icons/menu-language.webp" alt="" width="20" height="20" decoding="async" />
+              <span class="control-label">English</span>
+            </button>
+            <button id="soundToggle" type="button" class="button button-quiet icon-btn" aria-label="배경음악 및 효과음 켜기" title="배경음악 및 효과음 켜기" data-i18n-aria-label="tool.soundToggle.titleOff" data-i18n-title="tool.soundToggle.titleOff">
+              <img id="soundIcon" class="control-icon" src="./assets/icons/menu-sound-off.webp" alt="" width="20" height="20" decoding="async" />
+              <span id="soundLabel" class="control-label" data-i18n="tool.soundToggle.off">소리 끔</span>
+            </button>
+            <button id="aiBtn" type="button" class="button button-primary icon-btn" aria-label="아이 맞춤 추천" title="아이 맞춤 추천" data-i18n="results.aiButton" data-i18n-aria-label="results.aiButton" data-i18n-title="results.aiButton">
+              <img class="control-icon" src="./assets/icons/menu-ai.webp" alt="" width="20" height="20" decoding="async" />
+              <span class="control-label" data-i18n="results.aiButton">아이 맞춤 추천</span>
+            </button>
+            <p id="locateHint" class="map-hint" role="status" aria-live="polite" data-i18n="map.locateHint.default">내 위치를 사용하면 가까운 순으로 정렬합니다. 위치는 저장되지 않습니다.</p>
+          </div>
+        </details>
+      </div>
 
     <form id="searchDock" class="search-dock" aria-label="행사 검색 필터" data-i18n-aria-label="search.ariaLabel">
       <div class="search-row">
@@ -120,14 +138,69 @@
       </details>
     </form>
 
+    <section id="timelinePanel" class="timeline-panel" hidden aria-labelledby="timelineTitle">
+      <div class="timeline-head">
+        <div class="timeline-heading">
+          <h2 id="timelineTitle" data-i18n="timeline.title">우리 가족 타임라인</h2>
+          <p class="timeline-count"><strong id="timelineCount">0</strong><span data-i18n="common.countUnit">건</span></p>
+        </div>
+        <button id="timelineClose" type="button" class="button button-quiet icon-btn timeline-close" data-i18n="timeline.close" aria-label="타임라인 닫기" data-i18n-aria-label="timeline.close">닫기</button>
+      </div>
+      <div id="timelineScroll" class="timeline-body">
+        <p id="timelineIntro" class="timeline-intro" data-i18n="timeline.intro">보고 싶은 행사를 날짜와 이동 순서로 모아보세요.</p>
+        <div class="timeline-filters" role="group" aria-label="타임라인 보기 필터" data-i18n-aria-label="history.filtersAriaLabel">
+          <label for="timelineDate">
+            <span data-i18n="history.date">날짜</span>
+            <input id="timelineDate" type="date" />
+          </label>
+          <label for="timelineView">
+            <span data-i18n="history.view">보기</span>
+            <select id="timelineView">
+              <option value="all" data-i18n="history.viewAll">전체</option>
+              <option value="planned" data-i18n="history.viewPlanned">계획</option>
+              <option value="visited" data-i18n="history.viewVisited">방문 기록</option>
+            </select>
+          </label>
+          <button id="timelineDateClear" type="button" class="button button-quiet" data-i18n="history.allDates">모든 날짜</button>
+        </div>
+        <details id="historyImport" class="history-import">
+          <summary data-i18n="history.importTitle">Google Maps 타임라인 기록 가져오기</summary>
+          <div class="history-import-body">
+            <p class="history-import-privacy" data-i18n="history.importPrivacy">선택한 JSON 파일은 이 브라우저 안에서만 처리하며, 원본 기록·좌표·파일명은 업로드하거나 저장하지 않습니다.</p>
+            <p class="history-import-hint" data-i18n="history.importHint">Google 계정에 연결하지 않습니다. 현재 공개 행사와 일치하는 방문 후보만 보여 드리며, 선택하기 전에는 저장하지 않습니다.</p>
+            <label class="history-file-label" for="historyFile">
+              <span data-i18n="history.fileLabel">Google Maps JSON 내보내기 파일</span>
+              <input id="historyFile" type="file" accept="application/json,.json" />
+            </label>
+            <p id="historyImportStatus" class="history-import-status" role="status" aria-live="polite"></p>
+            <div id="historyCandidates" class="history-candidates" hidden></div>
+            <div class="history-import-actions">
+              <button id="historyConfirm" type="button" class="button button-primary" disabled data-i18n="history.confirm">선택한 방문 가져오기</button>
+              <button id="historyCancel" type="button" class="button button-quiet" data-i18n="history.cancel">미리보기 취소</button>
+            </div>
+            <p class="history-export-help">
+              <span data-i18n="history.exportHelp">공식 내보내기 안내:</span>
+              <a id="officialAndroid" href="https://support.google.com/maps/answer/6258979?co=GENIE.Platform%3DAndroid" target="_blank" rel="noopener noreferrer" data-i18n="history.officialAndroid">Android 도움말</a>
+              <a id="officialIOS" href="https://support.google.com/maps/answer/6258979?co=GENIE.Platform%3DiOS" target="_blank" rel="noopener noreferrer" data-i18n="history.officialIOS">iOS 도움말</a>
+            </p>
+          </div>
+        </details>
+        <p id="timelineNotice" class="timeline-notice" role="status" aria-live="polite" hidden></p>
+        <div id="timelineEmpty" class="state-panel timeline-empty">
+          <strong data-i18n="timeline.emptyTitle">아직 담은 일정이 없어요.</strong>
+          <p data-i18n="timeline.emptyBody">지도에서 마음에 드는 행사를 찾아 타임라인에 담아보세요.</p>
+          <div class="timeline-actions">
+            <button id="timelineBrowse" type="button" class="button button-primary" data-i18n="timeline.browse">지도에서 찾기</button>
+          </div>
+        </div>
+        <ol id="timelineList" class="timeline-list"></ol>
+      </div>
+    </section>
+
     <section id="resultsPanel" class="results" data-collapsed="true" aria-labelledby="resultsTitle">
       <div class="results-head">
         <div class="results-summary"><h2 id="resultsTitle" data-i18n="results.title">아이와 갈 행사</h2><p class="result-count"><strong id="count">0</strong><span data-i18n="common.countUnit">건</span></p></div>
         <div class="results-head-actions">
-          <button id="aiBtn" type="button" class="button button-primary icon-btn" aria-label="아이 맞춤 추천" title="아이 맞춤 추천" data-i18n="results.aiButton" data-i18n-aria-label="results.aiButton" data-i18n-title="results.aiButton">
-            <img class="control-icon" src="./assets/icons/menu-ai.webp" alt="" width="20" height="20" decoding="async" />
-            <span class="control-label" data-i18n="results.aiButton">아이 맞춤 추천</span>
-          </button>
           <button id="resultsToggle" type="button" class="button button-quiet results-toggle icon-btn" aria-controls="resultsScroll" aria-expanded="false">
             <img class="control-icon" src="./assets/icons/menu-results.webp" alt="" width="20" height="20" decoding="async" />
             <span class="control-label" data-i18n="results.toggleExpand">결과 펼치기</span>
@@ -167,6 +240,9 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
   <script src="./i18n.js"></script>
+  <script src="./directions.js"></script>
+  <script src="./timeline-import.js"></script>
+  <script src="./timeline.js"></script>
   <script src="./app.js"></script>
   <noscript><p class="state-panel">자바스크립트를 켜면 행사 목록과 지도를 볼 수 있습니다. 정적 상세 페이지는 <a href="./data/events.json">events.json</a>에서 직접 확인할 수 있어요.</p></noscript>
 </body>

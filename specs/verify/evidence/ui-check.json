@@ -1,7 +1,7 @@
 {
   "status": "passed",
-  "total_checks": 68,
-  "passed": 68,
+  "total_checks": 72,
+  "passed": 72,
   "data_context": "deterministic routed fixture (fixed KST 2026-10-15), not production events.json",
   "viewports": [
     "1440x900",
@@ -9,7 +9,7 @@
     "360x800",
     "390x844"
   ],
-  "spec_version": "1.6.0",
+  "spec_version": "1.8.0",
   "source_files_present": {
     "spec.md": true,
     "seed.yaml": true,
@@ -20,12 +20,12 @@
     "i18n.js": true
   },
   "source_hashes": {
-    "spec.md": "af94b2ef61dd559388e8ff4ac83108ee6e1c3a13e8fa3d88f8523befe99d7729",
-    "seed.yaml": "468e7ab87d600aa9b0a0166b9b1b86294f451ed7ce47d5cf8e610253bce20f01",
-    "index.html": "1bef6267d3eb4ec978aca079f61525d61ebe6e4d0247b293aa6f7d0492e71c0c",
-    "app.js": "28ebe46a385ec4b0372850ed2a0bf5a9b2adda0b5c7da7d36e47dbf7f39bd39a",
-    "styles.css": "f11c8b7bf502c57f3a76bfd3a6ef862b513a4aacdffabfca18f405009383b000",
-    "locales.json": "62a8cc23a3ef227281a74c993a0c254829dc55e226658ff6364f5fbd5ce9f033",
+    "spec.md": "306f80bcfa66a884f6eeac4d0a9e4c8b956ef92482b37b53cf72975ad588f97a",
+    "seed.yaml": "f78c44c5a25301853f5d644435fadd14ba79f40d50dcb2af3677eb5d19a015b8",
+    "index.html": "933b54a83c91ad216bc02949628c6d66a30f1ce5cf7ea7e786c1c72723378ff2",
+    "app.js": "ad5b8a7e8603d9b8193e89652991a95f73ab0a38271cc87520168c9b303a1f68",
+    "styles.css": "c8b3ce1264a7253ed9ee0b226ea299310334e61b55cd4a581f8b361de451ba35",
+    "locales.json": "697eccd9018388be44e955efdffa3a588aae86e6237bb75577e46816372cb044",
     "i18n.js": "3bd1a7a0d6627d90aaf9319e354bf9c481a6b72167e24f08373b3721329bdeb3"
   },
   "checks": [
@@ -37,7 +37,7 @@
     {
       "check": "일반 지도 페이지가 실제 OSM 타일 fixture를 사용함",
       "ok": true,
-      "detail": "{\"count\": 54}"
+      "detail": "{\"count\": 28}"
     },
     {
       "check": "데스크톱 가족 기본 스냅샷",
@@ -182,7 +182,7 @@
     {
       "check": "Retry 성공 시 필터·액션 복구·카운트·URL 보존·브라우저 오류 없음",
       "ok": true,
-      "detail": "{\"attempts\": {\"events.json\": 2}, \"after\": {\"disabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"count\": \"1\", \"errorHidden\": true, \"query\": \"?sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&free_only=1\"}, \"expectedDisabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"browserErrors\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:52129/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"expectedInitial503\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:52129/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"unexpectedErrors\": []}"
+      "detail": "{\"attempts\": {\"events.json\": 2}, \"after\": {\"disabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"count\": \"1\", \"errorHidden\": true, \"query\": \"?sido=%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C&free_only=1\"}, \"expectedDisabled\": {\"q\": false, \"sido\": false, \"theme\": false, \"age\": false, \"activity\": false, \"from\": false, \"to\": false, \"kids\": false, \"freeOnly\": false, \"applyable\": false, \"reset\": false, \"aiBtn\": false, \"sortRel\": false, \"sortNew\": false, \"sortDist\": true, \"pagePrev\": true, \"pageNext\": true}, \"browserErrors\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:49356/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"expectedInitial503\": [{\"kind\": \"console\", \"type\": \"error\", \"text\": \"Failed to load resource: the server responded with a status of 503 (Service Unavailable)\", \"location\": {\"url\": \"http://127.0.0.1:49356/data/events.json\", \"lineNumber\": 0, \"columnNumber\": 0}}], \"unexpectedErrors\": []}"
     },
     {
       "check": "지도 초기화 실패 시 Locate가 위치를 가장하지 않음",
@@ -220,9 +220,14 @@
       "detail": "{\"info\": 1, \"booking\": 1}"
     },
     {
+      "check": "상세 Google·Naver·Kakao 길찾기 앵커 allowlist·보안 속성",
+      "ok": true,
+      "detail": "{\"google\": {\"count\": 1, \"href\": \"https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=37.57%2C126.976\", \"target\": \"_blank\", \"rel\": \"noopener noreferrer\"}, \"naver\": {\"count\": 1, \"href\": \"https://map.naver.com/p/search/37.57%2C126.976\", \"target\": \"_blank\", \"rel\": \"noopener noreferrer\"}, \"kakao\": {\"count\": 1, \"href\": \"https://map.kakao.com/link/to/%EC%84%9C%EC%9A%B8%2010%EC%9B%94%20%EA%B0%80%EC%A1%B1%20%EC%B2%B4%ED%97%98,37.57,126.976\", \"target\": \"_blank\", \"rel\": \"noopener noreferrer\"}}"
+    },
+    {
       "check": "만료·미검증 출처는 카드/상세 외부 앵커 금지",
       "ok": true,
-      "detail": "닫기\n서울 10월 지난 과학 체험\n\n지난 날짜의 시작일-only 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 과학·탐구\n\n지난 날짜의 체험\n\n아이 동반 안내: 명시 문구: 가족\n\n지역: 서울특별시 강서구\n장소: 정보 없음\n일정: 2026년 10월 14일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n\n출처: 정보 없음\n\n연결 미확인 · 확인 2026. 10. 01. 오전 09:00 · 검증 만료\n공유용 상세"
+      "detail": "닫기\n서울 10월 지난 과학 체험\n\n지난 날짜의 시작일-only 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 과학·탐구\n\n지난 날짜의 체험\n\n아이 동반 안내: 명시 문구: 가족\n\n지역: 서울특별시 강서구\n장소: 정보 없음\n일정: 2026년 10월 14일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 종료\n주최: 정보 없음\n\n출처: 정보 없음\n\n연결 미확인 · 확인 2026. 10. 01. 오전 09:00 · 검증 만료\n타임라인에 추가\nGoogle 지도 · 대중교통\n다른 지도 앱\n공유용 상세"
     },
     {
       "check": "기본 결과 경험 우선·비경험/종료 행사 보존",
@@ -232,17 +237,17 @@
     {
       "check": "신선도 만료 booking은 활성 행사에서도 외부 앵커 금지",
       "ok": true,
-      "detail": "닫기\n부산 무료 가족 체험\n\n부산 가족 체험\n\n아이 동반 안내: 명시 문구: 가족\n\n지역: 부산광역시 해운대구\n장소: 정보 없음\n일정: 2026년 10월 15일 ~ 2026년 10월 16일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 정보 없음\n주최: 정보 없음\n\n출처: 정보 없음\n\n연결 미확인 · 확인 시각 없음\n예매처에서 확인 · 확인 2026. 10. 01. 오전 09:00 · 확인 만료\n공유용 상세"
+      "detail": "닫기\n부산 무료 가족 체험\n\n부산 가족 체험\n\n아이 동반 안내: 명시 문구: 가족\n\n지역: 부산광역시 해운대구\n장소: 정보 없음\n일정: 2026년 10월 15일 ~ 2026년 10월 16일\n대상 연령: 7-13\n비용: 무료\n소요시간: 정보 없음\n상태: 정보 없음\n주최: 정보 없음\n\n출처: 정보 없음\n\n연결 미확인 · 확인 시각 없음\n예매처에서 확인 · 확인 2026. 10. 01. 오전 09:00 · 확인 만료\n타임라인에 추가\nGoogle 지도 · 대중교통\n다른 지도 앱\n공유용 상세"
     },
     {
       "check": "매핑된 사설 IPv4는 카드·상세 외부 앵커 금지",
       "ok": true,
-      "detail": "닫기\n서울 유료 가족 체험\n\n유료 가족 체험\n\n아이와 해볼 수 있는 것\n\n분류: 만들기·예술 · 신체·놀이\n\n직접 만들고 놀며 참여하는 공예 체험\n\n아이 동반 안내: 명시 문구: 가족\n\n지역: 서울특별시 마포구\n장소: 정보 없음\n일정: 2026년 10월 15일 ~ 2026년 10월 16일\n대상 연령: 7-13\n비용: 1,000원\n소요시간: 정보 없음\n상태: 정보 없음\n주최: 정보 없음\n\n출처: 정보 없음\n\n연결 차단 · 확인 2026. 10. 15. 오전 12:00\n예매처에서 확인 · 확인 2026. 10. 15. 오전 12:00\n공유용 상세"
+      "detail": "{\"proofAnchors\": 0, \"hrefs\": [\"https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=37.55%2C126.91\", \"https://map.naver.com/p/search/37.55%2C126.91\", \"https://map.kakao.com/link/to/%EC%84%9C%EC%9A%B8%20%EC%9C%A0%EB%A3%8C%20%EA%B0%80%EC%A1%B1%20%EC%B2%B4%ED%97%98,37.55,126.91\"]}"
     },
     {
       "check": "NAT64 사설 목적지는 카드·상세 외부 앵커 금지",
       "ok": true,
-      "detail": "0"
+      "detail": "{\"proofAnchors\": 0, \"hrefs\": [\"https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=37.55%2C126.91\", \"https://map.naver.com/p/search/37.55%2C126.91\", \"https://map.kakao.com/link/to/%EC%84%9C%EC%9A%B8%20%EC%9C%A0%EB%A3%8C%20%EA%B0%80%EC%A1%B1%20%EC%B2%B4%ED%97%98,37.55,126.91\"]}"
     },
     {
       "check": "activity 필터 컨트롤 노출",
@@ -337,17 +342,17 @@
     {
       "check": "360px 지도 배경이 뷰포트를 채움",
       "ok": true,
-      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 134, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 650}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
+      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 324, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 460}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
     },
     {
       "check": "360px 우측 결과 drawer 기본 접힘·지도 56px",
       "ok": true,
-      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 134, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 650}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
+      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 324, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 460}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
     },
     {
       "check": "360px 문서 스크롤·가로 넘침 없음",
       "ok": true,
-      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 134, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 650}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
+      "detail": "{\"map\": {\"left\": 0, \"top\": 0, \"right\": 360, \"bottom\": 800, \"width\": 360, \"height\": 800}, \"panel\": {\"left\": 292, \"top\": 16, \"right\": 344, \"bottom\": 68, \"width\": 52, \"height\": 52}, \"search\": {\"left\": 12, \"top\": 324, \"right\": 348, \"bottom\": 784, \"width\": 336, \"height\": 460}, \"width\": 360, \"clientWidth\": 360, \"height\": 800, \"clientHeight\": 800, \"collapsed\": \"true\", \"expanded\": \"false\"}"
     },
     {
       "check": "360px 가족 기본 스냅샷",
@@ -355,9 +360,24 @@
       "detail": "specs/verify/evidence/ui-mobile-family.png"
     },
     {
+      "check": "360px 도구 메뉴에서 AI·Locate·언어 실제 조작",
+      "ok": true,
+      "detail": "내 위치 기준 거리순 정렬이 켜졌습니다. 위치는 저장되지 않습니다."
+    },
+    {
+      "check": "360px 카드 상세 닫기 후 재진입이 같은 행사로 복원",
+      "ok": true,
+      "detail": ""
+    },
+    {
       "check": "360px 주요 터치 타깃 44px",
       "ok": true,
-      "detail": "{\"filterTargets\": [{\"selector\": \"icon-btn\", \"width\": 334, \"height\": 44}, {\"selector\": \"button button-quiet icon-btn\", \"width\": 44, \"height\": 44}, {\"selector\": \"region-chip activity-chip\", \"width\": 150, \"height\": 76}, {\"selector\": \"region-chip\", \"width\": 101.25, \"height\": 44}, {\"selector\": \"region-chip\", \"width\": 99.71875, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 67.65625, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 66.203125, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 97.546875, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 96.09375, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 77.9375, \"height\": 44}, {\"selector\": \"region-chip subfacet-chip\", \"width\": 100.234375, \"height\": 44}, {\"selector\": \"button button-quiet results-toggle icon-btn\", \"width\": 44, \"height\": 44}], \"resultActions\": [{\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-primary\", \"width\": 125.328125, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-primary\", \"width\": 125.328125, \"height\": 44}], \"filterTargetsOk\": true, \"resultActionsOk\": true}"
+      "detail": "{\"filterTargets\": [{\"id\": \"toolsToggle\", \"selector\": \"tools-toggle icon-btn\", \"width\": 44, \"height\": 44}, {\"id\": \"locateBtn\", \"selector\": \"button button-quiet icon-btn\", \"width\": 242, \"height\": 44}, {\"id\": \"languageToggle\", \"selector\": \"button button-quiet icon-btn\", \"width\": 242, \"height\": 44}, {\"id\": \"soundToggle\", \"selector\": \"button button-quiet icon-btn\", \"width\": 242, \"height\": 44}, {\"id\": \"aiBtn\", \"selector\": \"button button-primary icon-btn\", \"width\": 242, \"height\": 44}, {\"id\": \"filterToggle\", \"selector\": \"icon-btn\", \"width\": 334, \"height\": 44}, {\"id\": \"reset\", \"selector\": \"button button-quiet icon-btn\", \"width\": 44, \"height\": 44}, {\"id\": \"\", \"selector\": \"region-chip activity-chip\", \"width\": 150, \"height\": 76}, {\"id\": \"\", \"selector\": \"region-chip\", \"width\": 101.25, \"height\": 44}, {\"id\": \"\", \"selector\": \"region-chip\", \"width\": 99.71875, \"height\": 44}, {\"id\": \"\", \"selector\": \"region-chip subfacet-chip\", \"width\": 67.65625, \"height\": 44}, {\"id\": \"\", \"selector\": \"region-chip subfacet-chip\", \"width\": 66.203125, \"height\": 44}, {\"id\": \"\", \"selector\": \"region-chip subfacet-chip\", \"width\": 97.546875, \"height\": 44}, {\"id\": \"\", \"selector\": \"region-chip subfacet-chip\", \"width\": 96.09375, \"height\": 44}, {\"id\": \"\", \"selector\": \"region-chip subfacet-chip\", \"width\": 77.9375, \"height\": 44}, {\"id\": \"\", \"selector\": \"region-chip subfacet-chip\", \"width\": 100.234375, \"height\": 44}, {\"id\": \"resultsToggle\", \"selector\": \"button button-quiet results-toggle icon-btn\", \"width\": 44, \"height\": 44}], \"resultActions\": [{\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-quiet timeline-save\", \"width\": 100.65625, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-quiet timeline-save\", \"width\": 100.65625, \"height\": 44}, {\"selector\": \"button button-primary\", \"width\": 125.328125, \"height\": 44}, {\"selector\": \"button button-quiet\", \"width\": 68.28125, \"height\": 44}, {\"selector\": \"button button-quiet timeline-save\", \"width\": 100.65625, \"height\": 44}, {\"selector\": \"button button-primary\", \"width\": 125.328125, \"height\": 44}], \"filterTargetsOk\": true, \"toolsTargetsOk\": true, \"toolsFlowOk\": true, \"resultActionsOk\": true}"
+    },
+    {
+      "check": "360px 도구 메뉴 초기 접힘·열기·조작 후 닫힘",
+      "ok": true,
+      "detail": "{\"initiallyClosed\": true, \"opened\": true, \"closed\": true, \"targetIds\": [\"\", \"aiBtn\", \"filterToggle\", \"languageToggle\", \"locateBtn\", \"reset\", \"resultsToggle\", \"soundToggle\", \"toolsToggle\"]}"
     },
     {
       "check": "360px 활동 칩 터치 타깃 44px",

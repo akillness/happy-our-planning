@@ -1,0 +1,98 @@
+{
+  "status": "passed",
+  "verified_on": "2026-10-17",
+  "spec_version": "1.8.0",
+  "app_sha256": "ad5b8a7e8603d9b8193e89652991a95f73ab0a38271cc87520168c9b303a1f68",
+  "browser_gates": [
+    {
+      "command": "python3 specs/verify/ui_locale_check.py",
+      "returncode": 0,
+      "status": "passed",
+      "passed": 172,
+      "total": 172
+    },
+    {
+      "command": "python3 specs/verify/map_viewport_check.py",
+      "returncode": 0,
+      "status": "passed",
+      "passed": 139,
+      "total": 139
+    },
+    {
+      "command": "python3 specs/verify/timeline_check.py",
+      "returncode": 0,
+      "status": "passed",
+      "passed": 60,
+      "total": 60
+    },
+    {
+      "command": "python3 specs/verify/history_import_check.py",
+      "returncode": 0,
+      "status": "passed",
+      "passed": 21,
+      "total": 21
+    },
+    {
+      "command": "python3 specs/verify/run_ui_check.py",
+      "returncode": 0,
+      "status": "passed",
+      "passed": 72,
+      "total": 72
+    }
+  ],
+  "browser_checks_total": 464,
+  "browser_evidence": [
+    "specs/verify/evidence/timeline-check.json",
+    "specs/verify/evidence/history-import-check.json",
+    "specs/verify/evidence/ui-check.json",
+    "specs/verify/evidence/map-viewport-check.json",
+    "specs/verify/evidence/ui-locale-check.json"
+  ],
+  "unit_tests": {
+    "command": "python3 -m unittest discover -s tests",
+    "returncode": 0,
+    "tests": 263,
+    "result": "OK"
+  },
+  "schema_validation": {
+    "command": "python3 scripts/build/validate.py",
+    "returncode": 0,
+    "valid": 440,
+    "total": 440
+  },
+  "offline_pipeline": {
+    "command": "python3 -m scripts.run_pipeline",
+    "environment": {
+      "OFFLINE": "1",
+      "external_api_keys": "explicitly blank"
+    },
+    "returncode": 0,
+    "validated_records": 440,
+    "public_events": 427,
+    "static_detail_pages": 427,
+    "sitemap_urls": 428,
+    "sqlite_event_count_before": 427,
+    "sqlite_event_count_after": 427
+  },
+  "pending_fit_negative_control": {
+    "setup": "Same collapsed-results-panel setup and non-null mapFitOptions as the positive run",
+    "mutation": "Restore the old preserve-first guard in a temporary routed app.js memory copy only",
+    "result": "expected_red",
+    "focused_check_ok": false,
+    "fit_calls_after_close": 0,
+    "pending_after": true,
+    "canonical_evidence_remains_positive": true,
+    "temporary_runner_removed": true,
+    "positive_fit_calls_after_close": 1,
+    "positive_pending_after": false,
+    "positive_preserve_after": null
+  },
+  "boundaries": {
+    "google_account_oauth_sync": false,
+    "background_location_tracking": false,
+    "raw_history_upload_or_persistence": false,
+    "personal_history_files_used_in_qa": false,
+    "real_device_native_app_handoff_verified": false,
+    "public_deployment_performed": false
+  }
+}

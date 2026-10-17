@@ -1,0 +1,1035 @@
+{
+  "status": "passed",
+  "spec_version": "1.8.0",
+  "checks": [
+    {
+      "check": "timeline/map primary controls are present",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "timeline starts hidden and opens to a visible empty state",
+      "ok": true,
+      "detail": {
+        "panelHidden": true,
+        "emptyAttrHidden": false,
+        "emptyHiddenByPanel": true,
+        "openVisible": true
+      }
+    },
+    {
+      "check": "add and duplicate prevention",
+      "ok": true,
+      "detail": {
+        "first": 1,
+        "second": 0
+      }
+    },
+    {
+      "check": "timeline item exposes date/time inputs",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "timeline count reports saved entries",
+      "ok": true,
+      "detail": "1"
+    },
+    {
+      "check": "remove works with time input focused",
+      "ok": true,
+      "detail": []
+    },
+    {
+      "check": "date/time ordering puts earlier date first and unknown time after fixed time",
+      "ok": true,
+      "detail": [
+        "timeline:gamma",
+        "timeline:alpha",
+        "timeline:beta"
+      ]
+    },
+    {
+      "check": "timeline directions use first-without-origin and next-with-previous-origin",
+      "ok": true,
+      "detail": {
+        "alpha": "https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=37.6421%2C127.0767",
+        "beta": "https://www.google.com/maps/dir/?api=1&travelmode=transit&origin=37.6421%2C127.0767&destination=37.5446%2C127.0374"
+      }
+    },
+    {
+      "check": "different-date timeline starts a new route without origin",
+      "ok": true,
+      "detail": "https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=37.5446%2C127.0374"
+    },
+    {
+      "check": "date outside event period is rejected",
+      "ok": true,
+      "detail": {
+        "value": "2026-10-22",
+        "notice": "행사 기간 안의 올바른 날짜와 시간을 선택해 주세요."
+      }
+    },
+    {
+      "check": "tools toggle center hit is unobstructed",
+      "ok": true,
+      "detail": true
+    },
+    {
+      "check": "tools toggle opens with physical click",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "tools toggle closes with keyboard Escape",
+      "ok": true,
+      "detail": "toolsToggle"
+    },
+    {
+      "check": "tools toggle opens with keyboard Enter",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "filter and language changes preserve timeline",
+      "ok": true,
+      "detail": {
+        "before": [
+          "timeline:gamma",
+          "timeline:alpha",
+          "timeline:beta"
+        ],
+        "after": [
+          "timeline:gamma",
+          "timeline:alpha",
+          "timeline:beta"
+        ]
+      }
+    },
+    {
+      "check": "reload restores timeline and versioned storage",
+      "ok": true,
+      "detail": {
+        "items": [
+          "timeline:gamma",
+          "timeline:alpha",
+          "timeline:beta"
+        ],
+        "stored": {
+          "version": 2,
+          "entries": [
+            {
+              "entry_id": "5f427ee9-a8ea-438e-ad5b-f64b43504ce7",
+              "event_id": "timeline:alpha",
+              "date": "2026-10-20",
+              "time": "",
+              "visited": false,
+              "source": "manual"
+            },
+            {
+              "entry_id": "13e1ba95-9b44-4ec5-acc1-f32a7fd1dc63",
+              "event_id": "timeline:beta",
+              "date": "2026-10-22",
+              "time": "",
+              "visited": false,
+              "source": "manual"
+            },
+            {
+              "entry_id": "253999a7-f358-4f35-bcc1-35fb13e575a7",
+              "event_id": "timeline:gamma",
+              "date": "2026-10-19",
+              "time": "",
+              "visited": false,
+              "source": "manual"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "check": "Escape closes timeline and restores opener focus",
+      "ok": true,
+      "detail": "timelineTab"
+    },
+    {
+      "check": "corrupt storage is reported without blocking app",
+      "ok": true,
+      "detail": "저장한 일정 일부를 읽지 못했어요. 확인 가능한 방문 계획은 유지했습니다."
+    },
+    {
+      "check": "storage failure is surfaced while browsing continues",
+      "ok": true,
+      "detail": "브라우저에 저장하지 못했어요. 이 화면을 벗어나면 방문 계획이 사라질 수 있습니다."
+    },
+    {
+      "check": "320x740 no horizontal overflow",
+      "ok": true,
+      "detail": {
+        "scrollWidth": 320,
+        "innerWidth": 320
+      }
+    },
+    {
+      "check": "320x740 map and timeline primary navigation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "320x740 primary targets >=44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "mapTab",
+          "width": 106,
+          "height": 44
+        },
+        {
+          "id": "timelineTab",
+          "width": 106,
+          "height": 44
+        },
+        {
+          "id": "toolsToggle",
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "check": "320x740 tools drawer controls center-hit/in-viewport/44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 242,
+          "height": 44,
+          "left": 55,
+          "top": 143,
+          "right": 297,
+          "bottom": 187,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "languageToggle",
+          "width": 242,
+          "height": 44,
+          "left": 55,
+          "top": 195,
+          "right": 297,
+          "bottom": 239,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "left": 55,
+          "top": 247,
+          "right": 297,
+          "bottom": 291,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "left": 55,
+          "top": 299,
+          "right": 297,
+          "bottom": 343,
+          "centerHit": true,
+          "inViewport": true
+        }
+      ]
+    },
+    {
+      "check": "320x740 16px padding/12px spacing contract",
+      "ok": true,
+      "detail": {
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "listGap": 12,
+        "workspaceHeight": 740
+      }
+    },
+    {
+      "check": "360x800 no horizontal overflow",
+      "ok": true,
+      "detail": {
+        "scrollWidth": 360,
+        "innerWidth": 360
+      }
+    },
+    {
+      "check": "360x800 map and timeline primary navigation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "360x800 primary targets >=44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "mapTab",
+          "width": 106,
+          "height": 44
+        },
+        {
+          "id": "timelineTab",
+          "width": 106,
+          "height": 44
+        },
+        {
+          "id": "toolsToggle",
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "check": "360x800 tools drawer controls center-hit/in-viewport/44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 242,
+          "height": 44,
+          "left": 95,
+          "top": 143,
+          "right": 337,
+          "bottom": 187,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "languageToggle",
+          "width": 242,
+          "height": 44,
+          "left": 95,
+          "top": 195,
+          "right": 337,
+          "bottom": 239,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "left": 95,
+          "top": 247,
+          "right": 337,
+          "bottom": 291,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "left": 95,
+          "top": 299,
+          "right": 337,
+          "bottom": 343,
+          "centerHit": true,
+          "inViewport": true
+        }
+      ]
+    },
+    {
+      "check": "360x800 16px padding/12px spacing contract",
+      "ok": true,
+      "detail": {
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "listGap": 12,
+        "workspaceHeight": 800
+      }
+    },
+    {
+      "check": "390x844 no horizontal overflow",
+      "ok": true,
+      "detail": {
+        "scrollWidth": 390,
+        "innerWidth": 390
+      }
+    },
+    {
+      "check": "390x844 map and timeline primary navigation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "390x844 primary targets >=44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "mapTab",
+          "width": 106,
+          "height": 44
+        },
+        {
+          "id": "timelineTab",
+          "width": 106,
+          "height": 44
+        },
+        {
+          "id": "toolsToggle",
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "check": "390x844 tools drawer controls center-hit/in-viewport/44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 242,
+          "height": 44,
+          "left": 125,
+          "top": 143,
+          "right": 367,
+          "bottom": 187,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "languageToggle",
+          "width": 242,
+          "height": 44,
+          "left": 125,
+          "top": 195,
+          "right": 367,
+          "bottom": 239,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "left": 125,
+          "top": 247,
+          "right": 367,
+          "bottom": 291,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "left": 125,
+          "top": 299,
+          "right": 367,
+          "bottom": 343,
+          "centerHit": true,
+          "inViewport": true
+        }
+      ]
+    },
+    {
+      "check": "390x844 16px padding/12px spacing contract",
+      "ok": true,
+      "detail": {
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "listGap": 12,
+        "workspaceHeight": 844
+      }
+    },
+    {
+      "check": "768x1024 no horizontal overflow",
+      "ok": true,
+      "detail": {
+        "scrollWidth": 768,
+        "innerWidth": 768
+      }
+    },
+    {
+      "check": "768x1024 map and timeline primary navigation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "768x1024 primary targets >=44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "mapTab",
+          "width": 126,
+          "height": 44
+        },
+        {
+          "id": "timelineTab",
+          "width": 126,
+          "height": 44
+        },
+        {
+          "id": "toolsToggle",
+          "width": 84.859375,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "check": "768x1024 tools drawer controls center-hit/in-viewport/44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 242,
+          "height": 44,
+          "left": 83,
+          "top": 268,
+          "right": 325,
+          "bottom": 312,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "languageToggle",
+          "width": 242,
+          "height": 44,
+          "left": 83,
+          "top": 320,
+          "right": 325,
+          "bottom": 364,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "left": 83,
+          "top": 372,
+          "right": 325,
+          "bottom": 416,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "left": 83,
+          "top": 424,
+          "right": 325,
+          "bottom": 468,
+          "centerHit": true,
+          "inViewport": true
+        }
+      ]
+    },
+    {
+      "check": "768x1024 16px padding/12px spacing contract",
+      "ok": true,
+      "detail": {
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "listGap": 16,
+        "workspaceHeight": 1024
+      }
+    },
+    {
+      "check": "1440x900 no horizontal overflow",
+      "ok": true,
+      "detail": {
+        "scrollWidth": 1440,
+        "innerWidth": 1440
+      }
+    },
+    {
+      "check": "1440x900 map and timeline primary navigation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "1440x900 primary targets >=44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "mapTab",
+          "width": 126,
+          "height": 44
+        },
+        {
+          "id": "timelineTab",
+          "width": 126,
+          "height": 44
+        },
+        {
+          "id": "toolsToggle",
+          "width": 84.859375,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "check": "1440x900 tools drawer controls center-hit/in-viewport/44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 242,
+          "height": 44,
+          "left": 83,
+          "top": 268,
+          "right": 325,
+          "bottom": 312,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "languageToggle",
+          "width": 242,
+          "height": 44,
+          "left": 83,
+          "top": 320,
+          "right": 325,
+          "bottom": 364,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "soundToggle",
+          "width": 242,
+          "height": 44,
+          "left": 83,
+          "top": 372,
+          "right": 325,
+          "bottom": 416,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "aiBtn",
+          "width": 242,
+          "height": 44,
+          "left": 83,
+          "top": 424,
+          "right": 325,
+          "bottom": 468,
+          "centerHit": true,
+          "inViewport": true
+        }
+      ]
+    },
+    {
+      "check": "1440x900 16px padding/12px spacing contract",
+      "ok": true,
+      "detail": {
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "listGap": 16,
+        "workspaceHeight": 900
+      }
+    },
+    {
+      "check": "844x390 결과 접힘 header·results-head 비겹침·center/left 실제 head hit",
+      "ok": true,
+      "detail": {
+        "header": {
+          "left": 12,
+          "top": 8,
+          "right": 572,
+          "bottom": 66,
+          "width": 560,
+          "height": 58
+        },
+        "resultsHead": {
+          "left": 777,
+          "top": 17,
+          "right": 827,
+          "bottom": 67,
+          "width": 50,
+          "height": 50
+        },
+        "overlap": false,
+        "centerHit": {
+          "x": 802,
+          "y": 42,
+          "tag": "IMG",
+          "id": "",
+          "className": "control-icon",
+          "inside": true
+        },
+        "leftHit": {
+          "x": 785,
+          "y": 42,
+          "tag": "BUTTON",
+          "id": "resultsToggle",
+          "className": "button button-quiet results-toggle icon-btn",
+          "inside": true
+        },
+        "inViewport": true
+      }
+    },
+    {
+      "check": "844x390 결과 펼침 header·results-head 비겹침·center/left 실제 head hit",
+      "ok": true,
+      "detail": {
+        "header": {
+          "left": 12,
+          "top": 8,
+          "right": 440,
+          "bottom": 66,
+          "width": 428,
+          "height": 58
+        },
+        "resultsHead": {
+          "left": 449,
+          "top": 17,
+          "right": 827,
+          "bottom": 78,
+          "width": 378,
+          "height": 61
+        },
+        "overlap": false,
+        "centerHit": {
+          "x": 638,
+          "y": 47.5,
+          "tag": "DIV",
+          "id": "",
+          "className": "results-head",
+          "inside": true
+        },
+        "leftHit": {
+          "x": 457,
+          "y": 47.5,
+          "tag": "STRONG",
+          "id": "count",
+          "className": "",
+          "inside": true
+        },
+        "inViewport": true
+      }
+    },
+    {
+      "check": "844x390 첫 .card-open scrollIntoView·정확한 center hit·실클릭 detail open",
+      "ok": true,
+      "detail": {
+        "card": {
+          "rect": {
+            "left": 474,
+            "top": 205.15625,
+            "right": 802,
+            "bottom": 249.15625,
+            "width": 328,
+            "height": 44
+          },
+          "center": {
+            "x": 638,
+            "y": 227.15625
+          },
+          "inViewport": true,
+          "centerHit": true,
+          "hitTag": "BUTTON",
+          "hitClass": "card-open"
+        },
+        "detailOpen": true
+      }
+    },
+    {
+      "check": "844x390 no horizontal overflow",
+      "ok": true,
+      "detail": {
+        "scrollWidth": 844,
+        "innerWidth": 844
+      }
+    },
+    {
+      "check": "844x390 map and timeline primary navigation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "844x390 primary targets >=44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "mapTab",
+          "width": 76,
+          "height": 44
+        },
+        {
+          "id": "timelineTab",
+          "width": 76,
+          "height": 44
+        },
+        {
+          "id": "toolsToggle",
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "check": "844x390 tools drawer controls center-hit/in-viewport/44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "left": 83,
+          "top": 137,
+          "right": 127,
+          "bottom": 181,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "languageToggle",
+          "width": 44,
+          "height": 44,
+          "left": 135,
+          "top": 137,
+          "right": 179,
+          "bottom": 181,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "soundToggle",
+          "width": 44,
+          "height": 44,
+          "left": 187,
+          "top": 137,
+          "right": 231,
+          "bottom": 181,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "aiBtn",
+          "width": 44,
+          "height": 44,
+          "left": 239,
+          "top": 137,
+          "right": 283,
+          "bottom": 181,
+          "centerHit": true,
+          "inViewport": true
+        }
+      ]
+    },
+    {
+      "check": "844x390 16px padding/12px spacing contract",
+      "ok": true,
+      "detail": {
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "listGap": 16,
+        "workspaceHeight": 390
+      }
+    },
+    {
+      "check": "568x320 결과 접힘 header·results-head 비겹침·center/left 실제 head hit",
+      "ok": true,
+      "detail": {
+        "header": {
+          "left": 12,
+          "top": 8,
+          "right": 484,
+          "bottom": 66,
+          "width": 472,
+          "height": 58
+        },
+        "resultsHead": {
+          "left": 501,
+          "top": 17,
+          "right": 551,
+          "bottom": 67,
+          "width": 50,
+          "height": 50
+        },
+        "overlap": false,
+        "centerHit": {
+          "x": 526,
+          "y": 42,
+          "tag": "IMG",
+          "id": "",
+          "className": "control-icon",
+          "inside": true
+        },
+        "leftHit": {
+          "x": 509,
+          "y": 42,
+          "tag": "BUTTON",
+          "id": "resultsToggle",
+          "className": "button button-quiet results-toggle icon-btn",
+          "inside": true
+        },
+        "inViewport": true
+      }
+    },
+    {
+      "check": "568x320 결과 펼침 header·results-head 비겹침·center/left 실제 head hit",
+      "ok": true,
+      "detail": {
+        "header": {
+          "left": 12,
+          "top": 8,
+          "right": 320,
+          "bottom": 66,
+          "width": 308,
+          "height": 58
+        },
+        "resultsHead": {
+          "left": 329,
+          "top": 17,
+          "right": 551,
+          "bottom": 78,
+          "width": 222,
+          "height": 61
+        },
+        "overlap": false,
+        "centerHit": {
+          "x": 440,
+          "y": 47.5,
+          "tag": "DIV",
+          "id": "",
+          "className": "results-head",
+          "inside": true
+        },
+        "leftHit": {
+          "x": 337,
+          "y": 47.5,
+          "tag": "STRONG",
+          "id": "count",
+          "className": "",
+          "inside": true
+        },
+        "inViewport": true
+      }
+    },
+    {
+      "check": "568x320 첫 .card-open scrollIntoView·정확한 center hit·실클릭 detail open",
+      "ok": true,
+      "detail": {
+        "card": {
+          "rect": {
+            "left": 352,
+            "top": 106,
+            "right": 528,
+            "bottom": 150,
+            "width": 176,
+            "height": 44
+          },
+          "center": {
+            "x": 440,
+            "y": 128
+          },
+          "inViewport": true,
+          "centerHit": true,
+          "hitTag": "BUTTON",
+          "hitClass": "card-open"
+        },
+        "detailOpen": true
+      }
+    },
+    {
+      "check": "568x320 no horizontal overflow",
+      "ok": true,
+      "detail": {
+        "scrollWidth": 568,
+        "innerWidth": 568
+      }
+    },
+    {
+      "check": "568x320 map and timeline primary navigation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "568x320 primary targets >=44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "mapTab",
+          "width": 76,
+          "height": 44
+        },
+        {
+          "id": "timelineTab",
+          "width": 76,
+          "height": 44
+        },
+        {
+          "id": "toolsToggle",
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "check": "568x320 tools drawer controls center-hit/in-viewport/44px",
+      "ok": true,
+      "detail": [
+        {
+          "id": "locateBtn",
+          "width": 44,
+          "height": 44,
+          "left": 83,
+          "top": 137,
+          "right": 127,
+          "bottom": 181,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "languageToggle",
+          "width": 44,
+          "height": 44,
+          "left": 135,
+          "top": 137,
+          "right": 179,
+          "bottom": 181,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "soundToggle",
+          "width": 44,
+          "height": 44,
+          "left": 187,
+          "top": 137,
+          "right": 231,
+          "bottom": 181,
+          "centerHit": true,
+          "inViewport": true
+        },
+        {
+          "id": "aiBtn",
+          "width": 44,
+          "height": 44,
+          "left": 239,
+          "top": 137,
+          "right": 283,
+          "bottom": 181,
+          "centerHit": true,
+          "inViewport": true
+        }
+      ]
+    },
+    {
+      "check": "568x320 16px padding/12px spacing contract",
+      "ok": true,
+      "detail": {
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "listGap": 12,
+        "workspaceHeight": 320
+      }
+    }
+  ],
+  "total_checks": 60,
+  "passed": 60
+}

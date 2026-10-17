@@ -1,0 +1,113 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "check": "ordinary app data GET completes before import",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "native file input opens one non-multiple picker",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "preview shows candidates unchecked by default",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "preview does not write storage",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "cancel clears preview without changing storage",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "confirm stores only selected candidates",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "existing plan survives history confirmation",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "stored history entries contain only minimal fields",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "import makes no network request",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "source JSON/file name/GPS do not appear in request, console, or storage",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "page has no import runtime error",
+      "ok": true,
+      "detail": "[]"
+    },
+    {
+      "check": "reload preserves repeat visits as separate timeline entries",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "date and visited view filter the timeline",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "date clear and planned view restore plan",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "v1 migration preserves plans and removes old key after v2 write",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "planned-only view keeps hidden same-day predecessor origin",
+      "ok": true,
+      "detail": "https://www.google.com/maps/dir/?api=1&travelmode=transit&origin=37.5%2C127&destination=37.5%2C127"
+    },
+    {
+      "check": "visited-only view starts with no predecessor origin",
+      "ok": true,
+      "detail": "https://www.google.com/maps/dir/?api=1&travelmode=transit&destination=37.5%2C127"
+    },
+    {
+      "check": "timeline shows explicit time and time-unset label",
+      "ok": true,
+      "detail": "{'focus-a': '01:00', 'focus-b': '시간 미정'}"
+    },
+    {
+      "check": "keyboard visited toggle preserves focus on reused row",
+      "ok": true,
+      "detail": "{'entryId': 'focus-a', 'className': 'button button-quiet timeline-visited', 'pressed': 'false'}"
+    },
+    {
+      "check": "filter-hidden visited toggle moves focus to view control",
+      "ok": true,
+      "detail": ""
+    },
+    {
+      "check": "failed v2 migration keeps v1 plans",
+      "ok": true,
+      "detail": "['notchima:timeline:v1']"
+    }
+  ],
+  "total_checks": 21,
+  "passed": 21,
+  "boundary": "synthetic local file only; no Google account, export, or external Maps verification"
+}

@@ -243,6 +243,7 @@ def render_page(
     raw_url = e.get("url")
     source_url = esc(raw_url) if isinstance(raw_url, str) else "정보 없음"
     desc = esc(_text(e.get("description")))
+    directions_event = esc(json.dumps(e, ensure_ascii=False, separators=(",", ":")), quote=True)
     canonical = f'<link rel="canonical" href="{esc(info_url)}">\n' if info_url else ""
     return (
         "<!doctype html>\n"
@@ -277,10 +278,15 @@ def render_page(
         f'<p class="info-link">{info_html}</p>\n'
         f'<p class="booking-link"><span class="booking-disclaimer" data-i18n="link.bookingDisclaimer">예매처에서 확인</span> {booking_html}</p>\n'
         '</div>\n'
+        '<nav class="directions-navigation" aria-label="길찾기" data-i18n-aria-label="directions.ariaLabel">\n'
+        '<p class="directions-intro" data-i18n="directions.intro">외부 지도에서 길찾기를 열 수 있습니다.</p>\n'
+        f'<div class="directions-host" data-directions-event="{directions_event}"></div>\n'
+        '</nav>\n'
         '<p><a href="index.html" data-i18n="staticPage.backToAll">← 전체 행사 보기</a></p>\n'
         '</main>\n'
-        '</body>\n'
         '<script src="../i18n.js"></script>\n'
+        '<script src="../directions.js"></script>\n'
+        '</body>\n'
         '</html>\n'
     )
 

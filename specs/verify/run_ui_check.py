@@ -46,7 +46,7 @@ _SOURCE_FILES = {
 def _run_metadata() -> dict:
     present = {name: path.exists() for name, path in _SOURCE_FILES.items()}
     return {
-        "spec_version": "1.6.0",
+        "spec_version": "1.8.0",
         "source_files_present": present,
         "source_hashes": {
             name: hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
@@ -236,6 +236,66 @@ def _run_ui_check(checks: list[dict]) -> int:
         if not menu.evaluate("el => el.open"):
             page.locator("#filterToggle").click()
             page.wait_for_function("document.querySelector('#filterMenu')?.open === true")
+        return True
+    def open_tools_disclosure(page) -> bool:
+        menu = page.locator("#toolsMenu")
+        if menu.count() != 1:
+            return False
+        filter_menu = page.locator("#filterMenu")
+        if filter_menu.count() == 1 and filter_menu.evaluate("el => el.open"):
+            page.keyboard.press("Escape")
+            page.wait_for_function("document.querySelector('#filterMenu')?.open === false")
+        results_panel = page.locator("#resultsPanel")
+        if (results_panel.count() == 1
+                and page.evaluate("() => window.matchMedia('(max-width: 640px), (max-height: 560px) and (min-width: 641px)').matches")
+                and results_panel.get_attribute("data-collapsed") != "true"):
+            page.locator("#resultsToggle").click()
+            page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'true'")
+        toggle = page.locator("#toolsToggle")
+        toggle.scroll_into_view_if_needed()
+        page.wait_for_function("""
+        () => {
+          const el = document.querySelector('#toolsToggle');
+          if (!el) return false;
+          const rect = el.getBoundingClientRect();
+          return rect.width >= 44 && rect.height >= 44
+            && rect.left >= 0 && rect.top >= 0
+            && rect.right <= window.innerWidth && rect.bottom <= window.innerHeight;
+        }
+        """)
+        if not menu.evaluate("el => el.open"):
+            probe = page.evaluate("""
+            () => {
+              const toggle = document.querySelector('#toolsToggle');
+              const rect = toggle?.getBoundingClientRect();
+              const x = rect ? rect.left + rect.width / 2 : -1;
+              const y = rect ? rect.top + rect.height / 2 : -1;
+              const describe = el => el ? {tag: el.tagName, id: el.id || '', className: el.className || '', open: Boolean(el.open)} : null;
+              const hit = document.elementFromPoint(x, y);
+              return {
+                viewport: {width: window.innerWidth, height: window.innerHeight},
+                toggle: rect ? {left: rect.left, top: rect.top, right: rect.right, bottom: rect.bottom, width: rect.width, height: rect.height} : null,
+                hit: describe(hit),
+                hitInsideToggle: Boolean(hit && (hit === toggle || toggle.contains(hit))),
+                stack: document.elementsFromPoint(x, y).slice(0, 8).map(describe),
+                openPanels: Array.from(document.querySelectorAll('details[open], dialog[open]')).map(describe),
+                brand: describe(document.querySelector('.brand-tile')),
+                mapTab: describe(document.querySelector('#mapTab')),
+              };
+            }
+            """)
+            if not probe.get("hitInsideToggle"):
+                raise AssertionError(f"toolsToggle occluded: {json.dumps(probe, ensure_ascii=False)}")
+            toggle.click()
+            page.wait_for_function("document.querySelector('#toolsMenu')?.open === true")
+        return True
+    def close_tools_disclosure(page) -> bool:
+        menu = page.locator("#toolsMenu")
+        if menu.count() != 1:
+            return False
+        if menu.evaluate("el => el.open"):
+            page.locator("#toolsToggle").click()
+            page.wait_for_function("document.querySelector('#toolsMenu')?.open === false")
         return True
     def prepare_filter_action(page) -> None:
         menu = page.locator("#filterMenu")
@@ -470,6 +530,7 @@ def _run_ui_check(checks: list[dict]) -> int:
         record("가족·서울·무료 → 정확한 fixture 지도", map_consistent,
                f"containers={map_container_count} markers={marker_count} expected={len(expected_combined_ids)}")
 
+        open_tools_disclosure(page2)
         page2.click("#aiBtn")
         page2.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
         rec_names = page2.locator("#aiDialog .recommendations li .rec-open").all_inner_texts()
@@ -479,6 +540,7 @@ def _run_ui_check(checks: list[dict]) -> int:
             recommendations_consistent = recommendations_consistent and "추천할 진행 중 행사가 없습니다" in rec_text
         record("가족·서울·무료 → 추천 범위 일치", recommendations_consistent, rec_text)
         page2.locator("#aiDialog .close").press("Enter")
+        close_tools_disclosure(page2)
         open_filter_disclosure(page2)
 
         # A no-result query exposes the empty state and reset recovers the family default.
@@ -741,9 +803,11 @@ def _run_ui_check(checks: list[dict]) -> int:
         missing_map_page.goto(base, wait_until="networkidle")
         missing_map_page.wait_for_function("document.getElementById('count').textContent !== ''")
         missing_map_page.wait_for_function("document.getElementById('mapFallback')?.hidden === false")
+        open_tools_disclosure(missing_map_page)
         missing_map_page.click("#locateBtn")
         missing_map_hint = missing_map_page.locator("#locateHint").inner_text()
         missing_map_fallback = missing_map_page.locator("#mapFallback").is_visible()
+        close_tools_disclosure(missing_map_page)
         record("지도 초기화 실패 시 Locate가 위치를 가장하지 않음",
                missing_map_fallback and missing_map_hint == "지도를 사용할 수 없어 현재 위치를 표시할 수 없습니다.",
                json.dumps({"fallback": missing_map_fallback, "hint": missing_map_hint}, ensure_ascii=False))
@@ -774,6 +838,7 @@ def _run_ui_check(checks: list[dict]) -> int:
         fixture_container_count = fixture_page.locator(".leaflet-container").count()
         fixture_marker_count = fixture_page.locator(".leaflet-marker-icon").count()
         fixture_map_ok = fixture_container_count == 1 and fixture_marker_count == 2
+        open_tools_disclosure(fixture_page)
         fixture_page.click("#aiBtn")
         fixture_page.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
         fixture_recs = fixture_page.locator("#aiDialog .recommendations li .rec-open").all_inner_texts()
@@ -797,6 +862,7 @@ def _run_ui_check(checks: list[dict]) -> int:
         record("결정적 활성 행사만 추천", fixture_recommendation_ok,
                json.dumps(fixture_recs, ensure_ascii=False))
         fixture_page.locator("#aiDialog .close").press("Enter")
+        close_tools_disclosure(fixture_page)
         verified_card = fixture_page.locator("#list .card").filter(has_text=expected_name)
         verified_info_anchor = verified_card.locator("a[href='https://www.busan.go.kr/active']")
         verified_booking_anchor = verified_card.locator("a[href='https://booking.example/active']")
@@ -807,12 +873,34 @@ def _run_ui_check(checks: list[dict]) -> int:
                and "noopener" in (verified_info_rel or "")
                and "noopener" in (verified_booking_rel or ""),
                json.dumps({"info": verified_info_anchor.count(), "booking": verified_booking_anchor.count()}, ensure_ascii=False))
+        verified_card.locator(".card-open").click()
+        fixture_page.wait_for_function("document.querySelector('#detail[open]') !== null")
+        direction_specs = {
+            "google": (".directions-google", "https://www.google.com/maps/dir/?api=1"),
+            "naver": (".directions-naver", "https://map.naver.com/p/search/"),
+            "kakao": (".directions-kakao", "https://map.kakao.com/"),
+        }
+        direction_details = {}
+        directions_ok = True
+        for key, (selector, prefix) in direction_specs.items():
+            anchor = fixture_page.locator(f"#detail .directions-actions {selector}")
+            href = anchor.get_attribute("href") if anchor.count() else ""
+            rel = anchor.get_attribute("rel") if anchor.count() else ""
+            target = anchor.get_attribute("target") if anchor.count() else ""
+            item_ok = (anchor.count() == 1 and (href or "").startswith(prefix)
+                       and target == "_blank" and {"noopener", "noreferrer"}.issubset(set((rel or "").split())))
+            directions_ok = directions_ok and item_ok
+            direction_details[key] = {"count": anchor.count(), "href": href, "target": target, "rel": rel}
+        record("상세 Google·Naver·Kakao 길찾기 앵커 allowlist·보안 속성", directions_ok,
+               json.dumps(direction_details, ensure_ascii=False))
+        fixture_page.keyboard.press("Escape")
+        fixture_page.wait_for_function("document.querySelector('#detail[open]') === null")
 
         expired_card = fixture_page.locator("#list .card").filter(has_text=expired_name)
         expired_anchor = expired_card.locator("a[href^='https://']")
         expired_card.locator(".card-open").click()
         fixture_page.wait_for_function("document.querySelector('#detail[open]') !== null")
-        detail_external = fixture_page.locator("#detail a[href^='https://']")
+        detail_external = fixture_page.locator("#detail a[href^='https://']:not(.directions-actions a)")
         detail_text = fixture_page.locator("#detail").inner_text()
         record("만료·미검증 출처는 카드/상세 외부 앵커 금지", expired_anchor.count() == 0
                and detail_external.count() == 0
@@ -844,11 +932,14 @@ def _run_ui_check(checks: list[dict]) -> int:
         mapped_anchor = mapped_card.locator("a[href^='https://']")
         mapped_card.locator(".card-open").click()
         fixture_page.wait_for_function("document.querySelector('#detail[open]') !== null")
-        mapped_detail_anchor = fixture_page.locator("#detail a[href^='https://']")
+        mapped_detail_anchor = fixture_page.locator("#detail a[href^='https://']:not(.directions-actions a)")
+        mapped_detail_hrefs = fixture_page.locator("#detail a[href^='https://']").evaluate_all("els => els.map(el => el.href)")
         mapped_detail_text = fixture_page.locator("#detail").inner_text()
         record("매핑된 사설 IPv4는 카드·상세 외부 앵커 금지",
                mapped_anchor.count() == 0 and mapped_detail_anchor.count() == 0
-               and "연결 차단" in mapped_detail_text, mapped_detail_text)
+               and not any("127.0.0.1" in href or "::ffff" in href for href in mapped_detail_hrefs)
+               and "연결 차단" in mapped_detail_text,
+               json.dumps({"proofAnchors": mapped_detail_anchor.count(), "hrefs": mapped_detail_hrefs}, ensure_ascii=False))
         fixture_page.keyboard.press("Escape")
         fixture_payloads["events.json"][1]["link_url"] = "https://[64:ff9b::7f00:1]/"
         fixture_page.reload(wait_until="networkidle")
@@ -857,10 +948,12 @@ def _run_ui_check(checks: list[dict]) -> int:
         nat64_anchor = nat64_card.locator("a[href^='https://']")
         nat64_card.locator(".card-open").click()
         fixture_page.wait_for_function("document.querySelector('#detail[open]') !== null")
-        nat64_detail_anchor = fixture_page.locator("#detail a[href^='https://']")
+        nat64_detail_anchor = fixture_page.locator("#detail a[href^='https://']:not(.directions-actions a)")
+        nat64_detail_hrefs = fixture_page.locator("#detail a[href^='https://']").evaluate_all("els => els.map(el => el.href)")
         record("NAT64 사설 목적지는 카드·상세 외부 앵커 금지",
-               nat64_anchor.count() == 0 and nat64_detail_anchor.count() == 0,
-               str(nat64_detail_anchor.count()))
+               nat64_anchor.count() == 0 and nat64_detail_anchor.count() == 0
+               and not any("64:ff9b" in href or "::ffff" in href for href in nat64_detail_hrefs),
+               json.dumps({"proofAnchors": nat64_detail_anchor.count(), "hrefs": nat64_detail_hrefs}, ensure_ascii=False))
         fixture_page.keyboard.press("Escape")
 
         activity_control = fixture_page.locator("#activity")
@@ -879,6 +972,7 @@ def _run_ui_check(checks: list[dict]) -> int:
             record("activity → 카드·지도·공유 URL 동기화", activity_ok,
                    json.dumps({"names": activity_names, "query": activity_qs,
                                "containers": activity_container_count, "markers": activity_markers}, ensure_ascii=False))
+            open_tools_disclosure(fixture_page)
             ai_button = fixture_page.locator("#aiBtn")
             ai_button.focus()
             ai_button.press("Enter")
@@ -911,6 +1005,7 @@ def _run_ui_check(checks: list[dict]) -> int:
                    detail_focus == {"detailOpen": True, "aiOpen": False, "activeInsideHiddenAI": False}
                    and ai_return == {"detailOpen": False, "aiOpen": False, "activeId": "aiBtn", "activeInsideHiddenAI": False},
                    json.dumps({"detail": detail_focus, "return": ai_return}, ensure_ascii=False))
+            close_tools_disclosure(fixture_page)
             open_filter_disclosure(fixture_page)
             prepare_filter_action(fixture_page)
             fixture_page.click("#reset")
@@ -1129,23 +1224,67 @@ def _run_ui_check(checks: list[dict]) -> int:
         mobile_shot = EVID / "ui-mobile-family.png"
         page2.screenshot(path=str(mobile_shot), full_page=False)
         record("360px 가족 기본 스냅샷", mobile_shot.exists(), str(mobile_shot.relative_to(ROOT)))
-        filter_target_boxes = page2.locator("#filterToggle, #resultsToggle, #reset, #aiBtn, #activityQuick .region-chip, #regionQuick .region-chip, #subFacets .subfacet-chip").evaluate_all(
-            "els => els.filter(el => !el.hidden && getComputedStyle(el).display !== 'none').map(el => { const r = el.getBoundingClientRect(); return {selector: el.className || el.id, width: r.width, height: r.height}; })"
+        tools_menu = page2.locator("#toolsMenu")
+        tools_initially_closed = tools_menu.count() == 1 and not tools_menu.evaluate("el => el.open")
+        tools_opened = open_tools_disclosure(page2)
+        page2.locator("#aiBtn").click()
+        page2.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
+        page2.keyboard.press("Escape")
+        page2.wait_for_function("document.querySelector('#aiDialog[open]') === null")
+        page2.locator("#languageToggle").click()
+        page2.wait_for_function("document.documentElement.lang === 'en'")
+        open_tools_disclosure(page2)
+        page2.locator("#languageToggle").click()
+        page2.wait_for_function("document.documentElement.lang === 'ko'")
+        page2.evaluate("""
+        () => Object.defineProperty(navigator, 'geolocation', {configurable:true, value: {
+          getCurrentPosition(success) { success({coords: {latitude: 37.5665, longitude: 126.9780, accuracy: 5}}); }
+        }})
+        """)
+        open_tools_disclosure(page2)
+        page2.locator("#locateBtn").click()
+        page2.wait_for_function("document.querySelector('#locateHint')?.textContent.trim() !== ''")
+        located_hint = page2.locator("#locateHint").inner_text().strip()
+        record("360px 도구 메뉴에서 AI·Locate·언어 실제 조작", bool(located_hint) and page2.evaluate("() => document.documentElement.lang === 'ko'") and not page2.locator("#aiDialog[open]").count(), located_hint)
+        filter_target_boxes = page2.locator("#filterToggle, #resultsToggle, #reset, #toolsToggle, #locateBtn, #languageToggle, #soundToggle, #aiBtn, #activityQuick .region-chip, #regionQuick .region-chip, #subFacets .subfacet-chip").evaluate_all(
+            "els => els.filter(el => !el.hidden && getComputedStyle(el).display !== 'none').map(el => { const r = el.getBoundingClientRect(); return {id: el.id, selector: el.className || el.id, width: r.width, height: r.height}; })"
         )
         filter_targets_ok = bool(filter_target_boxes) and all(box["width"] >= 44 and box["height"] >= 44 for box in filter_target_boxes)
+        required_tools_ids = {"toolsToggle", "locateBtn", "languageToggle", "soundToggle", "aiBtn"}
+        tools_target_ids = {box["id"] for box in filter_target_boxes}
+        tools_targets_ok = tools_opened and required_tools_ids.issubset(tools_target_ids)
+        tools_closed = close_tools_disclosure(page2)
+        tools_flow_ok = tools_initially_closed and tools_opened and tools_closed
         page2.locator("#filterToggle").press("Escape")
         page2.wait_for_function("document.querySelector('#filterMenu')?.open === false")
         page2.locator("#resultsToggle").click()
         page2.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'false'")
+        mobile_card = page2.locator("#list .card-open").first
+        mobile_card.scroll_into_view_if_needed()
+        mobile_card.click()
+        page2.wait_for_function("document.querySelector('#detail[open]') !== null")
+        first_mobile_detail = page2.locator("#detailTitle").inner_text().strip()
+        page2.keyboard.press("Escape")
+        page2.wait_for_function("document.querySelector('#detail[open]') === null")
+        mobile_card.click()
+        page2.wait_for_function("document.querySelector('#detail[open]') !== null")
+        second_mobile_detail = page2.locator("#detailTitle").inner_text().strip()
+        record("360px 카드 상세 닫기 후 재진입이 같은 행사로 복원", bool(first_mobile_detail) and first_mobile_detail == second_mobile_detail)
+        page2.keyboard.press("Escape")
+        page2.wait_for_function("document.querySelector('#detail[open]') === null")
         page2.locator("#resultsScroll .card-actions .button").first.scroll_into_view_if_needed()
         result_action_boxes = page2.locator("#resultsScroll .card-actions .button").evaluate_all(
             "els => els.map(el => { const r = el.getBoundingClientRect(); return {selector: el.className || el.id, width: r.width, height: r.height}; })"
         )
         result_actions_ok = bool(result_action_boxes) and all(box["width"] >= 44 and box["height"] >= 44 for box in result_action_boxes)
-        targets_ok = filter_targets_ok and result_actions_ok
+        targets_ok = filter_targets_ok and tools_targets_ok and result_actions_ok
         record("360px 주요 터치 타깃 44px", targets_ok,
                json.dumps({"filterTargets": filter_target_boxes, "resultActions": result_action_boxes,
-                           "filterTargetsOk": filter_targets_ok, "resultActionsOk": result_actions_ok}, ensure_ascii=False))
+                           "filterTargetsOk": filter_targets_ok, "toolsTargetsOk": tools_targets_ok,
+                           "toolsFlowOk": tools_flow_ok, "resultActionsOk": result_actions_ok}, ensure_ascii=False))
+        record("360px 도구 메뉴 초기 접힘·열기·조작 후 닫힘", tools_flow_ok and tools_targets_ok,
+               json.dumps({"initiallyClosed": tools_initially_closed, "opened": tools_opened,
+                           "closed": tools_closed, "targetIds": sorted(tools_target_ids)}, ensure_ascii=False))
         chip_page = _new_page(context, 360, 780)
         _install_tile_fixture(chip_page)
         chip_page.route("**/data/*.json", fulfill_fixture)

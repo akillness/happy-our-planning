@@ -42,7 +42,7 @@ TILE_URL_RE = re.compile(r"^https://[a-c]\.tile\.openstreetmap\.org/")
 def _report_metadata() -> dict:
     run_metadata = _run_metadata()
     return {
-        "source_hashes": run_metadata["source_hashes"],
+        "spec_version": run_metadata["spec_version"],
         "source_files_present": run_metadata["source_files_present"],
         "verifier_hash": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "command": [sys.executable, *sys.argv],
@@ -209,6 +209,45 @@ def _open_filters(page) -> bool:
     if not menu.evaluate("el => el.open"):
         page.locator("#filterToggle").click()
         page.wait_for_function("document.querySelector('#filterMenu')?.open === true")
+    return True
+def _open_tools(page) -> bool:
+    menu = page.locator("#toolsMenu")
+    if menu.count() != 1:
+        return False
+    filter_menu = page.locator("#filterMenu")
+    if filter_menu.count() == 1 and filter_menu.evaluate("el => el.open"):
+        page.keyboard.press("Escape")
+        page.wait_for_function("document.querySelector('#filterMenu')?.open === false")
+    results_panel = page.locator("#resultsPanel")
+    if (results_panel.count() == 1
+            and page.evaluate("() => window.matchMedia('(max-width: 640px), (max-height: 560px) and (min-width: 641px)').matches")
+            and results_panel.get_attribute("data-collapsed") != "true"):
+        page.locator("#resultsToggle").click()
+        page.wait_for_function("document.querySelector('#resultsPanel')?.dataset.collapsed === 'true'")
+    toggle = page.locator("#toolsToggle")
+    toggle.scroll_into_view_if_needed()
+    page.wait_for_function("""
+    () => {
+      const el = document.querySelector('#toolsToggle');
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      return rect.width >= 44 && rect.height >= 44
+        && rect.left >= 0 && rect.top >= 0
+        && rect.right <= window.innerWidth && rect.bottom <= window.innerHeight;
+    }
+    """)
+    if not menu.evaluate("el => el.open"):
+        toggle.click()
+        page.wait_for_function("document.querySelector('#toolsMenu')?.open === true")
+    return True
+
+def _close_tools(page) -> bool:
+    menu = page.locator("#toolsMenu")
+    if menu.count() != 1:
+        return False
+    if menu.evaluate("el => el.open"):
+        page.locator("#toolsToggle").click()
+        page.wait_for_function("document.querySelector('#toolsMenu')?.open === false")
     return True
 def _open_results_drawer(page) -> bool:
     toggle = page.locator("#resultsToggle")
@@ -677,6 +716,29 @@ def _wait_for_current_popup_settle(page, title: str) -> None:
 
 def _fit_bounds_open_marker(page, title: str) -> None:
     """Reset through the app's disclosure, wait for its own fit, then physically click a marker."""
+    active_popup = page.evaluate("() => Boolean(window.__notchimaMap?._popup?.isOpen?.())")
+    popup_wait = """
+      () => {
+        const map = window.__notchimaMap;
+        if (map?._popup?.isOpen?.()) return false;
+        return Array.from(document.querySelectorAll('.leaflet-popup')).every(element => {
+          if (!element.isConnected) return true;
+          const style = getComputedStyle(element);
+          const rect = element.getBoundingClientRect();
+          return element.hidden || style.display === 'none' || style.visibility === 'hidden'
+            || (style.pointerEvents === 'none' && rect.width === 0 && rect.height === 0);
+        });
+      }
+    """
+    if active_popup:
+        popup = page.locator(".leaflet-popup:visible")
+        if popup.count() != 1:
+            raise AssertionError("native active popup must expose one visible container before map reset")
+        close_button = popup.locator(".leaflet-popup-close-button:visible")
+        if close_button.count() != 1:
+            raise AssertionError("native active popup must expose one visible physical close button before map reset")
+        close_button.click()
+    page.wait_for_function(popup_wait)
     _close_results_drawer_for_marker(page)
     menu = page.locator("#filterMenu")
     if menu.count() != 1:
@@ -695,8 +757,55 @@ def _fit_bounds_open_marker(page, title: str) -> None:
     marker = page.locator(f'#map .leaflet-marker-icon[title="{title}"]')
     if marker.count() != 1:
         raise AssertionError(f"expected one marker title {title!r}")
-    page.evaluate("() => { delete window.__notchimaPopupProbe; }")
-    marker.click()
+    page.evaluate("() => { delete window.__notchimaPopupProbe; delete window.__notchimaMarkerRectProbe; }")
+    page.wait_for_function(
+        """
+        wanted => {
+          const marker = Array.from(document.querySelectorAll('#map .leaflet-marker-icon'))
+            .find(element => element.getAttribute('title') === wanted);
+          if (!marker) return false;
+          const rect = marker.getBoundingClientRect();
+          const signature = [rect.left, rect.top, rect.right, rect.bottom, rect.width, rect.height].join('|');
+          const prior = window.__notchimaMarkerRectProbe;
+          if (!prior || prior.signature !== signature) {
+            window.__notchimaMarkerRectProbe = {signature, stable: 0};
+            return false;
+          }
+          window.__notchimaMarkerRectProbe.stable += 1;
+          return window.__notchimaMarkerRectProbe.stable >= 3;
+        }
+        """,
+        arg=title,
+        polling="raf",
+    )
+    marker_box = marker.bounding_box()
+    if not marker_box or marker_box["width"] <= 4 or marker_box["height"] <= 4:
+        raise AssertionError(f"marker has no usable physical hit box: {marker_box}")
+    point = page.evaluate(
+        """
+        ({wanted, box}) => {
+          const fractions = [0.1, 0.25, 0.5, 0.75, 0.9];
+          const candidates = [];
+          for (const yFraction of fractions) {
+            for (const xFraction of fractions) {
+              const x = box.x + box.width * xFraction;
+              const y = box.y + box.height * yFraction;
+              if (x < 0 || y < 0 || x > window.innerWidth || y > window.innerHeight) continue;
+              const element = document.elementFromPoint(x, y);
+              const marker = element?.closest?.('.leaflet-marker-icon');
+              const markerTitle = marker?.getAttribute('title') || null;
+              candidates.push({x, y, tag: element?.tagName || null, markerTitle});
+              if (markerTitle === wanted) return {x, y, tag: element?.tagName || null, markerTitle};
+            }
+          }
+          return {error: 'no-marker-hit', candidates};
+        }
+        """,
+        {"wanted": title, "box": marker_box},
+    )
+    if point.get("error") or point.get("markerTitle") != title:
+        raise AssertionError(f"marker physical point is not the requested marker: {point}")
+    page.mouse.click(point["x"], point["y"])
     _wait_for_current_popup_settle(page, title)
 
 
@@ -1182,6 +1291,20 @@ def _run_case(page, viewport: tuple[int, int], checks: list[dict], payloads: dic
       getCurrentPosition(success) { success({coords: {latitude: 37.5665, longitude: 126.9780, accuracy: 5}}); }
     }})
     """)
+    tools_menu = page.locator("#toolsMenu")
+    tools_initially_closed = tools_menu.count() == 1 and not tools_menu.evaluate("el => el.open")
+    tools_opened = _open_tools(page)
+    page.locator("#aiBtn").click()
+    page.wait_for_function("document.querySelector('#aiDialog[open]') !== null")
+    page.keyboard.press("Escape")
+    page.wait_for_function("document.querySelector('#aiDialog[open]') === null")
+    page.locator("#languageToggle").click()
+    page.wait_for_function("document.documentElement.lang === 'en'")
+    _open_tools(page)
+    page.locator("#languageToggle").click()
+    page.wait_for_function("document.documentElement.lang === 'ko'")
+    tools_actions_ok = page.evaluate("() => document.documentElement.lang === 'ko' && !document.querySelector('#aiDialog[open]')")
+    _record(checks, f"{width}x{height} 도구 메뉴에서 AI·언어 실제 조작", tools_actions_ok)
     page.locator("#locateBtn").click()
     located = page.evaluate("""
     () => {
@@ -1200,8 +1323,10 @@ def _run_case(page, viewport: tuple[int, int], checks: list[dict], payloads: dic
       };
     }
     """)
+    _close_tools(page)
     locate_ok = (located["pixelError"] <= 2 and located["zoom"] == 14
                  and located["count"] == before_locate_count and "거리순" in located["hint"])
+    _record(checks, f"{width}x{height} 도구 메뉴 초기 접힘·Locate 조작 후 닫힘", tools_initially_closed and tools_opened and tools_menu.count() == 1 and not tools_menu.evaluate("el => el.open"), {"initiallyClosed": tools_initially_closed, "opened": tools_opened, "closed": not tools_menu.evaluate("el => el.open") if tools_menu.count() == 1 else False})
     _open_marker(page, "서울 단일 좌표 행사")
     geometry = _geometry(page, "서울 단일 좌표 행사")
     geometry_ok = geometry.get("tipError", float("inf")) <= 2 and geometry.get("popupLatlng") == geometry.get("latlng")

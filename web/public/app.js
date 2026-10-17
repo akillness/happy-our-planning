@@ -6,7 +6,7 @@
   const state = {
     events: [], regions: [], facets: {}, fuse: null,
     map: null, markers: null, userMarker: null, mapReady: false, tileFailures: new Set(),
-    mapPoints: [], mapFitPending: false, lastAutoFitCenter: null, lastAutoFitZoom: null, markerGroups: [],
+    mapPoints: [], mapFitPending: false, mapFitActive: false, viewportPreserve: null, lastAutoFitCenter: null, lastAutoFitZoom: null, markerGroups: [],
     filteredRows: [], wired: false, retryWired: false, dataReady: false,
     page: 0, lastPageSize: 0, sortMode: "relevance", userPos: null, lastQuery: "",
     activePopup: null, viewportFrame: 0, searchTimer: 0,
@@ -408,7 +408,7 @@
     add($("resultsPanel"));
     add($("mapFallback"));
     if (document.querySelectorAll) {
-      document.querySelectorAll(".search-dock, .filter-menu, .brand-tile, .results, .map-tools, .leaflet-control-zoom, .leaflet-control-attribution").forEach(add);
+      document.querySelectorAll(".search-dock, .filter-menu, .brand-tile, .results, .map-tools, .primary-nav, .timeline-panel, .tools-menu, .leaflet-control-zoom, .leaflet-control-attribution").forEach(add);
     }
     return nodes.map((node) => {
       if (!node || node.hidden || typeof node.getBoundingClientRect !== "function") return null;
@@ -571,14 +571,62 @@
   }
 
   function refreshMapViewport() {
+    const workspace = $("mapWorkspace");
+    const brand = document.querySelector(".brand-tile");
+    if (workspace && brand) {
+      const bottom = Math.ceil(brand.getBoundingClientRect().bottom - workspace.getBoundingClientRect().top);
+      workspace.style.setProperty("--brand-bottom", `${bottom}px`);
+    }
     if (!state.mapReady || !state.map) return;
+    const viewBeforeResize = typeof state.map.getCenter === "function" ? state.map.getCenter() : null;
+    const zoomBeforeResize = typeof state.map.getZoom === "function" ? state.map.getZoom() : null;
+    const preserveViewport = state.viewportPreserve;
     const wasAutoFit = currentViewMatchesAutoFit();
-    state.map.invalidateSize({ pan: false });
+    const mapNode = $("map");
+    const mapSize = state.map.getSize();
+    const sizeChanged = mapNode && (mapSize.x !== mapNode.clientWidth || mapSize.y !== mapNode.clientHeight);
+    if (sizeChanged) state.map.invalidateSize({ pan: false });
     const filterMenu = $("filterMenu");
-    if (state.mapFitPending && (!filterMenu || !filterMenu.open)) fitCurrentMap();
-    else if (wasAutoFit && state.mapPoints.length && (!filterMenu || !filterMenu.open)) fitCurrentMap();
+    let fitApplied = false;
+    if (state.mapFitPending && (!filterMenu || !filterMenu.open)) {
+      fitApplied = fitCurrentMap();
+    } else if (!preserveViewport && wasAutoFit && state.mapPoints.length && (!filterMenu || !filterMenu.open)) {
+      fitApplied = fitCurrentMap();
+    }
+    if (!fitApplied && !preserveViewport) {
+      const target = viewBeforeResize;
+      if (target && typeof state.map.setView === "function") {
+        const center = state.map.getCenter();
+        const zoom = typeof state.map.getZoom === "function" ? state.map.getZoom() : null;
+        if (!center || Math.abs(center.lat - target.lat) > 1e-9
+          || Math.abs(center.lng - target.lng) > 1e-9
+          || (zoomBeforeResize != null && zoom !== zoomBeforeResize)) {
+          state.mapFitActive = true;
+          try {
+            state.map.setView({ lat: target.lat, lng: target.lng }, zoomBeforeResize, { animate: false });
+          } finally {
+            state.mapFitActive = false;
+          }
+        }
+      }
+    }
     const popupLayer = state.activePopup;
     if (popupLayer && typeof popupLayer.isOpen === "function" && popupLayer.isOpen()) updatePopupViewport(popupLayer);
+    if (preserveViewport && state.viewportPreserve === preserveViewport && typeof state.map.setView === "function") {
+      const center = state.map.getCenter();
+      const zoom = typeof state.map.getZoom === "function" ? state.map.getZoom() : null;
+      if (!center || Math.abs(center.lat - preserveViewport.lat) > 1e-9
+        || Math.abs(center.lng - preserveViewport.lng) > 1e-9
+        || (preserveViewport.zoom != null && zoom !== preserveViewport.zoom)) {
+        state.mapFitActive = true;
+        try {
+          state.map.setView({ lat: preserveViewport.lat, lng: preserveViewport.lng }, preserveViewport.zoom, { animate: false });
+        } finally {
+          state.mapFitActive = false;
+        }
+      }
+      state.viewportPreserve = null;
+    }
   }
 
   function scheduleMapViewportRefresh() {
@@ -615,10 +663,16 @@
       return false;
     }
     state.mapFitPending = false;
-    if (state.mapPoints.length) state.map.fitBounds(state.mapPoints, options);
-    else if (!state.userPos) state.map.setView([36.5, 127.8], 7, { animate: false });
-    if (typeof state.map.getCenter === "function") state.lastAutoFitCenter = state.map.getCenter();
-    if (typeof state.map.getZoom === "function") state.lastAutoFitZoom = state.map.getZoom();
+    state.viewportPreserve = null;
+    state.mapFitActive = true;
+    try {
+      if (state.mapPoints.length) state.map.fitBounds(state.mapPoints, options);
+      else if (!state.userPos) state.map.setView([36.5, 127.8], 7, { animate: false });
+      if (typeof state.map.getCenter === "function") state.lastAutoFitCenter = state.map.getCenter();
+      if (typeof state.map.getZoom === "function") state.lastAutoFitZoom = state.map.getZoom();
+    } finally {
+      state.mapFitActive = false;
+    }
     return true;
   }
 
@@ -645,6 +699,10 @@
     }
     try {
       state.map = window.L.map("map", { scrollWheelZoom: false }).setView([36.5, 127.8], 7);
+      state.map.on("moveend", () => {
+        if (state.mapFitActive) return;
+        state.mapFitPending = false;
+      });
       localizeNativeMapControls();
       const tileLayer = window.L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
@@ -986,6 +1044,7 @@
     detailButton.type = "button";
     detailButton.addEventListener("click", () => showDetail(event));
     actions.appendChild(detailButton);
+    window.NotchimaTimeline.addAction(actions, event);
     appendProofActions(actions, event);
     article.appendChild(actions);
     li.appendChild(article);
@@ -1018,6 +1077,7 @@
     detail.type = "button";
     detail.addEventListener("click", () => showDetail(event));
     row.appendChild(detail);
+    window.NotchimaTimeline.addAction(row, event);
     appendProofActions(row, event);
     wrap.appendChild(row);
     return wrap;
@@ -1038,6 +1098,7 @@
         showDetail(event);
       });
       appendProofActions(row, event, { anchorClass: "map-source-link" });
+      window.NotchimaTimeline.addAction(row, event);
       row.appendChild(button);
       const small = make("small");
       small.appendChild(document.createTextNode(`${vocab(event.sido, "sido") || t("card.noLocation")} · `));
@@ -1051,6 +1112,7 @@
 
   function renderMap(rows) {
     if (!state.mapReady || !state.markers) return;
+    state.viewportPreserve = null;
     state.map.invalidateSize({ pan: false });
     state.markers.clearLayers();
     const groups = new Map();
@@ -1485,6 +1547,8 @@
     dialog.appendChild(make("p", null, `${t("detail.source", { value: event.source || t("common.noInfo") })}${isDemoEvent(event) ? t("detail.demoSuffix") : ""}`));
     const actions = make("div", "dialog-actions");
     appendProofActions(actions, event);
+    window.NotchimaTimeline.addAction(actions, event);
+    window.NotchimaDirections.append(actions, event);
     const local = make("a", "button button-quiet", t("detail.shareLink"));
     local.href = localDetailUrl(event);
     local.rel = "noopener";
@@ -1722,14 +1786,13 @@
         scheduleMapViewportRefresh();
       });
       document.addEventListener("pointerdown", (event) => {
-        if (!filterMenu.open || filterMenu.contains(event.target)) return;
-        filterMenu.open = false;
         const mapNode = $("map");
         if (mapNode && typeof mapNode.contains === "function" && mapNode.contains(event.target)) {
+          state.viewportPreserve = null;
           state.mapFitPending = false;
-          state.lastAutoFitCenter = null;
-          state.lastAutoFitZoom = null;
         }
+        if (!filterMenu.open || filterMenu.contains(event.target)) return;
+        filterMenu.open = false;
         scheduleMapViewportRefresh();
       });
     }
@@ -1772,6 +1835,11 @@
         scheduleMapViewportRefresh();
         refreshPageSizeAndRender();
       });
+    }
+
+    const brandTile = document.querySelector(".brand-tile");
+    if (brandTile && typeof window.ResizeObserver === "function") {
+      new window.ResizeObserver(scheduleMapViewportRefresh).observe(brandTile);
     }
 
     window.addEventListener("popstate", () => { restoreFromURL(); applyFilters(); });
@@ -1834,6 +1902,7 @@
       setDataReady(true);
       applyFilters();
       renderFreshness(updated);
+      window.NotchimaTimeline.refresh();
       setHidden("loading", true);
     } catch (error) {
       setDataReady(false);
@@ -1888,7 +1957,11 @@
   // page, map view/zoom, and any open popup/dialog are left untouched; the
   // map is relabeled, never rebuilt or refit, just to switch language.
   function onLanguageChange() {
+    const center = state.map && typeof state.map.getCenter === "function" ? state.map.getCenter() : null;
+    const zoom = state.map && typeof state.map.getZoom === "function" ? state.map.getZoom() : null;
+    state.viewportPreserve = center && zoom != null ? { lat: center.lat, lng: center.lng, zoom } : null;
     localizeStaticChrome();
+    scheduleMapViewportRefresh();
     if (!state.dataReady) return;
     buildFilters();
     applyFilters({ updateMap: false, resetScroll: false, preservePage: true });
@@ -1927,6 +2000,16 @@
     localizeStaticChrome();
     window.addEventListener("notchima:languagechange", onLanguageChange);
     initMap();
+    window.NotchimaTimeline.init({
+      getEvents: () => state.events,
+      onDetail: showDetail,
+      isMobile: isMobileViewport,
+      onLayout: () => { syncResultsDisclosure(); scheduleMapViewportRefresh(); },
+    });
+    window.NotchimaTimelineImport.init({
+      getEvents: () => state.events,
+      onImport: (candidates) => window.NotchimaTimeline.importEntries(candidates),
+    });
     wire();
     await loadData();
   }

@@ -3,7 +3,7 @@
 # 방향은 단방향: spec.md -> seed.yaml. 두 파이프라인을 병렬 SSOT로 돌리지 않는다.
 seed:
   name: notchima-event-infra
-  spec_ref: specs/spec.md@1.6.0
+  spec_ref: specs/spec.md@1.8.0
   ambiguity: 0.15            # 인터뷰 후 잔여 모호도(<=0.2 통과)
   weighting: brownfield     # 성숙 코드베이스(1975 LOC, 40 tests) 위에 증분
 
@@ -17,6 +17,8 @@ tools:
   ui:         "python3 specs/verify/run_ui_check.py"  # 기존 탐색 행위 + 지도 우선 레이아웃
   map_ui:     "python3 specs/verify/map_viewport_check.py" # 실제 Leaflet 지오메트리/오버레이
   locale_ui:  "python3 specs/verify/ui_locale_check.py" # 하단 검색/우측 결과·한영 전환·종료·모바일 아이콘·투명도
+  timeline_ui: "python3 specs/verify/timeline_check.py" # F7 방문 계획·길찾기·반응형 증거
+  history_ui: "python3 specs/verify/history_import_check.py" # F8 방문 기록·선택 JSON 가져오기·저장/네트워크 경계
   notify:     "telegram-bot-api"                      # F4.3 — 토큰 없으면 dry-run
   survey_validator: "python3 ~/.agents/skills/survey/scripts/validate_survey_artifacts.py"
 
@@ -130,6 +132,24 @@ success_criteria:
   - id: AC-F6-cron
     check: "기존 03:00 KST 단일 cron 동시 실행 직렬화 및 failure visibility; collection-status sidecar와 updated.json 집계가 fixture/live를 구별"
     evidence: "workflow concurrency 검토 + sidecar/output fixture"
+  - id: AC-F7.1-timeline
+    check: "주요지도/타임라인전환·빈상태·목록상세추가중복방지제거·시작일초기값(진행중KST오늘)·방문날짜시간편집정렬기간검증·동시간저장순유지·편집중초점보존·필터언어무관보존·새로고침복원·무손실검증/새저장성공후v1원본제거·손상원본일반수정덮어쓰기금지/임시세션안내·저장실패안내"
+    evidence: "timeline_check.py 사용자흐름 + history_import_check.py 무손실 이관·손상 저장소 보호 브라우저 회귀"
+  - id: AC-F7.2-directions
+    check: "키없는Google Maps transit각구간링크·첫방문origin생략·보기필터전전체같은날일정직전장소origin고정·좌표/주소폴백/목적지없음·안전인코딩/rel·선택네이버카카오목적지·유료SDK/키/추적없음"
+    evidence: "timeline_check.py 길찾기 + history_import_check.py 보기필터와 무관한 origin 검사 + google-history-research.json 실제 Google 외부연결; 네이버카카오는 URL검사와 실제기기전환 구분"
+  - id: AC-F7.3-responsive-navigation
+    check: "320/360/390/768/1440및844x390 반응형·메뉴통합·타임라인주요텍스트메뉴·넘침없음·16px본문패딩/12px간격/44px타깃·safearea/dvh·패널상호배타·내부스크롤·Escape초점복원·ko/en·기존기능보존"
+    evidence: "timeline_check.py viewport geometry·스크린샷·실제 브라우저 smoke"
+  - id: AC-F8.1-local-history
+    check: "날짜·전체/계획/방문기록보기·사용자완료/복귀·미래완료차단·반복방문/중복방지·개별삭제/새로고침·기존계획무손실"
+    evidence: "history_import_check.py 방문기록·반복방문·필터·수동상태변경·개별삭제·재로딩 브라우저 회귀"
+  - id: AC-F8.2-google-file-import
+    check: "사용자선택JSON legacy/Android/iOS 방문만브라우저파싱·20MiB/100000레코드상한·유효KST/좌표·기간내150m실좌표행사후보만·기본미선택/명시확인/취소·미지원/손상/저장실패·raw점/중심좌표제외·재가져오기중복방지"
+    evidence: "tests.test_timeline_import 합성 3포맷 parser/matcher + history_import_check.py file picker/preview/확인/취소 브라우저 증거"
+  - id: AC-F8.3-history-privacy
+    check: "Google계정/OAuth/추적/유료API없음·원본/GPS/경로/파일명업로드로그저장없음·선택된로컬기록식별자/행사ID/날짜시간/방문/출처만저장·실제개인파일미사용·공식export도움말/API/내비지원한계노출"
+    evidence: "history_import_check.py network/storage 검사 + google-history-research.json 출처·한계 + 합성 fixture만"
   - id: AC-full
     check: "tools.tests = 40+ green && tools.validate rc==0 && events.db 재생성 동일 카운트 && family/experience/link/source-status 기준 충족"
     evidence: "통합 실행 로그"
