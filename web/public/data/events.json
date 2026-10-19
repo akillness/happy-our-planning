@@ -92,7 +92,7 @@
       "url": "http://playticket.co.kr/nav/detail.html?idx=4616"
     },
     "booking_link_status": "unverified",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "접근 확인 필요",
     "organizer": "연극실험실 혜화동1번지",
@@ -666,7 +666,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303368",
@@ -715,7 +715,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303388",
@@ -764,7 +764,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303255",
@@ -1051,7 +1051,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014635"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "서울연극앙상블",
@@ -1102,7 +1102,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26013958"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "범음악제 운영위원회",
@@ -1547,7 +1547,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26013686"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "대구문화예술진흥원, 대구문화예술회관",
@@ -1649,7 +1649,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014535"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(사)대전시민오페라단",
@@ -2594,7 +2594,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014677"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "톤픽쳐(Tonepicture)",
@@ -4070,7 +4070,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014255"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)예술경영지원센터",
@@ -4121,7 +4121,7 @@
       "url": "http://playticket.co.kr/nav/detail.html?idx=4605"
     },
     "booking_link_status": "unverified",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "접근 확인 필요",
     "organizer": null,
@@ -4172,7 +4172,7 @@
       "url": "https://ticket.yes24.com/Perf/60378"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "범음악제 운영위원회",
@@ -5795,7 +5795,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014752"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "벨라톤 심포니 (B.T.S, Bella Tone Symphony)",
@@ -5944,7 +5944,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014227"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "종로노인종합복지관",
@@ -6244,7 +6244,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014495"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "극단 작은곰",
@@ -7389,7 +7389,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014777"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)카이트",
@@ -7589,7 +7589,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014956"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)케이스타박스엔터테인먼트",
@@ -7738,7 +7738,7 @@
       "url": "https://ticket.yes24.com/Perf/60638"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)문화재단1963",
@@ -8181,7 +8181,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014471"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재) 화성시문화관광재단, 화성시청",
@@ -8481,7 +8481,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014610"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "아트홀 베짱이",
@@ -8781,7 +8781,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014069"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-16T20:45:45.931275Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "서스테인 뮤직",
@@ -9473,7 +9473,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014623"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "푸르지오아트홀",
@@ -9916,7 +9916,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014682"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "케이클래식스테이지(K-CLASSIC STAGE)",
@@ -10508,7 +10508,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014632"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "92.7, 92.7, 더 스튜디오 화담",
@@ -10608,7 +10608,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014828"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "아트뱅크코레아",
@@ -11457,7 +11457,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014666"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "남양성모성지",
@@ -11704,7 +11704,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014349"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)예술경영지원센터",
@@ -11904,7 +11904,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014647"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-19T22:10:30.151275Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)티엠이그룹(TME Group) (구. 하이그라운드)",
