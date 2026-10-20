@@ -669,104 +669,6 @@
     "display_status": "진행중"
   },
   {
-    "id": "kopis:PF303368",
-    "name": "김도윤 바이올린 독주회",
-    "description": null,
-    "event_type": "MusicEvent",
-    "themes": [
-      "공연"
-    ],
-    "start_date": "2026-10-20T00:00:00+09:00",
-    "end_date": "2026-10-20T23:59:59+09:00",
-    "application_start": null,
-    "application_end": null,
-    "status": "Scheduled",
-    "sido": "서울특별시",
-    "sigungu": null,
-    "venue": "예술의전당 [서울]",
-    "address": "서울특별시 서초구 남부순환로 2406 (서초동)",
-    "geo_precision": "venue",
-    "lat": 37.4786896,
-    "lng": 127.01182410000001,
-    "age": null,
-    "age_bands": [],
-    "audience": [],
-    "family_friendly": false,
-    "family_evidence": "근거 부족",
-    "experience_categories": [],
-    "experience_summary": null,
-    "is_experience": false,
-    "price": null,
-    "price_text": null,
-    "duration_text": null,
-    "duration": null,
-    "link_status": "verified",
-    "link_checked_at": "2026-10-15T21:09:11.246025Z",
-    "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303368",
-    "link_reason": "연결 확인",
-    "offers": null,
-    "booking_link_status": "blocked",
-    "booking_link_checked_at": null,
-    "booking_link_url": null,
-    "booking_link_reason": "원본 URL 없음",
-    "organizer": null,
-    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303368",
-    "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303368_261014_171438.gif",
-    "source": "kopis",
-    "verification": null,
-    "confidence": null,
-    "display_status": "진행중"
-  },
-  {
-    "id": "kopis:PF303388",
-    "name": "제3회 채옥선 가야금 독주회: 상심지화",
-    "description": null,
-    "event_type": "MusicEvent",
-    "themes": [
-      "공연"
-    ],
-    "start_date": "2026-10-20T00:00:00+09:00",
-    "end_date": "2026-10-20T23:59:59+09:00",
-    "application_start": null,
-    "application_end": null,
-    "status": "Scheduled",
-    "sido": "서울특별시",
-    "sigungu": null,
-    "venue": "국립국악원",
-    "address": "서울특별시 서초구 남부순환로 2364 (서초동) 국립국악원",
-    "geo_precision": "venue",
-    "lat": 37.4786094,
-    "lng": 127.01130690000002,
-    "age": null,
-    "age_bands": [],
-    "audience": [],
-    "family_friendly": false,
-    "family_evidence": "근거 부족",
-    "experience_categories": [],
-    "experience_summary": null,
-    "is_experience": false,
-    "price": null,
-    "price_text": null,
-    "duration_text": null,
-    "duration": null,
-    "link_status": "verified",
-    "link_checked_at": "2026-10-15T21:09:11.246025Z",
-    "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303388",
-    "link_reason": "연결 확인",
-    "offers": null,
-    "booking_link_status": "blocked",
-    "booking_link_checked_at": null,
-    "booking_link_url": null,
-    "booking_link_reason": "원본 URL 없음",
-    "organizer": null,
-    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303388",
-    "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303388_261015_101309.png",
-    "source": "kopis",
-    "verification": null,
-    "confidence": null,
-    "display_status": "진행중"
-  },
-  {
     "id": "kopis:PF303255",
     "name": "춘천 실내악 페스티벌, 아투스뮤직: 프랑스 달빛 콘서트 2회차 (10.21)",
     "description": null,
@@ -813,7 +715,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303119",
@@ -862,7 +764,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303157",
@@ -911,7 +813,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303192",
@@ -960,7 +862,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303395",
@@ -1009,7 +911,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303427",
@@ -1060,7 +962,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303430",
@@ -1111,7 +1013,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303539",
@@ -1160,7 +1062,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303170",
@@ -6495,7 +6397,7 @@
       "url": "http://playticket.co.kr/nav/detail.html?idx=4600"
     },
     "booking_link_status": "unverified",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "접근 확인 필요",
     "organizer": "극장 봄, 창작19다",
@@ -12053,7 +11955,7 @@
       "url": "https://ticket.yes24.com/Perf/60404"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)제이와이피엔터테인먼트(JYP Entertainment)",
@@ -12549,7 +12451,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26013716"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)국립합창단",
@@ -12700,7 +12602,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014676"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "지클레프",
@@ -13096,7 +12998,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26013816"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)영등포문화재단, (주)네오프로덕션",
@@ -13196,7 +13098,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014648"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)성북문화재단",
@@ -13645,7 +13547,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014203"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)에이바운드엔터테인먼트(ABOUND)",
@@ -14188,7 +14090,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014629"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "한국우쿨렐레교육협회",
@@ -14735,7 +14637,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014701"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "대전광역시청",
@@ -14835,7 +14737,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014885"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "이든예술기획(주)",
@@ -14984,7 +14886,7 @@
       "url": "https://ticket.yes24.com/Perf/60607"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "울산광역시청",
@@ -15035,7 +14937,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014339"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "클래식부산",
@@ -15384,7 +15286,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014234"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주) 컨셉케이컴퍼니 CONCEPT.K COMPANY, (주)공연마루, (주)에이바운드엔터테인먼트(ABOUND), 아이오케이이엔엠",
@@ -15435,7 +15337,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014012"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "여우컴퍼니",
@@ -15486,7 +15388,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014844"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-17T20:22:07.109298Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "문화체육관광부",
@@ -15588,7 +15490,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014764"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "유벨톤 심포니 오케스트라",
@@ -15790,7 +15692,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014952"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "두남재엔터테인먼트(주)",
@@ -16337,7 +16239,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014726"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "네오아르케아티스트그룹",
@@ -16388,7 +16290,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014884"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)스테이지 원",
@@ -17782,7 +17684,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014399"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)부천아트센터",
@@ -17982,7 +17884,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014516"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)예술경영지원센터",
@@ -18082,7 +17984,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014740"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주) 에스이십칠, (주)제이제이팩토리, S27M",
@@ -18476,7 +18378,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014713"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)KBS교향악단",
@@ -18927,7 +18829,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014712"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-18T20:22:33.751308Z",
+    "booking_link_checked_at": "2026-10-20T21:25:37.725174Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)스톰프뮤직",
@@ -21225,6 +21127,104 @@
     "organizer": "쏭 기획",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303628",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303628_261016_144859.jpg",
+    "source": "kopis",
+    "verification": null,
+    "confidence": null,
+    "display_status": "종료"
+  },
+  {
+    "id": "kopis:PF303368",
+    "name": "김도윤 바이올린 독주회",
+    "description": null,
+    "event_type": "MusicEvent",
+    "themes": [
+      "공연"
+    ],
+    "start_date": "2026-10-20T00:00:00+09:00",
+    "end_date": "2026-10-20T23:59:59+09:00",
+    "application_start": null,
+    "application_end": null,
+    "status": "Scheduled",
+    "sido": "서울특별시",
+    "sigungu": null,
+    "venue": "예술의전당 [서울]",
+    "address": "서울특별시 서초구 남부순환로 2406 (서초동)",
+    "geo_precision": "venue",
+    "lat": 37.4786896,
+    "lng": 127.01182410000001,
+    "age": null,
+    "age_bands": [],
+    "audience": [],
+    "family_friendly": false,
+    "family_evidence": "근거 부족",
+    "experience_categories": [],
+    "experience_summary": null,
+    "is_experience": false,
+    "price": null,
+    "price_text": null,
+    "duration_text": null,
+    "duration": null,
+    "link_status": "verified",
+    "link_checked_at": "2026-10-15T21:09:11.246025Z",
+    "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303368",
+    "link_reason": "연결 확인",
+    "offers": null,
+    "booking_link_status": "blocked",
+    "booking_link_checked_at": null,
+    "booking_link_url": null,
+    "booking_link_reason": "원본 URL 없음",
+    "organizer": null,
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303368",
+    "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303368_261014_171438.gif",
+    "source": "kopis",
+    "verification": null,
+    "confidence": null,
+    "display_status": "종료"
+  },
+  {
+    "id": "kopis:PF303388",
+    "name": "제3회 채옥선 가야금 독주회: 상심지화",
+    "description": null,
+    "event_type": "MusicEvent",
+    "themes": [
+      "공연"
+    ],
+    "start_date": "2026-10-20T00:00:00+09:00",
+    "end_date": "2026-10-20T23:59:59+09:00",
+    "application_start": null,
+    "application_end": null,
+    "status": "Scheduled",
+    "sido": "서울특별시",
+    "sigungu": null,
+    "venue": "국립국악원",
+    "address": "서울특별시 서초구 남부순환로 2364 (서초동) 국립국악원",
+    "geo_precision": "venue",
+    "lat": 37.4786094,
+    "lng": 127.01130690000002,
+    "age": null,
+    "age_bands": [],
+    "audience": [],
+    "family_friendly": false,
+    "family_evidence": "근거 부족",
+    "experience_categories": [],
+    "experience_summary": null,
+    "is_experience": false,
+    "price": null,
+    "price_text": null,
+    "duration_text": null,
+    "duration": null,
+    "link_status": "verified",
+    "link_checked_at": "2026-10-15T21:09:11.246025Z",
+    "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303388",
+    "link_reason": "연결 확인",
+    "offers": null,
+    "booking_link_status": "blocked",
+    "booking_link_checked_at": null,
+    "booking_link_url": null,
+    "booking_link_reason": "원본 URL 없음",
+    "organizer": null,
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303388",
+    "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303388_261015_101309.png",
     "source": "kopis",
     "verification": null,
     "confidence": null,
