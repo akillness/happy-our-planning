@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-24T06:13:40+09:00",
+  "generated_at": "2026-10-25T05:30:41+09:00",
   "total_active": 427,
   "archived": 0,
   "publication": {
@@ -14,7 +14,7 @@
   "sources": {
     "kopis": {
       "mode": "fixture",
-      "attempted_at": "2026-10-24T06:13:10+09:00",
+      "attempted_at": "2026-10-25T05:30:09+09:00",
       "last_success_at": "2026-10-16T17:10:42+09:00",
       "error": null,
       "collected": 3,
@@ -23,7 +23,7 @@
     },
     "tourapi": {
       "mode": "fixture",
-      "attempted_at": "2026-10-24T06:13:10+09:00",
+      "attempted_at": "2026-10-25T05:30:09+09:00",
       "last_success_at": null,
       "error": null,
       "collected": 3,
@@ -32,7 +32,7 @@
     },
     "websearch": {
       "mode": "fixture",
-      "attempted_at": "2026-10-24T06:13:10+09:00",
+      "attempted_at": "2026-10-25T05:30:09+09:00",
       "last_success_at": "2026-10-16T17:10:42+09:00",
       "error": null,
       "collected": 3,
@@ -42,7 +42,7 @@
   },
   "source_mode": "offline",
   "last_success_at": "2026-10-16T17:10:42+09:00",
-  "collection_started_at": "2026-10-24T06:13:11+09:00",
+  "collection_started_at": "2026-10-25T05:30:09+09:00",
   "collection_error_count": 0,
   "collection_errors": []
 }
