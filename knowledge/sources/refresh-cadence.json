@@ -1,8 +1,7 @@
 {
-  "generated_at": "2026-10-26T05:38:33.235330+09:00",
+  "generated_at": "2026-10-27T07:29:38.048379+09:00",
   "due_tiers": [
-    "daily",
-    "weekly"
+    "daily"
   ],
   "schedule": "single daily cron 03:00 KST (C11)"
 }
