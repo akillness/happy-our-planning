@@ -611,7 +611,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303511",
@@ -660,7 +660,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303583",
@@ -711,7 +711,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303315",
@@ -853,7 +853,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014495"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "극단 작은곰",
@@ -955,7 +955,7 @@
       "url": "https://ticket.yes24.com/Perf/60615"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "전남광주통합특별시예술의전당 (구.광주예술의전당)",
@@ -1104,7 +1104,7 @@
       "url": "http://playticket.co.kr/nav/detail.html?idx=4600"
     },
     "booking_link_status": "unverified",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "접근 확인 필요",
     "organizer": "극장 봄, 창작19다",
@@ -4082,7 +4082,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014623"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "푸르지오아트홀",
@@ -4525,7 +4525,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014682"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "케이클래식스테이지(K-CLASSIC STAGE)",
@@ -5117,7 +5117,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014632"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "92.7, 92.7, 더 스튜디오 화담",
@@ -5217,7 +5217,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014828"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "아트뱅크코레아",
@@ -6066,7 +6066,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014666"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "남양성모성지",
@@ -6313,7 +6313,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014349"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)예술경영지원센터",
@@ -6513,7 +6513,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014647"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)티엠이그룹(TME Group) (구. 하이그라운드)",
@@ -6662,7 +6662,7 @@
       "url": "https://ticket.yes24.com/Perf/60404"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)제이와이피엔터테인먼트(JYP Entertainment)",
@@ -7158,7 +7158,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26013716"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)국립합창단",
@@ -7309,7 +7309,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014676"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "지클레프",
@@ -7805,7 +7805,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014648"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)성북문화재단",
@@ -8254,7 +8254,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014203"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)에이바운드엔터테인먼트(ABOUND)",
@@ -10044,7 +10044,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014012"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "여우컴퍼니",
@@ -10095,7 +10095,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014844"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "문화체육관광부",
@@ -10197,7 +10197,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014764"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "유벨톤 심포니 오케스트라",
@@ -10399,7 +10399,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014952"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "두남재엔터테인먼트(주)",
@@ -10450,7 +10450,7 @@
       "url": "https://ticket.yes24.com/Perf/60635"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "피비컴퍼니",
@@ -10946,7 +10946,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014726"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "네오아르케아티스트그룹",
@@ -10997,7 +10997,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014884"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-31T21:14:49.920225Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)스테이지 원",
@@ -11148,7 +11148,7 @@
       "url": "https://ticket.yes24.com/Perf/60619"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "낙동아트센터",
@@ -14032,7 +14032,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014389"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재) 천안문화재단(천안예술의전당)",
@@ -14183,7 +14183,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014978"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "멜론 심포니 오케스트라",
@@ -14532,7 +14532,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014555"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-10-30T22:05:41.484366Z",
+    "booking_link_checked_at": "2026-11-03T00:47:15.400614Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "아트인뮤직 컴퍼니",
