@@ -345,7 +345,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014495"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-08T21:52:25.795377Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "극단 작은곰",
@@ -555,108 +555,6 @@
     "display_status": "진행중"
   },
   {
-    "id": "kopis:PF303292",
-    "name": "백야의 밤 리딩 쇼케이스 [대학로]",
-    "description": "장르: 뮤지컬 · 공연장: 달밤엔씨어터 · 공연시간 안내: 월요일(20:00) · 관람연령: 만 15세 이상 · 런타임: 1시간 10분 · 티켓가격: 전석 10,000원 · 출연진: 김나연, 이준우, 노서희, 이경민 등 · 예매처: 네이버N예약 · 주최·주관: 스튜디오 의온",
-    "event_type": "MusicEvent",
-    "themes": [
-      "공연"
-    ],
-    "start_date": "2026-11-09T00:00:00+09:00",
-    "end_date": "2026-11-09T23:59:59+09:00",
-    "application_start": null,
-    "application_end": null,
-    "status": "Scheduled",
-    "sido": "서울특별시",
-    "sigungu": null,
-    "venue": "달밤엔씨어터",
-    "address": null,
-    "geo_precision": "sido-centroid",
-    "lat": 37.5665,
-    "lng": 126.978,
-    "age": "만 15세 이상",
-    "age_bands": [],
-    "audience": [],
-    "family_friendly": false,
-    "family_evidence": "근거 부족",
-    "experience_categories": [],
-    "experience_summary": null,
-    "is_experience": false,
-    "price": 10000,
-    "price_text": "전석 10,000원",
-    "duration_text": "1시간 10분",
-    "duration": "PT1H10M",
-    "link_status": "unchecked",
-    "link_checked_at": "2026-10-16T05:28:29.708751Z",
-    "link_url": null,
-    "link_reason": "검증 기록 만료",
-    "offers": {
-      "url": "https://booking.naver.com/booking/12/bizes/1749866"
-    },
-    "booking_link_status": "verified",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
-    "booking_link_url": "https://booking.naver.com/booking/12/bizes/1749866",
-    "booking_link_reason": "연결 확인",
-    "organizer": "스튜디오 의온",
-    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303292",
-    "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303292_261014_131913.jpg",
-    "source": "kopis",
-    "verification": null,
-    "confidence": null,
-    "display_status": "진행중"
-  },
-  {
-    "id": "kopis:PF303303",
-    "name": "서형민의 베토벤 칸타빌레 with 더 칼리오페 심포니 오케스트라",
-    "description": "장르: 서양음악(클래식) · 공연장: 푸르지오아트홀 · 공연시간 안내: 월요일(19:30) · 관람연령: 만 7세 이상 · 런타임: 1시간 10분 · 티켓가격: 전석 20,000원 · 출연진: 서형민 · 예매처: 놀유니버스 · 주최·주관: 푸르지오아트홀",
-    "event_type": "MusicEvent",
-    "themes": [
-      "공연"
-    ],
-    "start_date": "2026-11-09T00:00:00+09:00",
-    "end_date": "2026-11-09T23:59:59+09:00",
-    "application_start": null,
-    "application_end": null,
-    "status": "Scheduled",
-    "sido": "서울특별시",
-    "sigungu": null,
-    "venue": "푸르지오아트홀",
-    "address": null,
-    "geo_precision": "sido-centroid",
-    "lat": 37.5665,
-    "lng": 126.978,
-    "age": "만 7세 이상",
-    "age_bands": [],
-    "audience": [],
-    "family_friendly": false,
-    "family_evidence": "근거 부족",
-    "experience_categories": [],
-    "experience_summary": null,
-    "is_experience": false,
-    "price": 20000,
-    "price_text": "전석 20,000원",
-    "duration_text": "1시간 10분",
-    "duration": "PT1H10M",
-    "link_status": "unchecked",
-    "link_checked_at": "2026-10-16T05:28:29.708751Z",
-    "link_url": null,
-    "link_reason": "검증 기록 만료",
-    "offers": {
-      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014623"
-    },
-    "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-08T21:52:25.795377Z",
-    "booking_link_url": null,
-    "booking_link_reason": "신뢰 도메인 아님",
-    "organizer": "푸르지오아트홀",
-    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303303",
-    "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303303_261014_134904.jpg",
-    "source": "kopis",
-    "verification": null,
-    "confidence": null,
-    "display_status": "진행중"
-  },
-  {
     "id": "kopis:PF303141",
     "name": "와락심포니 정기연주회: 여성, 청춘을 품다 [부산]",
     "description": null,
@@ -703,7 +601,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303316",
@@ -752,7 +650,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303133",
@@ -801,7 +699,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303248",
@@ -850,7 +748,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303362",
@@ -899,7 +797,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303378",
@@ -948,7 +846,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303399",
@@ -997,7 +895,7 @@
     "source": "kopis",
     "verification": null,
     "confidence": null,
-    "display_status": "예정"
+    "display_status": "진행중"
   },
   {
     "id": "kopis:PF303240",
@@ -1088,7 +986,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014682"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-08T21:52:25.795377Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "케이클래식스테이지(K-CLASSIC STAGE)",
@@ -1680,7 +1578,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014632"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-08T21:52:25.795377Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "92.7, 92.7, 더 스튜디오 화담",
@@ -1780,7 +1678,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014828"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-08T21:52:25.795377Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "아트뱅크코레아",
@@ -2629,7 +2527,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014666"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-08T21:52:25.795377Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "남양성모성지",
@@ -2876,7 +2774,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014349"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-08T21:52:25.795377Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)예술경영지원센터",
@@ -3922,10 +3820,10 @@
     "offers": {
       "url": "http://www.ticketlink.co.kr/product/66282"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://www.ticketlink.co.kr/product/66282",
+    "booking_link_reason": "연결 확인",
     "organizer": "낭만바리케이트",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303594",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303594_261016_134745.jpg",
@@ -5907,7 +5805,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014701"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "대전광역시청",
@@ -6007,7 +5905,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014885"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "이든예술기획(주)",
@@ -6156,7 +6054,7 @@
       "url": "https://ticket.yes24.com/Perf/60607"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "울산광역시청",
@@ -6207,7 +6105,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014339"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "클래식부산",
@@ -6556,7 +6454,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014234"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주) 컨셉케이컴퍼니 CONCEPT.K COMPANY, (주)공연마루, (주)에이바운드엔터테인먼트(ABOUND), 아이오케이이엔엠",
@@ -6708,10 +6606,10 @@
     "offers": {
       "url": "http://www.ticketlink.co.kr/product/66264"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://www.ticketlink.co.kr/product/66264",
+    "booking_link_reason": "연결 확인",
     "organizer": "(주)포켓몬코리아",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303624",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303624_261016_144319.png",
@@ -7112,10 +7010,10 @@
     "offers": {
       "url": "https://booking.naver.com/booking/12/bizes/1744463"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://booking.naver.com/booking/12/bizes/1744463",
+    "booking_link_reason": "연결 확인",
     "organizer": "(재)안산문화재단(안산문화예술의전당), (재)예술경영지원센터",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303612",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303612_261016_141757.jpg",
@@ -7261,10 +7159,10 @@
     "offers": {
       "url": "http://www.ticketlink.co.kr/product/66316"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://www.ticketlink.co.kr/product/66316",
+    "booking_link_reason": "연결 확인",
     "organizer": "(유)브러쉬씨어터, (재)예술경영지원센터",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303587",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303587_261016_133129.gif",
@@ -7810,10 +7708,10 @@
     "offers": {
       "url": "http://www.ticketlink.co.kr/product/66239"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://www.ticketlink.co.kr/product/66239",
+    "booking_link_reason": "연결 확인",
     "organizer": "i기획",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303271",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303271_261014_105609.jpg",
@@ -7910,10 +7808,10 @@
     "offers": {
       "url": "https://booking.naver.com/booking/12/bizes/1753113"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://booking.naver.com/booking/12/bizes/1753113",
+    "booking_link_reason": "연결 확인",
     "organizer": null,
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303454",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303454_261015_134758.jpg",
@@ -8404,10 +8302,10 @@
     "offers": {
       "url": "https://booking.naver.com/booking/12/bizes/1753711"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://booking.naver.com/booking/12/bizes/1753711",
+    "booking_link_reason": "연결 확인",
     "organizer": "(주)엔투게더",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303270",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303270_261014_105446.jpg",
@@ -8954,7 +8852,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014399"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)부천아트센터",
@@ -9102,10 +9000,10 @@
     "offers": {
       "url": "http://www.ticketlink.co.kr/product/66294"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://www.ticketlink.co.kr/product/66294",
+    "booking_link_reason": "연결 확인",
     "organizer": "중원씨어터",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303619",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303619_261016_142907.png",
@@ -9154,7 +9052,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014516"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)예술경영지원센터",
@@ -9254,7 +9152,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014740"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주) 에스이십칠, (주)제이제이팩토리, S27M",
@@ -9648,7 +9546,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014713"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(재)KBS교향악단",
@@ -9800,10 +9698,10 @@
     "offers": {
       "url": "http://www.ticketlink.co.kr/product/66251"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://www.ticketlink.co.kr/product/66251",
+    "booking_link_reason": "연결 확인",
     "organizer": "극단 아이 (뮤지컬)",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303286",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303286_261014_130335.jpg",
@@ -10099,7 +9997,7 @@
       "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014712"
     },
     "booking_link_status": "blocked",
-    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
     "booking_link_url": null,
     "booking_link_reason": "신뢰 도메인 아님",
     "organizer": "(주)스톰프뮤직",
@@ -10198,10 +10096,10 @@
     "offers": {
       "url": "http://www.ticketlink.co.kr/product/66244"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://www.ticketlink.co.kr/product/66244",
+    "booking_link_reason": "연결 확인",
     "organizer": "굿초이스",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303458",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303458_261015_135647.png",
@@ -10645,10 +10543,10 @@
     "offers": {
       "url": "https://booking.naver.com/booking/12/bizes/1755197"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://booking.naver.com/booking/12/bizes/1755197",
+    "booking_link_reason": "연결 확인",
     "organizer": "(주)우리기획",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303444",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303444_261015_133044.jpg",
@@ -10845,10 +10743,10 @@
     "offers": {
       "url": "https://booking.naver.com/booking/12/bizes/1754253"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://booking.naver.com/booking/12/bizes/1754253",
+    "booking_link_reason": "연결 확인",
     "organizer": "(주)극단희망",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303577",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303577_261016_131204.png",
@@ -11043,10 +10941,10 @@
     "offers": {
       "url": "https://booking.naver.com/booking/12/bizes/1756919"
     },
-    "booking_link_status": "unchecked",
-    "booking_link_checked_at": "2026-11-01T21:52:36.080248Z",
-    "booking_link_url": null,
-    "booking_link_reason": "검증 기록 만료",
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-10T01:21:27.330293Z",
+    "booking_link_url": "https://booking.naver.com/booking/12/bizes/1756919",
+    "booking_link_reason": "연결 확인",
     "organizer": "진엔터컴",
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303588",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303588_261016_133035.jpg",
@@ -21225,6 +21123,108 @@
     "organizer": null,
     "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303560",
     "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303560_261016_123056.png",
+    "source": "kopis",
+    "verification": null,
+    "confidence": null,
+    "display_status": "종료"
+  },
+  {
+    "id": "kopis:PF303292",
+    "name": "백야의 밤 리딩 쇼케이스 [대학로]",
+    "description": "장르: 뮤지컬 · 공연장: 달밤엔씨어터 · 공연시간 안내: 월요일(20:00) · 관람연령: 만 15세 이상 · 런타임: 1시간 10분 · 티켓가격: 전석 10,000원 · 출연진: 김나연, 이준우, 노서희, 이경민 등 · 예매처: 네이버N예약 · 주최·주관: 스튜디오 의온",
+    "event_type": "MusicEvent",
+    "themes": [
+      "공연"
+    ],
+    "start_date": "2026-11-09T00:00:00+09:00",
+    "end_date": "2026-11-09T23:59:59+09:00",
+    "application_start": null,
+    "application_end": null,
+    "status": "Scheduled",
+    "sido": "서울특별시",
+    "sigungu": null,
+    "venue": "달밤엔씨어터",
+    "address": null,
+    "geo_precision": "sido-centroid",
+    "lat": 37.5665,
+    "lng": 126.978,
+    "age": "만 15세 이상",
+    "age_bands": [],
+    "audience": [],
+    "family_friendly": false,
+    "family_evidence": "근거 부족",
+    "experience_categories": [],
+    "experience_summary": null,
+    "is_experience": false,
+    "price": 10000,
+    "price_text": "전석 10,000원",
+    "duration_text": "1시간 10분",
+    "duration": "PT1H10M",
+    "link_status": "unchecked",
+    "link_checked_at": "2026-10-16T05:28:29.708751Z",
+    "link_url": null,
+    "link_reason": "검증 기록 만료",
+    "offers": {
+      "url": "https://booking.naver.com/booking/12/bizes/1749866"
+    },
+    "booking_link_status": "verified",
+    "booking_link_checked_at": "2026-11-07T21:38:17.230098Z",
+    "booking_link_url": "https://booking.naver.com/booking/12/bizes/1749866",
+    "booking_link_reason": "연결 확인",
+    "organizer": "스튜디오 의온",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303292",
+    "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303292_261014_131913.jpg",
+    "source": "kopis",
+    "verification": null,
+    "confidence": null,
+    "display_status": "종료"
+  },
+  {
+    "id": "kopis:PF303303",
+    "name": "서형민의 베토벤 칸타빌레 with 더 칼리오페 심포니 오케스트라",
+    "description": "장르: 서양음악(클래식) · 공연장: 푸르지오아트홀 · 공연시간 안내: 월요일(19:30) · 관람연령: 만 7세 이상 · 런타임: 1시간 10분 · 티켓가격: 전석 20,000원 · 출연진: 서형민 · 예매처: 놀유니버스 · 주최·주관: 푸르지오아트홀",
+    "event_type": "MusicEvent",
+    "themes": [
+      "공연"
+    ],
+    "start_date": "2026-11-09T00:00:00+09:00",
+    "end_date": "2026-11-09T23:59:59+09:00",
+    "application_start": null,
+    "application_end": null,
+    "status": "Scheduled",
+    "sido": "서울특별시",
+    "sigungu": null,
+    "venue": "푸르지오아트홀",
+    "address": null,
+    "geo_precision": "sido-centroid",
+    "lat": 37.5665,
+    "lng": 126.978,
+    "age": "만 7세 이상",
+    "age_bands": [],
+    "audience": [],
+    "family_friendly": false,
+    "family_evidence": "근거 부족",
+    "experience_categories": [],
+    "experience_summary": null,
+    "is_experience": false,
+    "price": 20000,
+    "price_text": "전석 20,000원",
+    "duration_text": "1시간 10분",
+    "duration": "PT1H10M",
+    "link_status": "unchecked",
+    "link_checked_at": "2026-10-16T05:28:29.708751Z",
+    "link_url": null,
+    "link_reason": "검증 기록 만료",
+    "offers": {
+      "url": "http://ticket.interpark.com/Ticket/Goods/GoodsInfo.asp?GoodsCode=26014623"
+    },
+    "booking_link_status": "blocked",
+    "booking_link_checked_at": "2026-11-08T21:52:25.795377Z",
+    "booking_link_url": null,
+    "booking_link_reason": "신뢰 도메인 아님",
+    "organizer": "푸르지오아트홀",
+    "url": "https://www.kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303303",
+    "image": "http://www.kopis.or.kr/upload/pfmPoster/PF_PF303303_261014_134904.jpg",
     "source": "kopis",
     "verification": null,
     "confidence": null,

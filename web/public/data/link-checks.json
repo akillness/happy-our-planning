@@ -25,7 +25,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303458"
     },
     "0363e79ec0c8651009d3810fade7907987178876a5fbda0391360d351b0b31ee": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://www.ticketlink.co.kr/product/66294"
@@ -271,7 +271,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303486"
     },
     "1377650b1c034d3c62492bc9c99f0c66cc9b6069f7c365b6da6c2477660cb8e0": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -283,7 +283,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303179"
     },
     "141a484267f2d7f00df7a042a7c01d2e2484185efd00c4c4133344fcccbabd86": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -301,7 +301,7 @@
       "link_url": null
     },
     "153e48b0b1f7458456be312dd482e9ea71d2d7028409071443bc781b955becb9": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -343,7 +343,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303339"
     },
     "17e90dc341fda1e1bc504ed348d6e1498b507be2ca866df0bad3ffd5b23395d7": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://www.ticketlink.co.kr/product/66251"
@@ -553,7 +553,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303379"
     },
     "281e7ae25f1d7ea43dfe25d7cbc6781cdae4faee68deb9018583b13f7da09d14": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "HTTPS만 허용",
       "link_status": "blocked",
       "link_url": null
@@ -619,7 +619,7 @@
       "link_url": null
     },
     "2d1bc3f7835f70b912a9b26e6c06d75f3fed540eaf23b1e4db1e7d283cf67170": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://booking.naver.com/booking/12/bizes/1754253"
@@ -673,7 +673,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303388"
     },
     "364dc1a4c691f663bc389c46e0ce2ce288173293a44c972162ed1109e328c3a8": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -691,7 +691,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303264"
     },
     "381e3e94632104b3b5ed145907afe68daa7d0056040bcf8fa0cf597721236938": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "비표준 포트 차단",
       "link_status": "blocked",
       "link_url": null
@@ -709,7 +709,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303172"
     },
     "395995ed0eb26297d1470df21986ee8d1ea1ea9680c4a9fdb77634e66c7f88df": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "HTTPS만 허용",
       "link_status": "blocked",
       "link_url": null
@@ -1039,7 +1039,7 @@
       "link_url": null
     },
     "5167656bd83667099c872ff4c469e59c5bb87cd894e4acec1a3ae37c4e15f2e2": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -1075,7 +1075,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303136"
     },
     "53225f7ad6f3056e53db0421d259bf268f0a83cc29d05782ed4ae42087d57fc1": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -1171,7 +1171,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303307"
     },
     "5e1e44832a14712ba3782b10730094aa045ad7ed0dfcca6f9167ee74eb61660a": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "HTTPS만 허용",
       "link_status": "blocked",
       "link_url": null
@@ -1237,7 +1237,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303382"
     },
     "60996ee41648e13e1f77508c4086ba7f9846a03b89acd449a6e668223663553c": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -1261,7 +1261,7 @@
       "link_url": null
     },
     "63c57a066a0b1dbf4ad5be29b047820d25122a63639a7b5049075aba30ecff87": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://booking.naver.com/booking/12/bizes/1753711"
@@ -1345,7 +1345,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303359"
     },
     "69169d9efb40551779e02f0b0060a6e912105d5027f660e313f34924858aa8d9": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://booking.naver.com/booking/12/bizes/1753113"
@@ -1417,7 +1417,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303108"
     },
     "6ce915226d8e1b4b9b1eb996c0d6991c3a4b81eca3e897d238eddcc7cd489750": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -1459,7 +1459,7 @@
       "link_url": null
     },
     "6fb7fca7e838a4e36c7ffd89dee57be8588801ae0e5385a5cabbb4fa6c1ddaee": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -1873,7 +1873,7 @@
       "link_url": "https://booking.naver.com/booking/12/bizes/1751991"
     },
     "8c339f589a6169399bb69c69a7d4eb81ae0c58ed5403a66a617a09dae916c57e": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -1963,7 +1963,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303405"
     },
     "932739817121b456f04a8832dc8b0eb8e019ba28a0785184406f3fddb255ed68": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://booking.naver.com/booking/12/bizes/1744463"
@@ -1987,7 +1987,7 @@
       "link_url": "https://ygcf.or.kr/Home/H10000/H10200/concertDetail?conct_no=2879"
     },
     "94b1f5bc02103729d384349ed340c8caea532ba16f9cbc1c2f30cd108152646a": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -1999,7 +1999,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303329"
     },
     "95568748cc5cee07b13435185210f12e548236272a7ce9f883aeb9766e43c636": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2137,7 +2137,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303205"
     },
     "9f6340be31e4e4aa2c1adf32af0b31464a41c2c3f475d5e3f72b8c068367bdf1": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2149,7 +2149,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303357"
     },
     "9fe625fe1daac3c9483b91e982ca9c6541d46f5c2144d77897e1baa0bab5a2cf": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2167,7 +2167,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303104"
     },
     "a35e80bd4aa891395425a865cdacfabc571bb80403cb291f42513994a3be8864": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://www.ticketlink.co.kr/product/66316"
@@ -2209,7 +2209,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303144"
     },
     "a9960282e08f951bc6c6124e3c1a6a5ddf6c61cbbbe7227afbd70b7e292c349c": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "비표준 포트 차단",
       "link_status": "blocked",
       "link_url": null
@@ -2371,7 +2371,7 @@
       "link_url": "https://www.ticketlink.co.kr/product/66055"
     },
     "b5674edb909a7a4d4d204a2fc5931575d7c099dde6422b0379cd1f63098f3d98": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2443,7 +2443,7 @@
       "link_url": null
     },
     "bb2b465038ab4567d48a6228beee894272a7017dd09197fa0a9fa35a2fa68873": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://www.ticketlink.co.kr/product/66244"
@@ -2491,7 +2491,7 @@
       "link_url": null
     },
     "bf3757e9d252ebd58123cd382f8a81132ed24753c1ae329a932122a69f47d904": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2521,7 +2521,7 @@
       "link_url": null
     },
     "c21f419244053bfbdd03670e999a8f4a9326685fc03b2198eb0e2b4c1e4459c4": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2557,7 +2557,7 @@
       "link_url": null
     },
     "c65c65d33cddc7f995e095836678e3e4f74880d713bc8c814577553c6fbcd344": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://www.ticketlink.co.kr/product/66239"
@@ -2617,7 +2617,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303210"
     },
     "c8f565bdc541fd4d02173c20f4c9a4e7ab61782ba4b5f0aec27f57e790a9a8f7": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2653,7 +2653,7 @@
       "link_url": null
     },
     "cb2f5908e5b17b78a719615db9429b097f062bc5e5ee72ccaddd2632b2e7be7a": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2797,13 +2797,13 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303435"
     },
     "d849291df1ce9cb375e7019458e5948b6ec65771bdef5aa4bdaac38aeb6a7341": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://booking.naver.com/booking/12/bizes/1756919"
     },
     "d84d63787f6604d15e718eff197641eccf9eb949776882a771683bf7fdc7bd86": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -2959,7 +2959,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303272"
     },
     "e0b10ba96f00225c1424435dcb5f59ae5c910a1c7df65a7397310e6110b30428": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://www.ticketlink.co.kr/product/66282"
@@ -3043,7 +3043,7 @@
       "link_url": null
     },
     "e637a9d183a682c9f3373652a6338f240bdfa649fcb9726322336b1073acc505": {
-      "link_checked_at": "2026-11-07T21:38:17.230098Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "신뢰 도메인 아님",
       "link_status": "blocked",
       "link_url": null
@@ -3223,7 +3223,7 @@
       "link_url": null
     },
     "f580104bc1f963926982e5700820174c3efa4c174af8ef223fc1f97d605c728e": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://booking.naver.com/booking/12/bizes/1755197"
@@ -3325,7 +3325,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303338"
     },
     "fb782c167325ef20c275fe4f60e427916b297c1883bd7a3b9794d08ae6890816": {
-      "link_checked_at": "2026-11-01T21:52:36.080248Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "연결 확인",
       "link_status": "verified",
       "link_url": "https://www.ticketlink.co.kr/product/66264"
@@ -3367,7 +3367,7 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303253"
     },
     "fdbe644de574d0cd63265085a4c594fad8bf542a04fae58e7a34adf42283a96a": {
-      "link_checked_at": "2026-11-08T21:52:25.795377Z",
+      "link_checked_at": "2026-11-10T01:21:27.330293Z",
       "link_reason": "HTTPS만 허용",
       "link_status": "blocked",
       "link_url": null
@@ -3403,6 +3403,6 @@
       "link_url": "https://kopis.or.kr/por/db/pblprfr/pblprfrView.do?mt20id=PF303168"
     }
   },
-  "generated_at": "2026-11-08T21:52:25.795377Z",
+  "generated_at": "2026-11-10T01:21:27.330293Z",
   "version": 1
 }
